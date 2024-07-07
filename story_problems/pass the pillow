@@ -1,0 +1,32 @@
+ // Approach: Simple simulation technique (just do what the question says)
+// Initially, the first person in the line holds the pillow (`person = 1`).
+// The `direction` starts as `true`, indicating passing from left to right.
+// Time starts from 1 second.
+// During each pass of the pillow, time is incremented by 1 second.
+// If the person reaches the end, reverse the direction to pass the pillow in the opposite order.
+// If the person reaches the start again, change the direction again.
+// Finally, return the index of the person holding the pillow after `time` seconds.
+// Time Complexity: O(time), as we iterate from 1 second to `time` seconds and SC:O(1).
+var passThePillow = function(n, time) {
+    let person = 1;
+    let direction = true; // true means passing from 1 to n, false means passing from n to 1
+    
+    for (let t = 1; t <= time; t++) {
+        if (direction) {
+            person ++;
+        } else {
+            person --;
+        }
+        
+        // Check if we reach the ends and need to change direction
+        if (person  === 0) {
+            direction = true;
+            currentPerson = 2;
+        } else if (person  === n + 1) {
+            direction = false;
+            person  = n - 1;
+        }
+    }
+    
+    return person ;
+};
