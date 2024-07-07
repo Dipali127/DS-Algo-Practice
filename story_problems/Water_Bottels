@@ -1,18 +1,25 @@
-// Initially, we have numBottles which contains the total number of bottles filled with water.
-// numExchange contains the number of empty bottles needed to exchange for one full water bottle.
-// Example: If you have 9 bottles which are full of water, and it is given in the question that you can
-// exchange 4 empty bottles to get one full water bottle, you need to return the total number of bottles
-// you can drink.
-
-// The Below function calculates the total number of bottles that can be drunk, including those obtained through exchanges.
-// TC: O(log(numBottles)) as we are dividing numBottles by numExchange in each iteration and SC: O(1).
-
-var numWaterBottles = function(numBottles, numExchange) {
+// Brute force appraoch: simple simulation technique (just do what the question says)
+// initially we have numBottles given which contain the total number of bottles which are filled
+// with water and numExchange contain the number of bottles which you can excahnge with 
+// empty water bottle to get one full water bottle.
+// example:- if you have 9 bottles which are full of water and there given in question that you can
+// empty 4 bottles to get one full water bottle and you have to return the number of bottles which
+// you emptied.
+// TC:O(N) and SC:O(1). 
+var numWaterBottles = function (numBottles, numExchange) {
     let totalDrinkBottles = numBottles;
-    while(numBottles>=numExchange){
-        totalDrinkBottles += Math.floor(numBottles/numExchange);
-        numBottles = Math.floor(numBottles/numExchange)+(numBottles%numExchange);
+    while (numBottles >= numExchange) {
+        totalDrinkBottles += Math.floor(numBottles / numExchange);
+        numBottles = Math.floor(numBottles / numExchange) + (numBottles % numExchange);
     }
 
     return totalDrinkBottles;
 };
+
+// Optimal appraoch: using mathematics concept
+// TC:O(1) and SC:O(1)
+var numWaterBottles = function (numBottles, numExchange) {
+    return numBottles + Math.floor((numBottles - 1) / (numExchange - 1));
+}
+
+
