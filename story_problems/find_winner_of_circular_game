@@ -1,0 +1,41 @@
+// problem name :- josephus problem
+// appraoch:- brute force appraoch
+// take an array and push all the people from 1 to n of a circle in array.
+// initialize an index variable 'index' to keep track of the current position in the circle.
+// Use a while loop to continue the process until only one person remains in the array
+// the formula (index + k - 1) % arr.length is used to find the k-th person in a circular manner.
+// the "index + k - 1" moves the index k-1 positions forward from the current index.
+// and splice will help to remove the person at the calculated index.
+// TC:O(N^2) due to the splice operation inside the loop and SC:O(N) for the array storing the people.
+var findTheWinner = function(n, k) {
+    let arr = [];
+    for(let i=1;i<=n;i++){
+        arr.push(i);
+    }
+     let index = 0;
+    while (arr.length > 1) {
+        index = (index + k - 1) % arr.length;
+        arr.splice(index, 1);
+    }
+
+    return arr[0];
+};
+
+// optimal appraoch:- find the index of the winner of the game and once winner index found then
+// return winner's index+1 to get value(name of the winner) in (1-based index).
+// TC:O(N) and SC:O(N) because of stack space.
+var findTheWinner = function (n, k) {
+    let indexofWinner = findindexWinner(n,k);
+    function findindexWinner(n,k){
+        // if there's only single person then the winner's index is 0
+        if(n === 1){
+            return 0;
+        }
+        // recursively find the winner's index for n-1 people
+        let index = findindexWinner(n-1,k);
+        index = (index+k)%n;
+        return index;
+    }
+
+    return indexofWinner+1;
+}
