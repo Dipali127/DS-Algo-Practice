@@ -1,0 +1,27 @@
+// appraoch:- simple simulation technique(just do what question says)
+ // below loop iterate through each customer, and for each customer, we have to calculate the waiting
+ // time based on their arrival time and the time taken by chef to complete their order.
+ // once calculate the waiting time add it to the totalwaitingTime to find the average waiting time
+ // of all the customers.
+ // also you need to check the arrival time for each customer if there is case that arrival time is
+ // more than order finish time it means that chef take new order from customer's arrival time .
+ // TC:O(N) to iterate through each customer to calculate the totalwaitingTime and SC:O(1)
+ 
+var averageWaitingTime = function (customers) {
+    let averagewaitingTime = 0;
+    let totalwaitingTime = 0;
+    let orderfinishTime = 0;
+    for (let i = 0; i < customers.length; i++) {
+        let arrivalTime = customers[i][0];
+        let orderTime = customers[i][1];
+        if (orderfinishTime < arrivalTime) {
+            orderfinishTime = arrivalTime;
+        }
+        orderfinishTime += orderTime;
+        totalwaitingTime += orderfinishTime - arrivalTime;
+    }
+
+    averagewaitingTime = totalwaitingTime / customers.length;
+    return averagewaitingTime;
+
+};
