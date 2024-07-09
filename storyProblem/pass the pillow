@@ -1,3 +1,4 @@
+ // leetcode Problem:
  // Approach: Simple simulation technique (just do what the question says)
 // Initially, the first person in the line holds the pillow (`person = 1`).
 // The `direction` starts as `true`, indicating passing from left to right.

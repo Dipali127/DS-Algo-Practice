@@ -1,3 +1,4 @@
+// leetcode Problem:
 // Brute force appraoch: simple simulation technique (just do what the question says)
 // initially we have numBottles given which contain the total number of bottles which are filled
 // with water and numExchange contain the number of bottles which you can excahnge with 

@@ -1,3 +1,4 @@
+// leetcode Problem:
 // appraoch:- simple simulation technique(just do what question says)
  // below loop iterate through each customer, and for each customer, we have to calculate the waiting
  // time based on their arrival time and the time taken by chef to complete their order.

@@ -1,0 +1,42 @@
+// GFG PROBLEM:
+class Solution {
+    addOne(node)
+    {
+          function reverse(node){
+            let prev = null;
+            let next = null;
+            let current = node;
+            while(current!==null){
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            }
+            
+            return prev;
+        }
+        
+      node = reverse(node);
+      let itrt = node;
+      let carry = 1;
+      while(itrt!=null){
+          let sum = itrt.data+carry;
+          itrt.data = sum%10;
+          carry = Math.floor(sum/10);
+          
+          if(carry === 0){
+              break;
+          }
+          
+          if(itrt.next ===null && carry>0){
+              itrt.next = new Node(carry);
+              carry = 0;
+          }
+          
+          itrt = itrt.next;
+      }
+      
+      node = reverse(node);
+      return node;
+    }
+}

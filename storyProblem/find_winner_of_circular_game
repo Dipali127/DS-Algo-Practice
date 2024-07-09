@@ -1,3 +1,4 @@
+// leetcode Problem:
 // problem name :- josephus problem
 // appraoch:- brute force appraoch
 // take an array and push all the people from 1 to n of a circle in array.
