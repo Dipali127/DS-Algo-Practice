@@ -1,4 +1,14 @@
 // GFG PROBLEM:
+// appraoch:- first reverse the given linked list 
+// traverse the reverse linked list and add one to the first value of reverse\
+// linked list and while addition if there is any carry then handle it.
+// after addition again reverse back the linked list to restore the original
+// order of the given linked list.
+// TC:O(N), Explanation:- two times O(N) to reverse the linked list and  to
+// reverse back again the linked list after addition and O(N) to add 1 
+// to the linked list through iterating whole linked list. So, overall 
+// TC: O(N)+O(N)+O(N) = O(N) and SC:O(1)
+
 class Solution {
     addOne(node)
     {
