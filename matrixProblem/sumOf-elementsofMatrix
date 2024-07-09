@@ -1,0 +1,17 @@
+// GFG PROBLEM
+// appraoch:- use of nested loop to iterate through the matrix for calculating 
+// sum of all elements of the matrix.
+// TC:O(N^2) beacuse of nested loop to iterate through the matrix and SC:O(1)
+
+class Solution {
+    sumOfMatrix(N,M,Grid){
+       let sum = 0;
+       for(let i=0;i<N;i++){
+           for(let j=0;j<M;j++){
+               sum+=Grid[i][j];
+           }
+       }
+       
+       return sum;
+    }
+}

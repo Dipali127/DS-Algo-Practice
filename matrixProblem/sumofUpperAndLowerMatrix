@@ -1,0 +1,39 @@
+// GFG PROBLEM 
+// lower_triangle_matrix:- lower triangle of a matrix includes all elements 
+// which are on the diagonal and below the diagonal.
+// upper_triangle_matrix:- upper triangle of a matrix includes all elements 
+// which are on the diagonal and above the diagonal.
+// appraoch:- take two varaibles upperSum and lowerSum to store the
+// sum of upper and lower matrix.
+// TC:O(N^2), explanation:- O(N^2) for calculating upperSum and O(N^2) for
+// calculating lower sum. So, // lower_triangle_matrix:- lower triangle of a matrix includes all elements 
+// which are on the diagonal and below the diagonal.
+// upper_triangle_matrix:- upper triangle of a matrix includes all elements 
+// which are on the diagonal and above the diagonal.
+// appraoch:- take two varaibles upperSum and lowerSum to store the
+// sum of upper and lower matrix.
+// TC:O(N^2), explanation:- O(N^2) for calculating upperSum and O(N^2) for
+// calculating lower sum. So, overall TC:-O(N^2)+O(N^2) => O(2N^2) => O(N^2) AND SC:O(1)
+
+class Solution 
+{
+    //Function to return sum of upper and lower triangles of a matrix.
+    sumTriangles(mat, N)
+    {
+    let lowerSum = 0;
+    let upperSum = 0;
+    for(let i=0;i<mat.length;i++){
+        for(let j=i;j<mat[0].length;j++){
+            upperSum+=mat[i][j];
+        }
+    }
+    
+    for(let i=0;i<mat.length;i++){
+        for(let j=0;j<=i;j++){
+            lowerSum+=mat[i][j];
+        }
+    }
+    
+    return [upperSum,lowerSum]
+    } 
+}

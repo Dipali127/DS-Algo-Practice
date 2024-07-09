@@ -1,0 +1,34 @@
+// approach:- outer loop iterate through each row and before moving inside inner loop first 
+// check condition that if row is
+// even then start printing value of matrix from left to right and if row is odd then start
+// printing value from right to left.
+//  TC:O(N^2) as the outer loop runs n times, where n is the number of rows in the matrix and
+// at each iteration of the outer loop, there's an inner loop. When the index i is even, 
+// the inner loop runs n times, and when i is odd, it also runs n times.
+// So, in total, the number of iterations is 2 * n * n, which is O(2n^2) and after neglecting
+// constant the TC:O(N^2) and SC:O(N^2) as the output array stores all the elements of the 
+// matrix in snake pattern.
+// Since the size of the output array is proportional to the number of elements in 
+// the matrix (which is n * n for an n x n matrix), the space complexity is O(N^2) as well.
+
+class Solution 
+{
+    //Function to return list of integers visited in snake pattern in matrix.
+    snakePattern(matrix)
+    {
+        let arr = [];
+    for(let i=0;i<matrix.length;i++){
+        if(i%2==0){
+            for(let j=0;j<matrix[i].length;j++){
+                arr.push(matrix[i][j]);
+            }
+        }else{
+            for(let j=matrix[i].length-1;j>=0;j--){
+                arr.push(matrix[i][j]);
+            }
+        }
+    }
+    
+    return arr;
+    } 
+}

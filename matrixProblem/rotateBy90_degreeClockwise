@@ -1,0 +1,30 @@
+// leetcode Problem:
+// approach:- first take transpose of a matrix by swapping the the elements at positions (i, j) with (j, i).
+// this will change the rows into colums and colums into rows.
+// swap elements from the start of each row with elements from the end of the row.
+// this will effectively rotate the given matrix by 90 degree clockwise.
+// TC:O(N^2), explanation:- O(N^2) for traspose of matrix and O(N^2) for reversing the rows.
+// So, overall TC:- O(N^2)+O(N^2) => O(2N^2) => O(N^2) AND SC:O(1)
+
+var rotate = function(matrix) {
+    let row = matrix.length;
+    let col = matrix[0].length;
+
+// Transpose the matrix by swapping elements below the diagonal with those above the diagonal
+    for(let i=0;i<row;i++){
+        for(let j =0;j<i;j++){
+            let temp = matrix[i][j];
+            matrix[i][j] = matrix[j][i];
+            matrix[j][i] = temp;
+        }
+    }
+
+// Reverse each row to complete the 90-degree clockwise rotation
+    for(let i=0;i<row;i++){
+        for(let j=0;j<col/2;j++){
+            let temp = matrix[i][j];
+            matrix[i][j] = matrix[i][col-j-1];
+            matrix[i][col-j-1] = temp;
+        }
+    }
+};
