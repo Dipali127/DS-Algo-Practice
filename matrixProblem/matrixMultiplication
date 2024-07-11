@@ -1,0 +1,37 @@
+// for doing matrix multiplication, number of coloumns of matrixA must be equal to number of rows of matrixB
+// appraoch:- use nested loop to do matrix multiplication after checking condition that if number of rows of
+// matrixA is equal to number of columns of matrixB.
+// in nested loop, the first loop iterate through each row of matrixA and second loop iterate through each
+// column of matrixB for each row of matrixA and while iterating columns of matrixB for each row of matrixA,
+// the third loop calculate the matrix multiplication.
+// each column multiplication will be added on temp variable and each row multiplication will be added on matrixC
+// once all rows multiplication will be calculated return it.
+// TC:O(N^3), as for getting matrix multiplication we use three nested loop and SC:O(N^2) because the result matrixC 
+// has dimensions based on the rows of matrixA and columns of matrixB.
+
+let matrixA = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
+let matrixB = [[2, 2, 2], [2, 2, 2], [2, 2, 2]];
+let row1 = matrixA.length;
+let col1 = matrixA[0].length;
+let row2 = matrixB.length;
+let col2 = matrixB[0].length;
+
+console.log(matrixMultiplication(matrixA, matrixB))
+function matrixMultiplication(matrixA, matrixB) {
+    let matrixC = []
+    if (col1 === row2) {
+        for (let i = 0; i < row1; i++) {
+            let temp = [];
+            for (let j = 0; j < col2; j++) {
+                let sum = 0;
+                for (let k = 0; k < col1; k++) {
+                    sum += matrixA[i][k] * matrixB[k][j]
+                }
+                temp.push(sum)
+            }
+            matrixC.push(temp)
+        }
+    }
+    return matrixC
+
+}

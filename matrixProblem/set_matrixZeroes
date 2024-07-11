@@ -1,0 +1,45 @@
+// Leetcode Problem
+// Problem:- we have given a matrix such that if a matrix cell matrix[i][j] is 0, 
+// then all the cells in its ith row and jth column will become 0.
+// appraoch:- Iterate through the matrix to identify rows and columns that contain a zero and 
+// update arrRow and arrCol accordingly.
+// Iterate through arrRow to set entire rows in the matrix to zero where required.
+// Iterate through arrCol to set entire columns in the matrix to zero where required.
+// Time Complexity: O(N^2) due to nested loops to iterate and modify the matrix
+// Space Complexity: O(N) due to the extra space used to store the zero values in the arrays
+
+var setZeroes = function (matrix) {
+    let row = matrix.length;
+    let col = matrix[0].length;
+    let arrRow = new Array(row).fill(1);
+    let arrCol = new Array(col).fill(1);
+
+    // Fill the arrRow and arrCol arrays with 0 if the current iterating row and column in the 
+    // matrix contain 0.
+    for (let i = 0; i < row; i++) {
+        for (let j = 0; j < col; j++) {
+            if (matrix[i][j] === 0) {
+                arrRow[i] = 0;
+                arrCol[j] = 0;
+            }
+        }
+    }
+     // Iterate the arrRow array and set the entire row of the matrix to 0 if the current 
+     // iterated value of arrRow is 0.
+    for (let i = 0; i < arrRow.length; i++) {
+        if (arrRow[i] === 0) {
+            for (let j = 0; j < col; j++) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+    // Iterate the arrCol array and set the entire column of the matrix to 0 if the current 
+    //iterated value of arrCol is 0.
+    for (let i = 0; i < arrCol.length; i++) {
+        if (arrCol[i] === 0) {
+            for (let j = 0; j < row; j++) {
+                matrix[j][i] = 0;
+            }
+        }
+    }
+};
