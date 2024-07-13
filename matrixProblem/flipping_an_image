@@ -1,0 +1,39 @@
+// Leetcode Problem:
+// appraoch:- first iterate through the matrix to flip an image horizontally means that reverse
+// each row (swap each row value which are before or on the midlle of the row with value which are after 
+// the middle of the row).
+// once each row is reversed again iterate through the reverse matrix to invert the matrix means that
+// changing 0s to 1 and 1s to 0.
+// TC:O(N^2) as the below code use twice nested loop that is once for image
+// flipping and other for image inverting AND SC:O(N^2) as the result matrix is of the same
+// size of the given matrix to store all the values of the matrix. 
+
+var flipAndInvertImage = function(image) {
+    let row = image.length;
+    let col = image[0].length;
+
+    for(let i=0;i<row;i++){
+        for(let j=0;j<col/2;j++){
+            let temp = image[i][j];
+            image[i][j] = image[i][col-j-1];
+            image[i][col-j-1] = temp;
+        }
+    }
+
+    let result = [];
+
+    for(let i=0;i<row;i++){
+        let temp = [];
+        for(let j=0;j<col;j++){
+            if(image[i][j] === 0){
+                temp.push(1)
+            }else{
+                temp.push(0);
+            }
+        }
+
+        result.push(temp)
+    }
+
+    return result;
+};

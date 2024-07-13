@@ -1,0 +1,74 @@
+// Leetcode Problem:
+// appraoch:- first, iterate through each row of given grid(matrix).
+// while iterating each row of given matrix, use of set to encounter value in each row meanwhile check
+// if current iterated value of a row is a number which is already present in the set then return
+// return false from there only as the row contain duplicate. likewise, iterate through each column
+// of given grid(matrix) and while iterating column again use of set to encounter value in each column
+//  meanwhile check if current iterated value of a column is a number which is already present in the
+//  set then return false from there only as the column contain duplicate.
+// There are nine 3x3 sub-matrix in a 9x9 Sudoku board.
+// Iterate over each sub-matrix by moving in steps of 3 (i.e., i += 3 and j += 3).
+// Use a Set to track the numbers encountered in the current sub-matrix.
+// For each cell(single box) in the 3x3 sub-matrix,  check if the number is already in the Set.
+// If the number is in the Set, the sub-matrix contains duplicates, so return false.
+// If the number is not in the Set, add it to the Set.
+// The time complexity remains O(1), because we are iterating over a fixed number of cells (81) which
+// we have 9 rows and 9 columns.
+// The space complexity is also O(1), as we are using a fixed amount of additional space
+// (3 arrays of 9 blocks).
+
+var isValidSudoku = function (board) {
+    let row = board.length;
+    let col = board[0].length;
+
+    //Check for rows that it contain any duplicate or not
+    for (let i = 0; i < row; i++) {
+        let set = new Set();
+        let count = 0;
+        for (let j = 0; j < col; j++) {
+            if (board[i][j] != ".") {
+                if (set.has(board[i][j])) {
+                    return false;
+                } else {
+                    set.add(board[i][j])
+                }
+            }
+        }
+    }
+
+//Check for columns that it contain any duplicate or not
+for (let j = 0; j < col; j++) {
+    let set = new Set();
+    for (let i = 0; i < row; i++) {
+        if (board[i][j] != ".") {
+            if (set.has(board[i][j])) {
+                return false;
+            } else {
+                set.add(board[i][j])
+            }
+        }
+    }
+}
+
+
+// Check for each 3x3 sub-matrix that it contain any duplicate or not
+for (let i = 0; i < row; i += 3) {
+    for (let j = 0; j < col; j += 3) {
+        let set = new Set();
+        for (let k = i; k < i+3; k++) {
+            for (let l = j; l < j+3; l++) {
+                let value = board[k][l];
+                if (value != ".") {
+                    if (set.has(value)) {
+                        return false;
+                    }
+                    set.add(value);
+                }
+            }
+        }
+    }
+}
+
+
+return true;
+};

@@ -1,3 +1,4 @@
+// GFG PROBLEM:
 // approach:- outer loop iterate through each row and before moving inside inner loop first 
 // check condition that if row is
 // even then start printing value of matrix from left to right and if row is odd then start

@@ -1,4 +1,4 @@
-// GFG PROBLEM
+// GFG PROBLEM:
 // appraoch:- use of nested loop to iterate through the matrix for calculating 
 // sum of all elements of the matrix.
 // TC:O(N^2) beacuse of nested loop to iterate through the matrix and SC:O(1)

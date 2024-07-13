@@ -1,4 +1,4 @@
-// GFG PROBLEM
+// GFG PROBLEM:
 // we only can do transpose in a square matrix.
 // appraoch:- swap the value which are below the diagonal with the value which are above 
 // the diagonal and this will change the rows into colums and colums into rows

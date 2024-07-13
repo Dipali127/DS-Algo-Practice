@@ -1,0 +1,52 @@
+// Leetcode Problem:
+// brute force approach:  use nested for loop to iterate though the matrix array
+// outer loop iterate through each row and inner loop iterate through each element
+// of current iterated row.
+// while iterateing row's element, check that if current iterated element is equal to
+// target? if it is then return true else return false.
+// TC:O(n^2) or O(m*n) and SC:O(1).
+// var searchMatrix = function(matrix, target) {
+//     for(let i = 0;i<matrix.length;i++){
+//         for(let j = 0; j<matrix[i].length;j++){
+//             if(matrix[i][j] === target){
+//                 return true;
+//             }
+//         }
+//     }
+
+//     return false;
+// };
+
+// approach:- apply binary search
+// let suppose m is no. of rows in a matrix and n is a no. of columns in a matrix.
+//  initalise low with 0 and high with m*n-1 (last index of the matrix when treated as a 1D array).
+// calculate mid index and for getting mid index value in 2D array use the formula as given below.
+// If midValue equals the target, return true.
+// If midValue is less than the target, move low to mid + 1.
+// If midValue is greater than the target, move high to mid - 1.
+//TC:O(log(m*n)),where m is number of rows and n is number of columns and SC:O(1);
+
+var searchMatrix = function (matrix, target) {
+    if (matrix.length == 0) {
+        return false;
+    }
+
+    let m = matrix.length; //number of rows
+    let n = matrix[0].length;//number of columns
+    let low = 0, high = (m * n) - 1;
+    while (low <= high) {
+        //this below code avoid floating points error
+        let mid = Math.floor(low + (high - low) / 2);
+        //below line give the mid index value from 2d matrix bcoz actually it is 2D array which
+        //we treated as 1D array to apply binary search on it.
+        let midValue = matrix[Math.floor(mid / n)][mid % n];
+        if (midValue == target) {
+            return true;
+        } else if (midValue < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return false;
+}

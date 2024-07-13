@@ -1,4 +1,4 @@
-// Leetcode Problem
+// Leetcode Problem:
 // Problem:- we have given a matrix such that if a matrix cell matrix[i][j] is 0, 
 // then all the cells in its ith row and jth column will become 0.
 // appraoch:- Iterate through the matrix to identify rows and columns that contain a zero and 
