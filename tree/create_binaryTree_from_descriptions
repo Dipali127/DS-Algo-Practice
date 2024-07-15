@@ -1,0 +1,46 @@
+ // Leetcode Problem:
+ // appraoch:- take an unordered map to store parent and child nodes which store parent and child node with its
+ // address of tree node ,as for each parent and child node, construct tree first then assign that
+ // tree address to the corresponding parent and child node in unordered map meanwhile check its left
+ // is either 0 or 1 to assign current iterated nodes left and right child.
+ // also take one set store all child nodes and for identifying the node which will never become
+ // parent.
+ // once descriptions all nodes iterated, iterate descriptions again to find the node which will never
+ // become parent and return that node from the unordered map.
+ // TC:O(N) to iterate the descriptions array and SC:O(N) to store all the child nodes.
+var createBinaryTree = function(descriptions) {
+    let nodes = {}, childs = new Set();
+    for(let i=0;i<descriptions.length;i++){
+        const parent=descriptions[i][0]
+        const child=descriptions[i][1]
+        const isLeft=descriptions[i][2]
+
+        if(!nodes[parent]){
+            nodes[parent] = new TreeNode(parent,null,null);
+        }
+
+        if(!nodes[child]){
+            nodes[child] = new TreeNode(child,null,null);
+        }
+
+        if(isLeft === 1){
+            nodes[parent].left = nodes[child]
+        }else{
+            nodes[parent].right = nodes[child]
+        }
+
+        if(!childs.has(child)){
+            childs.add(child)
+        }
+    }
+
+    //find the root:-
+    for(let i=0;i<descriptions.length;i++){
+        let parent = descriptions[i][0];
+        if(!childs.has(parent)){
+            return nodes[parent];
+        }
+
+    }
+
+};
