@@ -1,11 +1,10 @@
 // GFG PROBLEM:
-// approach:- outer loop iterate through each row and before moving inside inner loop first 
-// check condition that if row is
-// even then start printing value of matrix from left to right and if row is odd then start
-// printing value from right to left.
+// approach:- while iterating through each row , check condition that if current iterated row is
+// even then start printing value of current iterated row from left to right and if current iterated row is odd 
+// then start printing value from right to left.
 //  TC:O(N^2) as the outer loop runs n times, where n is the number of rows in the matrix and
-// at each iteration of the outer loop, there's an inner loop. When the index i is even, 
-// the inner loop runs n times, and when i is odd, it also runs n times.
+// at each iteration of the row, there's an inner loop which print the value of current iterated row. 
+// When the index i is even, the inner loop runs n times, and when i is odd, it also runs n times.
 // So, in total, the number of iterations is 2 * n * n, which is O(2n^2) and after neglecting
 // constant the TC:O(N^2) and SC:O(N^2) as the output array stores all the elements of the 
 // matrix in snake pattern.
