@@ -1,0 +1,47 @@
+// Leetcode Problem:
+// A loop means that the last node of the linked list is connected back to a node in the same list. 
+// brute force appraoch:-
+// store the address (the whole object) of a node in set.
+// traverse the linked list until found that node of a linked list which is already in set.
+// once found a case where the current iterated node is already  exist in set then return true otherwise return false.
+// TC: O(N) to iterated through the linked list AND SC: O(N) to store all the values of linked list in set.
+
+ var hasCycle = function(head){
+    let temp = head;
+    let set = new Set();
+    while(temp!=null){
+        if(set.has(temp)){
+            return true;
+        }else{
+            set.add(temp);
+        }
+
+        temp = temp.next;
+    }
+
+    return false;
+ }
+
+// optimal appraoch:- use floyd's cylce finding algortihm also known as (also known as the Tortoise and Hare algorithm)
+// which uses two pointers one moving twice as fast as the other one.
+// The faster one is called the faster pointer and the other one is called the slow pointer.
+// Traverse linked list using two pointers.
+// Move one pointer i.e slow pointer by one and another pointer fast by two.
+// If these pointers meet at the same node then there is a loop. 
+// If pointers do not meet then the linked list doesn’t have a loop
+// TC: O(N) to traverse all the nodes in the list to detect a cycle.
+// SC: O(1) as we uses a constant amount of extra space for the two pointers (fast and slow).
+
+var hasCycle = function(head) {
+    let fast = head ,slow= head;
+    while(fast!=null  && fast.next!=null){
+        slow=slow.next;
+        fast=fast.next.next;
+        
+        if(slow==fast){
+            return true;
+        }
+    }
+
+    return false;
+};
