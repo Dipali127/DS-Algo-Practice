@@ -1,21 +1,4 @@
-//User function Template for javascript
-
-/*LINKED LIST NODE
-class Node {
-  constructor(x){
-    this.data = x;
-    this.next = null;
-  }
-}
-*/
-
-
-/**
- * @param {Node} head
- * @param {number} k
- * @return {Node}
-*/
-
+// GFG PROBLEM:
 // appraoch:- take a dummyNode and set its next pointer to head  of linked list. 
 // it helps to manage the case where head value itself a deleted value.
 // iterate the given linked list and initially count is 0 so, check if count is equal

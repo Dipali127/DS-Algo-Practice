@@ -24,3 +24,21 @@ var reverseList = function (head) {
 
     return prev;
 };
+
+//  recursively reverse the linked list
+// appraoch:- recursively calls itself with the next node in the list.
+// this continues until it reaches the end of the list, at which point it starts to reverse the nodes.
+// TC: O(N) as each node is processed exactly once. 
+// Space Complexity: O(N) (due to the recursive call stack)
+
+var reverseList = function (head){
+    // base case:
+    if(head === null || head.next === null){
+        return head;
+    }
+// recursively call for the sub linked list to get the new head of the reverse linked list;
+    let reversellHead = reverseList(head.next);
+    head.next.next = head;
+    head.next = null;
+    return reversellHead;
+}
