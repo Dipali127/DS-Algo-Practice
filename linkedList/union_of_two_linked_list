@@ -1,0 +1,45 @@
+// GFG PROBLEM:
+// Appraoch :- 
+// merge both the linked list in one by taking set to store unique values.
+// convert set into array to sort the set so that we can easily iterate through it
+// convert the sorted set values in new linked list.
+// TC: O(NLOGN) 
+// Explanation:- 
+// O(N) to traverse head1 and add elements to the set.
+// O(N) to traverse head2 and add elements to the set.
+// O(N log N) to sort the array converted from the set.
+// O(N) to iterate through the sorted array and create the new linked list.
+// Overall, the time complexity is O(N log N).
+// Space Complexity: O(N)
+// We use a set to store values from both linked lists, so the space complexity is O(N).
+
+class Solution {
+    makeUnion(head1, head2) {
+        let set = new Set();
+
+        // Traverse the first linked list
+        while (head1 != null) {
+            set.add(head1.data);
+            head1 = head1.next;
+        }
+
+        // Traverse the second linked list
+        while (head2 != null) {
+            set.add(head2.data);
+            head2 = head2.next;
+        }
+
+        // Convert set to array and sort it
+        let uniqueArr = Array.from(set).sort((a, b) => a - b);
+
+        let newLinked = new Node(0);
+        let itr = newLinked;
+
+        for (let i = 0; i < uniqueArr.length; i++) {
+            itr.next = new Node(uniqueArr[i]);
+            itr = itr.next;
+        }
+
+        return newLinked.next;
+    }
+}

@@ -1,0 +1,82 @@
+// appraoch:-
+ // Traverse each row to find the minimum value and store it in minArr.
+ // Traverse each column to find the maximum value and store it in maxArr.
+ // Iterate through the matrix and check if the current element is equal to both the minimum value 
+ // of its row and the maximum value of its column. Collect all such elements as lucky numbers.
+ // TC: O(N^2), Explanation:-
+ // Finding all row minimums: O(N^2)
+ // Finding all column maximums: O(N^2)
+ // Checking for lucky numbers: O(N^2)
+ // Overall TC: O(N^2) AND SC: O(N+M) where 𝑁 is the number of rows and M is the number of columns.
+
+var luckyNumbers  = function(matrix) {
+    let minArr = [], maxArr = [];
+    for(let i=0;i<matrix.length;i++){
+        let min = Infinity;
+        for(let j=0;j<matrix[0].length;j++){
+            min = Math.min(min,matrix[i][j]);
+        }
+        minArr.push(min);
+    }
+
+    for(let j=0;j<matrix[0].length;j++){
+        let max = -Infinity;
+        for(let i=0;i<matrix.length;i++){
+            max = Math.max(max,matrix[i][j]);
+        }
+        maxArr.push(max);
+    }
+
+let luckyNumber = []
+    for(let i=0;i<matrix.length;i++){
+        for(let j=0;j<matrix[0].length;j++){
+            if(matrix[i][j] === minArr[i] && matrix[i][j] === maxArr[j]){
+                luckyNumber.push(matrix[i][j]);
+            }
+        }
+    }
+
+    return luckyNumber;
+};
+
+// optimal Appraoch:- 
+// Traverse each row to find the minimum value.
+// Update minArrmax to be the maximum of the current minArrmax and the row minimum.
+// This ensures minArrmax holds the largest of all row minimums.
+// Traverse each column to find the maximum value.
+// Update maxArrmin to be the minimum of the current maxArrmin and the column maximum.
+// This ensures maxArrmin holds the smallest of all column maximums.
+// If minArrmax is equal to maxArrmin, return this value in an array as the lucky number.
+// If they are not equal, return an empty array indicating no lucky number.
+// TC: O(N^2), Explanation:-
+// Finding all row minimums: O(N^2)
+// Finding all column maximums: O(N^2)
+// Overall TC: O(N^2) AND SC: O(N+M) where 𝑁 is the number of rows and M is the number of columns.
+
+var luckyNumbers  = function(matrix) {
+     let minArr = [], maxArr = [];
+     let minArrmax = -Infinity;
+     let maxArrmin = Infinity;
+    for(let i=0;i<matrix.length;i++){
+        let min = Infinity;
+        for(let j=0;j<matrix[0].length;j++){
+            min = Math.min(min,matrix[i][j]);
+        }
+         minArrmax = Math.max(minArrmax,min);
+    }
+
+     
+    for(let j=0;j<matrix[0].length;j++){
+        let max = -Infinity;
+        for(let i=0;i<matrix.length;i++){
+            max = Math.max(max,matrix[i][j]);
+        }
+        maxArrmin = Math.min(maxArrmin,max);
+    }
+
+    if(minArrmax === maxArrmin){
+        return [minArrmax];
+    }
+ 
+ return [];
+}

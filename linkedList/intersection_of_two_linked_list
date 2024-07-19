@@ -1,0 +1,74 @@
+// Leetcode Problem:-
+// The intersection of two linked lists means that from a certain node onwards, 
+// both lists share the same nodes
+// intersection of two linked list means that the intersected node exist in same memory loct^n
+// In JavaScript, when we add nodes to a set and compare nodes, we are comparing their references
+// (i.e., memory addresses). This is why using a set of node references helps us accurately 
+// determine where the lists intersect.
+// in below code we use set to get the intersected node from both the linked list.
+// first store the memory location of linked list headA in set and then while traversing the
+// second linked list headB check if the headB node reference in set then return that node
+// refercence(address).
+// TC:O(N), explanation:- O(N),O(N) to iterate through the both linked list . so overall TC:O(N)
+// and SC:O(N) to store first linked list node reference in set 
+
+var getIntersectionNode = function(headA, headB) {
+     let set = new Set();
+    
+    // Traverse the first linked list and add node references to the set
+    while (headA !== null) {
+        set.add(headA);
+        headA = headA.next;
+    }
+
+    // Traverse the second linked list
+    while (headB !== null) {
+        // Check if the current node reference is in the set
+        if (set.has(headB)) {
+            return headB; // return the intersected node
+        }
+        headB = headB.next;
+    }
+
+    return null; // If no intersection is found
+};
+
+
+// Optimal aprraoch:- 
+// Traverse both linked lists to calculate their lengths.
+// Adjust the pointers of the longer list so that both lists have the same remaining length.
+// Traverse both lists simultaneously until the pointers are equal, indicating the intersection node.
+// Return the intersection node or null if no intersection exists.
+// TC:O(N) AND SC:O(1)
+
+var getIntersectionNode = function(headA, headB) {
+    let lengthA = 0,lengthB = 0;
+    let pointer1 = headA, pointer2 = headB;
+    while(pointer1!=null){
+        lengthA++;
+        pointer1=pointer1.next;
+    }
+
+    while(pointer2!=null){
+        lengthB++;
+        pointer2=pointer2.next;
+    }
+
+    while(lengthA>lengthB){
+        lengthA--;
+        headA = headA.next;
+    }
+
+    while(lengthA<lengthB){
+        lengthB--;
+        headB=headB.next;
+    }
+
+    // Traverse both lists together until the intersection is found
+    while(headA!=headB){
+        headA=headA.next;
+        headB=headB.next;
+    }
+
+    return headA
+}

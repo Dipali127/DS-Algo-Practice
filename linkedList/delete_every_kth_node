@@ -1,0 +1,51 @@
+//User function Template for javascript
+
+/*LINKED LIST NODE
+class Node {
+  constructor(x){
+    this.data = x;
+    this.next = null;
+  }
+}
+*/
+
+
+/**
+ * @param {Node} head
+ * @param {number} k
+ * @return {Node}
+*/
+
+// appraoch:- take a dummyNode and set its next pointer to head  of linked list. 
+// it helps to manage the case where head value itself a deleted value.
+// iterate the given linked list and initially count is 0 so, check if count is equal
+// to k then delete that value from linked list with the help of prev and itrt pointer
+// meanwhile increment the itrt and prev pointer. 
+// Also change count which is again 0 if  we found the deleted value.
+// Tc: O(N) to iterate through the given linked list AND SC: O(1) as we haven't take
+// any extra space and only a few extra pointers are used.
+
+class Solution {
+    deleteK(head,k){
+      let dummyNode = new Node(0);
+      dummyNode.next = head;
+      let prev = dummyNode;
+      let itrt = head;
+      let count = 0;
+      while(itrt !== null){
+          count++;
+          if(count === k){
+              prev.next = itrt.next;
+              count = 0;
+          }else{
+              prev = itrt;
+          }
+          
+          itrt = itrt.next;
+      }
+      
+       return dummyNode.next;
+  }
+    
+  }
+  

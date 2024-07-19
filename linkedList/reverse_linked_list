@@ -1,0 +1,26 @@
+// Leetcode Problem:
+// appraoch:- take prev pointer which is intialised with null as This will become the new head of  the
+// the reversed list as the original head's next pointer will become null when the list is reversed.
+// traverse the list using current pointer (which is intially pointing to head of linked list) until
+// the current!=null.
+// Traverse the list while current is not null.
+// For each node, temporarily store the next node (temp = current.next).
+// Reverse the current node’s link by setting current.next to prev.
+// Move prev to the current node(prev = current), which will be the new previous node for the next iteration.
+// Move current to the next node in the list(current = temp).
+// After the traversal is complete, prev points to the new head of the reversed linked list. Return prev
+// TC: O(N) to iterate through the given linked list to reverse the linked list AND SC: O(1)
+
+var reverseList = function (head) {
+    let temp;
+    let prev = null;
+    let current = head;
+    while (current != null) {
+        temp = current.next;
+        current.next = prev;
+        prev = current;
+        current = temp;
+    }
+
+    return prev;
+};

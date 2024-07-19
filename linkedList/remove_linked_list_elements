@@ -1,0 +1,28 @@
+// Leetcode Problem:-
+// appraoch:- first check a case where head value itself equal to given val then update head 
+// to point to the next node until the head node's value is not equal to val or the head becomes null.
+// Use two pointers, itrt (iterator) to traverse the list and prev to keep track of the previous node.
+// If the current node's value is equal to val, update the prev.next to itrt.next to skip the current node.
+// If the current node's value is not equal to val, move the prev pointer to the current node.
+// Move the itrt pointer to the next node in each iteration.
+ // TC:O(N) to iterate through linked list and SC:O(1)
+
+var removeElements = function (head, val) {
+    // Handle the case where the head node needs to be removed
+    while (head !== null && head.val === val) {
+        head = head.next;
+    }
+    let itrt = head;
+    let prev = null;
+    while (itrt != null) {
+        if (itrt.val === val) {
+            prev.next = itrt.next;
+            itrt = itrt.next;
+        } else {
+            prev = itrt;
+            itrt = itrt.next;
+        }
+    }
+
+    return head;
+};
