@@ -1,0 +1,38 @@
+// Leetcode Problem:
+// brute force appraoch:- 
+// store all the nodes of linked list inside array 
+// calculate the middle index of the array  and rounding down (Math.floor) then returns the node at that index..
+// TC: O(N), as each node is visited once and SC: O(N) to store all the nodes of linked list inside array.
+
+ var middleNode = function(head){
+    let arr = [];
+    let temp = head;
+    while(temp!=null){
+        arr.push(temp);
+        temp = temp.next;
+    }
+
+    let length = Math.floor(arr.length/2);
+    return arr[length];
+ }
+ 
+// optimal approach:- 
+// optimal appraoch:- use floyd's cylce finding algortihm also known as (also known as the Tortoise and Hare algorithm)
+// which uses two pointers slow and fast. The fast pointer moves twice as fast as the slow pointer.
+// There are two different case for getting middle node of the linked list:-
+// For an even-length linked list, when fast reaches null (end of the linked list), slow will be at the middle node of the linked list.
+// For an odd-length linked list, when fast reaches the last node of the linked list, slow will be at the middle node of linked list.
+// TC: O(N),  both pointers slow and fast traverse the list in a single pass, the time complexity is O(N).
+// SC: O(1) as we uses a constant amount of extra space for the two pointers (fast and slow).
+
+var middleNode = function(head){
+    let slow = head;
+    let fast = head;
+
+    while(fast!= null && fast.next!=null){
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    return slow;
+};
