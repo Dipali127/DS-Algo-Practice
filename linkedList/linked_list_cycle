@@ -3,7 +3,7 @@
 // brute force appraoch:-
 // store the address (the whole object) of a node in set.
 // traverse the linked list until found that node of a linked list which is already in set.
-// once found a case where the current iterated node is already  exist in set then return true otherwise return false.
+// once found a case where the current iterated node is already exist in set then return true otherwise return false.
 // TC: O(N) to iterated through the linked list AND SC: O(N) to store all the values of linked list in set.
 
  var hasCycle = function(head){
