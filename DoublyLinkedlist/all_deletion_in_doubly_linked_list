@@ -1,0 +1,240 @@
+// (1) Delete the node from the head of the linked list
+// Approach:
+// - Check if the head itself is null; if so, return null.
+// - Otherwise, delete the head node by using a temp pointer so that we have access to the doubly linked list using the head pointer.
+// Time Complexity: O(N) to print the doubly linked list.
+// Space Complexity: O(1) as we only use a few pointers which take constant space.
+
+ class dll {
+    constructor(node) {
+        this.node = node;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+let head = new dll(1);
+head.next = new dll(2);
+head.next.prev = head;
+head.next.next = new dll(3);
+head.next.next.prev = head.next;
+head.next.next.next = new dll(4);
+head.next.next.next.prev = head.next.next; 
+
+
+function deletehead(head){
+    if(head === null){
+        return null;
+    }
+    let temp = head;
+    head = temp.next;
+    if (head !== null) {
+        head.prev = null; // Set the new head's prev to null
+    }
+    temp.next = null;
+    return head;
+}
+head = deletehead(head);
+
+function printDLL(head){
+    let temp = head;
+    while(temp!=null){
+        console.log(temp.node);
+        temp = temp.next;
+    }
+}
+
+printDLL(head);
+
+// (2) Delete the last node of the linked list:
+// Approach:
+// - Traverse the given doubly linked list using a temp pointer until you reach the last node of the list.
+// - Once you reach the last node, modify pointers to delete the last node:
+//   - Change the second last node's next to null.
+//   - Change the last node's previous pointer to null.
+// - Do all the above work using a temp pointer so that we have access to the head node of the DLL.
+// TC: O(N), Explanation:-
+// O(N) to iterate through the doubly linked list to delete the node.
+// O(N) to print the list after deleting last node.
+// so, overall TC: O(N)+O(N) = O(2N) = O(N).
+// Space Complexity: O(1), as only a few extra pointers are used, which take constant space.
+
+class dll {
+    constructor(node) {
+        this.node = node;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+let head = new dll(1);
+head.next = new dll(2);
+head.next.prev = head;
+head.next.next = new dll(3);
+head.next.next.prev = head.next;
+head.next.next.next = new dll(4);
+head.next.next.next.prev = head.next.next; 
+
+function deleteLast(head){
+    if(head === null || head.next === null){
+        return null;
+    }
+
+    let temp = head;
+    while(temp.next!=null){
+        temp = temp.next;
+    }
+
+    temp.prev.next = null;
+    temp.prev = null;
+    return head;
+}
+
+head = deleteLast(head);
+
+function printDLL(head){
+    let temp = head;
+    while(temp!=null){
+        console.log(temp.node);
+        temp = temp.next;
+    }
+}
+
+printDLL(head);
+
+// (3) Delete kth node from the doubly linked list:
+// Approach:
+// - Check if the head itself is null; if so, return null.
+// - If k is 1 and the head next is null, it means the deleted node will be the head itself, so return null.
+// - Otherwise, use a temp pointer to traverse through the doubly linked list until you reach the kth node.
+// - Once you reach the kth node, make the necessary changes to delete that kth node:
+//   - Update the next pointer of the (k-1)th node to point to the (k+1)th node.
+//   - Update the prev pointer of the (k+1)th node to point to the (k-1)th node.
+// TC: O(N), Explanation:-
+// O(N) to iterate through the doubly linked list to delete the kth node.
+// O(N) to print the list after deleting kth node.
+// so, overall TC: O(N)+O(N) = O(2N) = O(N).
+// Space Complexity: O(1), as only a few extra pointers are used, which take constant space.
+
+class dll {
+    constructor(node) {
+        this.node = node;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+let head = new dll(1);
+head.next = new dll(2);
+head.next.prev = head;
+head.next.next = new dll(3);
+head.next.next.prev = head.next;
+head.next.next.next = new dll(4);
+head.next.next.next.prev = head.next.next; 
+
+function deleteKth(head,k){
+    if(head === null){
+        return null;
+    }
+    if(head.next === null && k == 1){
+        return null;
+    }
+
+    let temp = head;
+    let count = 0;
+    while(temp.next!=null){
+        count++;
+        if(count === k){
+            temp.prev.next = temp.next;
+            temp.next.prev = temp.prev;
+            temp.prev = null;
+            temp.next = null;
+            break;
+        }else{
+            temp = temp.next;
+        }
+    }
+
+    return head;
+}
+
+head = deleteKth(head,3);
+function printDLL(head){
+    let temp = head;
+    while(temp!=null){
+        console.log(temp.node);
+        temp = temp.next;
+    }
+}
+
+printDLL(head);
+
+// Delete the given value from the doubly linked list.
+// Approach:
+// check if the head itself is null; if so, return null.
+// traverse the list meanwhile check it currently iterated value is equal to given value then delete that value.
+// for deleting the node check few cases:-
+// if the node to be deleted is not the head, update the prev node’s next pointer to point to the next node of the temp.
+// update the next node’s prev pointer to point to the prev node of the temp.
+// if the node to be deleted is the head, update head to the next node of the temp.
+// set the prev and next pointers of the temp node to null to fully disconnect it from the list.
+// return the updated head of the list.
+// TC: O(N), Explanation:-
+// O(N) to iterate through the doubly linked list to delete the given value.
+// O(N) to print the list after deleting given value.
+// so, overall TC: O(N)+O(N) = O(2N) = O(N).
+// Space Complexity: O(1), as only a few extra pointers are used, which take constant space.
+
+class dll {
+    constructor(node) {
+        this.node = node;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+let head = new dll(1);
+head.next = new dll(2);
+head.next.prev = head;
+head.next.next = new dll(3);
+head.next.next.prev = head.next;
+head.next.next.next = new dll(4);
+head.next.next.next.prev = head.next.next; 
+
+function deleteVal(head,val){
+    if(head === null){
+        return null;
+    }
+    let temp = head;
+    while(temp!=null){
+        if(temp.node === val){
+            if (temp.prev !== null) {
+                temp.prev.next = temp.next; 
+            }
+            if (temp.next !== null) {
+                temp.next.prev = temp.prev; 
+            }
+            // If the node to be deleted is the head, update the head
+            if (temp === head) {
+                head = temp.next;
+            }
+            temp.prev = null;
+            temp.next = null;
+            break;
+        }else{
+            temp = temp.next
+        }
+    }
+    return head;
+}
+
+head = deleteVal(head,1)
+function printDLL(head){
+    let temp = head;
+    while(temp!=null){
+        console.log(temp.node);
+        temp = temp.next;
+    }
+}
+
+printDLL(head);

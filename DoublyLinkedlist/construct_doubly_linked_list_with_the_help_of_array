@@ -1,0 +1,32 @@
+// As we have given an array and we have to construct the doubly linked with the help of array.
+// appraoch:- 
+// create the head of the doubly linked list by creating the first node with the value array[0].
+// set a prev variable to keep track of the previous node, starting with the head.
+// iterate over the array starting from the second element (index 1).
+// for each element, create a new node and set its prev pointer to the previous node.
+// link the next pointer of the previous node to the new node.
+// update the prev variable to the new node.
+// finally, print the head of the doubly linked list.
+// TC: O(N), to traverse the array n-1 times so overall time complexity is O(N).
+// SC: O(N), as for 'n' size it create 'n' nodes.
+
+class dll {
+    constructor(node) {
+        this.node = node;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+let array = [1, 2, 3, 4, 5];
+let head = new dll(array[0]);
+let prev = head; // Correctly set prev to head
+
+for (let i = 1; i < array.length; i++) {
+    let temp = new dll(array[i]);
+    temp.prev = prev; // Set the previous pointer of the new node
+    prev.next = temp; // Link the next pointer of the previous node to the new node
+    prev = temp; // Move prev to the new node
+}
+
+console.log(head);

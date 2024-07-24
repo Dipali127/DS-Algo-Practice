@@ -9,42 +9,42 @@
 // Overall, TC: O(1)+O(N) => O(N)
 // SC: O(1), as only a few pointers are used.
 
-// class linkedList{
-//     constructor(data){
-//         this.data = data;
-//         this.next = null;
-//     }
-// }
+class linkedList{
+    constructor(data){
+        this.data = data;
+        this.next = null;
+    }
+}
 
-// let head = new linkedList(1);
-// head.next = new linkedList(2);
-// head.next.next = new linkedList(3);
-// head.next.next.next = new linkedList(4);
-// head.next.next.next.next = new linkedList(5);
-
-
-// head = deleteHead(head)
-//  function deleteHead(head){
-//     if(head === null){
-//         return null;
-//     }
-
-//     let temp = head;
-//     head = head.next;
-//     temp.next = null;
-//     return head;
-//  }
+let head = new linkedList(1);
+head.next = new linkedList(2);
+head.next.next = new linkedList(3);
+head.next.next.next = new linkedList(4);
+head.next.next.next.next = new linkedList(5);
 
 
-//  function printList(head) {
-//     let current = head;
-//     while (current!=null) {
-//         console.log(current.data);
-//         current = current.next;
-//     }
-// }
+head = deleteHead(head)
+ function deleteHead(head){
+    if(head === null){
+        return null;
+    }
 
-// printList(head);
+    let temp = head;
+    head = head.next;
+    temp.next = null;
+    return head;
+ }
+
+
+ function printList(head) {
+    let current = head;
+    while (current!=null) {
+        console.log(current.data);
+        current = current.next;
+    }
+}
+
+printList(head);
 
 // (2) Delete a node from end(tail) of linked list:-
 // appraoch:- 
@@ -59,51 +59,51 @@
 // Overall, TC: O(N)+O(N) => O(N)
 // SC: O(1), as only a few pointers are used.
 
-// class linkedList {
-//     constructor(data) {
-//         this.data = data;
-//         this.next = null;
-//     }
-// }
+class linkedList {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 
-// let head = new linkedList(1);
-// head.next = new linkedList(2);
-// head.next.next = new linkedList(3);
-// head.next.next.next = new linkedList(4);
-// head.next.next.next.next = new linkedList(5);
+let head = new linkedList(1);
+head.next = new linkedList(2);
+head.next.next = new linkedList(3);
+head.next.next.next = new linkedList(4);
+head.next.next.next.next = new linkedList(5);
 
-// head = deleteLast(head);
-// function deleteLast(head) {
-//     if (head === null || head.next === null) {
-//         return null;
-//     }
+head = deleteLast(head);
+function deleteLast(head) {
+    if (head === null || head.next === null) {
+        return null;
+    }
 
-//     let temp = head;
-//     let prev = null;
-//     while (temp.next != null) {
-//         prev = temp;
-//         temp = temp.next;
-//     }
-
-
-//     // Disconnect the last node
-//     if (prev.next != null) {
-//         prev.next = null;
-//         return head;
-//     }
-
-// }
+    let temp = head;
+    let prev = null;
+    while (temp.next != null) {
+        prev = temp;
+        temp = temp.next;
+    }
 
 
-// function printList(head) {
-//     let current = head;
-//     while (current != null) {
-//         console.log(current.data);
-//         current = current.next;
-//     }
-// }
+    // Disconnect the last node
+    if (prev.next != null) {
+        prev.next = null;
+        return head;
+    }
 
-// printList(head);
+}
+
+
+function printList(head) {
+    let current = head;
+    while (current != null) {
+        console.log(current.data);
+        current = current.next;
+    }
+}
+
+printList(head);
 
 // (3)Delete kth node from the linked list:-
 // appraoch:- 
@@ -119,53 +119,53 @@
 // Overall, TC: O(N)+O(N) => O(N)
 // SC: O(1), as only a few pointers are used.
 
-// class linkedList {
-//     constructor(data) {
-//         this.data = data;
-//         this.next = null;
-//     }
-// }
+class linkedList {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 
-// let head = new linkedList(1);
-// head.next = new linkedList(2);
-// head.next.next = new linkedList(3);
-// head.next.next.next = new linkedList(4);
-// head.next.next.next.next = new linkedList(5);
+let head = new linkedList(1);
+head.next = new linkedList(2);
+head.next.next = new linkedList(3);
+head.next.next.next = new linkedList(4);
+head.next.next.next.next = new linkedList(5);
 
-// head = deleteKth(head,6)
-// function deleteKth(head,k){
-//     let temp = head;
-//     if(k==1){
-//         head = head.next;
-//         temp.next = null;
-//         return head;
-//     }
-//         let prev = null;
-//         let count = 0;
-//         while(temp!=null){
-//             count++;
-//             if(count === k){
-//                 prev.next = prev.next.next;
-//                 temp.next = null;
-//                 break;
-//             }else{
-//                 prev = temp;
-//                 temp = temp.next;
-//             }
-//         }
+head = deleteKth(head,6)
+function deleteKth(head,k){
+    let temp = head;
+    if(k==1){
+        head = head.next;
+        temp.next = null;
+        return head;
+    }
+        let prev = null;
+        let count = 0;
+        while(temp!=null){
+            count++;
+            if(count === k){
+                prev.next = prev.next.next;
+                temp.next = null;
+                break;
+            }else{
+                prev = temp;
+                temp = temp.next;
+            }
+        }
 
-//         return head;
-// }
+        return head;
+}
 
-// function printList(head) {
-//     let current = head;
-//     while (current != null) {
-//         console.log(current.data);
-//         current = current.next;
-//     }
-// }
+function printList(head) {
+    let current = head;
+    while (current != null) {
+        console.log(current.data);
+        current = current.next;
+    }
+}
 
-// printList(head);
+printList(head);
 
 // Insetion:-
 // Insert node at head of linked list:-
@@ -178,37 +178,37 @@
 // Overall, TC: O(1)+O(N) => O(N)
 // SC: O(1) as i take few pointers which take constant space. 
 
-// class linkedList {
-//     constructor(data) {
-//         this.data = data;
-//         this.next = null;
-//     }
-// }
+class linkedList {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 
-// let head = new linkedList(1);
-// head.next = new linkedList(2);
-// head.next.next = new linkedList(3);
-// head.next.next.next = new linkedList(4);
-// head.next.next.next.next = new linkedList(5);
+let head = new linkedList(1);
+head.next = new linkedList(2);
+head.next.next = new linkedList(3);
+head.next.next.next = new linkedList(4);
+head.next.next.next.next = new linkedList(5);
 
-// let newNode = new linkedList(0);
+let newNode = new linkedList(0);
 
-// head = insertHead(head, newNode);
-// function insertHead(head, newNode){
-//     newNode.next = head;
-//     head = newNode;
-//     return head;
-// }
+head = insertHead(head, newNode);
+function insertHead(head, newNode){
+    newNode.next = head;
+    head = newNode;
+    return head;
+}
 
-// function printList(head) {
-//     let current = head;
-//     while (current != null) {
-//         console.log(current.data);
-//         current = current.next;
-//     }
-// }
+function printList(head) {
+    let current = head;
+    while (current != null) {
+        console.log(current.data);
+        current = current.next;
+    }
+}
 
-// printList(head);
+printList(head);
 
 // (2) Insert node at last of the linked list:-
 // appraoch:- 
@@ -221,46 +221,46 @@
 // Overall, TC: O(N)+O(N) => O(N)
 // SC: O(1), as only a few pointers are used.
 
-// class linkedList {
-//     constructor(data) {
-//         this.data = data;
-//         this.next = null;
-//     }
-// }
+class linkedList {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 
-// let head = new linkedList(1);
-// head.next = new linkedList(2);
-// head.next.next = new linkedList(3);
-// head.next.next.next = new linkedList(4);
-// head.next.next.next.next = new linkedList(5);
-// let newNode = new linkedList(6);
+let head = new linkedList(1);
+head.next = new linkedList(2);
+head.next.next = new linkedList(3);
+head.next.next.next = new linkedList(4);
+head.next.next.next.next = new linkedList(5);
+let newNode = new linkedList(6);
 
-// head = insertLast(head, newNode);
-// function insertLast(head, newNode) {
-//     if (head === null) {
-//         return newNode;
-//     }
+head = insertLast(head, newNode);
+function insertLast(head, newNode) {
+    if (head === null) {
+        return newNode;
+    }
 
-//     let temp = head;
-//     while (temp.next !== null) {
-//         temp = temp.next;
-//     }
+    let temp = head;
+    while (temp.next !== null) {
+        temp = temp.next;
+    }
 
-//     temp.next = newNode;
-//     newNode.next = null;
-//     return head;
+    temp.next = newNode;
+    newNode.next = null;
+    return head;
 
-// }
+}
 
-//     function printList(head) {
-//         let current = head;
-//         while (current != null) {
-//             console.log(current.data);
-//             current = current.next;
-//         }
-//     }
+    function printList(head) {
+        let current = head;
+        while (current != null) {
+            console.log(current.data);
+            current = current.next;
+        }
+    }
 
-//     printList(head);
+    printList(head);
 
 // (3) Inserting new node after kth position of the linked list:-
 // approach:-
