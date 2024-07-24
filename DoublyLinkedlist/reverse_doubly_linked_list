@@ -1,0 +1,58 @@
+// GFG PROBLEM:-
+// appraoch:- brute force
+// Traverse the given list and store all the values in a stack to get the last
+// value of the linked list at the top of the stack.
+// Iterate through the list again and replace the current iterated value of
+//  the list with the top of the stack.
+// TC: O(N), Explanation:-
+// - O(N) to iterate through the list to push all values into the stack.
+// - O(N) to replace the current node values with values popped from the stack.
+// overall, TC: O(N)+O(N) = O(2N) = O(N).
+// SC: O(N), to store all values of linked list in stack.
+
+class Solution {
+  reverseDLL(head){
+      let stack = [];
+      let temp = head;
+      while(temp !== null){
+          stack.push(temp.data);
+          temp = temp.next;
+      }
+      
+      let itrt = head;
+      while(itrt !== null){
+          itrt.data = stack.pop();
+          itrt = itrt.next;
+      }
+      
+      return head;
+  }
+}
+
+
+// appraoch:- optimal appraoch
+// traverse through the list and while traversing, do few modification:-
+// - update previous pointer which is intially null points to the current previous to access the current previosu node.
+// - update current previous pointer points to current next.
+// - update current next pointer points to prev pointer.
+// - increment current by current prev because current next now points to previous.
+// TC: O(N), to iterate through the given doubly linked list to reverse it.
+// SC: O(1), as i only use few pointers which take constant space.
+
+class Solution {
+  reverseDLL(head){
+      if(head === null || head.next === null){
+          return head;
+      }
+       let prev = null;
+       let current = head;
+       while(current != null){
+           prev = current.prev;
+           current.prev =  current.next;
+           current.next = prev;
+           current = current.prev;
+       }
+       
+       return prev.prev;
+  }
+}
