@@ -1,0 +1,190 @@
+// (1) Insert a given node at the beginning of doubly linked list:-
+// appraoch:- 
+// check a case where head is null if so then return newNode which will be the head of the list.
+// otherwise, do some modification to add new node at the begining of list:-
+// - update new node next pointer points to head of the doubly linked list.
+// - update previous pointer of the head points to new node of the doubly linked list.
+// - update head points to new node which is the new head of the list.
+// TC: O(N), to print the list and the insertion operation is done in constant time
+// SC: O(1), as we have only take few pointers which take constant space.
+ class dll {
+    constructor(node) {
+        this.node = node;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+let head = new dll(2);
+head.next = new dll(3);
+head.next.prev = head;
+head.next.next = new dll(4);
+head.next.next.prev = head.next;
+head.next.next.next = new dll(5);
+head.next.next.next.prev = head.next.next; 
+let newNode = new dll(1);
+
+function insertNode(head,newNode){
+    if(head === null){
+        return newNode;
+    }
+
+    newNode.next = head;
+    head.prev = newNode;
+    head = newNode;
+    return head;
+}
+
+head = insertNode(head,newNode);
+
+function printDLL(head){
+    let temp = head;
+    while(temp!=null){
+        console.log(temp.node);
+        temp = temp.next;
+    }
+}
+
+printDLL(head);
+
+// Insert a node after the tail of the linked list:-
+// appraoch:-
+// check a case where head itsel is null. if so, then return null.
+// check another case where head next is null. if so, then add a new node after the head.
+// otherwise, traverse through the given doubly linked list until reach at last node of the list.
+// once reach at last node, do necessary modification to add the node after tail of list such as:-
+// update tail next pointer points to new node of the list.
+// update new node previous pointer points to tail of the list.
+// finally, the list is updated. So, return head of the list.
+// TC: O(N), Explanation:-
+// O(N) to iterate through the doubly linked list to insert the node at last.
+// O(N) to print the list after inserting the node at last.
+// so, overall TC: O(N)+O(N) = O(2N) = O(N).
+// Space Complexity: O(1), as only a few extra pointers are used, which take constant space.
+
+class dll {
+    constructor(node) {
+        this.node = node;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+let head = new dll(1);
+head.next = new dll(2);
+head.next.prev = head;
+head.next.next = new dll(3);
+head.next.next.prev = head.next;
+head.next.next.next = new dll(4);
+head.next.next.next.prev = head.next.next; 
+let newNode = new dll(3);
+
+function insertNode(head,newNode){
+    if(head === null){
+        return newNode;
+    }
+
+    if(head.next === null){
+        head.next = newNode;
+        newNode.prev = head;
+        return head;
+    }
+
+    let tail = head;
+    while(tail.next !== null){
+        tail = tail.next;
+    }
+
+    tail.next = newNode;
+    newNode.prev = tail;
+    return head;
+}
+
+head = insertNode(head,newNode);
+
+function printDLL(head){
+    let temp = head;
+    while(temp!=null){
+        console.log(temp.node);
+        temp = temp.next;
+    }
+}
+
+ printDLL(head);
+
+// (3) Insert a new node before the kth node 
+// appraoch:- 
+// check a case where head itself is null. if so, then return null.
+// - update head previous pointer points to new node.
+// - update new node next pointer points to head.
+// - update head points to new node which is the new node of the list.
+// otherwise, traverse the list using temp pointer to reach at the kth node.
+// once reach at kth node do few modification to add new node before the kth node such as:-
+// - update the next pointer of newNode points to the 𝑘th node.
+// - update the node before the kth node' next pointer points to new node.
+// - update the new node previous pointer points to kth node previous.
+// - update the kth node previous pointer points to new node.
+// TC: O(N), Explanation:-
+// O(N) to iterate through the doubly linked list to insert the node before the kth node.
+// O(N) to print the list after inserting the node at last.
+// so, overall TC: O(N)+O(N) = O(2N) = O(N).
+// Space Complexity: O(1), as only a few extra pointers are used, which take constant space.
+
+
+class dll {
+    constructor(node) {
+        this.node = node;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+let head = new dll(1);
+head.next = new dll(2);
+head.next.prev = head;
+head.next.next = new dll(4);
+head.next.next.prev = head.next;
+head.next.next.next = new dll(5);
+head.next.next.next.prev = head.next.next; 
+let newNode = new dll(3);
+
+function insertNode(head,newNode,k){
+    if(head === null){
+        return newNode;
+    }
+    
+    let count = 0;
+    let temp = head;
+    while(temp.next !== null){
+        count++;
+        if(count === k){
+            newNode.next = temp;
+            temp.prev.next = newNode;
+            newNode.prev = temp.prev;
+            temp.prev = newNode;
+
+        }else{
+            temp = temp.next;
+        }
+        
+    }
+
+    if (temp === null) {
+        // If k is greater than the number of nodes, return the head without changes
+        return head;
+    }
+
+    return head;
+}
+
+head = insertNode(head,newNode,9);
+
+function printDLL(head){
+    let temp = head;
+    while(temp!=null){
+        console.log(temp.node);
+        temp = temp.next;
+    }
+}
+
+printDLL(head);
