@@ -50,7 +50,6 @@ printDLL(head);
 // Insert a node after the tail of the linked list:-
 // appraoch:-
 // check a case where head itsel is null. if so, then return null.
-// check another case where head next is null. if so, then add a new node after the head.
 // otherwise, traverse through the given doubly linked list until reach at last node of the list.
 // once reach at last node, do necessary modification to add the node after tail of list such as:-
 // update tail next pointer points to new node of the list.
@@ -84,12 +83,6 @@ function insertNode(head,newNode){
         return newNode;
     }
 
-    if(head.next === null){
-        head.next = newNode;
-        newNode.prev = head;
-        return head;
-    }
-
     let tail = head;
     while(tail.next !== null){
         tail = tail.next;
@@ -115,6 +108,7 @@ function printDLL(head){
 // (3) Insert a new node before the kth node 
 // appraoch:- 
 // check a case where head itself is null. if so, then return null.
+// check a case where k is equal to 1. if so, then do few modification such as :-
 // - update head previous pointer points to new node.
 // - update new node next pointer points to head.
 // - update head points to new node which is the new node of the list.
@@ -152,6 +146,14 @@ function insertNode(head,newNode,k){
     if(head === null){
         return newNode;
     }
+
+       
+    if(k === 1){
+        newNode.next = head;
+        head.prev = newNode;
+        head = newNode;
+        return head;
+    }
     
     let count = 0;
     let temp = head;
@@ -169,15 +171,10 @@ function insertNode(head,newNode,k){
         
     }
 
-    if (temp === null) {
-        // If k is greater than the number of nodes, return the head without changes
-        return head;
-    }
-
     return head;
 }
 
-head = insertNode(head,newNode,9);
+head = insertNode(head,newNode,1);
 
 function printDLL(head){
     let temp = head;

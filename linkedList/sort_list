@@ -1,0 +1,113 @@
+// leetcode problem:-
+// brute force appraoch:-
+// appraoch:-
+// store all nodes's values in array.
+// sort the array.
+// traverse the linked list and replace the current iterated node of linked list with current iterated
+// array value.
+// TC: O(NLOGN), Explanation:- 
+// O(N) to traverse the list to store original node's values in array.
+// O(NLOGN) to sort the array
+// O(N) to again traveres the list to replace list node's value with array value.
+// overall TC: O(N) + O(NLOGN) + O(N) = O(NLOGN).
+// SC: O(N)  , as i have use of array to store all values of list.
+
+var sortList = function(head) {
+    let arr = [];
+    let temp = head;
+    while(temp!=null){
+        arr.push(temp.val);
+        temp = temp.next;
+    }
+
+    arr.sort((a,b) => a-b);
+    let itrt = head;
+    let i = 0;
+    while(itrt != null){
+        itrt.val = arr[i++];
+        itrt = itrt.next;
+    }
+
+    return head;
+};
+
+// optimal appraoch:-
+// appraoch:- merge sort
+// find middle of the list using findMiddle function.
+// divide the list into two halves using middle
+// recursively call for the left and right half of the list until you get the single node in the list.
+// once, you will get single node in the list call the mergeSortedlist function to sort both the list.
+// TC: O(NLOGN), Explanation:-
+// O(N), for finding middle of the list.
+//  O(NLOGN),  for recursively dividing the n size list into two halves.
+// O(N), for merge the two sorted list.
+// overall, TC: O(N) + O(NLOGN) + O(N) = O(NLOGN).
+// SC: O(LOGN), due to the recursion stack.
+var sortList = function (head) {
+
+   // if the list is empty or has only one node, it is already sorted, so return the head
+    if (head === null || head.next === null) {
+        return head;
+    }
+
+    // Find the middle of the list using the findMiddle function
+    let middle = findMiddle(head);
+
+    // Divide the list into two halves
+    let right = middle.next;
+    middle.next = null;
+    let left = head;
+
+    // Recursively sort the left and right halves
+    left = sortList(left);
+    right = sortList(right);
+    return mergeTwoSortedLinkedLists(left, right);
+
+    // Function to find the middle of a linked list
+    function findMiddle(head) {
+        // If the list is empty or has only one node, the middle is the head itself
+        if (head === null || head.next === null) {
+            return head;
+        }
+
+        let slow = head;
+        let fast = head.next;
+        while (fast !== null && fast.next !== null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    function mergeTwoSortedLinkedLists(list1, list2) {
+        let newNode = new ListNode(0);
+        let temp = newNode;
+        while (list1 !== null && list2 !== null) {
+            if (list1.val < list2.val) {
+                temp.next = list1;
+                temp = temp.next;
+                list1 = list1.next;
+            } else {
+                temp.next = list2;
+                temp = temp.next;
+                list2 = list2.next;
+            }
+        }
+
+        // If there are remaining nodes in list1 or list2, append them
+        while(list1 != null){
+            temp.next = list1;
+            list1 = list1.next;
+            temp = temp.next;
+        }
+
+        while(list2 != null){
+            temp.next = list2;
+            list2 = list2.next;
+            temp = temp.next;
+        }
+
+        return newNode.next;
+    }
+};
+
