@@ -1,0 +1,92 @@
+// Leetcode Problem:
+// brute force approach:-
+// approach:-
+// store all values of given linked list in array.
+// call the checkPalindrome function on array to check that given linked list is palindrome or not.
+// if array is palindrome means that given list is palindrome and return true otherwise return false.
+// TC: O(N), Explanation:- 
+// O(N) :- to store all linked list values in array.
+// O(N) :- to check the linked list is palindrome or not.
+// overall TC: O(N) + O(N) = O(2N) = O(N).
+// SC: O(N), to store all linked list values in array.
+
+ var isPalindrome = function(head){
+    let arr = [];
+    let temp = head;
+     while(temp !== null){
+        arr.push(temp.val);
+        temp = temp.next;
+     }
+
+     return checkPalindrome(arr);
+ }
+
+function use two pointer approach to check that given linked list is palidrome or not 
+ function checkPalindrome(arr){
+    let left = 0;
+    let right = arr.length-1;
+    while(left<right){
+        if(arr[left] === arr[right]){
+            left++;
+            right--;
+        }else{
+            return false;
+        }
+    }
+
+    return true;
+ }
+
+// optimal approach:- using tortoise and hare algorithm
+// approach:-
+// first find middle of the linked list using slow and fast pointer.
+// (Note:- while finding middle of the linked list, take floor value).
+// reverse the second half of the linked list starting from the node after the middle node.
+// now, compare the first half of the linked list with second half of the linked list to check the 
+// given linked list is palindrome or not.
+// reverse the second half of the list again to restore the original order of the linked list.
+// TC: O(N), Explanation:-
+// O(N/2) :- to find the middle of the linked list.
+// O(N/2) :- to reverse secodn half linked list.
+// O(N/2) :- to compare both first and second half linked list to check palindrome.
+// overall, TC: O(N/2) + O(N/2) + O(N/2) = O(3(N/2)) = O(N).
+// SC : O(1), only few pointers are used which take constant space.  
+
+var isPalindrome = function(head){
+    let slow = head, fast = head;
+    while(fast.next !== null && fast.next.next !== null){
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    let newHead = reverse(slow.next);
+    let compare1 = head;
+    let compare2 =  newHead;
+
+    while(compare2 !== null){
+        if(compare1.val !== compare2.val){
+           reverse( newHead)
+           return false;
+        }else{
+            compare1 = compare1.next;
+            compare2 = compare2.next;
+        }
+
+    }
+    reverse( newHead);
+    return true;
+}
+
+function reverse(node){
+    let prev = null;
+    let current = node;
+    let temp;
+    while(current!= null){
+        temp= current.next;
+        current.next = prev;
+        prev = current
+        current = temp;
+    }
+
+    return prev;
+}

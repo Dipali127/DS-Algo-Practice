@@ -1,6 +1,6 @@
 // leetcode problem:-
-// brute force appraoch:-
-// appraoch:-
+// brute force approach:-
+// approach:-
 // store all nodes's values in array.
 // sort the array.
 // traverse the linked list and replace the current iterated node of linked list with current iterated
@@ -31,8 +31,8 @@ var sortList = function(head) {
     return head;
 };
 
-// optimal appraoch:-
-// appraoch:- merge sort
+// optimal approach:-
+// approach:- merge sort
 // find middle of the list using findMiddle function.
 // divide the list into two halves using middle
 // recursively call for the left and right half of the list until you get the single node in the list.

@@ -1,0 +1,80 @@
+// LeetCode Problem:
+ // brute force appraoch:- 
+ // appraoch:-
+ // store first all odd index node's value in array then store all even index node's value in array.
+ // now, traverse the list and replace all odd index node's value of linked list with odd value store in
+ // array and all even index node's value of linked list with even value store in array.
+ // TC: O(N), Explanation:-
+ // O(N/2) :- to store all odd index node's value in array.
+ // O(N/2) :-  to store all even index node's value in array.
+ // O(N) :- to traverse the list to replace all node's value with array value.
+ // overall TC: O(N/2) + O(N/2) + O(N) = O(2(N/2)) + O(N) = O(N) , as 2 is constant.
+ // SC: O(N) , as here is a use of array to store all list value.
+
+ var oddEvenList = function(head) {
+    if(head === null || head.next === null){
+        return head;
+    }
+    let arr = [];
+    let odd = head;
+    let even = head.next;
+    while(odd !== null && odd.next !== null){
+        arr.push(odd.val);
+        odd = odd.next.next;
+    }
+    if(odd !== null){
+        arr.push(odd.val);
+    }
+
+    while(even !== null && even.next !== null){
+        arr.push(even.val);
+        even = even.next.next;
+    }
+    if(even !== null){
+        arr.push(even.val);
+    }
+
+    let itrt = head, i=0;
+    while(itrt !== null){
+        itrt.val = arr[i++];
+        itrt = itrt.next;
+    }
+
+    return head;
+ }
+
+// optimal appraoch:-
+// appraoch:- separate the given linked list into two parts where one part contain all odd nodes indices
+// and another part contain all even nodes indices.
+// for separating the list take two pointers where one pointer points to odd node index of the given list 
+// and another pointer points to even node index of the given list.
+// for joining the two half of the list where one half contain all odd node and another half contain
+// all even node, take one more pointer i.e evenNodeHead which points to starting even index of even node.
+// Once the given list divided in two parts, join the last index of odd node with start index of even 
+// node using evenNodeHead.  
+// TC: O(N), list is traversed once to separate odd and even indexed nodes.
+// SC: O(1), there isn't taken any extra space apart from few pointers.
+
+ var oddEvenList = function(head){
+    if(head === null || head.next === null){
+        return head;
+    }
+
+    let odd = head;
+    let even = head.next;
+    let evenNodeHead = even;
+
+// ensure that even should not be null as well even's next should not be null because if
+// even hasn't reach to null then odd cannot because odd is at front of even.
+    while(even !== null && even.next !== null){
+        odd.next = odd.next.next;
+        even.next = even.next.next;
+
+        odd = odd.next;
+        even = even.next;
+    }
+
+// Join the last odd node to the head of the even nodes
+    odd.next = evenNodeHead;
+    return head;
+ }
