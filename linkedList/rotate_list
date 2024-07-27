@@ -1,1 +1,52 @@
- 
+ // Leetcode Problem:
+ // approach:-
+// check a case where list is empty or k is equal to zero means no rotation. if so, then return head.
+// traverse the list to calculate its length and find the tail node. 
+// adjust k to handle cases where k is greater than the length of the list.
+// connect the tail node back to the head to form a circular list.
+// find the new tail and new head based on the new value of k.
+// disconnect the new tail from the new head to form the rotated singly list.
+// TC: O(N), Explanation:-
+// O(N) to find the tail node and calculate the length.
+// O(N - k) to rotate the list.
+// overall, TC : O(N) + O(N-K) = O(N).
+// SC: O(1), as no extra space used.
+
+const rotateRight = (head, k) => {
+    if (head === null || k === 0) {
+        return head;
+    }
+
+    let length = 1;
+    let tail = head;
+    // ensure that tail not reach beyond the null 
+    while (tail.next != null) {
+        length++;
+        tail = tail.next;
+    }
+
+    // if k is divisible by the length of the given list then simply return head of the list.
+    if (k % length === 0) {
+        return head;
+    }
+
+    k = k % length;
+    if (k === 0) {
+        return head;
+    }
+
+    // make circular list
+    tail.next = head;
+
+    let stepsToNewHead = length - k;
+    let newTail = head;
+    for (let i = 1; i < stepsToNewHead; i++) {
+        newTail = newTail.next;
+    }
+    let newHead = newTail.next;
+
+    // Break the circular list
+    newTail.next = null;
+
+    return newHead;
+};
