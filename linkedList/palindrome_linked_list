@@ -37,29 +37,32 @@ function use two pointer approach to check that given linked list is palidrome o
     return true;
  }
 
-// optimal approach:- using tortoise and hare algorithm
-// approach:-
-// first find middle of the linked list using slow and fast pointer.
-// (Note:- while finding middle of the linked list, take floor value).
-// reverse the second half of the linked list starting from the node after the middle node.
-// now, compare the first half of the linked list with second half of the linked list to check the 
-// given linked list is palindrome or not.
-// reverse the second half of the list again to restore the original order of the linked list.
-// TC: O(N), Explanation:-
-// O(N/2) :- to find the middle of the linked list.
-// O(N/2) :- to reverse secodn half linked list.
-// O(N/2) :- to compare both first and second half linked list to check palindrome.
-// overall, TC: O(N/2) + O(N/2) + O(N/2) = O(3(N/2)) = O(N).
-// SC : O(1), only few pointers are used which take constant space.  
+// optimal approach: using the Tortoise and Hare algorithm
+// approach:
+// find the middle of the linked list using slow and fast pointers.
+//    - the slow pointer moves one step at a time.
+//    - the fast pointer moves two steps at a time.
+//    - when the fast pointer reaches the end, the slow pointer will be at the middle.
+// 2. reverse the second half of the linked list starting from the middle node (from the slow pointer).
+// 3. compare the first half of the linked list with the second half to check if the linked list is a palindrome.
+// 4. reverse the second half of the list again to restore the original order of the linked list.
+// TC: O(N)
+// Explanation:
+// - O(N/2) to find the middle of the linked list.
+// - O(N/2) to reverse the second half of the linked list.
+// - O(N/2) to compare both the first and second halves of the linked list to check for palindrome.
+// - overall, TC: O(N/2) + O(N/2) + O(N/2) = O(3(N/2)) = O(N).
+// SC: O(1), as only a few pointers are used, which take constant space.
+  
 
 var isPalindrome = function(head){
     let slow = head, fast = head;
-    while(fast.next !== null && fast.next.next !== null){
+    while(fast!== null && fast.next !== null){
         slow = slow.next;
         fast = fast.next.next;
     }
 
-    let newHead = reverse(slow.next);
+    let newHead = reverse(slow);
     let compare1 = head;
     let compare2 =  newHead;
 
