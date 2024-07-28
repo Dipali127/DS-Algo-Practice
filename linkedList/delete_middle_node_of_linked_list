@@ -1,0 +1,28 @@
+// Leetcode Problem:
+// approach :- use of Tortoise and Hare algorithm
+ // check a case where there is no node in list means head is null or there is only single node means
+ // head.next is null then return null as there is no middle node exist to be deleted.
+ // take a pointer prev intialised with null which is used to keep track of the node before middle(deleted) node.
+ // and take two more pointer slow and fast where fast move twice as fast as slow.
+ // once the slow is at middle remove the middle node by updating prev pointer next points to (middle) deleted
+ // node next and return the modified new linked list using head pointer.
+ // TC:O(N), Explanation:-
+ // O(N/2) time taken by for both fast and slow pointer in a single pass 
+ // So, overall TC: O(N) and SC: O(1), as there are only few pointers used which take constant space. 
+
+var deleteMiddle = function(head) {
+    let prev = null;
+    let fast = head;
+    let slow = head;
+    if(head === null || head.next === null){
+        return null;
+    }
+    while(fast!=null && fast.next!=null){
+        prev=slow;
+        slow=slow.next;
+        fast=fast.next.next;
+    }
+
+    prev.next = slow.next;
+    return head;
+};

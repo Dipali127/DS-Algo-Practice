@@ -1,0 +1,40 @@
+// Leetcode Problem:
+// appraoch:- 
+// check that list1 and list2 are not null. if so, then return null.
+// take a dummy new linked list intialised with 0 value to store all the sum of both list
+// and take a pointer temp points to that dummy new linked list.
+// while doing sum of both the list, ensure that the list is not points to null.
+// to calculate carry, divide the sum of both current iterated node' value of list by 10;
+// for newNode value, take a modulo of the sum of both current iterated node' value of list by 10.
+// also ensure that pointers list1 and list2 are moved to their respective next nodes if they are not null.
+// after the loop, if there is a carry left, a new node with the carry value is added to the dummy list.
+// TC:O(M+N), as we traverse the both list in single pass where 'M' is the length of list1 and 'N' is the
+// length of list2 AND SC:O(MAX(M,N)), as space complexity is determined by the size of the resultant 
+// linked list. In the worst case, the resultant list will have max(M, N) + 1 nodes.
+
+var addTwoNumbers = function (list1, list2) {
+    if (list1 === null && list2 === null) {
+        return null;
+    }
+
+    let newNode = new ListNode(0);
+    let temp = newNode;
+    let carry = 0;
+    while (list1 !== null || list2 !== null) {
+        let val1 = list1 !== null ? list1.val : 0;
+        let val2 = list2 !== null ? list2.val : 0;
+        let sum = val1 + val2 + carry;
+        carry = Math.floor(sum / 10);
+        let nodeVal = sum % 10;
+        temp.next = new ListNode(nodeVal);
+        temp = temp.next;
+           if (list1 != null) list1 = list1.next;
+           if (list2 != null) list2 = list2.next;
+    }
+
+    if (carry !== 0) {
+        temp.next = new ListNode(carry);
+    }
+
+    return newNode.next;
+}
