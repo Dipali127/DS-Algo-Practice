@@ -39,7 +39,7 @@ var sortList = function(head) {
 // once, you will get single node in the list call the mergeSortedlist function to sort both the list.
 // TC: O(NLOGN), Explanation:-
 // O(N), for finding middle of the list.
-//  O(NLOGN),  for recursively dividing the n size list into two halves.
+// O(NLOGN),  for recursively dividing the n size list into two halves.
 // O(N), for merge the two sorted list.
 // overall, TC: O(N) + O(NLOGN) + O(N) = O(NLOGN).
 // SC: O(LOGN), due to the recursion stack.

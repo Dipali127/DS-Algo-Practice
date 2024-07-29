@@ -1,0 +1,231 @@
+// GFG PROBLEM:
+// brute force approach :- 
+// approach:-
+// traverse the given multi-level linked list.
+// for each node, first traverse vertically using the bottom pointers to collect all values in an array.
+// then move to the next node horizontally using the next pointer.
+// once, list is traversed, sort the array.
+// create a new linked list from the sorted values.
+// this new list will be a single-level list with bottom pointers only.
+// TC: O(N^2), Explanation:-
+// O(N^2) as for each node horizontal node in the list, traverse the entire vertical bottom list. 
+// O(NLOGN) to sorting the array.
+// O(N) to creating the new linked list from the sorted array.
+// overall, TC: O(N^2) + O(NLOGN) + O(N) = O(N^2)
+// SC: O(N), Explanation:-
+// O(N) , use of array to store all multilevel-linked list value.
+// O(N), to create new linked list.
+// overall, SC: O(N) + O(N) = O(N).
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.bottom = null;
+  }
+}
+
+// Creating nodes
+let node5 = new Node(5);
+let node10 = new Node(10);
+let node19 = new Node(19);
+let node28 = new Node(28);
+let node7 = new Node(7);
+let node20 = new Node(20);
+let node22 = new Node(22);
+let node35 = new Node(35);
+let node8 = new Node(8);
+let node50 = new Node(50);
+let node30 = new Node(30);
+let node40 = new Node(40);
+let node45 = new Node(45);
+
+// Linking nodes with 'next' pointers
+node5.next = node10;
+node10.next = node19;
+node19.next = node28;
+node28.next = null;
+
+node7.next = node20;
+node20.next = null;
+
+node8.next = null;
+
+node30.next = null;
+
+node35.next = null;
+
+node40.next = node45;
+node45.next = null;
+
+// Linking nodes with 'bottom' pointers
+node5.bottom = node7;
+node7.bottom = node8;
+node8.bottom = node30;
+
+node10.bottom = node20;
+
+node19.bottom = node22;
+node22.bottom = node50;
+
+node28.bottom = node35;
+
+node35.bottom = node40;
+
+function flattenLinked(head){
+    let arr = [];
+    let temp = head;
+    while(temp !== null){
+        let itrt = temp;
+        while(itrt !== null){
+            arr.push(itrt.value);
+            itrt = itrt.bottom;
+        }
+        temp = temp.next;
+    }
+    
+    arr.sort((a,b) => a-b);
+    let dummyNode = new Node(0);
+    let current = dummyNode;
+    for(let i = 0;i<arr.length;i++){
+        current.bottom = new Node(arr[i]);
+        current = current.bottom;
+    }
+    
+    return dummyNode.bottom;
+}
+
+function print(node){
+    let itrt = node;
+    while(itrt !== null){
+        console.log(itrt.value);
+        itrt = itrt.bottom;
+    }
+}
+
+node5 = flattenLinked(node5);
+print(node5);
+
+// optimal approach:-
+// approach:-
+// check a case where head is null or head.next is null means there is only a single sorted list using bottom pointer.
+// recursively call the flattenLinked function to flattens the next sublist.
+// merges the current list (head) with the flattened next sublist using mergelist.
+// in the mergelist function, return dummyNode.bottom to get the sorted list using bottom pointer.
+// TC: O(N), Explanation:-
+// O(N) to recursively call the flatten the list.
+// O(N) to merge two sorted list.
+// overall TC: O(N) + O(N) = O(2N) = O(N).
+// SC: O(N), Explanation:-
+// O(N) space used by recursion stack as in the worst case recursion depth is proportional to the number of nodes in 
+// the long horizontal list.
+// O(N) to create a new sorted list using dummyNode while merging two sorted list.  
+// overall SC: O(N) + O(N) = O(2N) = O(N)
+
+class Node {
+    constructor(value) {
+      this.value = value;
+      this.next = null;
+      this.bottom = null;
+    }
+  }
+  
+  // Creating nodes
+  let node5 = new Node(5);
+  let node10 = new Node(10);
+  let node19 = new Node(19);
+  let node28 = new Node(28);
+  let node7 = new Node(7);
+  let node20 = new Node(20);
+  let node22 = new Node(22);
+  let node35 = new Node(35);
+  let node8 = new Node(8);
+  let node50 = new Node(50);
+  let node30 = new Node(30);
+  let node40 = new Node(40);
+  let node45 = new Node(45);
+  
+  // Linking nodes with 'next' pointers
+  node5.next = node10;
+  node10.next = node19;
+  node19.next = node28;
+  node28.next = null;
+  
+  node7.next = node20;
+  node20.next = null;
+  
+  node8.next = null;
+  
+  node30.next = null;
+  
+  node35.next = null;
+  
+  node40.next = node45;
+  node45.next = null;
+  
+  // Linking nodes with 'bottom' pointers
+  node5.bottom = node7;
+  node7.bottom = node8;
+  node8.bottom = node30;
+  
+  node10.bottom = node20;
+  
+  node19.bottom = node22;
+  node22.bottom = node50;
+  
+  node28.bottom = node35;
+  
+  node35.bottom = node40;
+
+  function flattenLinked(head){
+    if(head === null || head.next === null){
+        return head;
+    }
+
+    let mergeHead = flattenLinked(head.next);
+    return mergelist(head,mergeHead);
+  }
+
+  function mergelist(list1,list2){
+    let dummyNode = new Node(0);
+    let temp = dummyNode;
+    while(list1 !== null && list2 !== null){
+        if(list1.value<list2.value){
+            temp.bottom = list1;
+            list1 = list1.bottom;
+            temp = temp.bottom;
+        }else{
+            temp.bottom = list2;
+            list2 = list2.bottom;
+            temp = temp.bottom;
+        }
+    }
+
+    while(list1 !== null){
+        temp.bottom = list1;
+        list1 = list1.bottom;
+        temp = temp.bottom;
+    }
+
+    while(list2 !== null){
+        temp.bottom = list2;
+        list2 = list2.bottom;
+        temp = temp.bottom;
+    }
+    
+    return dummyNode.bottom;
+  }
+
+  function print(node){
+    let itrt = node;
+    while(itrt !== null){
+        console.log(itrt.value);
+        itrt = itrt.bottom;
+    }
+}
+
+node5 = flattenLinked(node5);
+print(node5);
+
+node5 = flattenLinked(node5);
+print(node5);
