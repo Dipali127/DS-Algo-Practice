@@ -1,0 +1,64 @@
+// Leetcode problem:
+// brute force approach:
+// approach:
+// take a set to store the currently traversed node of linked list.
+// while traversing the linked list, check if currently traversed node is already exist in set.
+// if it is, it means a cycle is detected, return that node as the starting point of the cycle.
+// if the node is not in the set, add it to the set.
+// if there is no cycle in the list then return null.
+// TC: O(N) to traverse the linked list to store node of linked list in set.
+// SC: O(N) to stores each node of the linked list, so in the worst case, where 
+// there is no cycle, set stores all the nodes of the linked list.
+
+var detectCycle = function (head) {
+    let set = new Set();
+    let temp = head;
+    while (temp !== null) {
+        if (set.has(temp)) {
+            return temp;
+        } else {
+            set.add(temp);
+            temp = temp.next;
+        }
+    }
+
+    return null;
+};
+
+// optimal approach:- (using tortoise and hare algorithm)
+// approach:-
+// traverse the list using slow and fast pointer to detect the loop in the linked list.
+// once the loop is detected, reset the slow points to head of the linked list and fast points to 
+// that points where the cycle is detected.
+// simultaneously move both slow and fast pointer one step at a time until they meet again to get the 
+// start index of the cycle.
+// if there is no cylce in the list then return null.
+// TC: O(N), Explanation:-
+// O(N/2):- to detect loop in linked list(first phase) 
+// O(N/2):- to find start index of the cycle(second phase).
+// overall, TC:- O(N/2) + O(N/2) = O(2(N/2)) = O(N).
+// SC:- O(1) as there are only few pointers used.
+
+var detectCycle = function (head) {
+    if(head === null || head.next === null){
+        return null;
+    }
+
+    let fast = head, slow = head;
+    while(fast !== null && fast.next !== null){
+        slow = slow.next;
+        fast = fast.next.next;
+
+        if(slow === fast){
+            slow = head;
+            while(slow !== fast){
+                slow = slow.next;
+                fast = fast.next;
+            }
+
+            return slow;
+        }
+    }
+
+    return null;
+}

@@ -1,0 +1,86 @@
+// Leetcode Problem:
+// brute force approach:-
+// approach:- 
+// take a map to store the nodes of the linked list as keys and their corresponding iteration step (or timer) as values.
+// take a timer variable to keeps track of the iteration steps.
+// while traversing the list:-
+// If the node does not exist in the map, then add the node along with current timer value. 
+// and timer is then incremented, and the temp pointer moves to the next node.
+// If the node already exists in the map, it means a loop is detected. The length of the loop 
+// is then calculated as the difference between the current timer and the timer value stored in the map for that node.
+// If the traversal completes without detecting a loop, then returns 0.
+// TC: O(N) to traverse the list to store nodes with its timer in map.
+// SC: O(N) as map stores each node of the linked list, which requires extra space.
+
+class Solution {
+    //Function to find the length of a loop in the linked list.
+    countNodesinLoop(head)
+    {
+        let map = new Map();
+        let temp = head;
+        let timer = 1;
+        while(temp !== null){
+            if(!map.has(temp)){
+                map.set(temp,timer);
+                timer++;
+                temp = temp.next;
+            }else{
+                let val = map.get(temp);
+                return timer - val;
+            }
+        }
+        
+        return 0;
+}
+
+}
+
+// optimal approach:-
+// approach:- using tortoise and hare algorithm
+// check a case where head itself is null or head.next is null. If so then
+// return 0 as there is no loop in the linked list.
+// otherwise, find the loop in the linked list using slow and fast pointer.
+// once loop is detected, call the findlength function using slow
+// and fast pointer and return the length of loop if there is loop.
+// if the list has no loop and its linear then return 0.
+// TC: O(N), Explanation:-
+// O(N):- to traverse the list to find loop as in worst case fast pointer traverse the entire list.
+// O(N):- to traverse the list to find length.
+// overall TC: O(N) + O(N) = O(2N) = O(N).
+// SC: O(1), as there are only use of few pointers which take constant space.
+
+class Solution {
+    //Function to find the length of a loop in the linked list.
+    countNodesinLoop(head)
+    {
+        let slow = head, fast = head;
+        if(head === null || head.next === null){
+            return 0;
+        }
+        
+        while(fast !== null && fast.next !== null){
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            if(slow === fast){
+                return findLength(slow,fast);
+            }
+        }
+        
+    
+        function findLength(slow,fast){
+        let length = 1;
+        fast = fast.next;
+        while(slow !== fast){
+            length++;
+            fast = fast.next;
+        }
+        
+        return length;
+    }
+    
+      return 0;
+        
+    }
+    
+}

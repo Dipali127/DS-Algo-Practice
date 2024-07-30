@@ -1,0 +1,103 @@
+// GFG PROBLEM:
+// brute force approach:-
+// approach:- 
+// traverse the given linked list to count the occurrences of zeroe's, one's and two's.
+// traverse the linked list again to update each node's data with new counts of 0s, 1s and 2s. 
+// while updating linked list with new counted values, first store all 0s then 1s and then 2s.
+// finally, return new sorted linked list with all 0s,1s and 2s.
+// TC: O(N), Explanation:-
+// O(N):- to traverse the entire linked list to count the number of 0s, 1s, and 2s.
+// O(N):- to traverses the linked list again to update the nodes with the counted values. 
+// overall, TC: O(N) + O(N) = O(2N) = O(N).
+// SC: O(1) as there are only used of few pointers which take constant space.
+
+
+class Solution {
+    //Function to sort a linked list of 0s, 1s and 2s.
+    segregate(head)
+    {
+        let count0 = 0,count1 = 0, count2 = 0;
+        let temp = head;
+        while(temp !== null){
+            if(temp.data === 0){
+                count0++;
+            }else if(temp.data === 1){
+                count1++;
+            }else{
+                count2++;
+            }
+            
+            temp = temp.next;
+        }
+        
+        let itrt = head;
+        while(count0 !== 0){
+            itrt.data = 0;
+            itrt = itrt.next;
+            count0--;
+        }
+        
+        while(count1 !== 0){
+            itrt.data = 1;
+            itrt = itrt.next;
+            count1--;
+        }
+        
+        while(count2 !== 0){
+            itrt.data = 2;
+            itrt = itrt.next;
+            count2--;
+        }
+        
+        return head;
+    }
+}
+
+// Optimal approach:
+// Approach:
+// - Take three dummy nodes, zero, one, and two, initialized with -1, to help in separating the lists for nodes with values 0, 1, and 2.
+// - Use three pointers (zeroHead, oneHead, and twoHead) to keep track of the start of the above dummy lists.
+// - Traverse the list using the temp pointer and, depending on the value of each node (0, 1, or 2), append the node to its respective dummy list.
+// - While connecting the list to its respective dummy list, follow the below conditions:
+//   - The zero list is connected to the one list if it exists; otherwise, directly to the two list.
+//   - The one list is connected to the two list if it exists.
+//   - The end of the two list is set to null to terminate the list.
+// - Finally, update the head to the new linked list, i.e., the start of the zero list.
+// TC: O(N), as the given list is separated into three lists of all 0s, 1s, and 2s in a single traversal.
+// SC: O(1), as there is only the use of a few pointers which take constant space.
+class Solution {
+    //Function to sort a linked list of 0s, 1s and 2s.
+    segregate(head)
+    {
+        let zero = new Node(-1);
+        let zeroHead = zero;
+        let one = new Node(-1);
+        let oneHead = one;
+        let two = new Node(-1);
+        let twoHead = two;
+        
+        let temp = head;
+        while(temp !== null){
+            if(temp.data === 0){
+                zero.next = temp;
+                zero = zero.next;
+            }else if(temp.data === 1){
+                one.next = temp;
+                one = one.next;
+            }else{
+                two.next = temp;
+                two = two.next;
+            }
+            
+            temp = temp.next;
+        }
+        
+        zero.next = oneHead.next? oneHead.next:twoHead.next;
+        one.next = twoHead.next? twoHead.next:null;
+        two.next =  null;
+        
+        head = zeroHead.next;
+        return head;
+        
+    }
+}
