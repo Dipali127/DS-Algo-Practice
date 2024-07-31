@@ -1,0 +1,69 @@
+// Leetcode Problem:
+// Brute force approach:
+// Approach:
+// 1. Convert both strings into arrays of characters.
+// 2. Sort the arrays in ascending order.
+// 3. Join the sorted arrays back into strings.
+// 4. Compare the sorted strings using the strict equality operator.
+// The strict equality operator first checks if the lengths of both strings are equal. 
+// If not, it returns false. If lengths are equal, it compares both strings character by character
+// until it reaches the end of the string or finds any differing character. 
+// If a difference is found, it returns false; otherwise, it returns true.
+// Time Complexity: O(N log N)
+// Explanation:
+// O(N) for converting each string into an array.
+// O(N log N) for sorting each array.
+// O(N) for joining each array back into a string.
+// Overall TC: O(N) + O(N log N) + O(N) = O(N log N), as sorting is the most expensive operation.
+// Space Complexity: O(N)
+// Explanation: 
+// The space complexity is O(N) due to the additional space required for the arrays created by `split`,
+// and for the intermediate sorted arrays.
+
+//  var isAnagram = function(s, t) {
+//     s = s.split('').sort().join('');
+//     t = t.split('').sort().join('');
+
+//    return s === t;
+//  }
+
+// Optimal approach:
+// Approach:
+// Use a Map to store the count of each character in the string s.
+// Traverse the string t and check if each character exists in the Map with a count greater than 0.
+// If it does, decrement the count in the Map.
+// If it does not exist or the count is 0, return false.
+// Finally, check if all counts in the Map are zero. If any count is not zero, return false.
+// TC: O(N), Explanation:
+// O(N) to store each character's count in the Map from string s.
+// O(N) to check each character of string t in the Map and update counts.
+// O(N) to check if all counts in the Map are zero.
+// Overall TC: O(N) + O(N) + O(N) = O(3N) = O(N).
+// SC: O(N), as the Map is used to store all characters of string s.
+var isAnagram = function(s, t) {
+    let map = new Map();
+    for(let i=0;i<s.length;i++){
+        if(!map.has(s[i])){
+            map.set(s[i],1);
+        }else{
+            map.set(s[i],map.get(s[i])+1);
+        }
+    }
+
+    for(let i=0;i<t.length;i++){
+        if(!map.has(t[i])){
+            return false;
+        }else{
+            map.set(t[i],map.get(t[i])-1);
+        }
+    }
+     
+     let flag = true;
+    map.forEach((value,key)=>{
+        if(value !== 0){
+            flag=false;
+        }
+    })
+
+    return flag===true?true:false;
+}
