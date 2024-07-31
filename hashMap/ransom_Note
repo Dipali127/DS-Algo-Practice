@@ -1,15 +1,15 @@
 // Leetcode Problem:
-// Brute force approach:
-// Approach:
-// First convert both the strings into arrays so that we can easily traverse through them.
-// Traverse the ransomNote array and check if the current character exists in the magazine array.
-// If it exists, fetch the index of that character from the magazine array.
-// Remove that character from the magazine array so that we can check each character of ransomNote.
-// If all characters of ransomNote exist in the magazine, return true. Otherwise, return false.
+// brute force approach:
+// approach:
+// first convert both the strings into arrays so that we can easily traverse through them.
+// traverse the ransomNote array and check if the current character exists in the magazine array.
+// if it exists, fetch the index of that character from the magazine array.
+// remove that character from the magazine array so that we can check each character of ransomNote.
+// if all characters of ransomNote exist in the magazine, return true. Otherwise, return false.
 // TC: O(N^2), Explanation:
 // O(N) to convert both ransomNote and magazine strings into arrays using split() method.
 // O(N^2) to traverse through the ransomNote array and check each character of ransomNote in the magazine array using indexOf() and remove it using splice().
-// Overall TC: O(N) + O(N^2) = O(N^2)
+// overall TC: O(N) + O(N^2) = O(N^2)
 // SC: O(M + N) as we split the ransomNote and magazine strings into arrays, creating new arrays.
 
 var canConstruct = function (ransomNote, magazine) {
@@ -26,17 +26,17 @@ var canConstruct = function (ransomNote, magazine) {
     return true;
 };
 
-// Optimal approach:
-// Approach:
-// Use a Map to store the count of each character in the magazine string.
-// Traverse the ransomNote string to check if each character exists in the Map.
-// If it exists, decrement the character's count in the Map.
-// If it does not exist or the character's count is zero, return false.
-// If all characters of ransomNote exist in the magazine, return true.
+// optimal approach:
+// approach:
+// use a Map to store the count of each character in the magazine string.
+// traverse the ransomNote string to check if each character exists in the Map.
+// if it exists, decrement the character's count in the Map.
+// if it does not exist or the character's count is zero, return false.
+// if all characters of ransomNote exist in the magazine, return true.
 // TC: O(N), Explanation:
 // O(N) to traverse the magazine string and store each character's count in the Map.
 // O(M) to check each character of ransomNote in the Map.
-// Overall TC: O(N) + O(M) = O(N)
+// overall TC: O(N) + O(M) = O(N)
 // SC: O(N), as the Map is used to store all characters of the magazine.
 
 var canConstruct = function (ransomNote, magazine) {
