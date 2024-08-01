@@ -16,12 +16,12 @@
 // overall TC: O(N) + O(N log N) + O(N) = O(N log N), as sorting is the most expensive operation.
 // SC: O(N),  due to the additional space required for the arrays created by `split` and for the intermediate sorted arrays.
 
-//  var isAnagram = function(s, t) {
-//     s = s.split('').sort().join('');
-//     t = t.split('').sort().join('');
+ var isAnagram = function(s, t) {
+    s = s.split('').sort().join('');
+    t = t.split('').sort().join('');
 
-//    return s === t;
-//  }
+   return s === t;
+ }
 
 // optimal approach:
 // approach:

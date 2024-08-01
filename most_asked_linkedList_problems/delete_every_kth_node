@@ -1,30 +1,31 @@
 // GFG PROBLEM:
-// appraoch:- take a dummyNode and set its next pointer to head  of linked list. 
-// it helps to manage the case where head value itself a deleted value.
-// iterate the given linked list and initially count is 0 so, check if count is equal
-// to k then delete that value from linked list with the help of prev and itrt pointer
-// meanwhile increment the itrt and prev pointer. 
-// Also change count which is again 0 if  we found the deleted value.
-// Tc: O(N) to iterate through the given linked list AND SC: O(1) as we haven't take
-// any extra space and only a few extra pointers are used.
-
+// appraoch:- 
+// take a dummyNode and set its next pointer to the head of the linked list.
+// this helps to manage the case where the head node itself is a node that needs to be deleted.
+// traverse the given linked list. Initialize count to 0.
+// check if count is equal to k. If it is, delete that node from the linked list using the prev and itrt pointers.
+// meanwhile, increment the itrt and prev pointers.
+// reset count to 0 if a node is deleted.
+// Time Complexity: O(N) for iterating through the linked list.
+// Space Complexity: O(1) as no extra space is used, only a few extra pointers.
 class Solution {
     deleteK(head,k){
-      let dummyNode = new Node(0);
-      dummyNode.next = head;
-      let prev = dummyNode;
-      let itrt = head;
-      let count = 0;
-      while(itrt !== null){
-          count++;
-          if(count === k){
-              prev.next = itrt.next;
-              count = 0;
-          }else{
-              prev = itrt;
-          }
-          
-          itrt = itrt.next;
+        let dummyNode = new Node(0);
+        dummyNode.next = head;
+        let prev = dummyNode;
+        let itrt = head;
+        let count = 0;
+        while(itrt !== null){
+            count++;
+            if(count === k){
+                prev.next = itrt.next;
+                itrt.next = null;
+                itrt = prev.next;
+                count = 0;
+            }else{
+                prev = itrt;
+                itrt = itrt.next;
+            }
       }
       
        return dummyNode.next;

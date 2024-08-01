@@ -2,7 +2,7 @@
 // brute force approach:-
 // approach:-
 // store all nodes's values in array.
-// sort the array.
+// sort the array which contain sorted values of linked list.
 // traverse the linked list and replace the current iterated node of linked list with current iterated
 // array value.
 // TC: O(NLOGN), Explanation:- 
