@@ -1,0 +1,44 @@
+// Leetcode Problem:
+ // approach:- use of hash map
+// A bijection (or bijective function) is a function that creates a one-to-one correspondence between 
+// elements of two sets. This means every element in one set is paired with exactly one unique element
+// in the other set, and vice versa.
+// approach:-
+// convert pattern string into char of array and string s into word of array.
+// check a case where length of pattern is not equal to length of string, if it is then return false.
+// use of two map to store all mapping of char to word and word to char.
+// traverse the pattern array and while traversing, store all character of pattern array map to word
+//  of s array and all word of s array to character of pattern array.
+// if any pattern doesn't match return false otherwise return true.
+// TC: O(N), to traverse the pattern array and store char to word mapping and word to char mapping
+// in charToWord and wordToChar map in a single traversal.
+// SC: O(N), due to the space required to store the mappings in charToWord and wordToChar maps. 
+
+var wordPattern = function (pattern, s) {
+    pattern = pattern.split('');
+    s = s.split(' ');
+
+    if (pattern.length !== s.length) {
+        return false;
+    }
+
+    let charToWord = new Map();
+    let wordToChar = new Map();
+
+    for (let i = 0; i < pattern.length; i++) {
+        if (!charToWord.has(pattern[i])) {
+            charToWord.set(pattern[i], s[i]);
+        } else if (charToWord.get(pattern[i]) !== s[i]) {
+            return false;
+        }
+
+        if (!wordToChar.has(s[i])) {
+            wordToChar.set(s[i], pattern[i]);
+        } else if (wordToChar.get(s[i]) !== pattern[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+

@@ -1,0 +1,41 @@
+// Leetcode Problem:
+// Approach:
+// Use a map to store groups of anagrams together.
+// Use an array to collect all the groups of anagrams.
+// While traversing each string, first sort the string and convert it back into a string.
+// Then check if the sorted string already exists as a key in the map.
+// If it does not exist, store the sorted string as a key in the map and the original current iterated string as its value (in an array).
+// If it already exists, push the original string to the array corresponding to the sorted string in the map.
+// Once all groups of anagrams are found, traverse the map and push the map values (which contain groups of anagrams) into the anagrams array.
+// 
+// Time Complexity: O(N * N log N)
+// Explanation:
+// O(N) to traverse the list of strings.
+// O(N log N) to sort each string.
+// Overall, TC = O(N) * O(N log N) = O(N * N log N).
+// 
+// Space Complexity: O(N)
+// Explanation:
+// O(N) for the map to store groups of anagrams.
+// O(N) for the anagrams array to store all possible groups of anagrams.
+// overall, SC: O(N) + O(N) = O(2N) = O(N)
+
+var groupAnagrams = function (strs) {
+    var map = new Map();
+    var anagrams = [];
+
+    for (var i = 0; i < strs.length; i++) {
+        let hasStr = strs[i].split("").sort().join('')
+        if (map[hasStr]) {
+            map[hasStr].push(strs[i]);
+        } else {
+            map[hasStr] = [strs[i]];
+        }
+    }
+
+    for (let i in map) {
+        anagrams.push(map[i]);
+    }
+
+    return anagrams;
+};

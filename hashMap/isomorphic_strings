@@ -1,0 +1,41 @@
+// Leetcode Problem:
+// Note: The line: "No two characters map to the same character but a character may map to itself"
+// Example to understand the above line: if string s = "badc" and string t = "baba".
+// Here, both characters 'b' and 'd' of string s map to character 'b' of string t,
+// which violates the rule as 'b' and 'd' of string s are different characters that map to the same
+// character 'b'.
+// However, a character mapping to itself does not violate the rule, as in string s,
+// character 'b' maps to itself in string t.
+
+// Approach:
+// Use two maps to ensure the condition that no two characters may map to the same character.
+// If there is a case where two same characters map to different characters, return false.
+// Otherwise, store the current traversed character of s in both maps, mapS and mapT. 
+// Once all characters are mapped after traversing the string, return true as it indicates
+// that both are isomorphic strings.
+// TC: O(N), to traverse the string and map the characters of both strings s and t.
+// SC: O(N), as maps are used to store the characters.
+
+var isIsomorphic = function (s, t) {
+
+    mapS = new Map();
+    mapT = new Map();
+    for (let i = 0; i < s.length; i++) {
+        if (!mapS.has(s[i])) {
+            mapS.set(s[i], t[i]);
+        } else {
+            if (!(mapS.get(s[i]) == t[i])) {
+                return false;
+            }
+        }
+
+        if (!mapT.has(t[i])) {
+            mapT.set(t[i], s[i]);
+        } else {
+            if (!(mapT.get(t[i]) == s[i])) {
+                return false;
+            }
+        }
+    }
+    return true;
+};
