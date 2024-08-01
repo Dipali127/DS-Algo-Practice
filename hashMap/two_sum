@@ -1,0 +1,42 @@
+// Leetcode Problem:
+// brute force approach:-
+// approach:
+// use a nested loop where the outer loop considers each element and the inner loop sums each
+// value of the outer loop to check if the sum equals the target.
+// once the sum equals the target, return those two indices; otherwise, return -1 if no such pair is found.
+// TC: O(N^2), due to the use of two nested loops.
+// SC: O(1), as there is no extra space used.
+
+var twoSum = function (arr, target) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] + arr[j] === target) {
+                return [i, j];
+            }
+        }
+    }
+
+    return -1;
+}
+
+// optimal approach:-
+// approach:
+// use a map to get the indices of target value.
+// for each element, calculate the required value to reach the target (result = target - arr[i]).
+// check if this required value is already in the map:
+// - if it is, return the indices of the required value and the current element.
+// - if it isn't, store the current element and its index in the map.
+// TC: O(N), as we traverse the array once.
+// SC: O(N), due to the extra space used by the map.
+
+var twoSum = function (arr, target) {
+    let map = new Map();
+    for(let i = 0;i<arr.length;i++){
+        let result = target - arr[i];
+        if(map.has(result)){
+            return [map.get(result), i];
+        }else{
+            map.set(arr[i],i)
+        }
+    }
+}
