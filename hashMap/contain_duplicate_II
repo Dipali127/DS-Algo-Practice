@@ -1,0 +1,48 @@
+// Leetcode Problem:
+// brute force approach:
+// approach:
+// use of nested loop where the outer loop iterates through each element of the array.
+// the inner loop checks if the current element (pointed by the outer loop) is equal to any other 
+// element (pointed by the inner loop) within a distance 𝑘.
+// TC: O(N^2), because of the nested loop. 
+// SC: O(1) , as there is no extra space used.
+
+var containsNearbyDuplicate = function(arr, k) {
+    for (let i = 0; i < arr.length-1; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] === arr[j] && Math.abs(i - j) <= k) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
+// optimal approach: hash map method
+// approach:
+// use a hash map to store the currently traversed elements of the array with their indices. 
+// for each element, check if it already exists in the hash map.
+// if it exists, check if the difference between the current index and the stored index is less than 
+// or equal to k, if it is then return true.
+// if not exist, then update the hash map with the current element and its index.
+// once traversed all elements, if no such pair is found, return false.
+// traverse index.
+// TC : O(N), as we traverse the array once
+// SC : O(N), as there is a use of map and in the worst case it may possible that map store all
+// elements.
+
+var containsNearbyDuplicate = function(arr,k){
+     let map = new Map();
+    for (let i = 0; i < arr.length; i++) {
+        if (map.has(arr[i])) {
+            let val = map.get(arr[i]);
+            if (Math.abs(val - i) <= k) {
+                return true;
+            }
+        }
+        map.set(arr[i], i);
+
+    }
+
+    return false;
+}

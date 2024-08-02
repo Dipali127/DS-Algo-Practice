@@ -1,0 +1,24 @@
+// Leetcode Problem:
+// approach:
+// use a loop to calculate the square of each digit of a number until the number reaches 1.
+// use a set to store the sums of the squares of the digits of the number. if the same sum
+// appears in the set, it indicates we are in a loop and the number is not a happy number.
+// otherwise, continue the process and add the sum to the set.
+// TC: O(N), where N is the number of digits times the number of iterations.
+// SC: O(N), due to the use of a set to store the sums.
+
+var isHappy = function (n) {
+    let set = new Set();
+    while (n != 1) {
+        let newSum = 0;
+        n.toString().split('').forEach(digit => newSum += digit * digit);
+        if (set.has(newSum)) {
+            return false;
+        } else {
+            set.add(newSum);
+            n = newSum
+        }
+    }
+
+    return true;
+};
