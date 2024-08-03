@@ -23,44 +23,40 @@
    return s === t;
  }
 
-// optimal approach:
+// Optimal approach:
 // approach:
-// use a Map to store the count of each character in the string s.
-// traverse the string t and check if each character exists in the Map with a count greater than 0.
+// check if the lengths of strings s and t are not equal. if they are not, return false.
+// use a Map to store the count of each character in string s.
+// traverse string t and check if each character exists in the Map with a count greater than 0.
 // if it does, decrement the count in the Map.
 // if it does not exist or the count is 0, return false.
-// finally, check if all counts in the Map are zero. If any count is not zero, return false.
-// TC: O(N), Explanation:
-// O(N):- to store each character's count in the Map from string s.
-// O(N):- to check each character of string t in the Map and update counts.
-// O(N):- to check if all counts in the Map are zero.
-// overall TC: O(N) + O(N) + O(N) = O(3N) = O(N).
+// finally, check if all counts in the Map are zero. if any count is not zero, return false.
+// TC: O(N), explanation:
+// O(N) to store each character's count in the Map from string s.
+// O(N) to check each character of string t in the Map and update counts.
+// overall TC: O(N) + O(N) = O(2N) = O(N).
 // SC: O(N), as the Map is used to store all characters of string s.
 
-var isAnagram = function(s, t) {
+var isAnagram = function (s, t) {
+    if (s.length !== t.length) {
+        return false;
+    }
     let map = new Map();
-    for(let i=0;i<s.length;i++){
-        if(!map.has(s[i])){
-            map.set(s[i],1);
-        }else{
-            map.set(s[i],map.get(s[i])+1);
+    for (let i = 0; i < s.length; i++) {
+        if (!map.has(s[i])) {
+            map.set(s[i], 1);
+        } else {
+            map.set(s[i], map.get(s[i]) + 1);
         }
     }
 
-    for(let i=0;i<t.length;i++){
-        if(!map.has(t[i])){
+    for (let i = 0; i < t.length; i++) {
+        if (!map.has(t[i]) || map.get(t[i]) === 0) {
             return false;
-        }else{
-            map.set(t[i],map.get(t[i])-1);
+        } else {
+            map.set(t[i], map.get(t[i]) - 1);
         }
     }
-     
-     let flag = true;
-    map.forEach((value,key)=>{
-        if(value !== 0){
-            flag=false;
-        }
-    })
 
-    return flag===true?true:false;
+    return true;
 }
