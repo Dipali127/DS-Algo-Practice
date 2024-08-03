@@ -1,0 +1,97 @@
+// Leetcode Problem:
+// brute force approach:-
+// approach:
+// according to the problem triplets must be unique so, we need to ensure that i != j, i != k, and j != k .
+// we use a set to store unique triplets as strings to avoid duplicates.
+// use of three nested loops to check every possible triplet combination.
+// while iterating, if the sum of the current triplet is zero, we:
+// - create a triplet array.
+// - sort the array to maintain consistency in ordering.
+// - convert the sorted triplet to a string.
+// - check if this string representation is already in the set. 
+// - if not, add the string to the set and the triplet to the output array.
+// finally, return the output array containing all unique triplets. 
+// TC: o(N^3), due to the use of three nested loops to find unique triplets.
+// SC: o(N), Explanation:
+// O(N):- used to store all unique triplets in the set.
+// O(N):- used to store all unique triplets from the set in the output array.
+// overall, SC: O(N) + O(N) = O(2N) = o(N)
+
+ var threeSum =function(arr){
+    let output = [];
+    let set = new Set()
+    for (let i = 0; i < arr.length - 2; i++) {
+        for (let j = i + 1; j < arr.length - 1; j++) {
+            for (let k = j + 1; k < arr.length; k++) {
+                if (arr[i] + arr[j] + arr[k] === 0) {
+                    let triplet = [arr[i], arr[j], arr[k]].sort((a, b) => a - b);
+                    let tripletStr = triplet.join(','); 
+                    if (!set.has(tripletStr)) {
+                        set.add(tripletStr); 
+                        output.push(triplet); 
+                    }
+                }
+
+                }
+
+            }
+        }
+         return output;
+    }
+
+// optimal approach: using two pointer
+// approach:
+// sort the array to simplify finding triplets and avoiding duplicates.
+// iterate through the array with a loop, using two pointers to find valid triplets.
+// in the outer loop, if the current element is the same as the previous one then skip it to avoid duplicate triplets.
+// for each element, set two pointers i.e start to the next element and end to the last element.
+// then use a while loop to check for triplets where the sum is zero.
+// if the sum of the triplet is zero, add it to the result array and then move both pointers.
+// also skip any duplicate values for the start and end pointers to avoid duplicates in the result.
+// if the sum of the triplet is less than zero, move the start pointer to the right to increase the sum.
+// if the sum is greater than zero, move the end pointer to the left to decrease the sum.
+// finally, return the result array containing all unique triplets.
+// TC: O(N^2)Explanation:
+// O(N^2):- due to the nested loops.
+// O(NLOGN):- to sort the array.
+// overall, TC: O(NLOGN) + O(N^2) = O(N^2) 
+// SC: O(N), for storing the result array.
+
+var threeSum = function (nums) {
+    let result = [];
+    if (nums.length < 3) {
+        return result;
+    }
+    nums.sort((a, b) => a - b);
+    for (let i = 0; i < nums.length; i++)//first loop is used to find triplets
+    {
+        if (i > 0 && nums[i] === nums[i - 1]) {
+            continue;
+        }
+        let start = i + 1;
+        let end = nums.length - 1;
+        while (start < end) {
+            if (nums[i] + nums[start] + nums[end] === 0) {
+                result.push([nums[i], nums[start], nums[end]]);
+                start++;
+                end--;
+                //the below two while loops are used to remove the duplicate value
+                //which we already used .
+                while (start < end && nums[start] === nums[start - 1]) {
+                    start++;
+                }
+                while (start < end && nums[end] === nums[end + 1]) {
+                    end--;
+                }
+            }
+            else if (nums[i] + nums[start] + nums[end] < 0) {
+                start++;
+            }
+            else {
+                end--;
+            }
+
+        }
+    }
+    return result;
+};

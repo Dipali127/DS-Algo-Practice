@@ -1,0 +1,54 @@
+// Leetcode Problem:
+// brute force approach: 
+// approach:
+// initialize an index `i` to point to the string `s`.
+// use a loop to iterate through the string `t`.
+// while iterating through `t`, check if the current character of string `t`equal to the character at index `i` in string `s`.
+// if there is a match, increment `i` to check the next character in `s`.
+// after the loop, if `i` equals the length of string `s`, it means all characters of string `s` have been found in string `t` in the same order.
+// return `true` if `i` equals `s.length`, otherwise return `false`.
+// TC: O(N), to iterate through the string t.
+// SC: O(1), as there is no additional space used apart from the index variables.
+
+ var isSubsequence = function (s, t){
+    let i = 0;
+    for(let j = 0;j<t.length;j++){
+        if(s[i] === t[j]){
+            i++;
+        }
+    }
+     if(i === s.length){
+        return true;
+     }
+
+     return false;
+ }
+
+// optimal approach: use two pointers
+// approach:
+// initialize two pointers, `i` and `j`, where `i` points to the start index of string `s` and `j` points to the start index of string `t`.
+// use a while loop to iterate through both strings `s` and `t` simultaneously.
+// during iteration, if the current character of `s` and `t` are equal, increment both pointers `i` and `j`.
+// if the characters are not equal, increment only the `j` pointer to continue checking in string `t`.
+// after the loop, if pointer `i` reaches the length of string `s`, it means all characters of `s` were found in `t` in the correct order, so return `true`.
+// if `i` does not reach the length of `s`, return `false`.
+// TC: O(N), where N is the length of string `t`, as both strings are iterated in a single pass.
+// SC: O(1), as there is no additional space used.
+
+var isSubsequence = function (s, t) {
+    let i = 0, j = 0;
+    while (i < s.length && j < t.length) {
+        if (s[i] === t[j]) {
+            i++;
+            j++;
+        } else {
+            j++;
+        }
+    }
+
+    if (i === s.length) {
+        return true;
+    }
+
+    return false;
+}

@@ -1,0 +1,37 @@
+// LeetCode_Problem:
+// approach:
+// first store all special characters and spaces in a string.
+// initialize an empty string to store the given string without any special characters.
+// iterate through each character of the given string.
+// while iterating, if the current character is not a special character or space, convert it to
+// lowercase and append it to the new string.
+// initialize two pointers: one at the start and one at the end of the new string.
+// while the two pointers have not crossed each other:
+// - compare the characters at the positions of the two pointers.
+// - if the characters are not equal, return false.
+// - if the characters are equal, move the pointers towards the center of the string.
+// if all characters match correctly, return true, indicating that the string is a palindrome.
+// TC: O(N), Explanation:
+// O(N), to iterate through the given string to remove special characters.
+// O(N/2) to check that the new string is a palindrome or not.
+// overall, TC: O(N) + O(N/2) = O(N)
+
+var isPalindrome = function (string) {
+    let specialChars = "!@#$%^&*()_+{}\":;'<>?/,.~`-[] ";
+    let str = "";
+    for (let i = 0; i < string.length; i++) {
+        if (!specialChars.includes(string[i])) {
+            str += string[i].toLowerCase();
+        }
+    }
+    let i = 0, j = str.length - 1;
+    while (i < j) {
+        if (str[i] !== str[j]) {
+            return false;
+        } else {
+            i++;
+            j--;
+        }
+    }
+    return true;
+}
