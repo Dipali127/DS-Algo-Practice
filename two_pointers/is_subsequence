@@ -1,4 +1,3 @@
-// Leetcode Problem:
 // brute force approach: 
 // approach:
 // initialize an index `i` to point to the string `s`.
@@ -10,7 +9,7 @@
 // TC: O(N), to iterate through the string t.
 // SC: O(1), as there is no additional space used apart from the index variables.
 
- var isSubsequence = function (s, t){
+var isSubsequence = function (s, t){
     let i = 0;
     for(let j = 0;j<t.length;j++){
         if(s[i] === t[j]){
@@ -34,6 +33,9 @@
 // if `i` does not reach the length of `s`, return `false`.
 // TC: O(N), where N is the length of string `t`, as both strings are iterated in a single pass.
 // SC: O(1), as there is no additional space used.
+// Note:- In some cases, the optimal approach might exit the loop slightly earlier than the brute force approach 
+// if it determines the subsequence condition earlier (i.e., when all characters of s have been found in t). 
+// This early exit can occur when i reaches the length of s before j reaches the length of t.
 
 var isSubsequence = function (s, t) {
     let i = 0, j = 0;
@@ -52,3 +54,4 @@ var isSubsequence = function (s, t) {
 
     return false;
 }
+
