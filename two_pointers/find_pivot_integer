@@ -1,0 +1,68 @@
+/**
+ * @param {number} n
+ * @return {number}
+ */
+// brute force approach:
+// take two variables 'ls' and 'rs' to store the sum of all elements till the pivot
+// integer and the sum from the pivot integer to the given number n.
+// first, store the sum of all elements from 1 to n in rs.
+// then iterate through the number 1 to n and while iterating, store the sum in ls. meanwhile,
+// check if ls equals rs. if not, then decrement the current element from rs.
+// once the pivot integer is found, return it. if not found, return -1.
+// tc: o(n), explanation:-
+// o(n): to store the sum of all elements from 1 to n.
+// o(n): to check left sum equals right sum.
+// overall, tc: o(n) + o(n) = o(2n) = o(n).
+// sc: o(1), as no additional space is used.
+
+var pivotInteger = function (n) {
+    let ls = 0, rs = 0;
+    for (let i = 1; i <= n; i++) {
+        rs += i;
+    }
+
+    for (let i = 0; i <= n; i++) {
+        ls += i;
+        if (ls === rs) {
+            return i;
+        }
+        rs -= i;
+    }
+
+    return -1;
+}
+
+// optimal approach: using two pointers.
+// take two pointers i and n, where i initially points to element 1 and n points to the given value n.
+// initially, i is equal to 1. while n is greater than i, 
+// if leftSum is less than or equal to rightSum, increment leftSum by i and increment i.
+// if leftSum is greater than rightSum, increment rightSum by n and decrement n.
+// once the loop exits, if leftSum equals rightSum, return n (the current position of n).
+// if not, return -1.
+// tc: o(n), as each element is processed at most once.
+// sc: o(1), as no additional space is used.
+
+var pivotInteger = function (n) {
+    if (n == 1) {
+        return n;
+    }
+
+    let leftSum = 0;
+    let rightSum = 0;
+    let i = 1;
+    while (n > i) {
+        if (leftSum <= rightSum) {
+            leftSum += i;
+            i++;
+        } else if (leftSum > rightSum) {
+            rightSum += n;
+            n--;
+        }
+    }
+
+    if (leftSum === rightSum) {
+        return n;
+    }
+
+    return -1;
+};
