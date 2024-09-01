@@ -1,7 +1,8 @@
 // Introduction to Sliding Window:-
 // Four Different Patterns of Sliding Window:-
 
-// (1) First Type: Constant Window Size
+// rarely asked pattern.
+// (1) Pattern First: Constant Window Size
 // Example:
 // Given an array of positive and negative integers and an integer 'k', you need to find the maximum sum 
 // obtainable by picking 'k' consecutive elements.
@@ -60,7 +61,8 @@ function findSum1(arr1,K){
     return maxSum;
 }
 
-// (2) Second Type:- Longest subarray/substring where <condition>. 
+// most asked pattern.
+// (2) Pattern Second:- Longest subarray/substring where <condition>. 
 // subarray => any consecutive(one after another) portion of the array and substring => any consecutive(one after another)
 // portion of the string.
 // Given an array of positive and negative integers and an integer 'k', you have to find out the window size where
@@ -69,11 +71,13 @@ function findSum1(arr1,K){
 
 // Brute force approach:
 // approach:-
+// generate all possible subarrays and calculate sum to get maximum window size whose sum is less than equal to k. 
 // initialize maxWindow to -Infinity to keep track of the maximum window size found.
 // use a nested loop where the outer loop 'i' iterates through each element, representing the start of the window.
 // the inner loop 'j' iterates from the start index 'i' to the end of the array, calculating the sum of the window.
 // if the sum of the current window is less than or equal to Sum, update maxWindow with the maximum value between 
 // the current maxWindow and the size of the current window (j-i+1).
+// but if sum is greater than given Sum break the loop.
 // once, found maxWindow return it.
 // Time Complexity: O(N^2), due to the nested loop.
 // Space Complexity: O(1), as no additional space is used.
@@ -88,6 +92,9 @@ function findWindowsize(arr2,Sum){
             sum+= arr2[j];
             if(sum <= Sum){
                 maxWindow = Math.max(maxWindow, j-i+1);
+            }
+            if(sum>Sum){
+                break;
             }
         }
     }
@@ -130,3 +137,13 @@ function findWindowsize(arr2,Sum){
 
     return maxWindow;
 }
+
+// (2) Pattern Third:- Number of subarray where <condition>. 
+// Problem :- find the number of subarrays with sum equal to k.
+// approach:- (find number of subarrays where sum <= k) - (find number of subarrays where sum <= (k-1))
+// these kind of problem can be solved with the help of second type of problem's solution.
+// you will see the third type of problem in this sliding window series. 
+
+// rarely asked pattern.
+// (4) Pattern Fourth:- shortest/minimum window where <condition>
+// approach:- find the valid window and try to shrink that window which still satisfies the condition.
