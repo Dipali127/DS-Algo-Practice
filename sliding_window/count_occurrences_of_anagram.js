@@ -1,5 +1,5 @@
 // GeeksForGeeks Problem
-// brute force approach:
+// Brute force approach:
 // approach:-
 // consider each possible substring in string 'txt' that has the same length as string 'pat'.
 // for each substring, create a map to store the frequency of each character in string 'pat'.
