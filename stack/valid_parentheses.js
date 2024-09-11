@@ -5,7 +5,7 @@
 // while iterating the strig if you encounter the closing parenthesis (')', '}', or ']'), check if it matches the top character of the stack. 
 // if it does, pop the top of the stack element. 
 // if it doesn't match or if the stack is empty return `false` immediately.
-// after processing all characters, if the stack is empty, it means all opening parentheses had matching closing parentheses, and the string is valid.
+// after processing all parentheses of the given string, if the stack is empty, it means all opening parentheses had matching closing parentheses, and the string is valid.
 // If the stack is not empty, return `false` as there are unmatched opening parentheses.
 // TC: O(N), as we iterate through each character exactly once.
 // SC: O(N), due to the stack used to store the expected closing parentheses.
@@ -35,6 +35,6 @@ var isValid = function (s) {
         }
     }
 
-    return stack.length == 0;
+    return stack.length === 0;
 
 };
