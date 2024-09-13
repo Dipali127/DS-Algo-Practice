@@ -1,13 +1,13 @@
 // Leetcode Problem:- 102
-// Optimal approach:
+// Optimal approach: Use BFS (Breadth-First Search).
+
 // This code is useful for solving many BFS-related problems where operations are performed on a tree level-wise.
 // Approach:
-// the function traverses the tree level-wise using a breadth-first search (BFS) technique, which involves a queue
-// to store nodes of the current level and for each level, it iterates through the nodes in the `queue`
-// and store those values in the `currentLevel` array. 
-// After processing all nodes at the current level, it adds the `currentLevel` array to the `result` array, which stores values from all levels of the tree.
-// TC:- O(N) - where N is the number of nodes in the binary tree, since each node is processed exactly once.
-// SC:- O(N) - where N is the number of nodes, due to the space used by the `queue`, `currentLevel`, and `result` arrays.
+// traverses through the tree level-wise and stores the nodes of the current level in 'queue'.
+// and iterates through the nodes in the `queue` store those nodes in the `currentLevel` array. 
+// after processing all nodes at the current level, it adds the `currentLevel` array to the `result` array, which stores values from all levels of the tree.
+// TC:- O(N) - where 'N' is the number of nodes in the binary tree, since each node is processed exactly once.
+// SC:- O(N) - where 'N' is the number of nodes, due to the space used by the `queue`, `currentLevel`, and `result` arrays.
 
 // Note:
 // At the beginning, the `queue` contains a single element, which is the root node object. This object has:

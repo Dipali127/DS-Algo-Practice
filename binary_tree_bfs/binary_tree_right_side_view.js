@@ -1,15 +1,16 @@
 // Leetcode Problem:- 199
 // Problem:
 // We need to print the right view of a binary tree.
-// Suppose a person stands on the right side of the tree. The task is to print all the node values that the person can see from the right side.
+// Suppose, a person stands on the right side of the tree. The task is to print all the node values that the person
+// can see from the right side.
 
 // Optimal Approach: Using BFS (Breadth-First Search).
-// traverse the tree level by level and at each level, the last node visited is the node visible from the right side.
-// a queue is used to process nodes level by level, and for each level, the last node is pushed into the result array.
-// the result array stores the nodes visible from the right side of the tree, ordered from top to bottom.
+// approach:-
+// traverse through the tree level by level and use of queue to add the node of each level .
+// for each level, check the last visited node is the node visible from the right side.if it is then add it to the 'result' array.
+// once, traverse the given tree level-by-level, return result.
 // TC:- O(N), where 'N' is the number of nodes in the tree. Each node is visited once.
 // SC:- O(N), where 'N' is the number of nodes in the tree. This accounts for the space used by the queue, which can grow to the width of the tree.
-
 
 var rightSideView = function(root) {
     let result = [];
