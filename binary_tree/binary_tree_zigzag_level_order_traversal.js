@@ -34,7 +34,7 @@ var zigzagLevelOrder = function (root) {
             }
         }
 
-        if(level%2!=0){
+        if(level%2 !== 0){
             currentlevel.reverse();
         }
         result.push(currentlevel);
