@@ -48,23 +48,20 @@ var lowestCommonAncestor = function(root, p, q) {
     }
 
     // If the current node is either p or q, return the current node
-    if (root.val === p || root.val === q) {
+    if (root === p || root === q) {
         return root;
     }
 
     // Recursively search for p and q in the left and right subtrees
-    let leftN = lowestCommonAncestor(root.left, p, q);
-    let rightN = lowestCommonAncestor(root.right, p, q);
-
-    // If one of the subtrees contains both p and q, return that subtree's LCA
-    if (leftN !== null) {
-        return leftN;
-    } else {
-        return rightN;
-    }
+    let leftLCA = lowestCommonAncestor(root.left, p, q);
+    let rightLCA = lowestCommonAncestor(root.right, p, q);
 
     // If both p and q are found in different subtrees, return the current node (root) as the LCA
-    if (leftN !== null && rightN !== null) {
+    if (leftLCA !== null && rightLCA !== null) {
         return root;
     }
+
+     // If one of the subtrees contains both p and q, return that subtree's LCA
+     return leftLCA !== null? leftLCA : rightLCA; 
 };
+
