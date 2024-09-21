@@ -27,7 +27,7 @@ var findPeakElement = function (nums) {
     return 0;
 };
 
-// Optimal Approach: 
+// Optimal Approach: Using Binary Search
 // approach:-
 // initialized two pointer 'low' and 'high' as 'low' starts at index 0 (beginning of the array) and 'high' starts at the
 // last index of the array (nums.length - 1). 
@@ -35,7 +35,7 @@ var findPeakElement = function (nums) {
 // Compare nums[mid] with nums[mid + 1]:-
 // - If nums[mid] < nums[mid + 1], it means the peak element lies on the right side of mid, so update low to mid + 1 (move the search to the right half).
 // - If nums[mid] > nums[mid + 1], it indicates that the peak element is either at mid or on the left side of mid, so update high to mid (move the search to the left half).
-// Continue the loop until 'low === high', which will give the index of the peak element.
+// Continue the loop until 'low < high', which will give the index of the peak element.
 // O(log n), since the binary search reduces the search space by half in each iteration.
 // O(1), as no additional space is used other than the variables for pointers.
 

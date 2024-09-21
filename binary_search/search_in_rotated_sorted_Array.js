@@ -6,15 +6,16 @@
 // If the target is found, returns the index where the target element is located.
 // If the loop completes without finding the target, returns -1 to indicate the target is not present.
 // TC:- O(N), where 'N' is the length of the array, since we might need to check every element.
-// SC: O(1), since only a few pointers are used for the search. 
-var search = function(nums, target) {
-    for(let i=0;i<nums.length;i++){
-        if(nums[i] == target){
-            return i;
-        }
-    }
+// SC:- O(1), since only a few pointers are used for the search. 
 
-    return -1;
+var search = function(nums, target) {
+  for(let i=0;i<nums.length;i++){
+      if(nums[i] == target){
+          return i;
+      }
+  }
+
+  return -1;
 };
 
 // Optimal Approach: Using Binary Search on a Rotated Sorted Array
@@ -30,30 +31,30 @@ var search = function(nums, target) {
 //   - If the target is within this range, update 'low' to mid + 1.
 //   - Otherwise, update 'high' to mid - 1 to search the left half.
 // continue this process until the target is found or 'low' exceeds 'high'.
-// TC: O(logN), as binary search divides the array in half in each iteration.
-// SC: O(1), since only a few pointers are used for the search.
+// TC:- O(LOGN), as binary search divides the array in half in each iteration.
+// SC:- O(1), since only a few pointers are used for the search.
 
 var search = function(arr,target) {
-  let low = 0;
-  let high = arr.length-1;
-  while(low<=high){
-    let mid = Math.floor(low+(high-low)/2);
-    if(arr[mid] === target){
-      return mid;
+let low = 0;
+let high = arr.length-1;
+while(low<=high){
+  let mid = Math.floor(low+(high-low)/2);
+  if(arr[mid] === target){
+    return mid;
+  }
+  else if(arr[low]<=arr[mid]){
+    if(target<arr[mid] && target>=arr[low]){
+      high = mid-1
+    }else{
+      low=mid+1;
     }
-    else if(arr[low]<=arr[mid]){
-      if(target<arr[mid] && target>=arr[low]){
-        high = mid-1
-      }else{
-        low=mid+1;
-      }
-    }else if(arr[mid]<=arr[high]){
-      if(target>arr[mid] && target<=arr[high]){
-        low=mid+1;
-      }else{
-        high=mid-1;
-      }
+  }else if(arr[mid]<=arr[high]){
+    if(target>arr[mid] && target<=arr[high]){
+      low=mid+1;
+    }else{
+      high=mid-1;
     }
   }
-  return -1; 
+}
+return -1; 
 }
