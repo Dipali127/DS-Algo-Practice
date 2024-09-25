@@ -2,7 +2,7 @@
 // Geeksforgeeks Problem
 // Optimal Approach:
 // approach:-
-// Base Case:- Ii given 'N' is equal to '0', print '0' and return immediately.
+// Base Case:- if given 'N' is equal to '0', print '0' and return immediately.
 // initialize an empty string to build the binary representation.
 // while 'N' is greater than 0, perform the following steps to convert 'N' to binary:
 // get the remainder when 'N' is divided by 2 (this gives the current binary digit).
@@ -35,7 +35,7 @@ class Solution {
     }
 }
 
-// (1) Convert decimal to binary
+// (1) Convert binary to decimal
 // Geeksforgeeks Problem
 // Optimal Approach:
 // approach:-
@@ -61,12 +61,12 @@ class Solution {
 
 // Introduction to 1's and 2's Complement
 // (1) 1's Complement:
-// In 1's complement, you invert each bit of the binary representation of a number.
+// In 1's complement, invert each bit of the binary representation of a number.
 // Example:
 // the binary representation of 13 is 1101.
 // the 1's complement of 13 is obtained by flipping each bit:- 1101 becomes 0010.
 // (2) 2's Complement:
-// To obtain the 2's complement, follow these steps:
+// To obtain the 2's complement of a number, follow these steps:
 // Step 1: Compute the 1's complement of the number.
 // Step 2: Add 1 to the 1's complement result.
 // Example:
@@ -80,7 +80,7 @@ class Solution {
 // Operators Used in bit manipulation
 // (1) AND Operator (&):
 // The AND operator compares each bit of two numbers. If both bits in a specific position are 1, the resulting bit is 1. 
-// If either bit is 0, the resulting bit is 0.
+// If one of the bit is 0, the resulting bit is 0.
 // exapmle
 // AND operator of 12 and 5 is:
 //   1100  (12)
@@ -99,9 +99,9 @@ class Solution {
 //   1101  (13)
 
 // (3) XOR Operator (^):
-// The XOR (exclusive OR) operator compares each bit of two numbers. The resulting bit is 1 if the bits in that 
+// The XOR (exclusive OR) operator compares each bit of two numbers. The resulting bit is 1 if both the bits in a specific 
 // position are different (i.e., one is 1 and the other is 0).
-// If both bits are the same (both 0 or both 1), the resulting bit is 0.
+// If both bits are the same (both are 0 or both are 1), the resulting bit is 0.
 // example
 //   1100  (12)
 // ^ 0101  (5)

@@ -43,7 +43,7 @@ function convertTobinary(n) {
 
 // Optimal Approach:- Using Bit Manipulation.
 // approach:-
-// This approach uses the fact that performing 'n = n & (n - 1)' removes the rightmost set bit in 'n'.
+// This approach uses the fact that performing 'n = n & (n - 1)' removes the rightmost set bit of binary representation of 'n'.
 // each time this operation is performed, it clears one rightmost set bit, reducing the number of 1s by 1.
 // and while loop continues until all bits are cleared (i.e., 'n' becomes 0).
 // Explanation:-
