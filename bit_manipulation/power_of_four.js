@@ -6,7 +6,7 @@
 // inside the loop, keep dividing 'n' by 4 to reduce it.
 // once the loop exits, check if 'n' is equal to 1. If it is, then the original 'n' 
 // was a power of 2, so return true. Otherwise, return false.
-// TC:- O(N), as the number is halved in each iteration, so it runs in logarithmic time.
+// TC:- O(LOGN), as the number is halved in each iteration, so it runs in logarithmic time.
 // SC:- O(1), since no additional space is used.
 
 var isPowerOfFour = function(n) {

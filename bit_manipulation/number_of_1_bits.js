@@ -5,9 +5,9 @@
 // once the binary string is returned, a loop iterates over the binary string.
 // during each iteration, it checks if the character is '1'. If it is, the counter `count` is incremented.
 // the final value of `count` represents the number of set bits (1's) in the binary representation of 'n' and is returned by the function.
-// TC:- O(N + LOGN), Explanation:-
-// O(N), to count the number of 1 by iterating through the string 'str'.
-// O(LOGN), to convert the decimal numer into its binary representation.
+// TC:- O(LOGN), Explanation:-
+// O(LOGN), the binary string has log₂(n) bits, so iterating through the string to count '1's also takes O(log n) time.
+// O(LOGN), to convert the decimal numer into its binary representation, as in each step the 'n' is half by two.
 // overall TC:- O(N) + O(LOGN) = O(N + LOGN).
 // SC: O(log N), due to the storage of the binary digits in the string.
 
