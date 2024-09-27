@@ -108,3 +108,11 @@ class Solution {
     }
 }
 
+// Recap:- 
+// (1) Check the kth bit set or not :- use (n & 1 << k).
+// (2) Set the kth bit :- use (n | 1 << k).
+// (3) Clear the kth bit :- n & ~(1 << k).
+// (4) Toggle the kth bit :- n ^ (1 << k).
+// (5) Power of two :- n & (n-1).
+
+
