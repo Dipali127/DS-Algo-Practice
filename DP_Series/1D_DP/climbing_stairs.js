@@ -94,33 +94,37 @@ var climbStairs = function(n) {
      return dp[n];
 };
 
-// Optimal Approach3 (Best Approach):- [Constant Space Complexity]
-// approach:- 
-// if 'n' is 0, return 1 because there's one way to stay at the base (taking no steps).
-// if 'n' is 1, return 1 because there's one way to climb to the first step (a single step).
-// initialize 'prev1' to 1 and 'prev2' to 1. These variables represent the number of ways to reach the last two steps.
-// use a loop that runs from 2 to n, updating the current number of ways (steps) as the sum of prev1 and prev2.
-// after each iteration, update prev1 and prev2 to represent the last two computed values.
-// Once the loop is done, return the current number of ways stored in 'steps'.
-// TC:- O(N), because the loop runs from 2 to n.
-// SC:- O(1), since no additional space is used except for a constant number of variables.
+// Optimal Approach (Best Approach):- [Constant Space Complexity]
+// Approach:- 
+// if 'n' is 1, return 1 because there's only one way to climb to the first step (a single step).
+// if 'n' is 2, return 2 because there are two ways to climb to the second step (either two single steps or one two-step).
+// initialize 'prev1' to 1 and 'prev2' to 2. These variables represent the number of ways to reach the first and second steps, respectively.
+// use a loop that runs from 3 to 'n', updating the current number of ways (steps) as the sum of 'prev1' and 'prev2'.
+// After each iteration, update 'prev1' to 'prev2' and 'prev2' to 'steps' to represent the last two computed values.
+// Once the loop finishes, return the current number of ways stored in 'steps'.
+// TC:- O(N), because the loop runs from 3 to 'n'.
+// SC:- O(1), since only a constant amount of extra space is used (three variables: prev1, prev2, and steps).
 
 var climbStairs = function(n) {
     // Base cases
-    if (n === 0) return 1;
-    if (n === 1) return 1; 
-
+    if(n <= 2){
+        return n;
+    }
     let prev1 = 1; 
-    let prev2 = 1; 
+    let prev2 = 2; 
     let steps; 
 
-    for (let i = 2; i <= n; i++) {
+    for (let i = 3; i <= n; i++) {
         steps = prev1 + prev2; 
         prev1 = prev2; 
         prev2 = steps; 
     }
     return steps; 
 };
+
+
+
+
 
 
 

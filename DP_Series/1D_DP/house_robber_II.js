@@ -122,3 +122,54 @@ var rob = function(nums) {
     let result2 = dp[n];
     return Math.max(result1, result2);
 };
+
+// Optimal Approach (Best Approach):- [Constant Space Complexity] 
+// Approach:
+// Base Case:- if the length of the given array 'nums' is 1, return the value of the first and
+// only house (nums[0]), as there are no other houses to consider.
+// if there are two houses, return the maximum of the two, since we can't rob adjacent houses.
+// Main Idea:- Since the first and last houses are adjacent in a circular neighborhood,
+// robbing the first house excludes the last, and robbing the last excludes the first.
+// Therefore, we solve the problem twice:
+// - First, by considering the range of houses from index 0 to n-2 (i.e., robbing the first house).
+// - Second, by considering the range from index 1 to n-1 (i.e., skipping the first house).
+// we then return the maximum result from these two scenarios.
+// To solve for each range, we use two variables, 'prevprev' and 'prev', where:
+// - 'prevprev' stores the maximum money robbed before the previous house.
+// - 'prev' stores the maximum money robbed up to the previous house.
+// As we iterate through the houses in the range, calculate the maximum of two choices for each house:
+// 1. Skip the current house (thus, keep the max value in 'prev').
+// 2. Steal from the current house (add its value to 'prevprev').
+// After processing all houses in each scenario, 'max' will contain the maximum money that can be stolen in that range.
+// TC:- O(N), since the given array 'nums' is processed twice for two ranges.
+// SC:- O(1), since no additional space is used other than the two variables.
+
+var rob = function(nums) {
+    let n = nums.length;
+    // if there is only one house then stole money from there.
+    if(n === 1){
+        return nums[0];
+    }
+     if(n === 2){
+        return Math.max(nums[0], nums[1]);
+     }
+     
+    let take_first_house = solve(nums, 0, n-2);
+    let skip_first_house = solve(nums, 1, n-1);
+    return Math.max(take_first_house, skip_first_house);
+};
+
+function solve(nums, l, r){
+    let prevprev = 0;
+    let prev = 0;
+    let max;
+    for(let i = l; i <= r; i++){
+        let skip = prev;
+        let steal = nums[i] + prevprev;
+        max = Math.max(skip, steal);
+        prevprev = prev;
+        prev = max;
+    }
+
+    return max;
+}

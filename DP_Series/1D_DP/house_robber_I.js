@@ -85,3 +85,40 @@ var rob = function (nums) {
     return dp[n];
 };
 
+// Optimal Approach (Best Approach):- [Constant Space Complexity] 
+// Approach:
+// Base Case:- if the length of the given array 'nums' is 1, return the value of the first and
+// only house (nums[0]), as there are no other houses to consider.
+// use of two variables, 'prevprev' and 'prev', where:
+// - 'prevprev' stores the maximum money robbed before the previous house.
+// - 'prev' stores the maximum money robbed up to the previous house.
+// As we iterate through the houses, for each house, we calculate the maximum of two choices:
+// 1. Skip the current house (thus, keep the max value in 'prev').
+// 2. Steal from the current house (add its value to 'prevprev').
+// After processing all houses, 'max' will contain the maximum money that can be stolen by the thief
+// when they reach the last house.
+// TC:- O(N), since the given array 'nums' is processed once to find the maximum money stolen.
+// SC:- O(1), since no additional space is used other than the two variables.
+
+var rob = function (nums) {
+    let n = nums.length;
+    if(n === 1){
+        return nums[0];
+    }
+
+    let prevprev = 0;
+    let prev = nums[0];
+    let max;
+    for(let i = 2; i <= n; i++){
+       let skip = prev;
+       let steal = nums[i-1] + prevprev;
+       max = Math.max(skip, steal);
+       prevprev = prev;
+       prev = max;
+    }
+
+    return max;
+};
+
+
+
