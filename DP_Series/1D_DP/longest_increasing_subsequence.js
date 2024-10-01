@@ -1,16 +1,23 @@
 // Leetcode Problem:- 300
 // Problem:- Find the length of the longest strictly increasing subsequence from the given array 'nums'.
 // The longest increasing subsequence means that every previous value in the subsequence must be less than the next value.
-// In a subsequence, you can skip elements from the array.
+// In a subsequence, you can skip elements from the array. 
 // Brute force approach:- [Top-Down Approach] (Using Recursion)
-// call the function 'solve' and inside it:
-// - check if the current index 'i' is out of bounds (greater than or equal to the size of the array 'nums'), if so, return 0.
-// - otherwise, at each step for index 'i':
-//   - Take the current element in the subsequence (if it's strictly larger than the previous one).
-//   - Skip the current element and move to the next.
-// - return the maximum of the 'take' and 'skip' cases.
+// Approach:-
+// The function 'solve' is called to find the longest increasing subsequence starting from index 'i'.
+// At each index 'i', we have two choices:
+//  -take the current element if it is strictly larger than the previous element in the subsequence.
+//    - This happens if the 'prev' index is -1 (indicating no previous element) or if 'nums[prev] < nums[i]'.
+//   - skip the current element and move to the next index.
+// Base case:- if the current index 'i' is out of bounds (i.e., greater than or equal to the size of the array 'nums'), return 0.
+// Otherwise, calculate two values:
+//   - 'take': include the current element 'nums[i]' in the subsequence (if allowed).
+//   - 'skip': skip the current element and moving to the next. 
+// Return the maximum of the 'take' and 'skip' cases to explore all possible subsequences. 
 // TC:- O(2^N), because at each step, the function calls itself twice (for 'take' and 'skip').
-// SC:- O(N), since the recursive function uses stack space.
+// SC:- O(N), due to the recursion stack space used during function calls.
+
+// Note:- Always remember the 'take and skip' method when solving problems related to finding subsequences, such as the longest increasing subsequence.
 
 var lengthOfLIS = function(nums) {
     let n = nums.length;
@@ -82,13 +89,13 @@ function solve(nums, i, prev, n, dp) {
 // Optimal Approach (Best Approach):- [Constant Space Complexity] 
 // Approach:-
 // initialize a 1D array 'dp' to track the length of the longest increasing subsequence ending at each index in 'nums'.
-// each element in the 'dp' array represents the length of the longest increasing subsequence ending at that index,
+// each value in the 'dp' array represents the length of the longest increasing subsequence ending at that index,
 // and initially, the length ending at 'i' is 1 (the element itself).
 // 'longestSequence' is initialized to 0 to track the maximum length of increasing subsequences found.
 // iterate through each element 'i' of 'nums' and find the longest increasing sequence ending at 'i'.
-// for each element 'i', iterate through all previous elements 'j' to find the increasing subsequence.
+// for each element 'i', iterate through all previous elements using pointer 'j' to find the increasing subsequence.
 // if 'nums[j] < nums[i]', it means 'nums[i]' can extend the increasing subsequence ending at 'nums[j]'.
-// update 'dp[i]' to be the maximum of its current value and 'dp[j] + 1', which represents 
+// update 'dp[i]' to be the maximum of its current value i.e (dp[i]) and 'dp[j] + 1', which represents 
 // extending the subsequence with the current element.
 // after processing all 'j' for a given 'i', update 'longestSequence' with the maximum value found in 'dp[i]'.
 // finally, return the length of the longest increasing subsequence.
@@ -115,3 +122,4 @@ var lengthOfLIS = function (nums) {
 
     return longestSequence;
 };
+
