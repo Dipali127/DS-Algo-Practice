@@ -7,7 +7,7 @@
 // Base case: If 'n' is 0 or 1, the function just returns n because those are the first two numbers in the Fibonacci sequence.
 // Otherwise, it adds the results of fib(n-1) and fib(n-2) to get the nth fibonacci number.
 // TC:- O(2^n), as the function calls itself twice for every number, so the number of calls grows very quickly.
-// SC:- O(N), as the maximum number of function calls waiting in memory is equal to n (the depth of the recursion).
+// SC:- O(N), because the maximum depth of the recursion stack is proportional to n.
 
 var fib = function(n) {
     if(n==0 || n==1){
@@ -19,7 +19,7 @@ var fib = function(n) {
 
 // Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization) 
 // Approach:-
-// if 'n' is 0 or 1, return n directly because these are the first two Fibonacci numbers.
+// Base Case:- if 'n' is 0 or 1, return n directly because these are the first two Fibonacci numbers.
 // initialize an array 'dp' of size n+1 filled with -1. This array will store previously computed Fibonacci numbers to avoid redundant calculations.
 // call the helper function 'solve' with the input 'n' and the 'dp' array.
 // In the 'solve' function:
