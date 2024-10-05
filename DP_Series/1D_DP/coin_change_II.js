@@ -2,7 +2,6 @@
 // Problem Statement:-
 // You are given an array 'coins' of different denominations and an integer 'amount'.
 // You need to return the number of combinations that sum up to the given 'amount'.
-// If the amount of money cannot be made up by any combination of the coins, return 0.
 // You may assume that you have an infinite number of each kind of coin (i.e., you can take any coin any number of times).
 // Example:
 // coins = [1, 2, 5], amount = 5
@@ -97,3 +96,29 @@ function solve(coins, i, amount, n, dp) {
 
     return dp[i][amount] = take + skip;
 }
+
+
+// Optimal Approach2 (Best Approach): [Iterative Approach] 
+// use a 'dp' array to store the number of ways to make each amount start from 0 to the target amount.
+// Base case: for amount 0, there is 1 way to make it (using no coins), so we initialize dp[0] to 1. 
+// for all other amounts, initially set their values to 0, indicating they cannot be formed yet.
+// iterate through each coin available. 
+// for each coin, update the dp array for every amount from the coin's value up to the target amount. 
+// the inner loop starts from the value of the current coin to ensure that we do not consider amounts less than the coin value.
+// for each amount, update the number of ways to form that amount by adding the number of ways to form (current amount - coin value). 
+// this effectively counts how many ways we can form the current amount by including the current coin. 
+// once all coins have been processed, return dp[amount], which represents the total number of ways to make the target amount.
+// TC: O(N * M), where 'N' is the number of coins and 'M' is the target amount.
+// SC: O(M), where 'M' is the target amount.
+
+var change = function(amount, coins) {
+    let dp = new Array(amount + 1).fill(0);
+    dp[0] = 1; 
+    for (let coin of coins) {
+        for (let i = coin; i <= amount; i++) {
+            dp[i] += dp[i - coin]; 
+        }
+    }
+
+    return dp[amount];
+};
