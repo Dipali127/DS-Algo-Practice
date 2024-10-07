@@ -24,6 +24,7 @@ var tribonacci = function(n) {
 
 // Optimal Approach1: [Top-Down Approach] (Using Recursion + Memoization)
 // Approach:-
+// use a 'dp' array to store results of subproblems and avoid redundant calculations (memoization).
 // Base Case:-
 //  - if 'n' is 0, return 0 since the 0th Tribonacci number is 0. 
 //  - if 'n' is 1 or 2, return 1 because the 1st and 2nd Tribonacci numbers are 1.
