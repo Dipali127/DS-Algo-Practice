@@ -107,7 +107,8 @@ function uniquePath(obstacleGrid, i, j, m, n, dp){
 // Optimal Approach 2 (Best Approach): [Iterative Approach with Space Optimization]
 // Approach:-
 // use a one-dimensional 'dp' array to store the number of unique paths to reach each cell in the grid.
-// initialize the dp array with size 'n' (the number of columns) and set dp[0] = 1, representing the starting point.
+// initialize the dp array with size 'n' (the number of columns) and set dp[0] = 1, 
+// because there is exactly one way to reach the start position.
 // This array will be updated row by row as we iterate through the grid.
 // Base Case:
 // - if the start cell (grid[0][0]) or the destination cell (grid[m-1][n-1]) has an obstacle, return 0 since no path exists.

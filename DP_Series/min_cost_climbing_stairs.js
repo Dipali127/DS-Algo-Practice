@@ -78,16 +78,24 @@ function minCost(cost, i, dp, n) {
 // - finally, return the minimum cost to reach the top, which would be either from the last step (cost[n-1]) or the second last step (cost[n-2]).
 // TC:- O(N), since we are traversing the 'cost' array once in a loop from index 2 to n-1.
 // SC:- O(1), since we are modifying the input 'cost' array in place, and no extra space is used apart from a few variables.
-  
+// Note:-
+// For each stair starting from index 2, the cost of reaching that stair is updated to include the minimum of the 
+// previous two stairs' costs.
+// specifically, cost[i] = cost[i] + Math.min(cost[i - 1], cost[i - 2]):-
+//  - cost[i - 1] represents the cost of taking one step to the current stair i.
+//  - cost[i - 2] represents the cost of taking two steps to the current stair i.
+// After looping through all stairs, the last two elements of the array hold the total cost to reach the top:
+//  - cost[n - 1] holds the cost if the person takes one step to reach the top.
+//  - cost[n - 2] holds the cost if the person takes two steps to reach the top.
+
 var minCostClimbingStairs = function (cost) {
     let n = cost.length;
-    if(n === 2){
+    if (n === 2) {
         return Math.min(cost[0], cost[1])
     }
 
-    for(let i = 2; i < n; i++){
+    for (let i = 2; i < n; i++) {
         cost[i] = cost[i] + Math.min(cost[i - 1], cost[i - 2]);
     }
-    return Math.min( cost[n-1], cost[n-2]);
+    return Math.min(cost[n - 1], cost[n - 2]);
 };
-
