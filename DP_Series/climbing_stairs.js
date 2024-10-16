@@ -1,130 +1,142 @@
 // Leetcode Problem:- 70
-// Problem Says:- You are climbing a staircase. It takes 'n' steps to reach the top.
-// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+// Problem Says:-
+// You are given an array 'prices' where 'prices[i]' represents the price of a given stock on the ith day.
+// Your task is to find the maximum profit you can achieve by buying and selling stocks.
+// Conditions:
+//  - You can complete as many transactions as you like (i.e., you can buy and sell the stock as many times as you want).
+//  - However, you can't buy a stock before selling it (i.e., you need to sell before buying again).
+//  - After selling, you have a cooldown period of one day before you can buy again. This means if you sell on the ith day, you can only buy again on the (i+2)th day.
 // Brute force approach:- [Top - Down Approach](Using Recursion)
 // Approach:-
-// The function 'climbStairs' calculates the number of distinct ways to reach the top of a staircase with 'n' steps,
-// where at each step, you can either climb 1 or 2 steps.
-// The function 'findSteps(n)' is a recursive helper function:
-//    - If 'n' is less than 0, return 0, as there is no possibility to climb the stairs.
-//    - If 'n' is exactly 0, return 1 because reaching the top with exactly 0 steps is one valid way.
-//    - Otherwise, for each step, recursively compute the total number of ways by either taking one step (climbStairs(n-1)) or two steps (climbStairs(n-2)).
-// The total number of ways to reach the top is the sum of the number of ways to reach from n-1 and n-2 steps. 
-// TC:- O(2^n), as for each 'n', we check for two possibilities: (n-1) steps and (n-2) steps.
-// This leads to an exponential growth in the number of recursive calls.
-// SC:- O(N), as the maximum number of function calls waiting in memory is equal to n (the depth of the recursion).
+// call a function 'maxProfits' which return the maximum profit.
+// Inside 'maxProfits' function:
+//  - Base Case: if 'day' is greater than or equal to 'n' (length of the prices array), return 0 as there are no more days left.
+//  otherwise, at each day, you have two choices:
+//           - if it's a "buy" day, you can choose to either buy the stock or skip it (buy or not_buy).
+//           - if it's a "sell" day, you can choose to either sell the stock or skip it (sell or not_sell).
+//           - At each recursive step, calculate and update the maximum profit based on the decisions made (buy, sell, or skip).
+// once find the maximum profit, return it.
+// TC:- O(2^N), since on each day you have two options:- (buy or skip, sell or skip), 
+// the number of recursive calls grows exponentially, leading to O(2^n) time complexity.
+// SC:- O(N), the maximum depth of recursion is n because in the worst case, the recursion proceeds through all days.
 
-var climbStairs = function(n) {
-    return findSteps(n);
+var maxProfit = function(prices) {
+    let n = prices.length;
+    return maxProfits(prices, 0, n, true);
 };
 
-function findSteps(n){
-    if(n<0){
+function maxProfits(prices, day, n, buy){
+    let maxProfit = 0
+    if(day >= n){
         return 0;
     }
-    if(n === 0){
-        return 1;
-    }
 
-    return climbStairs(n-1) + climbStairs(n-2);
-}
+    if(buy){
+        let take = maxProfits(prices, day+1, n, false) - prices[day];
+        let not_take = maxProfits(prices, day+1, n, true);
+        maxProfit = Math.max(take, not_take);
+    }else{
+        let sell = prices[day] + maxProfits(prices, day+2, n, true);
+        let not_sell = maxProfits(prices, day+1, n, false);
+        maxProfit = Math.max(sell, not_sell);
+    }
+    return maxProfit;
+} 
 
 // Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization)
 // Approach:-
-// if 'n' is negative, return 0 as it's not possible to have negative steps.
-// if 'n' is 0, return 1 because there's one way to stay at the base (taking no steps).
-// initialize an array 'dp' of size 'n+1' filled with -1. This array will store previously computed results to avoid redundant recalculations (memoization).
-// call the helper function 'findSteps' with 'n' and 'dp' as arguments.
-// In 'findSteps' function:
-//    - if 'n' is 0, return 1 (base case: found one valid way).
-//    - if 'n' is negative, return 0 (no valid way).
-//    - if 'dp[n]' has already been computed (i.e., not -1), return its value to avoid recalculation.
-//    - Otherwise, recursively calculate the number of ways for 'n' by summing up the results of:
-//         (a) the number of ways from 'n-1' steps (one step taken)
-//         (b) the number of ways from 'n-2' steps (two steps taken)
-//    - Store the result in 'dp[n]' to avoid recalculating it in future calls.
-// finally, return the computed number of steps for 'n' from the 'dp' array.
-// TC: O(N), since each step is calculated only once because we store the previously computed values in the 'dp' array.
-// SC: O(N), due to the 'dp' array storing computed results and recursion depth in the worst case can go up to n.
+// use a 2D 'dp' array to store the results of subproblems (for both buy and sell states).
+// call a function 'maxProfits' which return the maximum profit.
+// Inside 'maxProfits' function:
+//  - Base Case: if 'day' is greater than or equal to 'n' (length of the prices array), return 0 as there are no more days left.
+// - If the result for the current subproblem is already stored in the 'dp' array, return the cached value from 'dp' to avoid recomputation.
+// otherwise, at each day, you have two choices:
+//           - if it's a "buy" day, you can choose to either buy the stock or skip it (buy or not_buy).
+//           - if it's a "sell" day, you can choose to either sell the stock or skip it (sell or not_sell).
+//           - At each recursive step, calculate and update the maximum profit based on the decisions made 
+//              (buy, sell, or skip) store the result in the 'dp' array for memoization.
+// Once the maximum profit is computed, return it.
+// TC:- O(N), where 'N' is the number of days. Since each day has at most two states (buy/sell), and we store the 
+// results in the dp array, we only compute each subproblem once, leading to linear time complexity.
+// SC:- O(N), Explanation:
+// O(N):- stack space used by recursive function.
+// O(N):- to store the results of subproblems to avoid redundant calculations. Even though it's a 2D array,
+// it can be simplified to O(N) because the second dimension (2) is a constant factor.
+// overall, SC:- O(N).
 
-var climbStairs = function(n) {
-    let dp = new Array(n + 1).fill(-1); 
-    return findSteps(n, dp);
+var maxProfit = function(prices) {
+    let n = prices.length;
+    let dp = Array.from(Array(n), () => Array(2).fill(-1));
+    return maxProfits(prices, 0, n, true, dp); 
 };
 
-function findSteps(n, dp){
-    if (n < 0) {
-        return 0;
+function maxProfits(prices, day, n, buy, dp) {
+    if (day >= n) return 0; 
+
+    if (dp[day][buy ? 1 : 0] !== -1) {
+        return dp[day][buy ? 1 : 0]; 
     }
-    if (n === 0) {
-        return 1;
+    
+    let maxProfit = 0; 
+    
+    if (buy) {
+        let take = maxProfits(prices, day + 1, n, false, dp) - prices[day]; 
+        let not_take = maxProfits(prices, day + 1, n, true, dp); 
+        maxProfit = Math.max(take, not_take); 
+    } else {
+        let sell = prices[day] + maxProfits(prices, day + 2, n, true, dp); 
+        let not_sell = maxProfits(prices, day + 1, n, false, dp); 
+        maxProfit = Math.max(sell, not_sell); 
     }
-  
-  // Return memoized result if it already exists
-    if (dp[n] !== -1) {
-        return dp[n];  
-    }
-  
-    // Store the result in dp array
-    dp[n] = findSteps(n - 1, dp) + findSteps(n - 2, dp);
-    return dp[n];
+    
+    dp[day][buy ? 1 : 0] = maxProfit; 
+    return maxProfit; 
 }
 
 // Optimal Approach2:- [Using Bottom Up DP] (Iterative Solution)
 // Approach:-
-// if 'n' is 0, return 1 directly because there's one way to stay at the base (taking no steps).
-// if 'n' is 1, return 1 because there's one way to take one step.
-// initialize an array 'dp' of size n+1, filled with 0 as this array will store the number of ways to climb stairs up to 'n'.
-// set the base cases: dp[0] = 1 (one way to stay at the base) and dp[1] = 1 (one way to take a single step).
-// use a loop that runs from 2 to n to fill in the dp array:
-//    - for each index 'i', calculate the number of ways to reach that step as the sum of the two preceding numbers: 
-//      'dp[i] = dp[i-1] + dp[i-2]' (representing the ways to step from the last one or two steps).
-// finally, return the number of ways to climb 'n' stairs from the dp array.
-// TC:- O(N), as each number of ways is computed once in the loop.
-// SC:- O(N), as we are using the dp array to store computed values.
+// create a 'dp' array with size n+2. The reason for n+2 is that, in the case of a cooldown (when you sell a stock on the last day),
+// you may need to look two days ahead (dp[i+2]). We fill it with 0 initially, as no profit can be made after all days are processed.
+// dp[i][0]:- stores the maximum profit on day 'i' when you are in a sell state (you are allowed to sell).
+// dp[i][1]:- stores the maximum profit on day 'i' when you are in a buy state (you are allowed to buy). 
+// start iterating backward from the last day (i = n-1) to the first day (i = 0), filling in the 'dp' array. 
+// while filling the table and calculating profit for each day:
+// - If 'buy === 1', it means we're in a state where we can buy the stock and we have two options:
+//    (1) Option 1:- Buy the stock on day i (which costs prices[i]), and then move to the next day in a sell state (dp[i + 1][0]).
+//    (2) Option 2:- Skip buying on day i and stay in the buy state (dp[i + 1][1]). 
+//    - take the maximum of these two options to get the best possible profit.
+// - If 'buy === 0', it means we're in a state where we can sell the stock, and we have two options:
+//    (1) Option 1: Sell the stock on day i (earning prices[i]), and move to day i+2 in a buy state (because of the one-day cooldown).
+//    (2) Option 2: Skip selling on day i and stay in the sell state (dp[i + 1][0]).
+//    - again, take the maximum of these two options to get the best possible profit.
+// Once the 'dp' table is fully filled, return dp[0][1], which holds the maximum possible profit starting from the first day
+// in a buy state.
+// TC:- O(N), we iterate over the 'prices' array once (n days), and for each day, we perform a constant amount of work
+// (checking two possible states: buy and sell), resulting in a linear time complexity of O(n).
+// SC:- O(N), as we are using a 'dp' table of size 'n+2' with two states (buy and sell).
 
-var climbStairs = function(n) {
-    let dp = new Array(n + 1);
-    dp[0] = 0;
-    dp[1] = 1;
-    dp[2] = 2;
-    for (let i = 3; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+// Note: The reason we start from the last day is that to calculate today's profit, we need to know the future day's profits.
+// By filling the table backward, we ensure that when calculating the value for a given day i, we already have the
+// future values we need. For example, let's say n = 5. We start filling from the last day (n-1) and assume we sell on the last day.
+// To calculate the profit two days ahead (because of the cooldown), we need dp[i+2]. That's why we consider the size of 'dp' as 'n+2'.
+
+var maxProfit = function(prices) {
+    let n = prices.length;
+    if (n === 0 || n === 1) {
+        return 0;
     }
-     return dp[n];
+
+    let dp = Array.from(Array(n+2), () => Array(2).fill(0));
+    for (let i = n - 1; i >= 0; i--) {
+        for (let buy = 0; buy <= 1; buy++) {
+            if (buy === 1) {
+                dp[i][buy] = Math.max(-prices[i] + dp[i + 1][0], dp[i + 1][1]);
+            } else {
+                dp[i][buy] = Math.max(prices[i] + dp[i + 2][1], dp[i + 1][0]);
+            }
+        }
+    }
+    return dp[0][1];
 };
-
-// Optimal Approach (Best Approach):- [Constant Space Complexity]
-// Approach:- 
-// if 'n' is 1, return 1 because there's only one way to climb to the first step (a single step).
-// if 'n' is 2, return 2 because there are two ways to climb to the second step (either two single steps or one two-step).
-// initialize 'prev1' to 1 and 'prev2' to 2. These variables represent the number of ways to reach the first and second steps, respectively.
-// use a loop that runs from 3 to 'n', updating the current number of ways (steps) as the sum of 'prev1' and 'prev2'.
-// After each iteration, update 'prev1' to 'prev2' and 'prev2' to 'steps' to represent the last two computed values.
-// Once the loop finishes, return the current number of ways stored in 'steps'.
-// TC:- O(N), because the loop runs from 3 to 'n'.
-// SC:- O(1), since only a constant amount of extra space is used (three variables: prev1, prev2, and steps).
-
-var climbStairs = function(n) {
-    // Base cases
-    if(n <= 2){
-        return n;
-    }
-    let prev1 = 1; 
-    let prev2 = 2; 
-    let steps; 
-
-    for (let i = 3; i <= n; i++) {
-        steps = prev1 + prev2; 
-        prev1 = prev2; 
-        prev2 = steps; 
-    }
-    return steps; 
-};
-
-
-
-
-
 
 
