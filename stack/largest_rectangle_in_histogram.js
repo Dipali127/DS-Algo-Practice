@@ -40,19 +40,18 @@ var largestRectangleArea = function (height) {
 // iterate through the height array, and for each bar, compute the width using the previousSmaller and nextSmaller
 // arrays and compute the area using the width and the current iterated height while updating maxArea.  
 // Inside 'prevSmaller' function:-
-// create an array 'ps' of size 'height.length' and initially fill all elements with -1, which indicates that there is
+// create an array 'ps' of size 'height.length' and initially fill all the elements with -1, which indicates that there is
 // no previous smaller height for the current height.
 // for the current iterated bar, use a stack to keep track of indices. 
 // until the stack is not empty and the height at the index of the top of the stack is greater than or equal to the 
-// current height, pop from the stack and alter this if the stack is not empty it means that the index at the top of
+// current height, pop from the stack.
+// but if not then check if the stack is not empty it means that the index at the top of
 // the stack will be the previous smaller index, which we will update to ps[i].
 // otherwise, push the current index onto the stack.
-// Inside 'nextSmaller' function:-
-// create an array 'ns' of size 'height.length' and fill all elements with height.length, indicating that there is no
-// smaller height to the right initially.
-// use a stack to track indices and for each bar, pop from the stack until the current bar is smaller than the height
-// at the index of the top of the stack.
-// once the current bar is less than the top of the stack, update the ns array with the index of the current bar.
+// create an array 'ns' of size 'height.length' and fill all elements with height.length, indicating that there is 
+// no next smaller height for the current height.
+// use of a stack to keep track of indices and for each bar, pop the index from the stack until the current bar is smaller than the height
+// index of the top of the stack and update the ns array with the index of the current bar.
 // otherwise, push the current index onto the stack. 
 // TC:- O(N), Explanation:-
 // O(N):- to get previous smaller indices for each bar of height.
