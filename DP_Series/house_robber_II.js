@@ -5,7 +5,62 @@
 // and you cannot rob two adjacent houses on the same night.
 // The goal is to determine the maximum amount of money you can rob without alerting the police.
 
-// Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization) 
+// Brute force approach:- [Top - Down Approach](Using Recursion)
+// Approach:-
+// - The idea is to recursively decide whether to "rob" the current house or "skip" it.
+// - If we rob the current house i, we cannot rob the next house (i + 1), so we move to house i + 2.
+// - If we skip the current house, we move to the next house (i + 1).
+// To handle the circular arrangement of houses:-
+// - If we rob the first house, we cannot rob the last house.
+// - If we skip the first house, we can rob the last house.
+// We solve the problem in two cases:-
+// - Case 1: Rob the first house (0th index) and skip the last house.
+// - Case 2: Skip the first house and consider the last house (n-1 index).
+// Base Case:- 
+// if there’s only one house, return its value (nums[0]).
+// if there are only two houses, return the maximum of the two (Math.max(nums[0], nums[1])), as we can only rob one of them.
+// use of a helper function 'solve' that computes the maximum money that can be robbed from house i to the last valid
+// house (based on the circular constraint).
+// In the 'solve' function:-
+// Base Case: If 'i' exceeds or equals the number of houses, return 0 (no more houses to rob). Otherwise, we have two options;
+// Option 1: Rob the current house 'i' and move to the house 'i + 2' (since adjacent houses can't be robbed).
+// Option 2: Skip the current house and move to the next house 'i + 1'.
+// And return the maximum of take and skip.
+// TC:- O(2^N), as for each house, we are making two recursive calls (either rob or skip), and this leads to an 
+// exponential number of recursive calls.
+// SC:- O(N), because the maximum depth of the recursion stack is proportional to n.
+
+var rob = function(nums) {
+    let n = nums.length;
+    // if there is only one house then stole money from there.
+    if(n === 1){
+        return nums[0];
+    }
+     if(n === 2){
+        return Math.max(nums[0], nums[1]);
+     }
+
+     // case 1:- if we will take 0rth house then we can't take the last house ATQ.
+     let take_0rth_index_house = solve(nums, 0, n-2);
+
+    // case 2:- if we will not take 0rth house then we can take the last house ATQ.
+    let take_1st_index_house = solve(nums, 1, n-1); 
+
+    return Math.max(take_0rth_index_house, take_1st_index_house); 
+};
+
+function solve(nums, i, n) {
+    if (i > n) {
+        return 0;
+    }
+    
+    let steal = nums[i] + solve(nums, i + 2, n);
+    let skip = solve(nums, i + 1, n);
+
+    return Math.max(steal, skip);
+}
+
+// Optimal Approach 1:- [Top - Down Approach](Using Recursion + Memoization) 
 // Approach:-
 // - The idea is to recursively decide whether to "rob" the current house or "skip" it.
 // - If we rob the current house i, we cannot rob the next house (i + 1), so we move to house i + 2.
@@ -123,7 +178,7 @@ var rob = function(nums) {
     return Math.max(result1, result2);
 };
 
-// Optimal Approach (Best Approach):- [Constant Space Complexity] 
+// Optimal Approach 3 (Best Approach):- [Constant Space Complexity] 
 // Approach:
 // Base Case:- if the length of the given array 'nums' is 1, return the value of the first and
 // only house (nums[0]), as there are no other houses to consider.

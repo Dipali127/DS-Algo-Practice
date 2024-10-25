@@ -3,7 +3,38 @@
 // You are a professional robber planning to steal money from houses, but the only constraint is that 
 // adjacent houses have security systems connected, so you cannot rob two adjacent houses on the same night.
 
-// Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization) 
+// Brute force approach:- [Top - Down Approach](Using Recursion)
+// Approach:-
+// - The idea is to recursively decide whether to "rob" the current house or "skip" it.
+// - If we rob the current house, we cannot rob the next adjacent house (i+1), so we move to house (i+2).
+// - If we skip the current house, we move to the next house (i+1).
+// from main function 'rob', we are calling the 'solve' function which will return the maximum amount of money that a robber robbed.
+// Inside 'solve' function:-
+// Base Case: If 'i' exceeds or equals the number of houses, return 0 (no more houses to rob). Otherwise, we have two options;
+// Option 1: Rob the current house 'i' and move to the house 'i + 2' (since adjacent houses can't be robbed).
+// Option 2: Skip the current house and move to the next house 'i + 1'.
+// And return the maximum of take and skip.
+// TC:- O(2^N), as for each house, we are making two recursive calls (either rob or skip), and this leads to an 
+// exponential number of recursive calls.
+// SC:- O(N), because the maximum depth of the recursion stack is proportional to n.
+
+ var rob = function (nums) {
+    let n = nums.length;
+    return solve(nums, 0, n);
+};
+
+function solve(nums, i, n) {
+    if (i >= n) {
+        return 0;
+    }
+    
+    let steal = nums[i] + solve(nums, i + 2, n);
+    let skip = solve(nums, i + 1, n);
+
+    return Math.max(steal, skip);
+}
+
+// Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization)
 // Approach:-
 // - The idea is to recursively decide whether to "rob" the current house or "skip" it.
 // - If we rob the current house, we cannot rob the next adjacent house (i+1), so we move to house (i+2).
@@ -43,7 +74,7 @@ function solve(nums, i, dp, n) {
 }
 
 
-// Optimal Approach2:- [Using Bottom Up DP] (Iterative Solution)
+// Optimal Approach:- [Using Bottom Up DP] (Iterative Solution)
 // Approach:-
 // Base Case:- If the length of the given array nums is equal to 1, return the value of the first and
 // only house (nums[0]), as there are no other houses to consider.
@@ -90,8 +121,8 @@ var rob = function (nums) {
 // Base Case:- if the length of the given array 'nums' is 1, return the value of the first and
 // only house (nums[0]), as there are no other houses to consider.
 // use of two variables, 'prevprev' and 'prev', where:
-// - 'prevprev' stores the maximum money robbed before the previous house.
-// - 'prev' stores the maximum money robbed up to the previous house.
+// - 'prevprev' stores the maximum money robbed before the adjacent house.
+// - 'prev' stores the maximum money robbed including the adjacent house.
 // As we iterate through the houses, for each house, we calculate the maximum of two choices:
 // 1. Skip the current house (thus, keep the max value in 'prev').
 // 2. Steal from the current house (add its value to 'prevprev').
@@ -119,6 +150,3 @@ var rob = function (nums) {
 
     return max;
 };
-
-
-
