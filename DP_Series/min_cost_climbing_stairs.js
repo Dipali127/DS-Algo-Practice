@@ -16,20 +16,21 @@
 // TC:- O(2^N), because at each index we have two options: climb one step or climb two steps, leading to an exponential number of recursive calls.
 // SC:- O(N), due to the maximum depth of the recursion stack being 'N' in the worst case (when we climb one step at a time).
 
-var minCostClimbingStairs = function(cost) {
+var minCostClimbingStairs = function (cost) {
     let n = cost.length;
-    return Math.min(minCost(cost, 0, n), minCost(cost, 0+1, n));
+    return Math.min(minCost(cost, 0, n), minCost(cost, 1, n));
 };
 
-function minCost(cost, i, n){
-    if(i >= n){
+function minCost(cost, i, n) {
+    if (i >= n) {
         return 0;
     }
 
-    let climbOne = cost[i] + minCost(cost, i+1, n);
-    let climbTwo = cost[i] + minCost(cost, i+2, n);
-    return Math.min(climbOne, climbTwo);
+    let climbOne =  minCost(cost, i + 1, n);
+    let climbTwo =  minCost(cost, i + 2, n);
+    return cost[i] + Math.min(climbOne, climbTwo);
 }
+
 
 // Optimal Approach1: [Top-Down Approach] (Using Recursion + Memoization)
 // Approach:- 
@@ -62,9 +63,9 @@ function minCost(cost, i, dp, n) {
     if (dp[i] !== -1) {
         return dp[i];
     }
-    let climbOne = cost[i] + minCost(cost, i + 1, dp, n);
-    let climbTwo = cost[i] + minCost(cost, i + 2, dp, n);
-    return dp[i] = Math.min(climbOne, climbTwo)
+    let climbOne =  minCost(cost, i + 1, dp, n);
+    let climbTwo =  minCost(cost, i + 2, dp, n);
+    dp[i] = cost[i] + Math.min(climbOne, climbTwo)
     return dp[i];
 }
 
