@@ -15,10 +15,11 @@ function kthSmallest(arr, k){
 // Quickselect repeatedly partitions the array around a pivot until it finds the kth smallest element.
 // Time Complexity (TC):
 // Worst Case:- O(N^2), occurs when the array is already sorted (either in ascending or descending order).
-// Best Case TC:- O(N), Explanation:
-// O(N):- as in quick select it only sort one part of the array either it is the left or right part of the array and linearly search in one part of the array.
-// O(N):- partition function linearly compare and swap will take O(n) complexity.
-// Hence, the overall time complexity is O(N) in the best case.
+// Best Case Time Complexity: O(N), Explanation:
+// O(logN): Quickselect only needs to search one side of the array (either left or right of the pivot),
+// which reduces the search space by half each time, resulting in O(logN) recursive levels in the best case.
+// O(N): Partition function itself takes O(N) time, as it linearly compares and swaps elements around the pivot.
+// Therefore, the overall time complexity is O(N) + O(logN) ≈ O(N).
 // SC:- O(1), since no additional space is used.
 
 let arr =[4,5,10,11,1,3,19,8,7];

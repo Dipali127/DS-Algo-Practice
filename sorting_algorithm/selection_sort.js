@@ -2,7 +2,7 @@
 // Element at beginning of the array to get the intended order either it is (increasing or decreasing).
 // TC:- O(N^2), in average,best and worst case regardless of the array's initial order.
 // SC:- O(1), since no additional space used.
-// Selection sort is not stable as they don't maintain the intended order. 
+// Selection sort is not stable as it doesn't maintains the relative order of array elements after sorting.. 
 
 let arr=[4,3,9,7,6,8];
 let n=arr.length;
