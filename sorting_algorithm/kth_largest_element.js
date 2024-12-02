@@ -25,8 +25,8 @@ function kthSmallest(arr, k){
 // SC:- O(1), since no additional space is used.
 
 // Note:- why arr.length - k hold the kth largest value? => because, In a zero-indexed array, the k-th largest element
-// is located at the index arr.length - k. For example, if you want the largest element, you'd need the element at
-// arr.length - 1; for the second-largest element, it’s at arr.length - 2, and so on.
+// is located at the index arr.length - k. For example, if you want the first largest element, you'd need the element at
+// arr.length - 1; for the second-largest element, it’s at arr.length - 2, and so on .
 
 let arr =[4,5,10,11,1,3,19,8,7];
 let low = 0, high = arr.length - 1, k = 5;
