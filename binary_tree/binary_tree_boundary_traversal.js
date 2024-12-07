@@ -7,7 +7,7 @@
 // - exclude the leaf nodes while traversing the left boundary.
 // - if the left child exists, recurse on the left subtree.
 // - if the left child doesn't exist but the right child does, recurse(call itself) on the right subtree. This ensures that we move down the left boundary.
-// Step2:- Traverse the leaf node ofa 'tree' and while traversing it:-  
+// Step2:- Traverse the leaf node of  a 'tree' and while traversing it:-  
 // - traverse the leaf nodes of both the left and right subtrees by recursively visiting each subtree.
 // - if a node has no left and right children, it is a leaf and is added to the result. 
 // Step3:- Traverse the right boundary of 'tree' and while traversing it:- 
@@ -26,69 +26,60 @@
 // overall, SC:- O(N).
 
 class Solution {
-  boundary(root) {
-    let result = [];
-    if (root === null) {
+  boundaryTraversal(root) {
+      let result = []; 
+      if(root === null){
+          return result;
+      }
+      
+      result.push(root.data);
+      this.leftView(root.left, result);
+      this.countLeaf(root.left, result);
+      this.countLeaf(root.right, result);
+      this.rightView(root.right, result);
+      
       return result;
-    }
-
-    result.push(root.data); 
-
-    // function to traverse the left boundary
-    function traverseLeft(root, result) {
-      if (root === null || (root.left === null && root.right === null)) {
-        return;
+      
+  }
+  
+  leftView(node, result, depth){
+      if(node === null || node.left === null && node.right === null){
+          return;
       }
-
-      result.push(root.data);
-      if (root.left !== null) {
-        traverseLeft(root.left, result);
-      } else {
-        traverseLeft(root.right, result);
+      
+      result.push(node.data);
+      if(node.left !== null){
+          this.leftView(node.left, result);
+      }else{
+          this.leftView(node.right, result);
       }
-    }
-
-    // function to traverse all leaf nodes
-    function traverseLeaf(root, result) {
-      if (root === null) {
-        return;
+      
+  }
+  
+  countLeaf(root, result){
+      if(root === null){
+          return;
       }
-
-      if (root.left === null && root.right === null) {
-        result.push(root.data);
-        return;
+      
+      if(root.left === null && root.right === null){
+          result.push(root.data);
       }
-
-      traverseLeaf(root.left, result);
-      traverseLeaf(root.right, result);
-    }
-
-    // function to traverse the right boundary
-    function traverseRight(root, result) {
-      if (root === null || (root.left === null && root.right === null)) {
-        return;
+      
+      this.countLeaf(root.left, result);
+      this.countLeaf(root.right, result);
+  }
+  
+  rightView(node, result,depth){
+      if(node === null || node.left === null && node.right === null){
+          return;
       }
-
-      if (root.right !== null) {
-        traverseRight(root.right, result);
-      } else {
-        traverseRight(root.left, result);
+      
+      if(node.right !== null){
+          this.rightView(node.right, result);
+      }else{
+          this.rightView(node.left, result);
       }
-
-      // Push after recursion to ensure reverse order
-      result.push(root.data);
-    }
-
-    // Traverse the left boundary, excluding leaves
-    traverseLeft(root.left, result);
-
-    // Traverse all leaf nodes
-    traverseLeaf(root.left, result);
-    traverseLeaf(root.right, result);
-
-    // Traverse the right boundary, excluding leaves (in reverse order)
-    traverseRight(root.right, result);
-
-    return result;
+      
+      result.push(node.data);
   }
 }
