@@ -1,5 +1,5 @@
 // Leetcode Problem:
-// brute force approach:
+// Brute force approach:
 // approach:
 // use of nested loop where the outer loop iterates through each element of the array.
 // the inner loop checks if the current element (pointed by the outer loop) is equal to any other 
@@ -7,41 +7,52 @@
 // TC: O(N^2), because of the nested loop. 
 // SC: O(1) , as there is no extra space used.
 
-var containsNearbyDuplicate = function(arr, k) {
-    for (let i = 0; i < arr.length-1; i++) {
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[i] === arr[j] && Math.abs(i - j) <= k) {
-        return true;
+var containsNearbyDuplicate = function (arr, k) {
+  for (let i = 0; i < arr.length - 1; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+          if (arr[i] === arr[j] && Math.abs(i - j) <= k) {
+              return true;
+          }
       }
-    }
   }
   return false;
 };
 
-// optimal approach: hash map method
-// approach:
-// use a hash map to store the currently traversed elements of the array with their indices. 
-// for each element, check if it already exists in the hash map.
-// if it exists, check if the difference between the current index and the stored index is less than 
-// or equal to k, if it is then return true.
-// if not exist, then update the hash map with the current element and its index.
-// once traversed all elements, if no such pair is found, return false.
-// traverse index.
-// TC : O(N), as we traverse the array once
-// SC : O(N), as there is a use of map and in the worst case it may possible that map store all
-// elements.
+// Optimal approach: using sliding window and hash map
+// approach:-
+// extend the window by moving pointer 'j' to the right.
+// use of a hash map to store the current iterated value as the key and its index as the value in the map.
+// while iterating through each value of nums, check if the current value at 'arr[j]' is in the hash map.
+//  - if it is, compare the distance between the current index 'j' and the index stored in the hash map.
+//  - if the distance is less than or equal to 'k', return true immediately.
+//  - if not, store the current index 'j' of 'arr[j]' in the hash map.
+// if the window size exceeds given k then i will shrink the window by moving the start pointer 'i' to avoid unnecessary 
+// comparisions for those elements which are not in the valid range given k.
+// and while shrinking the window i will remove the value pointed by start pointer 'i'.
+// continue this process until all elements are processed.
+// TC:- O(N), where N is the length of the array, as each element is traversed once.
+// SC:- O(min(N, k)), where N is the length of the array and 'k' is the window size.
+// If k is smaller than or equal to N (the array length), the hash map will store up to k
+// elements, because once the window size exceeds k, elements are removed.
 
-var containsNearbyDuplicate = function(arr,k){
-     let map = new Map();
-    for (let i = 0; i < arr.length; i++) {
-        if (map.has(arr[i])) {
-            let val = map.get(arr[i]);
-            if (Math.abs(val - i) <= k) {
+var containsNearbyDuplicate = function (arr, k) {
+    let map = new Map();
+    let i = 0, j = 0;
+    while (j < arr.length) {
+        if (map.has(arr[j])) {
+            if (Math.abs(j - map.get(arr[j])) <= k) {
                 return true;
             }
         }
-        map.set(arr[i], i);
+        map.set(arr[j], j);
+        
 
+        if (map.size > k) {
+            map.delete(arr[i]);
+            i++;
+        }
+
+        j++;
     }
 
     return false;
