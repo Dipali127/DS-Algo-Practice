@@ -35,6 +35,23 @@ class Solution {
     }
 }
 
+//                                                      OR
+let n = 10;
+console.log(decimalTObinary(n))
+function decimalTObinary(n){
+    if(n === 0){
+        return 0;
+    }
+    
+    let string = '';
+    while(n > 0){
+        string+=  n % 2;
+        n = Math.floor(n/2);
+    }
+    
+    return string.split('').reverse().join('');
+}            
+
 // (1) Convert binary to decimal
 // Geeksforgeeks Problem
 // Optimal Approach:
@@ -110,8 +127,10 @@ class Solution {
 
 // (4) Shift Operator
 // (i.(a)) Right Shift Operator Of Positive Number:-
-//      - discard the rightmost bit and shift remaining bit toward right and fill the leftmost bit with 0
-// regardless of number is positive or negative.
+//      - right shift operator (>>) shifts all the bits to the right, discards the rightmost bit, 
+// and fills the leftmost bit with 0.
+// Note:- If the result of a shift exceeds 32 bits, the rightmost bits are discarded.
+
 // example:- 
 // 46 >> 1 (shift 46 by 1 bit to the right)
 // Solution:-
@@ -119,7 +138,7 @@ class Solution {
 // Performing the Right Shift:- Shifting right by 1 position
 // Original:   00101110  (46)
 // Shifted:    00010111  (23)
-// here, the rightmost bit (0) is discarded, and a 0 is filled in the leftmost position.
+// here, the rightmost bit (0) is discarded, and 0 is filled in the leftmost position.
 // Formula for right shift(>>):
 // if 'x' is number and 'k' is a number of bits to shift bit then [right shift = x/2^k].
 // For example, shifting 46 by 1 bit results in:-  46/2^1 => 23.
@@ -148,8 +167,10 @@ class Solution {
 
 
 // (i.(a)) Left Shift Operator Of Positive Number:-
-//      - discard the leftmost bit and shift remaining bit toward left and fill the rightmost bit with 0
-// regardless of number is positive or negative.
+//      - left shift operator (<<) shifts all the bits to the left, discards the leftmost bit,
+//  and fills the rightmost bit with 0.
+// Note:- If the result of a shift exceeds 32 bits, the leftmost bits are discarded.
+
 // example:- 
 // 46 << 1 (shift 46 by 1 bit to the left)
 // Solution:-
