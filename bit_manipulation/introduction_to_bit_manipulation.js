@@ -35,7 +35,24 @@ class Solution {
     }
 }
 
-//                                                      OR
+//                                        OR
+// To convert a decimal number N into its binary representation, I repeatedly divide 𝑁 by 2 and append 
+// the remainder at each step as the remainder represents the current binary digit.
+// While appending the current binary digit, the digits are added in an incorrect order because the most significant
+// bit is appended first, even though the correct binary representation starts with the least significant bit. 
+// To fix this, I reverse the string after appending all the digits, which gives the correct binary representation.
+
+// For example, let 𝑁 = 10,
+// first, divide 10 by 2 to get a remainder of 0 and add '0' to the string, then update 𝑁 to 5.
+// Next, divide 5 by 2 to get a remainder of 1, add '1' to the string, and update N to 2.
+// Repeat this for 2 (remainder 0, add '0') and 1 (remainder 1, add '1'). 
+// At this point, the binary digits collected in reverse order are '0101'.
+// Reversing this string results in '1010', which is the correct binary representation of 10. 
+// This approach efficiently breaks down the number, collecting binary digits until N becomes 0.
+// The final reversal ensures the binary number is in the proper order.
+// Time Complexity (TC): O(LOGN), because at each step N is divided by 2, reducing its size by half.
+// Space Complexity (SC): O(LOGN), since the binary representation of the number is stored in a string.
+                                              
 let n = 10;
 console.log(decimalTObinary(n))
 function decimalTObinary(n){
