@@ -7,8 +7,10 @@
 // This operation removes the rightmost set bit (1) in 'num' during each iteration of the while loop.
 // and this loop continues until 'num' becomes 0, and track how many times the loop runs, which is the count of 1 bits for 'i'.
 // after finding the count of ones for current number 'i', push it into the result array and finally return it.
-// TC:- O(NlogN), as for each number we find the count of ones.
-// SC:- O(N), to store the count of set bits for each number.
+// TC:- O(Nlogk), where 'N' is the given number and K is the number of set bits. 
+// this is because for each number, we count the set bits using the num = num & (num - 1) operation, which takes O(logK) time for a number with K set bits.
+// SC:- O(N), as we store the count of set bits for each number in the result array.
+
 
 var countBits = function(n) {
     let result = [];
@@ -29,11 +31,13 @@ var countBits = function(n) {
 // Approach:-
 // use the 'result' array to store the count of set bits (1s) for each number from 0 to n.
 // The idea is to utilize the fact that:
-// - for even numbers, the number of set bits is the same as i/2 (since dividing by 2 in binary shifts all bits to the right, which does not change the number of 1s).
-// - For odd numbers, the number of set bits is one more than i/2 (because the least significant bit is always 1 for odd numbers).
+// - for even numbers, the number of set bits is the same as i/2 (since dividing by 2 in binary shifts all 
+// bits to the right, which does not change the number of 1s).
+// - For odd numbers, the number of set bits is one more than i/2 (because the least significant bit is 
+// always 1 for odd numbers).
 // TC: O(N), because we compute the count of 1s for each number from 0 to n in constant time.
 // SC: O(N), for storing the count of set bits for each number.
-// Note:- here, i am reusing the previously computed counts of bits for even and odd numbers to improve the efficiency of your algorithm.
+// Note:- here, i am reusing the previously computed counts of bits for even and odd numbers to improve the efficiency of the algorithm.
 var countBits = function(n) {
     let result = [];
     if (n === 0) {

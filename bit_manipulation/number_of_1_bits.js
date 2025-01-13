@@ -16,6 +16,8 @@
 // O(log N), as each division by 2 shifts the bits to the right, reducing the number of bits in the number.
 // The number of iterations is proportional to the number of bits in the binary representation of 'n'.
 // SC: O(1), as no additional space is used other than the count variable.
+// Note:- In any number n, the number of bits required to represent it is roughly log₂(n). 
+// When iterating through the bits, the number of iterations is proportional to the number of bits in n, which is log₂(n).
 
 var hammingWeight = function (n) {
     let count = 0;
@@ -30,8 +32,7 @@ var hammingWeight = function (n) {
 };
 
 
-// Optimal Approach:- Using Bit Manipulation.
-// approach:-
+
 // Optimal Approach:- Using Bit Manipulation.
 // approach:-
 // I will use the bitwise AND operator (&) between the given number 'n' and 'n - 1' which effectively
