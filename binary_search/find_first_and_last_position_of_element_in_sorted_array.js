@@ -1,7 +1,7 @@
 // Leetcode Problem:- 34
 // Brute force approach:
 // Approach:-
-// Use of two pointers, 'first' and 'last', which are initialized to -1.
+// use of two pointers, 'first' and 'last', which are initialized to -1.
 // iterates through the array, and check if the current element equals the target.
 // If the current element equals the target check then:-
 //    - if first is still -1, it indicates that we have found the first occurrence of the target; hence, update 'first' with the current index.
