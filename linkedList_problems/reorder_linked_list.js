@@ -4,8 +4,7 @@
 // First, i will add all the nodes of the given linked list into an array. Then, traverse the array 
 // using two pointers, `start` and `end`, to add the nodes pointed by `start` and `end` 
 // alternately to a new list using a `temp` pointer to reorder the list.
-// Once the linked list is reordered, set `temp.next` to `null` to terminate the list and avoid 
-// cycles in the linked list. Finally, return the reordered list starting from `dummyNode.next`.
+// Once the linked list is reordered, I will set temp.next to null to terminate the list and avoid cycles in the linked list because, in the case of an odd-length linked list, the start and end pointers might point to the same node, and form a cycle. Finally, I will return the reordered list starting from dummyNode.next.
 // TC: O(N), Explanation:
 // O(N): to add the nodes of the linked list into the array.
 // O(N): to iterate through the array using the `start` and `end` pointers.
