@@ -46,6 +46,8 @@ var reorderList = function(head){
  // O(N):- to merge both the halves of the linked list into one.
  // Overall, TC:- O(N)
  // SC:- O(1), since no additional space is used.
+// Note:- When finding the middle of a linked list, I'm iterating through half of the nodes, 
+// which would be O(n/2) in terms of steps. However, in Big O notation, constants are ignored, so it's simplified to O(n)
 
 var reorderList = function(head) {
     if(head === null || head.next === null){
