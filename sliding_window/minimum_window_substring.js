@@ -7,11 +7,10 @@
 // zero. it means that current substring character contain all the characters of string 't'.
 // so, update the 'minWindow' and add current substring into 'subString'.
 // once, found the minimum window substring which contain all characters of string 't', return subString.
-// TC:- O(N^3), Explanation:-
-// O(N), to iterate through each starting index of the string.
-// O(N), to iterate through each possible substring.
-// O(N), to iterate through the map to check if all characters are satisfied. Here 'N' is the length of string 't'.
-// overall TC:- O(N^3)
+// TC:- O(N^2 * M), Explanation:-
+// O(N), to iterate through each starting index of the string 's' or to consider each possible substring.
+// O(N * M), for each possible substring, iterate through it and check if all characters of string 't' in the hash map become zero.
+// Overall TC:- O(N^2 * M)
 // SC:- O(N), to store the characters of string 't' in the map. 
 
  var minWindow = function(string,t){
