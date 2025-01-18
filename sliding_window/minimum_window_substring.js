@@ -49,27 +49,26 @@
 
     return subString !== ""?subString:"";
  }
-
-// Optimal approach:-
-// approach:-
-// first check a condition that is length of string 't' is greater than length of string 's' then return an empty string as
-// it's impossible to check for all characters of 't' to exist in 's'.
-// create a frequency map to store all characters of string 't'. it will help us to track the count of each required character.
-// extend the window by moving pointer 'j' toward right of the given string 's' meanwhile check if the current character s[j]
-// exists in the map. 
-// if it does and its frequency is greater than 0, it means we need this character, so decrement its frequency and also decrease requiredCount.
-// once requiredCount becomes zero, this means we found a valid window that contains all characters of string 't'.
-// now, try to minimize the window by moving i to the right . for each valid window, update minWindow and the substring
-// if the current window is smaller than the previously one.
-// before shrinking the window, restore the count of the character at i in the map, and if the restored count becomes greater than 0,
-// increment requiredCount as we need this character again in future windows.
-// continue expanding and shrinking the window until the end of string 's' is reached.
-// finally, return the smallest valid window (substring) or an empty string if no valid window was found.
+// optimal approach:
+// if the length of string s is less than the length of string t, there’s no need to proceed, as it’s impossible to find a substring of s that contains all characters of t.
+// i will use a sliding window technique with two pointers (start and end) and a hash map. This approach ensures all characters of string t are present in the current window of string s.
+// first, I store all characters of string t in a hash map along with their respective frequencies.
+// i will expand the window using end pointer and while iterating through the current window,
+// I check whether the character at the end pointer exists in the hash map. If it does, and its frequency in the map is greater than 0, I will decrement the requiredCount, as we need this character, and it's present in the current window. Regardless of whether the character’s frequency is greater than 0, I will decrement its frequency in the hash map.
+// meanwhile i will check if the requiredCount becomes zero, it means the current window contains all characters of string t. At this point, I calculate the minLength and update the minWindow if the current window size is smaller than the previously recorded minLength.
+// after this I will try to shrink the window from the left using the start pointer.
+// Before shrinking the window, I will check if the character pointed to by the start pointer exists in the hash map. If it does, it means this character is part of string t, and we need it. Therefore, I will increment its frequency in the hash map. If its frequency in the hash map becomes greater than 0 after incrementing, I will increment the requiredCount, as this character is required in future,after this increment the start pointer.
+// Once the requiredCount becomes greater than 0, stop the inner while loop and increment the end pointer to expand the window again.
+// Continue the process of expanding and shrinking the window until all characters of s are processed.
+// After processing all characters, return the minWindow substring, which represents the smallest substring containing all characters of t.
 // TC:- O(N), Explanation:-
-// O(t):- to iterate through string 't', where 't' is the length of the string 't'.
-// O(N):- to iterate through each character of string 's'.
-// overall, TC:- O(N)
-// SC:- O(N), to store each character of string 't' in map. 
+// O(m):- to iterate through string 't', where 'm' is the length of the string 't'.
+// O(N):- used by outer while loop to iterate through each character of string 's', where 'N' is the length of the string 's'.
+// O(N):- for the inner while loop to shrink the window.
+// Both the 'start' and 'end' pointers iterate independently through the string 's' (not nested).
+// In the worst case, each character of 's' can be visited twice (once by the 'end' pointer and once by the 'start' pointer).
+// Overall TC:- O(N + N) = O(2N) = O(N).
+// SC:- O(m), to store each character of string 't' in the map, where 'm' is the length of the string 't'.
 
 var minWindow = function (s, t) {
     if(t.length>s.length){
