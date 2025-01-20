@@ -15,6 +15,8 @@
 // O(N), to iterate through the given string to remove special characters.
 // O(N/2) to check that the new string is a palindrome or not.
 // overall, TC: O(N) + O(N/2) = O(N)
+// Note: Since the `specialChars` string is of constant length (33 characters), the time complexity
+// of the `includes()` method is O(1).
 
 var isPalindrome = function (string) {
     let specialChars = "!@#$%^&*()_+{}\":;'<>?/,.~`-[] ";
@@ -35,3 +37,55 @@ var isPalindrome = function (string) {
     }
     return true;
 }
+
+// Also we can do like the below:-
+// the time complexity of below code is O(N) since the Using regex.test() is O(1)
+// per character because regex matching for a single character is a constant-time operation.
+var isPalindrome = function (s) {
+    let regex = /[a-z0-9A-Z]/;
+    let str = "";
+    s = s.split('');
+    for (let i = 0; i < s.length; i++) {
+        if (regex.test(s[i])) {
+            str += s[i].toLowerCase();
+        } else {
+            continue;
+        }
+    }
+
+    let start = 0, end = str.length - 1;
+    while (start < end) {
+        if (str[start] !== str[end]) {
+            return false;
+        } else {
+            start++, end--;
+        }
+    }
+
+    return true;
+}; 
+
+// Also we can do like this 
+// the time complexity of the below code is again O(N).
+var isPalindrome = function (s) {
+    let str = "";
+    s = s.split('');
+    for (let i = 0; i < s.length; i++) {
+        if ((s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')) {
+            str += s[i].toLowerCase();
+        } else {
+            continue;
+        }
+    }
+
+    let start = 0, end = str.length - 1;
+    while (start < end) {
+        if (str[start] !== str[end]) {
+            return false;
+        } else {
+            start++, end--;
+        }
+    }
+
+    return true;
+};
