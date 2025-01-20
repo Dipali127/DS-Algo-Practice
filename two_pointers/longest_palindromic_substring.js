@@ -37,6 +37,7 @@ var palindrome = function(string, i, j){
 }
 
 // optimal approach:
+// approach:
 // i will use the "expand around center" technique to find the longest palindromic substring.
 // The idea is to consider each character (or pair of characters for even-length palindromes) as a center and expand outward to check for palindromes. Here's how it works:
 // maxLength: This variable will store the length of the longest palindromic substring found so far.
