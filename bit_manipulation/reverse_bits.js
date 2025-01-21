@@ -39,6 +39,8 @@
 // Removes the leftmost bit.
 // Adds 0 to the rightmost bit.
 
+// Optimal Approach:
+// approach:
 // initialize a variable 'reversed' to 0, which will hold the result of the reversed bits.
 // iterate over all 32 bits of the input number.
 // shift 'reversed' left by 1 position to make space for the next bit, and extract the rightmost bit from the given
