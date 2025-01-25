@@ -19,24 +19,25 @@ var twoSum = function (arr, target) {
     return -1;
 }
 
-// optimal approach:-
+// Optimal approach:-
 // approach:
-// use a map to get the indices of target value.
-// for each element, calculate the required value to reach the target (result = target - arr[i]).
-// check if this required value is already in the map:
-// - if it is, return the indices of the required value and the current element.
-// - if it isn't, store the current element and its index in the map.
-// TC: O(N), as we traverse the array once.
-// SC: O(N), due to the extra space used by the map.
+// use of a map (hash table) to store the indices of the numbers we have already seen.
+// for each element in the array, calculate the required number to reach the target (requiredNumber = target - nums[i]).
+// Check if this required number is already in the map:
+// - If it is, return the indices of the required number and the current element (nums[i]).
+// - If it isn't, store the current element (nums[i]) and its index in the map.
+// This ensures that we only traverse the array once, providing an efficient solution.
+// TC: O(N), as we traverse the array once and perform constant-time operations for each element.
+// SC: O(N), due to the extra space used by the map to store the elements and their indices.
 
-var twoSum = function (arr, target) {
+var twoSum = function(nums, target){
     let map = new Map();
-    for(let i = 0;i<arr.length;i++){
-        let result = target - arr[i];
-        if(map.has(result)){
-            return [map.get(result), i];
+    for(let i = 0; i < nums.length; i++){
+        let requiredNumber = target - nums[i];
+        if(map.has(requiredNumber)){
+            return [map.get(requiredNumber), i];
         }else{
-            map.set(arr[i],i)
+            map.set(nums[i], i);
         }
     }
 }
