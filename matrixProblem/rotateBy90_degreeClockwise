@@ -1,6 +1,7 @@
 // leetcode Problem:
-// approach:- first take transpose of a matrix by swapping the the elements at positions (i, j) with (j, i).
-// this will change the rows into colums and colums into rows.
+// approach:- 
+// first i will take transpose of a matrix by swapping the elements at (i,j) with the elements at (j,i) 
+// which convert rown into columns and columns into rows and this help to roate matrix 
 // after transpose, iterate over half the elements in each row and swap their values to reverse the row. 
 // this will effectively rotate the given matrix by 90 degree clockwise.
 // TC:O(N^2), explanation:- O(N^2) for traspose of matrix and O(N^2) for reversing the rows.
