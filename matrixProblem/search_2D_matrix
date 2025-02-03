@@ -35,7 +35,7 @@ var searchMatrix = function (matrix, target) {
     let n = matrix[0].length;//number of columns
     let low = 0, high = (m * n) - 1;
     while (low <= high) {
-        //this below code avoid floating points error
+        // This avoids integer overflow when calculating the midpoint
         let mid = Math.floor(low + (high - low) / 2);
         //below line give the mid index value from 2d matrix bcoz actually it is 2D array which
         //we treated as 1D array to apply binary search on it.
