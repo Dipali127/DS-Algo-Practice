@@ -35,20 +35,22 @@ class Solution {
 // Leetcode Problem:- 867
 // Optimal Approach:
 // approach:
-// Since, the problem does not specify that the matrix is square, so we need to handle both square and non-square matrices. To achieve the transposition, we create a new matrix where the rows of the original matrix become columns in the transposed matrix and vice versa. This means the element at position matrix[i][j] in the original matrix will be placed at position transposeMatrix[j][i] in the transposed matrix.
+// Since, the problem does not specify that the matrix is square, so we need to handle both square and non-square matrix scenario.
+// In transpose of a matrix it flipped the matrix over its main diagonal (from the top-left to the bottom-right). This means that the rows become columns and the columns become rows for example:- 2*1 becomes 1*2.
+// So, to achieve the transpose of a matrix, we create a new matrix where the rows of the original matrix become columns in the transposed matrix and vice versa. This means the element at position matrix[i][j] in the original matrix will be placed at position transposeMatrix[j][i] in the transposed matrix.
 // TC:- O(N*M), where N is the number of rows and M is the number of columns in the original matrix and We have to iterate over all elements of the original matrix.
 // SC:- O(N*M), for the new 2D array (transposeMatrix), which has the same size as the original matrix.
 // Note:- let transposeMatrix = Array.from({ length: n }, () => new Array(m)) here,This creates an array with n rows, and for each row, it creates an array with m columns. 
 
 var transpose = function(matrix) {
-    let m = matrix.length;
-    let n = matrix[0].length;
-    let transposeMatrix = Array.from({ length: n }, () => new Array(m));
-    for (let i = 0; i < m; i++) {
-        for (let j = 0; j < n; j++) {
-            transposeMatrix[j][i] = matrix[i][j];  // Swap elements for transposition
-        }
-    }
- 
-    return transposeMatrix;
- };
+   let m = matrix.length;
+   let n = matrix[0].length;
+   let transposeMatrix = Array.from({ length: n }, () => new Array(m));
+   for (let i = 0; i < m; i++) {
+       for (let j = 0; j < n; j++) {
+           transposeMatrix[j][i] = matrix[i][j];  // Swap elements for transposition
+       }
+   }
+
+   return transposeMatrix;
+};
