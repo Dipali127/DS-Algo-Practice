@@ -22,7 +22,7 @@ var twoSum = function (arr, target) {
 // Optimal approach:-
 // approach:
 // use of a map (hash table) to store the indices of the numbers we have already seen.
-// for each element in the array, calculate the required number to reach the target (requiredNumber = target - nums[i]).
+// for each element in the array, i will calculate the required number to reach the target (requiredNumber = target - nums[i]).
 // Check if this required number is already in the map:
 // - If it is, return the indices of the required number and the current element (nums[i]).
 // - If it isn't, store the current element (nums[i]) and its index in the map.
