@@ -1,43 +1,50 @@
 // Leetcode Problem:- 121
-// Brute force appraoch:
-// find all possible profit by using nested loops and return the maximum profit.
-// first loop is used for buying stock and second loop is used for selling stock
-// profit is calculated by taking difference of selling stock value with buying stock value.
-// TC: O(N^2), as use of nested loops.
-// SC: O(1), as there is no additional space used apart from maxProfit.
+// Leetcode Problem:- 121
+// Brute force approach:
+// approach:
+// i will find all possible profits using nested loops where,
+// the first loop is used for buying a stock, and the second loop is used for selling a stock.
+// while iterating through the inner loop, I will calculate the profit by taking the difference between the selling price and the buying price.
+// if the currently computed profit is greater than the previously stored profit in maxProfit, I will update it.
+// finally, i will return maxProfit.
+// Time Complexity: O(N²), due to the use of nested loops.
+// Space Complexity: O(1), as no additional space is used apart from maxProfit.
 
 var maxProfit = function(prices) {
     let maxProfit = 0;
-    let diff;
     for(let i=0;i<prices.length-1;i++){
         for(let j=i+1;j<prices.length;j++){
-            diff = prices[j] - prices[i];
-            maxProfit = Math.max(diff, maxProfit);
+            let profit = prices[j] - prices[i];
+            maxProfit = Math.max(profit, maxProfit);
         }
     }
 
     return maxProfit;
 };
 
-// Optimal approach: Using contant space and linear time.
-// initialize 'minPrice' with the first element of the `prices` array.
-// initialize 'maxProfit' to 0 to keep track of the maximum profit.
-// iterate through the `prices` array:
-// for each price, update `minPrice` if the current price is lower.
-// calculate the profit by subtracting `minPrice` (buying price) from the current price (selling price).
-// update 'maxProfit' if the calculated profit is higher than the current 'maxProfit'.
-// TC: O(N), as the prices array is traversed only once.
-// SC: O(1), as there is no additional space used apart from `maxProfit` and `minPrice`.
 
-var maxProfit = function (prices) {
+// Optimal Approach:
+// approach:
+// instead of using nested loops, i will solve the problem linearly.
+// i initialize costPrice with the first value of the prices array, considering it as the stock's buying price.
+// while iterating through the array, I check if the current price is lower than the previously stored costPrice.
+// if so, i will update costPrice to this minimum value, since we aim to buy the stock at the lowest price.
+// meanwhile, i will compute the profit and check if it is greater than the previously stored maxProfit. If so, I will update maxProfit.
+// finally, i will return maxProfit.
+// Time Complexity: O(N), as we traverse the prices array only once.
+// Space Complexity: O(1), as no additional space is used apart from maxProfit and costPrice.
+
+var maxProfit = function(prices) {
     let maxProfit = 0;
-    let minPrice = prices[0];
+    let costPrice = prices[0];
+    for(let i = 1; i < prices.length; i++){
+        if(costPrice > prices[i]){
+            costPrice = prices[i];
+        }
 
-    for (let i = 1; i < prices.length; i++) {
-        minPrice = Math.min(minPrice, prices[i]);
-        let profit = prices[i] - minPrice;
-        maxProfit = Math.max(profit, maxProfit);
+        let profit = prices[i] - costPrice;
+        maxProfit = Math.max(maxProfit, profit);
     }
 
     return maxProfit;
-}
+};
