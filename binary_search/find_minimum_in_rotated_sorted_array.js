@@ -1,5 +1,17 @@
 // Leetcode Problem:- 153
 // Brute force approach:
+// approach:
+// i will sort the array nums in ascending order so that the minimum value is at the first position of the nums array,
+// Then, I will return the first element.
+// TC:- O(NLOGN), to sort the array nums in ascending order.
+// SC:- O(1), since no additional space is used.
+var findMin = function(nums) {
+  nums = nums.sort((a,b) => a - b);
+  return nums[0];
+};
+
+
+// optimal approach 1:
 // Approach:-
 // initializes a variable 'min' with a very large value (Infinity) to ensure that any number from the array will be smaller. 
 // iterates through the entire 'nums' array starting from index 0.
@@ -18,7 +30,7 @@ var findMin = function (nums) {
     return min;
 };
 
-// Optimal approach: Using Binary Search
+// Optimal approach 2: Using Binary Search
 // Approach:
 // use two pointers, 'low' and 'high', are initialized to point to the start and end of the array, respectively.
 // First, checks if the array is already sorted (i.e., if the first element is less than or equal to the last element). 

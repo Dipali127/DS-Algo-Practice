@@ -1,10 +1,5 @@
 // Leetcode Problem:- 53
-// Brute force approach:
-// approach:
-// i will consider all possible subarrays using a nested loop. for each subarray, I will compute the sum and check if the computed sum is greater than the previously stored sum in longSub. If it is, I will update longSub with the current sum.
-// Once I have iterated through all possible subarrays, I will return longSub.
-// TC:- O(N^2), because of nested loop.
-// SC:- O(1), since no additional space is used. 
+/5 
 var maxSubArray = function(nums) {
     let longSub = -Infinity;
     for(let i = 0; i < nums.length; i++){
