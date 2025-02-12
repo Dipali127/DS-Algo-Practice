@@ -1,8 +1,11 @@
 // Leetcode Problem:
 // Brute force approach:
-// I will consider each possible triplet using three nested loops, and for each triplet, I will compute the sum of its elements and check if the computed sum equals zero. If it does, I will ensure the triplet is unique by verifying that it doesn’t already exist in the set.
-
-// To ensure the triplet doesn’t exist in the set, I will sort the triplet to maintain ordering. To avoid storing duplicate triplets, I will check if the current triplet doesn’t already exist. If it doesn’t, I will store it in the result array. If it does exist in the set, it means the current triplet is a duplicate.
+// I will consider each possible triplet using three nested loops, and for each triplet,
+// I will compute the sum of its elements and check if the computed sum equals zero. If it does,
+// I will ensure the triplet is unique by verifying that it doesn’t already exist in the set.
+// To ensure the triplet doesn’t exist in the set, I will sort the triplet to maintain ordering.
+// To avoid storing duplicate triplets, I will check if the current triplet doesn’t already exist. If it doesn’t,
+// I will store it in the result array. If it does exist in the set, it means the current triplet is a duplicate.
 // TC:- O(N^3), because of triply nested loop.
 // SC:- O(N), to store the triplets in set.
 
@@ -28,14 +31,11 @@ var threeSum = function(nums) {
 
 // Optimal approach: using three pointers
 // Approach:
-// I will sort the array to apply the three-pointer technique for finding triplets and avoiding duplicates. I will iterate through the array to find valid triplets.
-
-// In the outer loop, I will check if the current element is the same as the previous one. If it is, I will skip it to avoid duplicate triplets. For each element, I will set two pointers:
-
-// start will point to the next element of the current element.
-// end will point to the last element.
+// I will sort the array to apply the three-pointer technique for finding triplets and avoiding duplicates.
+// I will iterate through the array to find valid triplets.
+// In the outer loop, I will check if the current element is the same as the previous one. If it is, I will skip it to avoid duplicate triplets. For each element, I will set two pointers
+// otherwise, i will take start pointer point to the next element of the current element pointer by pointer i and end pointer point to last element.
 // I will run a while loop until start is less than end to check for triplets where the sum is zero.
-
 // If the sum of the triplet is zero, I will add it to the result array and then move both pointers (start and end).
 // I will also skip any duplicate values for the start and end pointers to avoid duplicates in the result.
 // If the sum of the triplet is less than zero, I will move the start pointer to the right to increase the sum.
