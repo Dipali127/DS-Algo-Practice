@@ -33,20 +33,17 @@ var maxArea = function (height) {
 
 
 // optimal approach: use of two pointers
-// the brute force approach is not efficient due to its time complexity of O(n^2), as it involves checking
-// every possible pair of container walls. the two-pointer approach improves the time complexity to O(n).
-// the intention behind the two-pointer approach is to avoid unnecessary comparisons of smaller heights.
 // approach:
-// initialize maxArea to 0, which will contain the maximum amount of water that the container can hold.
-// initialize two pointers, one at the beginning (left) and one at the end (right) of the array.
-// iterate until the two pointers meet.
-// while iterating:
-// find the minimum height between the two pointers.
-// calculate the width (distance) between the two pointers.
-// calculate the current area using the formula: area = minHeight * width.
-// update the maximum area if the current area is larger.
-// move the pointer pointing to the shorter wall towards the center.
-// return the maximum area found.
+// instead of considering each possible pairs of container wall which increases the time complexity.
+// i will use of the two-pointer approach which improves the time complexity from O(N^2) to O(N).
+// the idea behind the two-pointer approach is to avoid unnecessary comparisons of smaller heights since they give in a smaller area.
+// i will run a while loop until left is less than right and in each iteration, i will find the area between pair of container wall and 
+// Update maxArea if the new area is greater.
+// the maxArea and check if height of wall pointed by left pointer is less than the height of wall pointed by right 
+// pointer, if it is then i will increment the left pointer to avoid minimum height (since minimum height give minimum area).
+// but if height of wall pointed by left pointer is greater than the height of wall pointed by right pointer,then decrement
+// right pointer.
+// once left is greater than right, while loop break and return maxArea.
 // TC: O(N), as we traverse the given height array using two pointers in a single pass.
 // SC: O(1), as no additional space is used apart from maxArea.
 
