@@ -7,7 +7,7 @@
 // use nested loops to calculate the area for every possible pair of container walls.
 // iterate over each element in the array using two nested loops.
 // for each pair of elements, calculate the minimum height between the two elements
-// (since the water can only be held up to the shorter wall).
+// (since water only store upto the minimum height of container).
 // calculate the width (distance) between the two walls.
 // calculate the area using the formula: area = minHeight * width.
 // keep track of the maximum area found during the iteration.
@@ -35,7 +35,8 @@ var maxArea = function (height) {
 // optimal approach: use of two pointers
 // approach:
 // instead of considering each possible pairs of container wall which increases the time complexity.
-// i will use of the two-pointer approach which improves the time complexity from O(N^2) to O(N).
+// i will use of the two-pointer approach where low points to the 0rth index of the array height and high points to the
+// last index of the height array.
 // the idea behind the two-pointer approach is to avoid unnecessary comparisons of smaller heights since they give in a smaller area.
 // i will run a while loop until left is less than right and in each iteration, i will find the area between pair of container wall and 
 // Update maxArea if the new area is greater.
