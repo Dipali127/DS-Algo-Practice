@@ -73,11 +73,13 @@ var trap = function(height) {
 
 // Most Optimal Approach:
 // approach:
-// To improve space complexity, I will use the two-pointer approach with left and right pointers, where;
-// left is initially set to index 0 and right is initially set to the last index of the height array.
-// i will use of two variable leftMax and rightMax to maintain the maximum height encountered so far from the left and maximum height encountered so far from the right.
-// I will run a while loop until left is less than right and inside the loop; i will check If height[left] <= height[right], if it is then i will update leftMax for the building at the left pointer. Then, I will compute the trapped water by subtracting height[left] from leftMax and add it to the totalWaterTrapped variable since water starts filling above the building and increment left.
-// Otherwise (if height[left] > height[right]), then I will update rightMax for the building at the right pointer. Then, I will compute the trapped water by subtracting height[right] from rightMax and add it to totalWaterTrapped and decrement right.
+// Since water can only be stored up to the minimum of the tallest heights on the left and right sides, I realized that instead of precomputing these heights and storing them in extra arrays, I could calculate them dynamically while iterating. To do this efficiently, I used the two-pointer approach:
+
+// I placed one pointer (left) at the beginning and another pointer (right) at the end of the array.
+// While iterating through the array, I kept track of the maximum heights seen so far (leftMax and rightMax).
+// If the left height was smaller, it meant the left boundary determined the water level at that index, so I updated leftMax and calculated the trapped water.
+// If the right height was smaller, the right boundary determined the water level, so I updated rightMax and calculated the trapped water.
+// This way, I avoided using extra space and reduced the time complexity to O(N) since I traverse the array only once.
 // TC:- O(N), as we traverse the array only once.
 // SC:- O(1), since no additional space is used.
 var trap = function(height){
