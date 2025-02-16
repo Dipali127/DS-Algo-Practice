@@ -1,7 +1,7 @@
 // Optimal approach:
 // approach:
-// Instead of iterating through each interval after sorting the intervals by their start times, 
-// I will store the first interval in a `range` array.
+// Instead of iterating through each interval after sorting the intervals by their start times which increase the time ,
+// complexity i.e; O(N^2), i will store the first intervals in a range arrray. 
 // Then, I will iterate through each of the remaining intervals. While iterating, I will check 
 // if the current interval overlaps with the interval stored in the `range` array. If there is 
 // an overlap, I will update the `range` array's start and end times.
