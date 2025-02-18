@@ -6,10 +6,10 @@
 // (2) If a is equal to b (base case), return either a or b. This means we have found the GCD.  
 // (3) Otherwise, if a is greater than b, recursively call the gcd function with (a - b, b) to reduce the
 //  larger number to smaller.  
-//     If b is greater than a, recursively call the gcd function with (a, b - a).  
+//     but If b is greater than a, recursively call the gcd function with (a, b - a).  
 //     Repeat step (3) until a equals b.  
 //  
-// Time Complexity: O(min(a, b)), because the function runs until one of the numbers becomes 0.  
+// Time Complexity: O(min(a, b)), because the function runs until one of the numbers becomes 0 or equal to each other.  
 // Space Complexity: O(min(a, b)), due to recursive calls stored in the stack.  
 // Note:- GCD (Greatest Common Divisor) and HCF (Highest Common Factor) are the same.
 let a = 2, b = 4;
