@@ -1,0 +1,48 @@
+class linkedlist{
+    constructor(data){
+        this.root = data;
+        this.next = null
+    }
+}
+
+let head = new linkedlist(1);
+head.next = new linkedlist(2);
+head.next.next = new linkedlist(3);
+head.next.next.next = new linkedlist(4);
+head.next.next.next.next = new linkedlist(5);
+let n = 2; // Node to delete
+
+console.log(deleteNode(head,n))
+function deleteNode(head, n){
+    let lengthofLinked = findLength(head);
+    if(n <= 0 || n > lengthofLinked){
+        return "can't delete";
+    }
+
+    if(n === 1){
+        return head.next;
+    }
+
+    let i = 1;
+    let temp = head;
+    let prev = null;
+    while(i < n){
+        prev = temp;
+        temp = temp.next;
+        i++;
+    }
+
+    prev.next = temp.next;
+    return head;
+}
+
+function findLength(head){
+    let temp = head;
+    let length = 0;
+    while(temp !== null){
+        temp = temp.next;
+        length++;
+    }
+
+    return length;
+}
