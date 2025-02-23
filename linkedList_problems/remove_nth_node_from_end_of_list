@@ -1,6 +1,6 @@
 // approach:- brute force appraoch
-// as there is no option to traverse linked list from last calculate length of the linked list so that
-// we can easily remove the nth node of linked list from end.
+// since there is no option to traverse linked list from last, i will calculate the length of the linked list so that
+// i can easily find the posistion from start of the given linked list to remove the nth node of linked list from end.
 // once calculate the length of list, check a case if length is equal to given n , it means that head is the
 // node to deleted and return head.next.
 // otherwise, Calculate the position of the node just before the deleted node by subtracting n from length.
@@ -11,33 +11,33 @@
 // overall TC: O(N)+O(N) = O(N) 
 // SC: O(1), as we are only using a constant amount of extra space.
 
- var removeNthFromEnd = function(head, n) {
+var removeNthFromEnd = function(head, n) {
     let length = 0;
     let temp = head;
-    while(temp!=null){
+    while(temp !== null){
         length++;
         temp = temp.next;
     }
 
-    // If n is equal to the length, remove the head node
-    if (n === length) {
+    if(n === length){
         return head.next;
     }
 
-    length = length - n - 1;
-    let itrt = head;
-    while(length--){
-        itrt = itrt.next;
+    let itrt = 1;
+    let current = head;
+    while(itrt < length - n){
+        current = current.next;
+        itrt++;
     }
 
-    itrt.next = itrt.next.next;
+    current.next = current.next.next;
     return head;
- }
+};
 
 // Optimal appraoch:- slow and fast pointer.
 // initialize two pointers, fast and slow, both pointing to the head of the list.
-// move the fast pointer n steps ahead. this ensures that when the fast pointer reaches the end
-// the slow pointer will be at the node just before the one we need to remove.
+// i will move the fast pointer to n steps which ensures that when the fast pointer reaches the end
+// the slow pointer will be at the node just before the node we have to remove.
 // if fast becomes null after the initial for loop, it means the node to be removed is the head node. 
 // otherwise, move both fast and slow pointers one step at a time until fast.next is null. 
 // TC: O(N),Explanation:-
@@ -46,23 +46,21 @@
 // overall TC: O(N)+O(N) = O(N).
 // SC: O(1), as we are only using a constant amount of extra space.
 
- var removeNthFromEnd = function(head, n) {
-    let fast = head, slow = head;
-    for(let i=0;i<n;i++){
+var removeNthFromEnd = function(head, n) {
+    let slow = head, fast = head;
+    for(let i = 0; i < n; i++){
         fast = fast.next;
     }
 
- // If fast is equal to the length, remove the head node
-   if(fast === null){
-    return head.next;
-   }
+    if(fast === null){
+        return head.next;
+    }
 
-    while(fast.next !== null){
+    while(fast !== null && fast.next !== null){
         slow = slow.next;
         fast = fast.next;
     }
 
     slow.next = slow.next.next;
     return head;
-    
- };
+};
