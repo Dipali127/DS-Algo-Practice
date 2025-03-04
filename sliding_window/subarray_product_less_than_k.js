@@ -25,13 +25,15 @@ var numSubarrayProductLessThanK = function(nums, k){
     return count;
 };
 
-// Optimal Approach: Using Sliding Window
+// Optimal Approach: Using Sliding Window and two pointer
 // Approach:
-// outer loop compute the product by considering each element meanwhile inner loop check if the product is greater than equal to k
-// Until the product is greater than equal to k, the inner loop shrinks the window from left by incrementing the start pointer 'i'.
-// and dividing the product by the element at the start pointer to remove its effect on the product. 
-// for each valid window (where product < k), the count of subarrays ending at the current element is added to the count.
-// TC: O(N), as each element traversed once and SC: O(1), as there is no additional space used.
+// i will take two pointer 'start' and 'end' and i will extend the window using pointer 'end' meanwhile i will compute the product and check 
+// if the product is greater than equal k , if it is then i will shrink the window by using 'start' pointer until the product is greater than
+// equal k.
+// but if the product is less than k , that means i have found a subarray and i wil increment the count by adding current window size 
+// window which give exact number of subarray in that window.
+// after finding all the subarray whose product is less than k , i will return the count of it. 
+// TC: O(N), as each element are traversed once using start and end pointer and SC: O(1), as there is no additional space used.
 
 var numSubarrayProductLessThanK = function (nums, k) {
     if (k <= 1) {
