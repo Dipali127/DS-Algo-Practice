@@ -11,29 +11,24 @@
 // overall , TC:- O(N)+O(N^2) = O(N^2).
 // SC:- O(1), as there is no additional space used.
 
-countSubarrays = function(nums, k) {
-    let numberSubarray = 0;
-    let maxElement = -Infinity;
-    for(let i=0;i<nums.length;i++){
-        if(nums[i] > maxElement){
-            maxElement = nums[i];
-        }
-    }
-
-    for(let i=0;i<nums.length;i++){
+var countSubarrays = function(nums, k) {
+    let maxElement = Math.max(...nums);
+    let subarrayCount = 0;
+    for(let i = 0; i < nums.length; i++){
         let count = 0;
-        for(let j=i;j<nums.length;j++){
+        for(let j = i; j < nums.length; j++){
             if(nums[j] === maxElement){
                 count++;
             }
+
             if(count >= k){
-                numberSubarray++;
+                subarrayCount++;
             }
         }
     }
 
-    return numberSubarray;
- }
+    return subarrayCount;
+};
 
 // Optimal approach: using sliding technique
 // approach:-
@@ -48,30 +43,26 @@ countSubarrays = function(nums, k) {
 // TC:- O(N),because each element is processed at most twice (once by `j` and once by `i`).
 // SC:- O(1), as there is no additional space used.
 
-countSubarrays = function (nums, k) {
-    let maxElement = -Infinity;
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] > maxElement) {
-            maxElement = nums[i];
-        }
-    }
-    let i = 0, j = 0, count = 0, numberSubarray = 0;
-    while (j < nums.length) {
-        if (nums[j] === maxElement) {
+var countSubarrays = function(nums, k) {
+    let maxElement = Math.max(...nums);
+    let subarrayCount = 0;
+    let start = 0, end = 0, count = 0;
+    while(end < nums.length){
+        if(nums[end] === maxElement){
             count++;
         }
 
-        while (count >= k) {
-            numberSubarray += nums.length - j;
-            if (nums[i] === maxElement) {
-                count--;
-            }
-            i++;
+        while(count >= k){
+         subarrayCount+= nums.length - end;
+         if(nums[start] === maxElement){
+            count--
+         }
+         start++;
         }
 
-        j++;
+        end++;
     }
 
-    return numberSubarray;
-}
+    return subarrayCount;
+};
 
