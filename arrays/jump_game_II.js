@@ -1,24 +1,19 @@
-// Leetcode Problme: 45
-// optimal approach:-
-// initialize 'jump' to keep track of the minimum number of jumps needed to reach the end.
-// 'farthest' tracks the farthest point that can be reached with the current number of jumps.
-// 'current' represents the farthest point that can be reached with the current jump count before needing to jump again.
-// iterate through the array from the first element to the second-to-last element (i < nums.length - 1), 
-// as we don't need to consider the last element because we are calculating the jumps needed to reach it.
-// in each iteration, update 'farthest' to be the maximum of its current value and the index 'i' plus the jump length from 'nums[i]'.
-// if the current index 'i' reaches 'current', it means we need to make a jump, so update 'current' to 'farthest' and increment 'jump'.
-// finally, return the total number of jumps needed to reach the end of the array.
-// TC:- O(N), in worst case we traverse the whole array.
-// SC:- O(1), as there is no additional space used.
+// Optimal Approach:-
+// i will take one variable `maxReach`, initialized to 0, which will keep track of the farthest position we can reach from the current position.
+// i will take two more variables: `currentReach`, which keeps track of the farthest position we can reach before making the next jump, and `jump`, which counts the number of jumps taken.
+// i will iterate through the array, and for each index `i`, I will update `maxReach` with the maximum between the current `maxReach` and the sum of the current index and the current iterated element.
+// if the curret index 'i' reaches 'currentReach', it means we need to make a jump, so update 'currentReach' with 'maxReach' and increment 'jump'.
+// TC: O(N), as we traverse the array once.
+// SC: O(1), as no additional space is used.
 
 var jump = function (nums) {
+    let maxReach = 0;
+    let currentReach = 0;
     let jump = 0;
-    let farthest = 0;
-    let current = 0;
     for (let i = 0; i < nums.length - 1; i++) {
-        farthest = Math.max(farthest, nums[i] + i);
-        if (i === current) {
-            current = farthest;
+        maxReach = Math.max(maxReach, i + nums[i]);
+        if(i === currentReach){
+            currentReach = maxReach;
             jump++;
         }
     }
