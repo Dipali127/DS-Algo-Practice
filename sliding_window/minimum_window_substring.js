@@ -1,114 +1,126 @@
 // Leetcode Problem:- 76
 // Brute force approach:
-// approach:-
-// consider all possible substring and for each substring store each character's frequency of string 't' into map.
-// and iterate through each substring to check if current substring character exist into map.
-// if it is then decrement that character frequency from map meanwhile check if map's all character's values are
-// zero. it means that current substring character contain all the characters of string 't'.
-// so, update the 'minWindow' and add current substring into 'subString'.
-// once, found the minimum window substring which contain all characters of string 't', return subString.
+// Approach:-
+// consider all possible substrings and for each substring, store each character's frequency of string 't' into a map.
+// iterate through each substring to check if the current substring contains all characters of string 't'.
+// if a character exists in the map, decrement its frequency.
+// meanwhile, check if all values in the map become zero, which means the current substring contains all characters of 't'.
+// Once we find such a substring, update 'minWin' and store the current substring in 'minSubstring'.
+// After finding the first valid substring, **break the inner loop** because there's no need to check further for this starting index.
+// Finally, return the minimum window substring that contains all characters of 't'.
 // TC:- O(N^2 * M), Explanation:-
-// O(N), to iterate through each starting index of the string 's' or to consider each possible substring.
-// O(N * M), for each possible substring, iterate through it and check if all characters of string 't' in the hash map become zero.
-// Overall TC:- O(N^2 * M)
-// SC:- O(N), to store the characters of string 't' in the map. 
+// O(N), to iterate through each starting index of the string 's' and consider each possible substring.
+// O(N * M), for each possible substring, iterate through it and check if all characters of 't' in the hash map become zero.
+// Overall TC:- O(N^2 * M).
+// SC:- O(M), to store the characters of string 't' in the map.
 
- var minWindow = function(string,t){
-    let minWindow = Infinity;
-    let subString='';
-    for(let i=0;i<string.length;i++){
+var minWindow = function(s, t) {
+    let minWin = Infinity, minSubstring = "";
+    
+    for(let i = 0; i < s.length; i++){
         let map = new Map();
-        for(let k=0;k<t.length;k++){
-            if(map.has(t[k])){
-                map.set(t[k],map.get(t[k])+1);
-            }else{
-                map.set(t[k],1);
-            }
+        
+        for(let j = 0; j < t.length; j++){
+            map.set(t[j], (map.get(t[j]) || 0) + 1);
         }
 
-        for(let j=i;j<string.length;j++){
-            if(map.has(string[j])){
-                map.set(string[j],map.get(string[j])-1);
+        for(let k = i; k < s.length; k++){
+            if(map.has(s[k])){
+                map.set(s[k], map.get(s[k])-1);
             }
 
             let flag = true;
             for(let val of map.values()){
-                if(val!=0){
+                if(val > 0){  
                     flag = false;
                     break;
                 }
             }
 
             if(flag){
-                minWindow = Math.min(minWindow,j-i+1);
-                subString = string.substring(i,j+1);
+                if(k - i + 1 < minWin){
+                    minWin = k - i + 1;
+                    minSubstring = s.substring(i, k + 1);
+                }
+                break;
             }
-
         }
     }
 
-    return subString !== ""?subString:"";
- }
-// optimal approach:
-// if the length of string s is less than the length of string t, there’s no need to proceed, as it’s impossible to find a substring of s that contains all characters of t.
-// i will use a sliding window technique with two pointers (start and end) and a hash map. This approach ensures all characters of string t are present in the current window of string s.
-// first, I store all characters of string t in a hash map along with their respective frequencies.
-// i will expand the window using end pointer and while iterating through the current window,
-// I check whether the character at the end pointer exists in the hash map. If it does, and its frequency in the map is greater than 0, I will decrement the requiredCount, as we need this character, and it's present in the current window. Regardless of whether the character’s frequency is greater than 0, I will decrement its frequency in the hash map.
-// meanwhile i will check if the requiredCount becomes zero, it means the current window contains all characters of string t. At this point, I calculate the minLength and update the minWindow if the current window size is smaller than the previously recorded minLength.
-// after this I will try to shrink the window from the left using the start pointer.
-// Before shrinking the window, I will check if the character pointed to by the start pointer exists in the hash map. If it does, it means this character is part of string t, and we need it. Therefore, I will increment its frequency in the hash map. If its frequency in the hash map becomes greater than 0 after incrementing, I will increment the requiredCount, as this character is required in future,after this increment the start pointer.
-// Once the requiredCount becomes greater than 0, stop the inner while loop and increment the end pointer to expand the window again.
-// Continue the process of expanding and shrinking the window until all characters of s are processed.
-// After processing all characters, return the minWindow substring, which represents the smallest substring containing all characters of t.
+    return minSubstring;
+};
+
+
+
+// optimal approach: using sliding window and two pointer
+// instead of using a new hash map for each substring, I will use a single hash map 
+// and store each character of string 't' along with its frequency.
+// i will use the sliding window technique with two pointers (start and end), 
+// initially both pointing to the start index of the window. 
+// additionally, I will take one variable 'requiredCount' equal to the length of string 't', 
+// which will help to find when all required characters are present in the window.
+// i will slide the window using the 'end' pointer and check if the current character 
+// at 'end' exists in the hash map. If it does, I will decrement 'requiredCount' 
+// since this character is needed and now exists in the current window.
+// Once 'requiredCount' reaches zero, it means I have found a valid window containing 
+// all characters of 't'. At this point, i will check if the previous minimum window 
+// is larger than the current window size. If it is, i will update 'minWin' and 
+// 'minSubstring' accordingly, then attempt to shrink the window.
+// Before shrinking the window, i will increment the frequency of the character 
+// pointed by 'start' in the hash map because it is not now part of the new window.
+// However, if this character's frequency in the hash map becomes greater than zero 
+// after incrementing, it means I need this character again, so I will increment 'requiredCount'.
+// This process continues until 'requiredCount' becomes greater than zero, at which point 
+// the shrinking stops, and the 'end' pointer continues expanding the window.
+// After processing all characters, return 'minSubstring', which represents the 
+// smallest substring containing all characters of 't'.
 // TC:- O(N), Explanation:-
-// O(m):- to iterate through string 't', where 'm' is the length of the string 't'.
-// O(N):- used by outer while loop to iterate through each character of string 's', where 'N' is the length of the string 's'.
-// O(N):- for the inner while loop to shrink the window.
+// O(m):- To iterate through string 't', where 'm' is the length of 't'.
+// O(N):- Used by the outer while loop to iterate through each character of string 's', 
+//        where 'N' is the length of 's'.
+// O(N):- Used by the inner while loop to shrink the window.
 // Both the 'start' and 'end' pointers iterate independently through the string 's' (not nested).
-// In the worst case, each character of 's' can be visited twice (once by the 'end' pointer and once by the 'start' pointer).
+// In the worst case, each character of 's' can be visited twice (once by the 'end' pointer 
+// and once by the 'start' pointer).
 // Overall TC:- O(N + N) = O(2N) = O(N).
-// SC:- O(m), to store each character of string 't' in the map, where 'm' is the length of the string 't'.
-
-var minWindow = function (s, t) {
-    if(t.length>s.length){
-        return "";
-    }
-    let i = 0, j = 0, minWindow = Infinity, substring = "";
-    let requiredCount = t.length, map = new Map();
-    for (let k = 0; k < t.length; k++) {
-        if (map.has(t[k])) {
-            map.set(t[k], map.get(t[k]) + 1);
-        } else {
-            map.set(t[k], 1);
+// SC:- O(m), to store each character of string 't' in the map, where 'm' is the length of 't'.
+ 
+var minWindow = function(s, t) {
+    let minWin = Infinity, minSubstring = ""
+    let requiredCount = t.length;
+    let map = new Map();
+    for(let i = 0; i < t.length; i++){
+        if(map.has(t[i])){
+            map.set(t[i], map.get(t[i])+1);
+        }else{
+            map.set(t[i], 1);
         }
     }
-    while (j < s.length) {
-        if (map.has(s[j]) && map.get(s[j]) > 0) {
+
+    let start = 0, end = 0;
+    while(end < s.length){
+        if(map.has(s[end]) && map.get(s[end]) > 0){
             requiredCount--;
         }
 
-        map.set(s[j], map.get(s[j]) - 1);
+        map.set(s[end], map.get(s[end]) - 1);
 
-        // once requiredCount is zero, it means we found the window where each characters of window are same as in map.
-        while (requiredCount === 0) {
-            if (minWindow > j-i+1) {
-                minWindow = j - i + 1;
-                substring = s.substring(i,j+1)
-            }
-            
-            map.set(s[i], map.get(s[i]) + 1);
-            
-            if(map.get(s[i])>0){
-                requiredCount++;
+        while(requiredCount === 0){
+            if(end - start + 1 < minWin){
+                minWin = end - start + 1;
+                minSubstring = s.substring(start, end+1);
             }
 
-            i++;
+            map.set(s[start], map.get(s[start])+1);
+           if(map.get(s[start]) > 0){
+            requiredCount++;
+           }
+
+           start++;
         }
 
-        j++;
+        end++;
     }
 
-    return minWindow === Infinity ?"" : substring;
-}
-
+    return minSubstring !== "" ? minSubstring : "";
+};

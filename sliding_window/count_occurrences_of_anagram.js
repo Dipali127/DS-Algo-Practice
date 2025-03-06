@@ -54,7 +54,7 @@ class Solution {
 // then decrement that character's count in the map.
 // once the window size is equal to the length of 'pat', check if all character counts in the map are zero.
 // if they are zero, it means we found the substring in string 'txt' which is an anagram of string 'pat'.
-// if an anagram is found, add the starting index of the current substring to the result array.
+// if an anagram is found, increment the count.
 // after that, shrink the current window. Before shrinking, check if the character pointed by pointer 'i' exists in the map.
 // if it does, increment its count in the map and then move the pointer 'i' to the right.
 // once all starting indices of substrings in string 'txt' which are anagrams of string 'pat' are found, return resultArray.
