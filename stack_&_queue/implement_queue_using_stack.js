@@ -1,16 +1,26 @@
 // Leetcode Problem 232: Implement Queue using Stacks
-// The task is to implement a queue using two stacks. 
-// we'll create a class 'myQueue' and define methods: push, pop, peek, and empty. 
-// first stack (stack1) will store elements as they come in, while the second stack (stack2) will perform operations 
-// to maintain queue-like behavior.
-// in the push method, we simply add the element to stack1, since adding element onto the stack and queue are same.
-// in the pop method, we move all elements from stack1 to stack2, pop the top of stack2 
-// (which give the front element of the queue), and then move everything back to stack1.
-// the peek method works similarly to pop, except it returns the front element without removing it.
-// the empty method checks whether stack1 is empty.
-// TC:- (1) O(1) - Adding an element to the queue using stack.
-//      (2) O(N) - Removing the front of the queue using stack.
-//      (3) O(N) - Returning the front of the queue using stack.
+// Optimal Approach:
+// To implement a queue using stacks, I have used two stacks.
+// stack1 stores the elements as they come, while stack2 is used to perform queue-like behavior.
+
+// push method:- Adding an element to a queue follows the same process as adding an element to a stack.
+// So, I will simply push the value into stack1.
+
+// pop method:- Removing an element from a stack is different from removing an element from a queue.
+// In a stack, we remove an element from the top (last element), whereas in a queue, we remove an element from the front.
+// So, to remove the front value of the queue using two stacks, I will first move all elements from stack1 to stack2,
+// pop the top element from stack2 (which represents the front of the queue), and then move the remaining elements back to stack1.
+
+// peek method:- Retrieving the front element of the queue is similar to the pop operation.
+// I will move all elements from stack1 to stack2, get the top element of stack2 (which represents the front of the queue),
+// push it back into stack2, and then move all elements back to stack1.
+
+// isEmpty:- Just check if stack1 is empty.
+// If stack1.length is 0, it means the queue is empty; otherwise, it is not empty.
+
+// TC:- (1) O(1) - Adding an element to the queue using a stack.
+//      (2) O(N) - Removing the front of the queue using a stack.
+//      (3) O(N) - Returning the front of the queue using a stack.
 //      (4) O(1) - Checking if the queue is empty.
 
 // MyStack is a constructor function in JavaScript. 
@@ -24,54 +34,57 @@
 // here, JavaScript object refers to the object created when we call new MyStack(). 
 // This object is an instance of the MyStack constructor function.
 
-class myQueue{
-    constructor(){
-      this.stack1 = [];
-      this.stack2 = [];
-    }
-    
-    push(x){
-      this.stack1.push(x);
-    }
-    
-    pop(){
-      while(this.stack1.length!==0){
-        this.stack2.push(this.stack1.pop());
-      }
-      
-      let poppedElement = this.stack2.pop()
-      while(this.stack2.length){
-        this.stack1.push(this.stack2.pop());
-      }
-      
-      return poppedElement;
-    }
-    
-    peek(){
-      while(this.stack1.length!==0){
-        this.stack2.push(this.stack1.pop());
-      }
-      
-      let topElement = this.stack2.pop()
-      this.stack2.push(topElement);
-      while(this.stack2.length){
-        this.stack1.push(this.stack2.pop());
-      }
-      
-      return topElement;
-    }
-    
-    empty(){
-      return this.stack1.length === 0;
-    }
+var MyQueue = function() {
+  this.stack1 = [];
+  this.stack2 = [];
+};
+
+/** 
+* @param {number} x
+* @return {void}
+*/
+MyQueue.prototype.push = function(x) {
+  this.stack1.push(x);
+};
+
+/**
+* @return {number}
+*/
+MyQueue.prototype.pop = function() {
+  while(this.stack1.length !== 0){
+      this.stack2.push(this.stack1.pop());
   }
-  
-  let obj = new myQueue();
-  obj.push(1);
-  obj.push(2);
-  obj.push(3);
-  console.log(obj);
-  console.log(obj.pop());
-  console.log(obj)
-  console.log(obj.peek());
-  console.log(obj);
+
+  let popVal = this.stack2.pop();
+
+  while(this.stack2.length){
+      this.stack1.push(this.stack2.pop());
+  }
+
+  return popVal;
+};
+
+/**
+* @return {number}
+*/
+MyQueue.prototype.peek = function() {
+  while(this.stack1.length !== 0){
+      this.stack2.push(this.stack1.pop());
+  }
+
+  let topVal = this.stack2.pop();
+  this.stack2.push(topVal);
+
+  while(this.stack2.length){
+      this.stack1.push(this.stack2.pop());
+  }
+
+  return topVal;
+};
+
+/**
+* @return {boolean}
+*/
+MyQueue.prototype.empty = function() {
+  return this.stack1.length === 0;
+};
