@@ -13,6 +13,17 @@
 //      (3) O(N) - Returning the front of the queue using stack.
 //      (4) O(1) - Checking if the queue is empty.
 
+// MyStack is a constructor function in JavaScript. 
+// When we create a new stack using new MyStack(), JavaScript automatically creates an object for it.
+// Instead of adding methods like push, pop, top, and empty directly to each new object, JavaScript adds them to 
+// MyStack. prototype.
+// This way, all stack objects share the same methods instead of each having its own copy, which saves memory. 
+// When we call a method on a stack object, JavaScript first looks for it in the object itself. If it’s not there,
+// it checks the prototype and finds the method there. This is how JavaScript allows multiple objects to use the same
+// methods efficiently.
+// here, JavaScript object refers to the object created when we call new MyStack(). 
+// This object is an instance of the MyStack constructor function.
+
 class myQueue{
     constructor(){
       this.stack1 = [];
