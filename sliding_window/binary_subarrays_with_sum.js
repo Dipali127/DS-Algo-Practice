@@ -39,13 +39,7 @@ var numSubarraysWithSum = function(nums, goal) {
 // TC: O(N), as we are iterating through the array only once.
 // SC: O(1), as we are using a constant amount of extra space.
 
-function slidingWindowAtmost(nums, goal) {
-    let countSubarray = 0, sum = 0, i = 0, j = 0;
-    while(j < nums.length) {
-        sum += nums[j];
- 
-
-//TC:O(N) AND SC:O(1) 
+  
 function slidingWindowAtmost(nums, goal) {
     let countSubarray = 0, sum = 0, i = 0, j = 0;
     while(j<nums.length) {
