@@ -8,6 +8,41 @@
 // - If two asteroids have the same size but opposite directions, both will explode.
 // - Two asteroids moving in the same direction will never collide.
 
+// Brute force approach:
+// approach:
+// I will iterate through the asteroids array, and for each asteroid, I will check its interaction with the adjacent asteroid to determine if a collision occurs.
+
+// Iterate through the asteroids array using a while loop.
+// Check for collisions between adjacent asteroids:
+// If asteroids[i] > 0 and asteroids[i + 1] < 0, a collision occurs.
+// To resolve the collision, compare the absolute values of both asteroids:
+// If |asteroids[i]| > |asteroids[i+1]|, the right asteroid (asteroids[i+1]) is destroyed, so I remove it using splice(i + 1, 1).
+// If |asteroids[i]| < |asteroids[i+1]|, the left asteroid (asteroids[i]) is destroyed, so I remove it using splice(i, 1). Since the removal might affect previous asteroids, I update i = Math.max(0, i - 1) to recheck the new adjacent asteroid.
+// If |asteroids[i]| === |asteroids[i+1]|, both asteroids destroy each other, so I remove them using splice(i, 2). Again, I move back by setting i = Math.max(0, i - 1).
+// Continue iterating through the list until all possible collisions are resolved.
+// TC:- O(N^2) , in the worst case, where every asteroid collides one by one, leading to repeated shifts of elements in the array due to splice().
+// SC:- O(1), since no additional space is used.
+
+var asteroidCollision = function(asteroids) {
+    let i = 0;
+    while (i < asteroids.length - 1) {
+        if (asteroids[i] > 0 && asteroids[i + 1] < 0) { 
+            if (Math.abs(asteroids[i]) > Math.abs(asteroids[i + 1])) {
+                asteroids.splice(i + 1, 1);
+            } else if (Math.abs(asteroids[i]) < Math.abs(asteroids[i + 1])) {
+                asteroids.splice(i, 1); 
+                i = Math.max(0, i - 1); 
+            } else {
+                asteroids.splice(i, 2); 
+                i = Math.max(0, i - 1); 
+            }
+        } else {
+            i++;
+        }
+    }
+    return asteroids;
+};
+
 // Optimal approach:
 // appraoch:-
 // use of a stack to track the asteroids that are moving to the right.
