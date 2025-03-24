@@ -17,7 +17,7 @@
 // If asteroids[i] > 0 and asteroids[i + 1] < 0, a collision occurs.
 // To resolve the collision, compare the absolute values of both asteroids:
 // If |asteroids[i]| > |asteroids[i+1]|, the right asteroid (asteroids[i+1]) is destroyed, so I remove it using splice(i + 1, 1).
-// If |asteroids[i]| < |asteroids[i+1]|, the left asteroid (asteroids[i]) is destroyed, so I remove it using splice(i, 1). Since the removal might affect previous asteroids, I update i = Math.max(0, i - 1) to recheck the new adjacent asteroid.
+// If |asteroids[i]| < |asteroids[i+1]|, the left asteroid (asteroids[i]) is destroyed, so I remove it using splice(i, 1). Since the removal might affect previous asteroids, I update i = Math.max(0, i - 1) to recheck the new adjacent asteroid and also not to intialise the iterator pointer with negative index.
 // If |asteroids[i]| === |asteroids[i+1]|, both asteroids destroy each other, so I remove them using splice(i, 2). Again, I move back by setting i = Math.max(0, i - 1).
 // Continue iterating through the list until all possible collisions are resolved.
 // TC:- O(N^2) , in the worst case, where every asteroid collides one by one, leading to repeated shifts of elements in the array due to splice().

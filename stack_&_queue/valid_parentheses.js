@@ -1,6 +1,7 @@
 // Optimal approach:-
 // approach:-
-// iterate through the given string and use of a stack to keep track of the expected closing parentheses. 
+// i will use of stack to store corresponding closing parenthesis of the opening parenthesis 
+// and I will iterate through the given string and 
 // while iterating the string, when encountering an opening parenthesis ('(', '{', or '['), push the corresponding closing parenthesis (')', '}', or ']') onto the stack.
 // while iterating the strig if you encounter the closing parenthesis (')', '}', or ']'), check if it matches the top character of the stack. 
 // if it does, pop the top of the stack element. 
@@ -37,4 +38,23 @@ var isValid = function (s) {
 
     return stack.length === 0;
 
+};
+
+
+//                                                  OR
+var isValid = function(s) {
+    let stack = [];
+    for(let i = 0; i < s.length; i++){
+        if(s[i] === '('){
+            stack.push(')');
+        }else if(s[i] === '{'){
+            stack.push('}')
+        }else if(s[i] === '['){
+            stack.push(']')
+        }else if(s[i] !== stack.pop()){
+            return false;
+        }
+    }
+
+    return stack.length === 0;
 };
