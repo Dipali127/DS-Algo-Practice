@@ -36,8 +36,12 @@ var containsNearbyDuplicate = function (arr, k) {
 // Continue this process until all elements are processed.
 
 // Time Complexity: O(N), where N is the length of the array, as each element is traversed once.
-// Space Complexity: O(min(N, k)), where N is the length of the array and 'k' is the window size.
-// The space used is proportional to the number of unique elements in the current window.
+// Space Complexity: O(min(N, k)), where N is the length of the array and k is the window size.
+// The hash map stores at most k unique elements at any given time because we remove the oldest element once 
+// the window size exceeds k.
+// In the worst case, when k ≥ N, the hash map could store up to N elements, making the space complexity O(N).
+// Otherwise, when k < N, the hash map stores at most k elements, leading to a space complexity of O(k).
+// Thus, the space complexity is O(min(N, k)).
 
 
 var containsNearbyDuplicate = function(nums, k) {
