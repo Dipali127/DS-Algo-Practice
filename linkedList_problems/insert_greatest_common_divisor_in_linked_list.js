@@ -1,57 +1,46 @@
-// Asked by Amazon
+// Asked by Amazon and google
 // Leetcode Problem:- 2807
-// Optimal Approach:
-// Approach:-
-// Base Case:- If head is null or head.next is null, return head because there is either no list or only one node.
-// otherwise, use a pointer 'current' which will point to the head of the linked list.
-// run a 'while loop' until 'current' is not null and 'current.next' is not null. 
-// for each pair of adjacent nodes ('current' and 'current.next'), calculate the 'GCD' of their values by calling the function 'GCD'.
-// create a new node with the calculated GCD value and insert this new node between 'current' and 'current.next'.
-// after inserting, move the 'current' pointer to the node after the newly inserted GCD node.
-// TC:- O(N * log(min(a, b))), Explanation:-
-// O(N):- to traverse each node of the linked list.
-// O(LOG(min(a,b))):- to compute the GCD of each pair of nodes..
-// SO, overall TC:- O(N) * O(LOG(min(a,b))), as for each node of linked list, we call the 'GCD function'.
-// SC:- O(min(a,b)), due to the recursion stack used by the GCD function.
+// Approach:
+// - Base Case: If head is null or head.next is null, return head because the list is either empty or has only one node.
+// - Otherwise, use two pointers: 'prev' pointing to the head and 'temp' pointing to the next node.
+// - Run a while loop until 'temp' is not null.
+// - For each pair of adjacent nodes ('prev' and 'temp'), calculate the GCD of their values using the function 'gcd'.
+// - Create a new node with the calculated GCD value and insert it between 'prev' and 'temp'.
+// - After inserting the GCD node, move 'prev' to 'temp' and 'temp' to the next node.
+// Time Complexity: O(N * log(min(a, b)))
+// - O(N): Traversing each node of the linked list.
+// - O(log(min(a, b))): Computing the GCD of each pair of adjacent nodes.
+// - Thus, the overall time complexity is O(N * log(min(a, b))).
+// Space Complexity: O(1)
+// - The iterative GCD function does not use extra space beyond a few variables.
+// - If the GCD function were implemented recursively, the space complexity would be O(log(min(a, b))) due to recursion stack usage.
 
-var insertGreatestCommonDivisors = function (head) {
-    if (head === null || head.next === null) {
+
+var insertGreatestCommonDivisors = function(head) {
+    if(head === null || head.next === null){
         return head;
     }
 
-    let current = head;
-
-    // Traverse the list until the second-last node
-    while (current !== null && current.next !== null) {
-        let v1 = current.val;
-        let v2 = current.next.val;
-
-        // Calculate GCD of current node value and next node value
-        let gcd = GCD(v1, v2);
-
-        // Create a new node with the GCD value
-        let gcdNode = new ListNode(gcd);
-
-        // Insert the GCD node between current and current.next
-        gcdNode.next = current.next;
-        current.next = gcdNode;
-
-        // Move current to the node after the inserted GCD node
-        current = gcdNode.next;
+    let prev = head;
+    let temp = head.next;
+    while(temp !== null){
+        let gcdVal = gcd(prev.val, temp.val);
+        let gcdNode = new ListNode(gcdVal);
+        prev.next = gcdNode;
+        gcdNode.next = temp;
+        prev = temp;
+        temp = temp.next;
     }
 
     return head;
-
-    // Helper function to calculate GCD using Euclidean algorithm
-    function GCD(a, b) {
-        if(a === b){
-            return a;
-        }
-
-        if(a > b){
-            return GCD(a - b, b);
-        }else{
-            return GCD(a, b - a);
-        }
-    }
 };
+
+function gcd(a,b){
+    while(b !== 0){
+        let temp = b;
+        b = a % b;
+        a = temp;
+    }
+
+    return a;
+}
