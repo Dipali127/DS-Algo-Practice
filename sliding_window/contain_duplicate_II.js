@@ -23,16 +23,13 @@ var containsNearbyDuplicate = function (arr, k) {
 // I will use a sliding window and a hash map to optimize the solution where, 
 // sliding window will always contain at most 'k' elements And hash map will store the current iterated value with its
 // index, which helps in detecting duplicates efficiently. 
-
 // While iterating through the given array, i will check if the current value at 'nums[end]' is already present in 
 // the hash map; if it is, compare the distance between the current index 'end' and the index stored in the hash map.
 // but if the distance is less than or equal to 'k', return true (since a duplicate exists within the required range).
 // Otherwise, update the hash map with the current index 'end' of 'nums[end]'.
-
 // To maintain the window size, if the window exceeds 'k' elements:
 //  - Move the pointer 'start' to the right.
 //  - Remove 'nums[start]' from the hash map to ensure only 'k' recent elements are stored.
-
 // Continue this process until all elements are processed.
 
 // Time Complexity: O(N), where N is the length of the array, as each element is traversed once.
@@ -42,7 +39,6 @@ var containsNearbyDuplicate = function (arr, k) {
 // In the worst case, when k ≥ N, the hash map could store up to N elements, making the space complexity O(N).
 // Otherwise, when k < N, the hash map stores at most k elements, leading to a space complexity of O(k).
 // Thus, the space complexity is O(min(N, k)).
-
 
 var containsNearbyDuplicate = function(nums, k) {
     let map = new Map();

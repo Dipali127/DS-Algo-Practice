@@ -30,7 +30,7 @@ var numberOfSubarrays = function (nums, k) {
 // approach:-
 // take few variabels such as:- oddCount, prevCount and niceSubarray, all are initialised with zero where ,
 // - oddCount is used to count the number of odd numbers from the current subarray. 
-// - prevCount tracks the number of valid subarrays ending at index j that contain exactly k odd numbers.
+// - prevCount tracks the number of valid subarrays ending at index j that contain exactly k odd numbers from current window.
 // - niceSubarray accumulates the total count of valid subarrays (with exactly k odd numbers) from the array nums.
 // extend the window by moving pointer 'j' toward right meanwhile check if value at pointer 'j' is odd. if it is
 // then increment the oddCount and make prevCount is zero which indicates the start of new subarrays with exactly k odd numbers.
@@ -78,25 +78,26 @@ var numberOfSubarrays = function(nums, k) {
 
 
 // Optimal Approach2: Using Sliding Window and Two Pointer
-// Instead of solving using a brute force approach which uses a time complexity of O(N²), I will use sliding window with a two-way calling method, where I will:
-// 1. Call the sliding window function first with at most k odd numbers, which includes subarrays with count 0, 1, 2, ..., up to k.
-// 2. Call the sliding window function again with at most k-1 odd numbers, which includes subarrays with count 0, 1, 2, ..., up to k-1.
-// 3. Subtracting findCount(nums, k) with findCount(nums, k-1) eliminates all common subarrays between both counts, leaving only the count of subarrays with exactly k odd numbers.
+// Instead of solving using a brute force approach which uses a time complexity of O(N²), I will use sliding window
+//  with a two-way calling method, where I will:
+//  Call the sliding window function first with at most k odd numbers, which includes subarrays with count 0, 1, 2, ..., up to k.
+// and then Call the sliding window function again with at most k-1 odd numbers, which includes subarrays with count 0, 1, 2, ..., up to k-1.
+// Subtracting findCount(nums, k) with findCount(nums, k-1) eliminates all common subarrays between both counts, 
+// leaving only the count of subarrays with exactly k odd numbers.
 
 // Inside findCount(nums, k):
 // - I will use two pointers, start and end, both initialized at 0, which point to the starting index of the window.
 // - A variable count is initialized to 0 to keep track of the number of nice subarrays ending at index end.
-
 // While iterating through the array nums, I will check:
 // - If the value pointed by end is odd, decrement k.
-// - If k becomes negative, it means the window has exceeded the allowed k odd numbers, so I will move start forward until k is valid again.
-// - If the value at start is odd, increment k since we are removing an odd number from the window.
-// - After adjusting the window, add (end - start + 1) to count, representing all valid subarrays ending at end.
+// - If k becomes negative, it means the window has exceeded the allowed k odd numbers, so I will shrink the window but before shrinking it
+// i will check if value pointer by start pointer is odd then increment k by 1 since it is no longer part of the new window 
+// otheriwise just increment start.
+// - And always add (end - start + 1) to count variable which represent all valid subarrays ending at end.
 // - Continue expanding the window by moving end forward.
 
-// Time Complexity:
-// - O(N): Since each element is processed at most twice (once by end expanding the window and once by start shrinking the window).
-// - O(1) Space: No extra space is used, only a few integer variables.
+// Time Complexity:-O(N), Since each element is processed at most twice (once by end expanding the window and once by start shrinking the window).
+// Space Complexity:- O(1), Since no additional space is used, only a few integer variables.
 
 var numberOfSubarrays = function(nums, k){
   return findCount(nums, k) - findCount(nums, k-1);
