@@ -26,12 +26,11 @@ var numSubarraysWithSum = function(nums, goal) {
 };
 
 // Optimal approach: Using Sliding Window with two-way calling
-// Instead of solving using a brute force approach which uses a time complexity of O(N²), 
+// instead of solving using a brute force approach which uses a time complexity of O(N²), 
 // I will use a sliding window with a two-way calling method, where I will:
-
-// 1. Call the slidingWindowAtmost function first with at most 'goal' sum, 
+// Call the slidingWindowAtmost function first with at most 'goal' sum, 
 //    which includes subarrays with sum 0, 1, 2, ..., up to 'goal'.
-// 2. Call the slidingWindowAtmost function again with at most 'goal - 1' sum, 
+// and then Call the slidingWindowAtmost function again with at most 'goal - 1' sum, 
 //    which includes subarrays with sum 0, 1, 2, ..., up to 'goal - 1'.
 // 3. Subtracting slidingWindowAtmost(nums, goal) from slidingWindowAtmost(nums, goal - 1) 
 //    eliminates all common subarrays between both counts, leaving only the count of subarrays 
@@ -43,22 +42,15 @@ var numSubarraysWithSum = function(nums, goal) {
 // - A variable countSubarray is initialized to 0 to keep track of the number of valid subarrays 
 //   ending at index 'j'.
 // - A variable sum is used to keep track of the current sum of the sliding window.
-
-// While iterating through the array 'nums', I will check:
-// - Add the value at index 'j' to sum.
-// - If sum exceeds goal, move 'i' forward while subtracting nums[i] from sum 
-//   until the window sum is at most goal.
+// While iterating through the array 'nums', I will add the value at index 'j' to sum.
+// - If sum exceeds goal, move 'i' forward while subtracting nums[i] from sum until the window sum is at most goal.
 // - After adjusting the window, add (j - i + 1) to countSubarray, representing all valid subarrays ending at 'j'.
 // - Continue expanding the window by moving 'j' forward.
-
-// Time Complexity:
-// - O(N): Since each element is processed at most twice (once by 'j' expanding the window 
+// TC:- O(N), Since each element is processed at most twice (once by 'j' expanding the window 
 //   and once by 'i' shrinking the window).
-// - O(1) Space: No extra space is used, only a few integer variables.
+// SC:- O(1) Since no extra space is used, only a few integer variables.
 
 
-
-  
 function slidingWindowAtmost(nums, goal) {
     let countSubarray = 0, sum = 0, i = 0, j = 0;
     while(j<nums.length) {
