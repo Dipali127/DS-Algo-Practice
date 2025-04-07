@@ -49,10 +49,13 @@ var maxSubarrayLength = function (nums, k) {
 
 // Optimal approach:
 // approach:-
-// Extend the window by moving pointer `j` to the right, and store the frequency of the current subarray elements in the hash map.
+// Extend the window by moving pointer `j` to the right, and store the frequency of the current subarray
+// elements in the hash map.
 // While storing the frequency, if the current subarray element exceeds `k`, shrink the window 
 // from the left until the condition is satisfied again (i.e., the frequency of the element becomes 
-// less than or equal to `k`). Before shrinking the window, remove that current subarray element from the hash map and increment pointer `i`.
+// less than or equal to `k`).
+// Before shrinking the window, remove that current subarray element from the hash map since the element pointed 
+// by 'i' pointer in no longer part of the new window and increment pointer `i`.
 // Continue the above process until pointer `j` reaches the end of the array `nums`.
 // After checking all possible subarrays, return the lengthOflongestSubarray.
 

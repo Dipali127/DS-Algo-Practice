@@ -6,10 +6,15 @@
 // Brute force approach:-
 // Approach:-
 
-// I will take one variable `maxFruits`, which is initially initialized to 0, to keep track of the maximum number of fruits we can pick up in the basket.
-// I will consider each possible subtree (subarray), and for each subtree (subarray), I will store the fruit in a hash map.
-// While storing the fruits in the hash map, I will check if the hash map length is greater than two. If it is, I will break that subtree (subarray).
-// Otherwise, I will increment the count since I have added a fruit to the hash map (Note: count will be incremented even if you are increasing that fruit's frequency, but it does not exceed more than two unique fruits).
+// I will take one variable `maxFruits`, which is initially initialized to 0, to keep track of the maximum number
+//  of fruits we can pick up in the basket.
+// I will consider each possible subtree (subarray), and for each subtree (subarray),
+//  I will store the fruit in a hash map.
+// While storing the fruits in the hash map, I will check if the hash map length is greater than two.
+//  If it is, I will break that subtree (subarray).
+// Otherwise, I will increment the count since I have added a fruit to the hash map 
+// (Note: count will be incremented even if you are increasing that fruit's frequency, but it does not exceed more than 
+// two unique fruits).
 // Also, I will update `maxFruits` with the current count of fruits in the subtree.
 // Finally, after finding `maxFruits`, which contains the maximum number of fruits in the subtree, I will return it.
 
@@ -53,7 +58,7 @@ var totalFruit = function(fruits){
 
 var totalFruit = function (fruits) {
     let maxFruits = 0;
-    let start = 0, end = 0, count = 0;
+    let start = 0, end = 0;
     let map = new Map();
     while (end < fruits.length) {
         if (map.has(fruits[end])) {
