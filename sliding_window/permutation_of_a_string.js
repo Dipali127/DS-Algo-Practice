@@ -53,16 +53,18 @@ var checkInclusion = function(s1, s2) {
 
 // Optimal Approach:
 // approach:
-// first store all the characters of string s1 in map.
+// first store all the characters of string s1 in hash map.
 // extend the window using pointer 'end' and check if the currect window characters exist in hash map then reduce their
-// frequency by 1 then check if the current window's characters frequency becomes zero. if it it means current
+// frequency by 1 then check if the current window's length is equal to s1.length, if it is then check that
+// all the character's frequency for current substring of s2 in hash map becomes zero. if it is, it means current
 // window substring is permutation of string s1 .
 // but if not then current window substring is not a permutation of string s1 then shrink the window from left to find 
-// the permutation of string s1 but before shrinking the window check first that if the current window left value
-// is in hahs map then increment its frequency as it not a part of a new window and we dont need it now.
+// the new window of permutation of string s1 but before shrinking the window check first that if the current window left value
+// exist in hash map then increment its frequency since that character is not a part of a new window and we dont need it.
 // once find the permutation string return true otherwise return false.
 // TC:- O(N), as this approach(sliding window) traverse each characters of both string once.
 // SC:- O(N), to store each characters of string s1 into map.
+// Note:- here, i am only maintaining the window size of 2, once window size 2 found i slide the window to get a new window
 
 var checkInclusion = function (s1, s2) {
     let start = 0, end = 0, map = new Map();

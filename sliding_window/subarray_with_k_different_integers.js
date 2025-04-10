@@ -37,52 +37,53 @@ var subarraysWithKDistinct = function (nums, k) {
 
 // Optimal approach: using sliding window
 // approach:
-// to find the number of subarrays where the number of unique elements is exactly 'k', we call the slidingWinodw helper function twice,
+// to find the number of subarrays where the number of unique elements is exactly 'k', we call the slidingWindow helper function twice,
 // - first, to get the count of subarrays with at most 'k' distinct elements which will return all the subarray of count equal to 0, 1, .. upto k.
 // - second, to get the count of subarrays with at most 'k-1' distinct elements which will return all the subarray of count equal to 0, 1, .. upto k-1.
 // the difference between these two counts gives the number of subarrays with exactly 'k' distinct elements and eliminate all the other subarray.
 
 // Inside slidingWindow function:
-// use two pointers 'i' and 'j' to represent the current window's start and end indices, respectively.
+// use two pointers 'start' and 'end' to represent the current window's start and end indices, respectively.
 // use a ' hash map' to store the frequency of elements within the current window.
-// extend the window by moving pointer 'j' to the right and updating the hash map with the frequency of 'nums[j]'.
+// extend the window by moving pointer 'end' to the right and updating the hash map with the frequency of 'nums[end]'.
 // if the size of the map (i.e., the number of distinct elements in the current window) becomes greater than 'k',
-// shrink the window from the left by moving pointer 'i' to the right, decrementing the frequency of 'nums[i]',
-// and removing it from the map if its frequency becomes zero.
-// for each position of 'j', add 'j - i + 1' to 'count', which represents the number of subarrays ending at 'j'
+// shrink the window from the left by moving pointer 'start' to the right, decrementing the frequency of 'nums[start]',
+// and removing it from the hash map if its frequency becomes zero.
+// for each position of 'end', add 'end - start + 1' to 'count', which represents the number of subarrays ending at 'end'
 // with at most 'k' distinct elements.
 // finally, return the difference between 'slidingWindow(nums, k)' and 'slidingWindow(nums, k - 1)', which gives 
 // the total number of subarrays with exactly 'k' distinct elements.
-// TC: O(N), since each element is added and removed from the map at most once.
-// SC: O(N), due to the map that can contain up to 'N' elements in the worst case.
+// TC: O(N), since each element is added and removed from the hash map at most once.
+// SC: O(N), due to the hash map that can contain up to 'N' elements in the worst case.
 
 var subarraysWithKDistinct = function (nums, k) {
-
-    return slidingWindow(nums, k) - slidingWindow(nums, k - 1)
-    //return total count of subarrays having <=k distinct elements
+    return slidingWindow(nums, k) - slidingWindow(nums, k - 1);
     function slidingWindow(nums, k) {
-        let map = new Map;
-        let i = 0, j = 0, count = 0;
-        while (j < nums.length) {
-            if (!map.has(nums[j])) {
-                map.set(nums[j], 1)
+        let goodSubarray = 0;
+        let start = 0, end = 0, map = new Map();
+        while (end < nums.length) {
+            if (map.has(nums[end])) {
+                map.set(nums[end], map.get(nums[end]) + 1);
             } else {
-                map.set(nums[j], map.get(nums[j]) + 1);
+                map.set(nums[end], 1);
             }
-            //until map size is greater than k shrink the window from left side.
+
             while (map.size > k) {
-                map.set(nums[i], map.get(nums[i]) - 1);
-                if (map.get(nums[i]) == 0) {
-                    map.delete(nums[i]);
+                if (map.has(nums[start])) {
+                    map.set(nums[start], map.get(nums[start]) - 1);
                 }
-                i++;
+                if (map.get(nums[start]) === 0) {
+                    map.delete(nums[start]);
+                }
+
+                start++;
             }
-            //give all the subarrays ending at j.
-            count += j - i + 1;
-            j++;
+
+            goodSubarray += end - start + 1;
+            end++;
         }
 
-        return count;
+        return goodSubarray;
     }
-};
+}
 
