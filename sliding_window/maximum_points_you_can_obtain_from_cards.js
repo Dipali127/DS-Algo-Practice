@@ -14,7 +14,8 @@
 // (1) Take no cards from the beginning (`leftSum = 0`) and take all `k` cards from the end (`rightSum = sum of last k cards`).  
 // (2) Take some cards from the beginning and the remaining from the end.  
 // (3) Take all `k` cards from the beginning (`leftSum = sum of first k cards`) and none from the end (`rightSum = 0`).  
-// I will iterate through all possible combinations and update `maxSum` accordingly cards and return it once after iterating through k cards from begining and end of the cardPoints array.
+// I will iterate through all possible combinations and update `maxSum` accordingly cards and return it once after
+// iterating through k cards from begining and end of the cardPoints array.
 // TC: O(k²), since we are iterating through `k` possible cards, and for each card, we calculate the sum of up to `k` elements.  
 // The worst-case time complexity is **O(k²)** when `k == N`.  
 // SC: O(1), since no additional space is used apart from a few variables.  
@@ -43,7 +44,8 @@ var maxScore = function(cardPoints, k) {
 
 // Optimal Approach:
 // instead of directly picking k cards from the beginning or end, which increases time complexity to O(k²) in the worst case,
-// i realized that picking k cards is the same as removing n - k consecutive cards from the middle (to the left), because the remaining sum would be our maximum possible score.
+// i realized that picking k cards is the same as removing n - k consecutive cards from the middle (to the left),
+// because the remaining sum would be our maximum possible score.
 // To efficiently find the smallest sum of n - k elements, I will use of the sliding window technique:
 //  - First, I will calculate the total sum of the array.
 //  - Then, I will compute the sum of the first n - k elements (this is our initial window).

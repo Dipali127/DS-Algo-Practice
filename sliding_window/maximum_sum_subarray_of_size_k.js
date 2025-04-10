@@ -37,7 +37,7 @@ class Solution {
         let start = 0, end = 0, sum = 0;
         while(end<arr.length){
             sum+= arr[end];
-            if(end - start+1 === k){
+            if(end - start + 1 === k){
                 maxSum = Math.max(maxSum, sum);
                 sum-= arr[start++];
             }

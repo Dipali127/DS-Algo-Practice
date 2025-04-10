@@ -39,6 +39,7 @@ var numSubarrayProductLessThanK = function (nums, k) {
     if (k <= 1) {
         return 0;
     }
+
     let prod = 1, count = 0, i = 0, j = 0;
     while (j < nums.length) {
         prod *= nums[j];
@@ -48,6 +49,7 @@ var numSubarrayProductLessThanK = function (nums, k) {
         }
 
         count += j - i + 1;
+        j++;
     }
 
     return count;

@@ -1,5 +1,4 @@
 // Leetcode Problem:- 209
-// Leetcode Problem:- 209
 // Brute force approach:
 // approach:-
 // consider each possible subarray and calculate the sum for each subarray meanwhile check that sum is 
@@ -45,7 +44,7 @@ var minSubArrayLen = function(target, nums) {
 // after iterating through all possible subarrays, return `minLength` if a valid subarray was found. 
 // if no such subarray is found, return 0.
 // TC: O(N), as the array 'nums' is traversed once using pointers 'i' and 'j'.
-// SC: O(1), as there is no additional space used apart from a few variables.
+// SC: O(1), since there is no additional space used apart from a few variables.
 
 var minSubArrayLen = function (target, nums) {
     let start = 0, end = 0;

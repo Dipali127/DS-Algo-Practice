@@ -138,7 +138,7 @@ function findWindowsize(arr2,Sum){
     return maxWindow;
 }
 
-// (2) Pattern Third:- Number of subarray where <condition>. 
+// (3) Pattern Third:- Number of subarray where <condition>. 
 // Problem :- find the number of subarrays with sum equal to k.
 // approach:- (find number of subarrays where sum <= k) - (find number of subarrays where sum <= (k-1))
 // these kind of problem can be solved with the help of second type of problem's solution.

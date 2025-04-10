@@ -1,17 +1,18 @@
 // Leetcode Problem:- 992
 // Brute force approach:-
 // approach:-
-// consider all possible subarrays and, for each subarray, store the frequency of its elements in a map. 
-// for each subarray, we check if the map's size (i.e., the number of distinct elements) is equal to 'k'. 
+// consider all possible subarrays and, for each subarray, store the frequency of its elements in a hash map. 
+// And for each subarray, we check if the map's size (i.e., the number of distinct elements) is equal to 'k'. 
 // if the map's size is equal to 'k', it means the subarray has exactly 'k' distinct elements, so we 
 // increment the `totalSubarray` count.
 // after considering all possible subarrays, we return the total number of subarrays where the number 
 // of distinct elements is exactly 'k'. 
 // TC: O(N^2), Explanation:-
 // O(N) to iterate through the starting index of each subarray.
-// O(N) to iterate through the ending index of each subarray (in the inner loop) and update the map.
+// O(N) to iterate through all the elements of the current subarray to store their frequency in hash map and in worst case
+// it might possible that inner loop iterate through each characte of the given string.
 // Overall TC: O(N) * O(N) = O(N^2).
-// SC: O(N), as there is a use of map to store the frequency of elements of each subarray, and in the 
+// SC: O(N), as there is a use of hash map to store the frequency of elements of each subarray, and in the 
 // worst case, the map can contain up to 'N' elements.
 
 var subarraysWithKDistinct = function (nums, k) {
@@ -36,18 +37,15 @@ var subarraysWithKDistinct = function (nums, k) {
 
 // Optimal approach: using sliding window
 // approach:
-// to find the number of subarrays where the number of unique elements is exactly 'k', we first calculate the number of subarrays
-// where the number of unique elements is less than or equal to 'k', and then subtract the number of subarrays where the number of
-// unique elements is less than 'k'. the difference gives the number of subarrays with exactly 'k' unique elements.
-// in the below code, we define a helper function 'slidingWindow' that calculates the number of subarrays with at most 'k' distinct elements, it 
-// means we call the 'slidingWindow' function twice:
-// - first, to get the count of subarrays with at most 'k' distinct elements.
-// - second, to get the count of subarrays with at most 'k-1' distinct elements.
-// the difference between these two counts gives the number of subarrays with exactly 'k' distinct elements.
+// to find the number of subarrays where the number of unique elements is exactly 'k', we call the slidingWinodw helper function twice,
+// - first, to get the count of subarrays with at most 'k' distinct elements which will return all the subarray of count equal to 0, 1, .. upto k.
+// - second, to get the count of subarrays with at most 'k-1' distinct elements which will return all the subarray of count equal to 0, 1, .. upto k-1.
+// the difference between these two counts gives the number of subarrays with exactly 'k' distinct elements and eliminate all the other subarray.
 
+// Inside slidingWindow function:
 // use two pointers 'i' and 'j' to represent the current window's start and end indices, respectively.
-// use a 'map' to store the frequency of elements within the current window.
-// extend the window by moving pointer 'j' to the right and updating the map with the frequency of 'nums[j]'.
+// use a ' hash map' to store the frequency of elements within the current window.
+// extend the window by moving pointer 'j' to the right and updating the hash map with the frequency of 'nums[j]'.
 // if the size of the map (i.e., the number of distinct elements in the current window) becomes greater than 'k',
 // shrink the window from the left by moving pointer 'i' to the right, decrementing the frequency of 'nums[i]',
 // and removing it from the map if its frequency becomes zero.

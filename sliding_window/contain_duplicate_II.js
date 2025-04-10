@@ -29,7 +29,7 @@ var containsNearbyDuplicate = function (arr, k) {
 // Otherwise, update the hash map with the current index 'end' of 'nums[end]'.
 // To maintain the window size, if the window exceeds 'k' elements:
 //  - Move the pointer 'start' to the right.
-//  - Remove 'nums[start]' from the hash map to ensure only 'k' recent elements are stored.
+//  - Remove 'nums[start]' from the hash map to ensure only 'k' recent elements are stored in the hash map.
 // Continue this process until all elements are processed.
 
 // Time Complexity: O(N), where N is the length of the array, as each element is traversed once.

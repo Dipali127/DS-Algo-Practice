@@ -37,11 +37,14 @@ var countSubarrays = function(nums, k) {
 // if the count of `maxElement` in the current window is greater than or equal to `k`, 
 // increment the `numberSubarray` by (nums.length - j), which gives exact number of subarrays ending at or after `j`.
 // before shrinking the window toward right by using pointer 'i',
-// check if the element at `i` is equal to `maxElement`. if it is, decrement the count of `maxElement` and move `i` to the right.
-// continue this process until all subarrays are checked.
+// check if the element at `i` is equal to `maxElement`. if it is, decrement the count of `maxElement` and move `i` to the 
+// right and again in the shrinked window check that count is greater than equal to k continue this process until all subarrays are checked.
 // once find all the subarray where the maxElmenet count is atleast k times then return numberSubarray.
 // TC:- O(N),because each element is processed at most twice (once by `j` and once by `i`).
 // SC:- O(1), as there is no additional space used.
+// Note:- the 'nums.length - end will count the number of subarray ending at index 'end' or after 'end' or 
+// In other words, once the window [start...end] is valid (i.e., it contains k or more max elements), any extension of that
+// subarray ending beyond end is also valid — because adding more elements can’t remove the already counted max elements. 
 
 var countSubarrays = function(nums, k) {
     let maxElement = Math.max(...nums);

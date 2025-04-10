@@ -87,38 +87,41 @@ var numberOfSubarrays = function(nums, k) {
 
 // Inside findCount(nums, k):
 // - I will use two pointers, start and end, both initialized at 0, which point to the starting index of the window.
-// - A variable count is initialized to 0 to keep track of the number of nice subarrays ending at index end.
+// - I will also declare two variables: oddCount and niceSubarray, both initialized to 0. 
+//   oddCount keeps track of the number of odd numbers found in the current window,
+//   and niceSubarray keeps track of all the valid subarrays ending at index 'end'.
 // While iterating through the array nums, I will check:
-// - If the value pointed by end is odd, decrement k.
-// - If k becomes negative, it means the window has exceeded the allowed k odd numbers, so I will shrink the window but before shrinking it
-// i will check if value pointer by start pointer is odd then increment k by 1 since it is no longer part of the new window 
-// otheriwise just increment start.
-// - And always add (end - start + 1) to count variable which represent all valid subarrays ending at end.
-// - Continue expanding the window by moving end forward.
+// - If the value pointed to by 'end' is odd, increment the oddCount variable by 1.
+// - Once the oddCount is greater than k, shrink the window. But before shrinking the window, 
+//   check if the value pointed to by the 'start' pointer is odd. If it is, decrement oddCount 
+//   since that number is no longer part of the new window. Otherwise, just increment the 'start' pointer.
+// - Always add (end - start + 1) to the niceSubarray variable, which represents all valid subarrays ending at index 'end'.
+// - Continue expanding the window by moving 'end' forward.
 
-// Time Complexity:-O(N), Since each element is processed at most twice (once by end expanding the window and once by start shrinking the window).
-// Space Complexity:- O(1), Since no additional space is used, only a few integer variables.
+// Time Complexity: O(N), since each element is processed at most twice (once when 'end' expands the window and once when 'start' shrinks it).
+// Space Complexity: O(1), since no additional space is used, only a few integer variables.
+
 
 var numberOfSubarrays = function(nums, k){
   return findCount(nums, k) - findCount(nums, k-1);
   function findCount(nums, k){
-      let start = 0, end = 0, count = 0;
+      let start = 0, end = 0, niceSubarray = 0, oddCount = 0;
       while(end < nums.length){
           if(nums[end] % 2 !== 0){
-              k--;
+              oddCount++;
           }
 
-          while(k < 0){
+          while(oddCount > k){
               if(nums[start] % 2 !== 0){
-                  k++;
+                  oddCount--;
               }
               start++;
           }
           
-          count+= end - start + 1;
+          niceSubarray+= end - start + 1;
           end++;
       }
 
-      return count;
+      return niceSubarray;
   }
 }
