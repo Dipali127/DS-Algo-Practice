@@ -40,12 +40,14 @@ var searchInsert = function (nums, target) {
   // Optimal Approach:
   // approach:-
   // initialize two pointers:- low (starting at 0) and high (starting at nums.length - 1).
-  // calculate the middle index, mid, using the formula: mid = Math.floor(low + (high - low) / 2). This avoids potential overflow that could occur when using (low + high) / 2 in some languages.
+  // calculate the middle index, mid, using the formula: mid = Math.floor(low + (high - low) / 2). This avoids potential 
+  // overflow that could occur when using (low + high) / 2 in some languages.
   // if nums[mid] is equal to target, return mid because the target is found.
-  // else if nums[mid] is less than target, set low = mid + 1 to search the right half of the array (since the target must be in the higher part).
+  // else if nums[mid] is less than target, set low = mid + 1 to search the right half of the array (since target must be in the higher half).
   // else, set high = mid - 1 to search the left half of the array (since the target must be in the lower part).
   // continue the loop until low exceeds high.
-  // if the loop ends without finding the target, return low because it represents the position where the target should be inserted to maintain the sorted order.
+  // if the loop ends without finding the target, return low because it represents the position where the target should
+  //  be inserted to maintain the sorted order.
   // TC:- O(LOGN), as we either search in left or right part of the array. 
   // SC:- O(1), since no additional space is used apart from few pointers. 
   

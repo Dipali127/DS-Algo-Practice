@@ -6,7 +6,8 @@
 // If the array has only two elements, compare the first and second elements:-
 //     - check if the first element is a peak by comparing it with the second element. If nums[0] > nums[1], return 0.
 //     - check if the last element is a peak by comparing it with the second-to-last element. If nums[n-1] > nums[n-2], return n-1.
-// for all other elements (from index 1 to n-2), use a loop to iterate through the array and check if the current element is a peak by comparing it with both its neighbors:
+// for all other elements (from index 1 to n-2), use a loop to iterate through the array and check if the current element is a 
+// peak by comparing it with both its neighbors:
 // if nums[i] is greater than or equal to both nums[i-1] and nums[i+1], return i as the peak index.
 // if no peak element is found after checking all elements, return 0 as a default, assuming that the first element is the peak.
 // TC:- O(N), since we are iterating through the entire array to find the peak.
@@ -40,17 +41,15 @@ var findPeakElement = function (nums) {
 // O(1), as no additional space is used other than the variables for pointers.
 
 var findPeakElement = function(nums) {
-  let low =0;
-  let high = nums.length-1;
-  let mid;
-  while(low<high){
-    mid = Math.floor(low+(high-low)/2);
-    if(nums[mid]<nums[mid+1]){
-      low=mid+1;
-    }else{
-      high=mid;
-    }
+  let low = 0, high = nums.length-1;
+  while(low < high){
+   let mid = Math.floor(low + (high-low)/2);
+   if(nums[mid] > nums[mid+1]){
+       high = mid;
+   }else{
+       low = mid+1;
+   }
   }
 
   return low;
-}
+};

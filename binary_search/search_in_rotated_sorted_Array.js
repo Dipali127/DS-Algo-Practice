@@ -37,27 +37,26 @@ var search = function(nums, target) {
 // tc: O(log N), as binary search divides the array in half in each iteration.  
 // sc: O(1), since only a few pointers are used for the search. 
 
-var search = function(arr,target) {
-let low = 0;
-let high = arr.length-1;
-while(low<=high){
-  let mid = Math.floor(low+(high-low)/2);
-  if(arr[mid] === target){
-    return mid;
+var search = function(nums, target) {
+  let low = 0, high = nums.length-1;
+  while(low <= high){
+      let mid = Math.floor(low + (high - low)/2);
+      if(nums[mid] === target){
+          return mid;
+      }else if(nums[low] <= nums[mid]){
+          if(target >= nums[low] && target < nums[mid]){
+              high = mid-1;
+          }else{
+              low = mid+1;
+          }
+      }else if(nums[mid] <= nums[high]){
+          if(target > nums[mid] && target <= nums[high]){
+              low = mid+1;
+          }else{
+              high = mid-1;
+          }
+      }
   }
-  else if(arr[low]<=arr[mid]){
-    if(target<arr[mid] && target>=arr[low]){
-      high = mid-1
-    }else{
-      low=mid+1;
-    }
-  }else if(arr[mid]<=arr[high]){
-    if(target>arr[mid] && target<=arr[high]){
-      low=mid+1;
-    }else{
-      high=mid-1;
-    }
-  }
-}
-return -1; 
-}
+
+  return -1;
+};

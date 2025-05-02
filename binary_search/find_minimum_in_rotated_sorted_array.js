@@ -35,11 +35,16 @@ var findMin = function (nums) {
 // i will use of binary search to find the minimum value in the nums array.  
 // i will use two pointers, low and high, where low is initialized with 0 and high is initialized
 // with the last index of the nums array.  
-// i will run a while loop until low is less than high. First, i will find the mid index and then check if the value at mid is greater than the value at high.  
-// If nums[mid] > nums[high], it means the left part of the array is already sorted, and the minimum value must be in the right part of mid because the given array nums is right rotated and intially array is in ascending order.  So, I will update low to mid + 1.  
-// Otherwise, if nums[mid] <= nums[high], it means the right part of the array is not sorted, and it might be possible that the value pointed by mid itself is the minimum among all the values in the array, or the minimum value could be in the left part of mid. So, I will update high to mid.  
+// i will run a while loop until low is less than high. First, i will find the mid index and then check if the value at
+//  mid is greater than the value at high.  
+// If nums[mid] > nums[high], it means the left part of the array is already sorted, and the minimum value must be in the right part of
+//  mid because the given array nums is right rotated and intially array is in ascending order.  So, I will update low to mid + 1.  
+// Otherwise, if nums[mid] <= nums[high], it means the right part of the array is not sorted, and it might be possible that the value pointed 
+// by mid itself is the minimum among all the values in the array, or the minimum value could be in the left part of mid.
+// So, I will update high to mid.  
 // Once low is greater than or equal to high, the loop ends, and the value pointed by low has the minimum value.  
-// I will return nums[low] because it might be possible that high moves before low, and the element before low has a greater value Thus, nums[low] is the minimum element.  
+// I will return nums[low] because it might be possible that high moves before low, and the element before 
+// low has a greater value Thus, nums[low] is the minimum element.  
 // TC: O(log N), as only half of the array is iterated in each step.  
 // SC: O(1), since no additional space is used.  
 var findMin = function(nums){
