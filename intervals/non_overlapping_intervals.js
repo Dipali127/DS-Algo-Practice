@@ -50,23 +50,37 @@ var eraseOverlapIntervals = function (intervals) {
 
 // Optimal Approach 2:
 // Approach:
-// Instead of sorting the intervals by their start time, I will sort the intervals by their end time because intervals that end later are more likely to overlap with other intervals in the future. 
-// By sorting the intervals by their end time, I can focus on removing the intervals that finish the earliest (by checking the end time).
-// After sorting, I will take a count variable which will keep track of the number of overlapping intervals that need to be removed.
-// I will initialize a variable `lastInterval` to point to the first interval of the intervals array and set pointer i to the next interval.
-// While iterating through the intervals array, I will check the following conditions:
-// 1. If the current start time is greater than or equal to the end time of the last interval, it means there is no overlap, so I will update `lastInterval` to the current interval and increment pointer i.
-// for this refer this example:- (0,2) and (3,6).
-// 2. If the current end time is greater than or equal to the end time of the last interval, it means there is an overlap, so I will increment the count and pointer i and keep `lastInterval` unchanged.
-// for this refer this example:- (0,3)  and (2,5).
-// 3. If the current end time is less than the end time of the last interval, it means I need to remove the last interval, so I will increment the count and update `lastInterval` to the current interval.
-// Once I have iterated through all intervals, I will return the count, which stores the number of overlapping intervals removed.
-// Time Complexity: O(N log N), Explanation:-
-// O(N log N) for sorting the intervals by end time.
-// O(N) to iterate through the intervals array once using pointer i and lastInterval.
-// Overall TC: O(N log N) + O(N) = O(N log N).
+// Instead of sorting the intervals by their start time we remove most of the intervals but the problem said to remove 
+// minimum intervals, So, I will sort the intervals by their end time to remove the intervals that end later 
+// because intervals that end later are more likely to overlap with others in the future. 
+// By sorting intervals by their end time, I can focus on keeping the intervals that finish earliest, which helps 
+// to remove minimum interval.
+// After sorting, I will take a `count` variable to keep track of the number of overlapping intervals that need to be
+// removed And I will initialize a variable `lastInterval` to point to the first interval in the array, 
+// and set a pointer `i` to the next interval.
+// While iterating through the array, I will check the following conditions:
+// 1. If the current start time (CS) >= end time of `lastInterval` (LE),
+//    it means there is no overlap. So, I will update `lastInterval` to the current interval and move `i` forward.
+//    (Example: (0,2) and (3,6)) → No overlap; update `lastInterval` to (3,6).
+//
+// 2. If the current end time (CE) >= LE, it means there is an overlap.
+//    In this case, I will **keep `lastInterval`** (since it ends earlier) and remove the current interval by 
+// incrementing `count`.  (Example: (1,3) and (2,4)) → Overlap; keep (1,3), remove (2,4).
+//
+// 3. If  the current end time (CE) < LE, it also means there is an overlap.
+//    But this time, I will remove `lastInterval` and **update `lastInterval` to the current interval**, 
+// as it ends earlier. Then, increment both `count` and `i`.
+//    (Example: (1,5) and (2,3)) → Overlap; remove (1,5), keep (2,3).
+//
+// After iterating through all intervals, I return `count`, which represents the minimum number of overlapping intervals removed.
+// Time Complexity: O(N log N)
+// - O(N log N) for sorting the intervals by end time.
+// - O(N) for iterating through the intervals once using pointer `i` and `lastInterval`.
+// - Overall TC: O(N log N) + O(N) = O(N log N)
+//
 // Space Complexity: O(1), since no additional space is used apart from a few variables.
-// Note:- This approach work with meeting room 1 and meeting 2 problem.
+//
+// Note: This approach works for both the Meeting Rooms I and Meeting Rooms II problems.
 
 var eraseOverlapIntervals = function (intervals) {
     intervals.sort((a, b) => a[1] - b[1]);

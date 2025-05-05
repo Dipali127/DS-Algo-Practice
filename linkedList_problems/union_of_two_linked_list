@@ -1,7 +1,7 @@
 // GFG PROBLEM:
 // Appraoch :- 
-// merge both the linked list in one by taking set to store unique values.
-// convert set into array to sort the set so that we can easily iterate through it
+// merge both the linked list in one by taking hash set to store unique values.
+// convert hash set into array to sort the set so that we can easily iterate through it
 // convert the sorted set values in new linked list.
 // TC: O(NLOGN) 
 // Explanation:- 

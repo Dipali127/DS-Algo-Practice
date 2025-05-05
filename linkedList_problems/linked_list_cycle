@@ -1,6 +1,6 @@
 // Leetcode Problem:
 // brute force approach:-
-// i will of a set to store the address (the whole object) of a node in set.
+// i will use of a set to store the address (the whole object) of a node in hash set.
 // then i will traverse through the linked list until found that node of a linked list which is already in set.
 // once i found a case where the current iterated node is already exist in the set then return true immediately otherwise return false.
 // TC: O(N) to iterated through the linked list.
