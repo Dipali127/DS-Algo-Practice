@@ -1,6 +1,6 @@
-// for doing matrix multiplication, number of coloumns of matrixA must be equal to number of rows of matrixB
-// appraoch:- use nested loop to do matrix multiplication after checking condition that if number of rows of
-// matrixA is equal to number of columns of matrixB.
+// for doing matrix multiplication, number of columns of matrixA must be equal to number of rows of matrixB
+// appraoch:- use nested loop to do matrix multiplication after checking condition that if number of coumns of
+// matrixA is equal to number of rows of matrixB.
 // in nested loop, the first loop iterate through each row of matrixA and second loop iterate through each
 // column of matrixB for each row of matrixA and while iterating columns of matrixB for each row of matrixA,
 // the third loop calculate the matrix multiplication.
