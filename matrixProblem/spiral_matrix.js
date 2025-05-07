@@ -2,11 +2,12 @@
 // Optimal Approach:
 // approach:
 // i will use of four directions to print the given matrix in a spiral format:
-// - The first direction is "top", which points to the first row.
-// - The second direction is "down", which points to the last row.
-// - The third direction is "left", which points to the first column.
-// - The fourth direction is "right", which points to the last column
-// after then i will take one direction variable which will help to print the matrix in spiral format.
+// - The first direction is "top", which points to the first row and help to iterate through the row from left to right.
+// - The second direction is "down", which points to the last row and help to iterate through the row from right to left.
+// - The third direction is "left", which points to the first column and help to iterate through the column from down to top.
+// - The fourth direction is "right", which points to the last column and help to iterate through the column from top to down.
+// after then i will take one direction variable which will help to print the matrix in spiral format with the help of
+// top, down, right and left.
 // If the direction is 0, it means that we have to print the row from left to right.
 // Here, the row is fixed, and the column changes (i.e., matrix[top][i]).
 // Once the row from the top is printed, increment the `top` variable by 1. 
@@ -21,8 +22,12 @@
 // Once the column from the left is printed, increment the `left` variable by 1. 
 // Repeat this process until top <= down and left <= right. Meanwhile, increment the `direction` by 1.
 // If the direction reaches 4, reset it to 0 again. 
-// Time Complexity: O(N), to iterate through the given matrix as each element is printed once.
-// Space Complexity: O(N), to store each value of the given matrix in the result array. 
+// Time Complexity: O(m × n), where 'm'is the number of rows and 'n' is the number of columns.
+//                  We traverse the matrix layer by layer in spiral order until all elements are visited.
+//                  Inside the while loop, based on the current direction, we run a for loop over each row or column,
+//                  ensuring each element is visited exactly once.
+// Space Complexity: O(m × n), for storing all elements in the result array.
+
 
 var spiralOrder = function (matrix) {
     let m = matrix.length;
