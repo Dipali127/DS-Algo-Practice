@@ -5,8 +5,10 @@
 // i will iterate through each value in nums1, and for each value:
 // i will take a variable found, initially set to false, to track whether I have found the element in nums2.
 // i will take another variable nextGreater, initially set to -1, to store the next greater element if found.
-// For each element in nums1, I will iterate through each value in nums2 and check if the current iterated value matches the current value of nums1.
-// Once I find the matching element in nums2, I will set found = true. Then, I will continue iterating through nums2 to check if there is a greater element. If found, I will update nextGreater and break the loop.
+// For each element in nums1, I will iterate through each value in nums2 and check if the current iterated value
+//  matches the current value of nums1.
+// Once I find the matching element in nums2, I will set found = true. Then, I will continue iterating through nums2 
+// to check if there is a greater element. If found, I will update nextGreater and break the loop.
 // Finally, I will push nextGreater into the result array.
 // TC: O(N * M), where N is the length of nums1 and M is the length of nums2.  
 //    - For each element in nums1, we iterate through nums2 to find the next greater element.  
