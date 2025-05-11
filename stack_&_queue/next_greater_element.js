@@ -1,4 +1,34 @@
 // geeks for geeks
+// Brute force approach:
+// Approach:
+// Iterate through each value of `arr`. For each value, initialize a variable `greater` with -1.
+// Then, iterate through the remaining elements to the right of the current element.
+// If a greater element is found (i.e., arr[j] > arr[i]), update the `greater` variable with that value
+// and break the loop, since we only need the first next greater element.
+// After processing each element, update the current value of `arr` with the `greater` value.
+// Finally, return the modified `arr`.
+//
+// TC: O(N^2), due to the nested loop.
+// SC: O(1), since no additional space is used.
+class Solution {
+    nextLargerElement(arr) {
+        for(let i = 0; i < arr.length; i++){
+            let greater = -1;
+            for(let j = i+1; j < arr.length; j++){
+                if(arr[i] < arr[j]){
+                    greater = arr[j];
+                    break;
+                }
+            }
+            
+            arr[i] = greater;
+        }
+        
+        return arr;
+    }
+}
+
+// optimal approach:
 // approach:
 // I will take a result array of size equal to the given array and initialize all values with -1.
 // I will also take a stack to store the next greater elements.
