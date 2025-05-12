@@ -8,7 +8,8 @@
 // -> the path must start with a single slash '/'.
 // -> directories (folders) must be separated by exactly one slash '/'.
 // -> the path must not end with a slash '/' unless it is the root directory.
-// -> the path must not contain any single ('.') or double periods ('..') representing current or parent directories in the result.
+// -> the path must not contain any single ('.') or double periods ('..') representing current or parent directories 
+// in the result.
 
 // approach:-
 // convert the given path string into an array of directory names or elements by splitting it with the '/' delimiter.
@@ -24,6 +25,8 @@
 // -> O(N): building the final result from the stack.
 // Overall, TC:- : O(3N) = O(N).
 // SC:- O(N) for storing valid directories or file names in the stack. 
+// Note:- converting the path string into array using delimeter '/' equal to path = "/home//foo/" , const parts = path.split('/') => 
+    // ["", "home", "", "foo", ""]
 var simplifyPath = function(path) {
     let stack = [];
     path=path.split('/');

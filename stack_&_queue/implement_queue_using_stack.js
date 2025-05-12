@@ -1,4 +1,11 @@
 // Leetcode Problem 232: Implement Queue using Stacks
+// A queue is a linear data structure that follows the FIFO (First In, First Out) principle. 
+// This means the element inserted first is the one removed from the queue first.
+// A real-life example of a queue is a line of patients in a hospital, where the patient who is first in line 
+// is the one who visits the doctor first for a checkup.
+// Queue is a data structure, but it does not have any built-in structure to store elements.
+// We have to use some other data structure to implement and store elements in the queue, such as an array, stack, or linked list.
+
 // Optimal Approach:
 // To implement a queue using stacks, I have used two stacks.
 // stack1 stores the elements as they come, while stack2 is used to perform queue-like behavior.

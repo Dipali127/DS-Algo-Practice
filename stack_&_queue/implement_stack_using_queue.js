@@ -1,4 +1,10 @@
 // leetcode problem:- 225
+// A stack is a linear data structure that follows the LIFO (Last In, First Out) principle.
+// This means the last element inserted onto the stack is the first one removed from it.
+// A real-life example of a stack is a pile of books, where you can only pick and remove the topmost book.
+// Stack is a data structure, but it does not have any built-in structure to store elements.
+// We have to use some other data structure to implement and store elements in the stack such as array, queue or linked list.
+
 // optimal approach:
 // To implement a stack using a queue, I have used two queues. 
 // q1 stores the elements as they come, while q2 is used to perform stack-like behavior. 
