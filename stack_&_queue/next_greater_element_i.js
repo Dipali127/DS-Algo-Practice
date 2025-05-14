@@ -48,7 +48,10 @@ var nextGreaterElement = function (nums1, nums2) {
 // - O(N) to iterate through each value of nums2 and store the next greater element in the hash map.  
 // - O(N) to iterate through each value of nums1 and retrieve the next greater element from the hash map.  
 // - Overall TC: O(N) + O(N) = O(2N) = O(N).  
-// SC: O(N), to store the next greater elements of nums2 in the hash map.  
+// SC: O(N)
+// - O(N) for the hash map to store next greater elements of nums2.
+// - O(N) for the stack used during processing of nums2.
+// - Total space: O(N) auxiliary space.  
 
 var nextGreaterElement = function (nums1, nums2) {
     let map = new Map(), stack = [], n = nums2.length;
