@@ -1,13 +1,17 @@
-// Leetcode Problem:- 637
-// Optimal approach: Use BFS (Breadth-First Search).
-// approach:-
-// iterate through the tree 'level-wise-level' and for each level, calculate the sum of all node values and then compute the average.
-// initially, the queue contains only the root node, and we process the tree level by level.
-// inside the outer while loop, an inner while loop helps to process each level separately. 
-// the while loop process all nodes of the current level and computes the sum of their values, and appends the average to the result array.
-// once compute the average of each level node, return result.
-// TC:- O(N), where N is the number of nodes in the tree, as we traverse every node exactly once.
-// SC:- O(N), since we are using a queue, and the queue may contain the nodes of the widest level of the tree.
+// Leetcode Problem: 637 - Average of Levels in Binary Tree
+// Optimal Approach: Use Breadth-First Search (BFS).
+
+// Approach:
+// - Traverse the tree level by level using a queue (BFS).
+// - For each level, calculate the sum of all node values.
+// - Compute the average by dividing the level sum by the number of nodes at that level.
+// - Append the average to the result array.
+// - Repeat this process until all levels of the tree are processed.
+// - Finally, return the result array containing the average of each level.
+
+// Time Complexity (TC): O(N), where N is the number of nodes in the tree, since each node is visited once.
+// Space Complexity (SC): O(N), due to the space used by the queue, which at most stores nodes from the widest level.
+
 
 
 var averageOfLevels = function(root) {

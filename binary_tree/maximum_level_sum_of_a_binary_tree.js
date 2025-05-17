@@ -1,15 +1,21 @@
-// Leetcode Problem:- 1161
+// Leetcode Problem: 1161
 // Optimal Approach: Using Breadth-First Search (BFS).
+
 // Approach:
-// traverse the tree level by level, and for each level store the current level node in the queue.
-// iterate through the queue and calculate the sum of the node values of current level. 
-// if the current level's sum is greater than the maximum sum (`maxSum`), update `maxSum` and also update `maxLevel` to store the level that has the maximum sum.
-// after calculating the sum of the current level, check if the left and right children of the current node exist. 
-// if they exist, push them into the queue to process the next level. This continues until all levels of the tree are processed (including the leaf level).
-// after visiting each level, increment the `level` variable to move to the next level. 
-// TC:- O(N), where 'N' is the number of nodes in the tree and each node is traversed exactly once.
-// SC:- O(N), to store the nodes of the current level in the queue and in the worst case, the queue can hold all nodes at the maximum width of the tree.
-var maxLevelSum = function(root) {
+// Traverse the binary tree level by level using a queue.
+// For each level, calculate the sum of node values.
+// If the current level's sum is greater than the previously recorded maximum (`maxSum`),
+// update `maxSum` and set `maxLevel` to the current level number.
+// After processing all nodes at the current level, add their left and right children (if any)
+// to the queue to process the next level.
+// Continue this process until all levels of the tree are traversed.
+// Keep track of the current level using a `level` counter, incrementing it after each level.
+
+// Time Complexity (TC): O(N) - where 'N' is the number of nodes in the tree.
+// Each node is visited exactly once.
+// Space Complexity (SC): O(N) - for storing nodes in the queue,
+// which in the worst case can be the number of nodes at the tree's widest level.
+
     if(!root){
         return 0;
     }

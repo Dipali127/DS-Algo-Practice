@@ -3,11 +3,14 @@
 
 // This code is useful for solving many BFS-related problems where operations are performed on a tree level-wise.
 // Approach:
-// traverses through the tree level-wise and stores the nodes of the current level in 'queue'.
-// and iterates through the nodes in the `queue` store those nodes in the `currentLevel` array. 
-// after processing all nodes at the current level, it adds the `currentLevel` array to the `result` array, which stores values from all levels of the tree.
-// TC:- O(N) - where 'N' is the number of nodes in the binary tree, since each node is processed exactly once.
-// SC:- O(N) - where 'N' is the number of nodes, due to the space used by the `queue`, `currentLevel`, and `result` arrays.
+// Traverse the binary tree level by level using a queue.
+// For each level, store the nodes of that level in the `queue`.
+// Iterate through the nodes in the `queue` and store their values in the `currentLevel` array.
+// After processing all nodes at the current level, push the `currentLevel` array into the `result` array,
+// which stores values from all levels of the tree.
+
+// Time Complexity (TC): O(N) - where 'N' is the number of nodes in the binary tree, since each node is processed exactly once.
+// Space Complexity (SC): O(N) - for storing nodes in the `queue`, `currentLevel`, and `result` arrays in the worst case.
 
 // Note:
 // At the beginning, the `queue` contains a single element, which is the root node object. This object has:
