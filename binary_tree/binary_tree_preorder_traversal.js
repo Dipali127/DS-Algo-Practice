@@ -1,5 +1,8 @@
 // Leetcode Problem:-  144
 // Optimal approach:
+// Preorder Traversal (current-left-right: Visit the current node before visiting any nodes inside the left or right
+//  subtrees. Here, the traversal is root – left child – right child(nlr). 
+// It means that the root node is traversed first then its left child and finally the right child. 
 
 // (1) Recursive approach:-
 // The "preorderTraversal" function uses the helper function "printPreorder"

@@ -1,6 +1,8 @@
 // Leetcode Problem:- 94
 // Optimal approach:
-
+// Visit the current node after visiting all nodes in the left subtree, but before visiting any node in the right subtree.
+// In this traversal, the order is: left child → root → right child.
+// This means that the left subtree is traversed first, followed by the current (root) node, and finally the right subtree.
 // (1) Recursive approach:-
 // The "inorderTraversal" function uses the helper function "inOrder"
 // to traverse the binary tree in inorder manner i.e., (left, root, right).
@@ -29,7 +31,8 @@ function inOrder(node, output) {
 // (2) Iterative approach:-
 // the iterative approach uses a stack to traverse the tree inorder (left, root, right).
 // - first, we traverse the leftmost nodes, pushing them onto the stack.
-// - once all the leftmost nodes are traversed, we pop them from the stack (pop the node from stack means we visit the root node).
+// - once all the leftmost nodes are traversed, we pop them from the stack 
+// (pop the node from stack means we visit the root node/current node).
 // - after visiting the root node, we traverse the right subtree and repeat the process.
 // Time Complexity (TC):- O(N), because every node is pushed to and popped from the stack exactly once.
 // Space Complexity (SC):- O(N), Explanation:

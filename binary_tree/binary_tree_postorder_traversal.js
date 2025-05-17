@@ -1,5 +1,8 @@
 // Leetcode Problem:- 145
 // Optimal approach:
+//  Visit the current node after visiting all the nodes of the left and right subtrees.
+//   Here, the traversal is left child – right child – root.  
+// It means that the left child has traversed first then the right child and finally its root node. 
 
 // (1) Recursive approach:-
 // The "postOrder" function uses the helper function "postorderTraversalr"
@@ -25,21 +28,21 @@ var postorderTraversal = function(root) {
    return result;
 };
 
-// (2) Iterative approach:-  
-//  start by pushing the root node onto the stack.
-//  pop nodes from the stack, and for each node;
-// add the node's value to the front of the result array (using unshift).
-// push the left child onto the stack (if it exists).
-// push the right child onto the stack (if it exists).
-// the nodes are processed in a modified preorder traversal (root, right, left), and by adding them to the front of the result
-// array, we effectively reverse the order, producing the correct postorder sequence (left, right, root).
-// Note:-
-// unshift() is used to insert nodes at the front of the array, ensuring that the left subtree is processed before the right subtree.
-// TC:- O(N), to traverse each node of the tree once.
-// Space Complexity (SC):- O(N), Explanation:
-// in the worst case (e.g., an unbalanced tree), the stack can store up to O(N) nodes.
-// O(N), to store all node values in result array.
-// overall, SC:- O(N)
+// (2) Iterative Approach:
+// - Take a result array to store the nodes of the tree in postorder.
+// - Use a stack to help achieve postorder traversal iteratively.
+// - Run a while loop as long as the stack is not empty.
+//   Inside the loop, traverse all nodes in a way that right nodes are processed before left nodes.
+// - Push the current node’s value into the result array.
+// - First push the left child, then the right child to the stack so that the right child is processed first 
+// (due to stack's LIFO nature).
+// - After the loop ends, reverse the result array to get the correct postorder traversal.
+// Time Complexity (TC): O(N) — each node is visited exactly once.
+// Space Complexity (SC):
+// - O(N) in the worst case (e.g., for an unbalanced tree), as the stack can hold up to N nodes.
+// - O(N) to store all node values in the result array.
+// - Overall, SC = O(N)
+
 
 var postorderTraversal = function(root) {
    if(!root){
@@ -47,16 +50,17 @@ var postorderTraversal = function(root) {
    }
    let stack = [root];
    let result = [];
-   while(stack.length){
-       let temp = stack.pop();
-       result.unshift(temp.val)
-       if(temp.left){
-           stack.push(temp.left);
-       }
-       if(temp.right){
-           stack.push(temp.right);
-       }
+   while(stack.length > 0){
+      let currentNode = stack.pop();
+      result.push(currentNode.val);
+      if(currentNode.left){
+        stack.push(currentNode.left);
+      }
+
+      if(currentNode.right){
+        stack.push(currentNode.right);
+      }
    }
 
-   return result;
+   return result.reverse();
 }
