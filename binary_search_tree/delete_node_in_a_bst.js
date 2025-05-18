@@ -11,7 +11,7 @@
 // Once the node is found:
 // - If the node has no children, delete it.
 // - If the node has one child, replace the node with its child.
-// - If the node has two children, find the in-order successor (smallest node in the right subtree), 
+// - If the node has two children, find the in-order successor (the smallest node in the right subtree), 
 //   replace the node's value with the successor's value, and recursively delete the in-order successor.
 
 // Example:- given root = [5,3,6,2,4,null,7] and key = 3, once we find the node with value `3`, 
@@ -33,7 +33,8 @@ var deleteNode = function(root, key) {
         return null;
     }
 
-// here, the 'root.right' and 'root.left' is updated to point to the new subtree after the node with the specified key has been deleted.
+// here, the 'root.right' and 'root.left' is updated to point to the new subtree after the node with the
+//  specified key has been deleted.
     if (key < root.val) {
         root.left = deleteNode(root.left, key); 
     } else if (key > root.val) {

@@ -9,7 +9,8 @@
 // overall, TC:- O(N)
 // SC:- O(N), Explanation:-
 // O(N):- to store all values of tree in 'inorderArr' array.
-// O(H):- for the recursion stack, where H is the height of the BST. This could be O(log N) for a balanced tree or O(N) for a skewed tree.
+// O(H):- for the recursion stack, where H is the height of the BST. 
+// And this could be O(log N) for a balanced tree or O(N) for a skewed tree.
 // overall, SC:- O(N)
 
 var getMinimumDifference = function (root) {
@@ -38,7 +39,8 @@ var getMinimumDifference = function (root) {
 // Optimal appraoch:- 
 // in the below approach, compute the minimum difference between consecutive nodes in the inorder traversal of the BST.
 // perform an inorder traversal of the BST while keeping track of the previously visited node (prev).
-// during the traversal of each node, compute the absolute difference between the current visited node’s value and the prev node’s value.
+// during the traversal of each node, compute the absolute difference between the current visited node’s value 
+// and the prev node’s value.
 // update the minimum difference (min) if the computed difference is smaller.
 // continue the traversal to ensure that all pairs of consecutive nodes are checked.
 // TC:- O(N), to traverse the BST in an inorder manner.

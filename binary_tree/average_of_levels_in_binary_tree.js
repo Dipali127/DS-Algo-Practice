@@ -11,7 +11,8 @@
 
 // Time Complexity (TC): O(N), where N is the number of nodes in the tree, since each node is visited once.
 // Space Complexity (SC): O(N), due to the space used by the queue, which at most stores nodes from the widest level.
-
+// why time complexity is O(N) not O(N^2) because, the total number of iterations made by the inner loop is equal to the
+// total number of nodes in the tree, and each node is processed only once when it is dequeued.
 
 
 var averageOfLevels = function(root) {
