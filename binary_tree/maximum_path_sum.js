@@ -9,7 +9,7 @@
 //       2   3
 // The sequence 2 -> 1 -> 3 has the maximum path sum (2 + 1 + 3 = 6), and all nodes are connected by edges.
 
-//  Optimal Approach: Use DFS (Depth First Search)
+// Optimal Approach: Use DFS (Depth First Search)
 // approach:-
 // Base case:- For null nodes, return 0 (since they don't contribute to the path sum).
 // recursively calculate the maximum path sum for the left and right subtrees.
