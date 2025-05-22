@@ -7,7 +7,8 @@
 // Optimal Approach: Using BFS (Breadth-First Search).
 // approach:
 // traverse the tree level by level using a queue to process each node level-wise.
-// for each level, the last node visited in that level will be the one visible from the right side. Add this node to the 'result' array.
+// for each level, the last node visited in that level will be the one visible from the right side.
+// Add this node to the 'result' array.
 // once we've traversed the entire tree level by level, return the 'result' array.
 // TC: O(N), where 'N' is the number of nodes in the tree, as each node is visited exactly once.
 // SC: O(N), as in the worst case, the queue size can grow to O(N) for a tree with many nodes at the same level (wide tree).\ but in a balanced
@@ -50,10 +51,11 @@ var rightSideView = function(root) {
 // after processing all the nodes in the tree, return the result.
 // TC:- O(N), where 'N' is the number of nodes in the tree, as each node is visited exactly once.
 // SC:- O(N), Explanation:
-// O(N):- Space is used by the result array to store the nodes visible from the right view in the worst case (for a skewed tree), 
+// O(N):- Space is used by the result array to store the nodes visible from the right view 
+// in the worst case (for a skewed tree), 
 // but in a balanced tree, the space complexity for storing nodes in the result is O(log N).
-// O(N):- Stack space used by the recursive function call ('dfs function') as in the worst case (skewed tree), the recursion depth can be O(N), 
-// but in a balanced tree, the depth will be O(log N).
+// O(N):- Stack space used by the recursive function call ('dfs function') as in the worst case (skewed tree),
+// the recursion depth can be O(N), but in a balanced tree, the depth will be O(log N).
 
 var rightSideView = function (root) {
     let result = [];

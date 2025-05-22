@@ -7,7 +7,8 @@
 // Optimal Approach: Using BFS (Breadth-First Search).
 // approach:-
 // traverse the tree level by level using a queue.
-// for each level, check the first visited node (i.e., the leftmost node), as it will be the node visible from the left side.
+// for each level, check the first visited node (i.e., the leftmost node), 
+// as it will be the node visible from the left side.
 // if it is the first node at the current level (i.e., i === 0), add it to the 'result' array.
 // continue traversing the tree level-by-level until all nodes are processed, then return the result.
 // TC: O(N), where 'N' is the number of nodes in the tree, as each node is visited exactly once.
