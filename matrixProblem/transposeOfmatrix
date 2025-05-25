@@ -7,7 +7,7 @@
 // from start index of each row to less than diagonal value of that row.
 // The outer loop runs from 0 to n-1, where n is the size of the matrix. This loop iterates
 // n times.
-//  Inside the outer loop, there is another nested loop that runs from 0 to i-1. 
+// Inside the outer loop, there is another nested loop that runs from 0 to i-1. 
 // Since this loop depends on the outer loop variable i, the number of iterations increases as
 // i increases. On average, this loop runs approximately n/2 times.
 // Within the inner loop, there are constant time operations: swapping two elements of the

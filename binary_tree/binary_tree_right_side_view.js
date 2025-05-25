@@ -46,8 +46,8 @@ var rightSideView = function(root) {
 // Second Approach: Using DFS (Depth-First Search).
 // approach:
 // traverse the tree by calling a function 'dfs' that recursively visits the right subtree first and then the left subtree.
-// for each node, if the current depth is equal to the length of the result array, it means this node is the node 
-// viewer can view from the right side of a tree, so add it to the result.
+// for each node, if the current depth is equal to the length of the result array, it means this node is the last node(
+// rightmost node) viewer can view from the right side of a tree, so add it to the result.
 // after processing all the nodes in the tree, return the result.
 // TC:- O(N), where 'N' is the number of nodes in the tree, as each node is visited exactly once.
 // SC:- O(N), Explanation:
