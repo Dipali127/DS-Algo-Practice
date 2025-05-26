@@ -21,7 +21,7 @@
      return checkPalindrome(arr);
  }
 
-function use two pointer approach to check that given linked list is palidrome or not 
+//function use two pointer approach to check that given linked list is palidrome or not 
  function checkPalindrome(arr){
     let left = 0;
     let right = arr.length-1;
