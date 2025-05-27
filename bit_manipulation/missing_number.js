@@ -1,41 +1,44 @@
 // Leetcode Problem:- 268
-// Brute force approach:
-// Approach: 
-// calculate the total sum of numbers from 0 to n using the formula: totalSum = n * (n + 1) / 2.
-// initialize a variable 'actualSum' to accumulate the sum of the numbers present in the input array 'nums'.
-// loop through each number in 'nums' to calculate the 'actualSum'.
-// the missing number is found by subtracting 'actualSum' from 'totalSum'.
-// TC:- O(N), to iterate through the array 'nums' to calculat the sum of each elements in it.
-// SC:- O(1), since no additional space is used.
+// Brute Force Approach:
+// Approach:
+// Use a hash set to store the unique values from the input array.
+// Iterate through the range from 0 to n (inclusive), and for each number,
+// check if it exists in the hash set. If a number is missing in the set,
+// that means it's the missing number — return it.
 
-var missingNumber = function(nums) {
-    let n = nums.length;
-    let actualSum = 0;
-    let totalSum = (n * (n + 1)) / 2;
+// Time Complexity (TC): O(N), to iterate through the range from 0 to n.
+// Space Complexity (SC): O(N), to store elements in the set. 
+// In the worst case, the missing number could be the last one in the range.
 
-    for(let j = 0; j < nums.length; j++){
-        actualSum+= nums[j];
+var missingNumber = function (nums) {
+    let set = new Set(nums);
+    for (let i = 0; i <= nums.length; i++) {
+        if (!set.has(i)) {
+            return i;
+        }
     }
+};
 
-    return totalSum - actualSum;
-}
 
 // Optimal Approach:
-// Approach: 
-// initialize a variable 'missingNumber' with the length of the input array 'nums' (n) to find out the missing number.
-// use of a loop to iterate through each element in 'nums' array.
-// apply the "XOR" operation between 'result', the current element 'nums[i]', and the index 'i'and
-// the XOR operation will cancel out numbers that appear in both the array and in their corresponding indices.
-// the final value of 'missingNumber' will be the missing number, as all paired numbers will cancel each other out.
-// TC:- O(N), as we iterate through the array 'nums' once.
-// SC:- O(1), since no additional space is used.
+// Approach:
+// First, calculate the sum of the range from 0 to n (inclusive).
+// Then, iterate through the input array 'nums' and subtract each element from the total.
+// After completing the iteration, the remaining value in 'total' will be the missing number.
 
-var missingNumber = function(nums) {
-    let n = nums.length;
-    let result = n;
-    for(let i = 0; i < nums.length; i++){
-        result^= nums[i]^i;
+// Time Complexity (TC): O(N), for iterating through the array twice — 
+// once to calculate the total sum, and once to subtract array elements.
+// Space Complexity (SC): O(1), as only a constant amount of extra space is used.
+
+var missingNumber = function (nums) {
+    let total = 0;
+    for (let i = 0; i <= nums.length; i++) {
+        total += i;
     }
 
-    return result;
-}
+    for (let i = 0; i < nums.length; i++) {
+        total -= nums[i];
+    }
+
+    return total;
+};
