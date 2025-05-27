@@ -1,15 +1,18 @@
 // Leetcode Problem:- 108
 // Optimal Approach:- Using divide and conquer
+// since the array is in ascending order, i will apply the divide and conquer approach which make the tree balanced
 // call a function 'buildBST' and pass the parameters nums, low and high to build a binary search tree.
 // Inside 'buildBST' function:
 // Base case:-
 // if the current low index exceeds the high index, return null (indicating no subtree).
 // calculate the middle index to ensure the tree remains balanced.
-// create a new TreeNode with the middle element as the root.
-// recursively build the left subtree with the left half of the array.
-// recursively build the right subtree with the right half of the array.
+// create a new TreeNode with the middle element as the root since the given array is in ascending order 
+// so all the values which are left of the array are less than the middle index and all the values which are right of 
+// the middle index are grater than the middle index number.
+// recursively call left half of the array to construct the left subtree.
+// recursively call right half of the array to construct the right subtree.
 // return the constructed subtree rooted at 'root'
-//  TC:- O(N), as each element of the array is processed exactly once while constructing the tree.
+// TC:- O(N), as each element of the array is processed exactly once while constructing the tree.
 // The recursive calls split the array into halves, but they do not contribute additional time complexity 
 // because each call only performs constant work to find the middle index and create nodes.
 // Therefore, the overall time complexity remains O(N).
