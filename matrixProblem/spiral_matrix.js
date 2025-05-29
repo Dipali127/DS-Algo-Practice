@@ -1,7 +1,7 @@
 // Leetcode Problem:- 54
 // Optimal Approach:
 // approach:
-// i will use of four directions to print the given matrix in a spiral format:
+// i will use of four directions variable to print the given matrix in a spiral format:
 // - The first direction is "top", which points to the first row and help to iterate through the row from left to right.
 // - The second direction is "down", which points to the last row and help to iterate through the row from right to left.
 // - The third direction is "left", which points to the first column and help to iterate through the column from down to top.

@@ -1,5 +1,68 @@
+// Brute force approach:
+// approach:
+// - Take two arrays, `result1` and `result2`, to store the values of the linked lists `l1` and `l2`.
+// - Take one `result` array to store the sum of values from both linked lists.
+// - Use a `carry` variable (initially 0) to handle the carry-over during addition.
+// - Use two pointers, `i` and `j`, to iterate through both `result1` and `result2`.
+// - Run a `while` loop until all digits from both arrays are processed or there is a remaining carry.
+//   - Compute the sum of the corresponding digits and the carry.
+//   - Add the remainder (`sum % 10`) to the `result` array.
+//   - Update the `carry` as `Math.floor(sum / 10)` for the next iteration.
+// - After computing the final result array, create a dummy linked list to convert the result array into a linked list and return it.
+
+// Time Complexity: O(max(N, M))
+// - O(N) to iterate through `l1` and store values in `result1`.
+// - O(M) to iterate through `l2` and store values in `result2`.
+// - O(max(N, M)) to compute the sum digit by digit.
+// - O(max(N, M)) to build the final linked list.
+// => Overall Time Complexity: O(max(N, M))
+
+// Space Complexity: O(N + M + max(N, M))
+// - O(N) for storing `result1`
+// - O(M) for storing `result2`
+// - O(max(N, M)) for the `result` array
+// - O(max(N, M)) extra space for the final linked list nodes (output space)
+// => Overall Space Complexity: O(N + M + max(N, M))
+ 
+var addTwoNumbers = function(l1, l2) {
+    let result1 = [], result2 = [];
+    let temp1 = l1, temp2 = l2;
+    while(temp1 !== null){
+        result1.push(temp1.val);
+        temp1 = temp1.next;
+    }
+
+    while(temp2 !== null){
+        result2.push(temp2.val);
+        temp2 = temp2.next;
+    }
+
+    let carry = 0;
+    let i = 0, j = 0;
+    let result = [];
+    while(i < result1.length || j < result2.length || carry !== 0){
+        let val1 = i < result1.length ? result1[i] : 0;
+        let val2 = j < result2.length ? result2[j] : 0;
+        let sum = val1 + val2 + carry;
+        result.push(sum % 10);
+        carry = Math.floor(sum / 10);
+        i++, j++;
+    }
+
+    let dummy = new ListNode(0);
+    let temp = dummy;
+    let k = 0;
+    while(k < result.length){
+        temp.next = new ListNode(result[k++]);
+        temp = temp.next;
+    }
+
+    return dummy.next;
+};
+
 // Leetcode Problem:
-// appraoch:- 
+// Brute force approach
+// Optimal Appraoch:- 
 // check that list1 and list2 are not null. if so, then return null.
 // take a dummy new linked list intialised with 0 value to store all the sum of both list
 // and take a pointer temp points to that dummy new linked list.
@@ -9,32 +72,27 @@
 // also ensure that pointers list1 and list2 are moved to their respective next nodes if they are not null.
 // after the loop, if there is a carry left, a new node with the carry value is added to the dummy list.
 // TC:O(M+N), as we traverse the both list in single pass where 'M' is the length of list1 and 'N' is the
-// length of list2 AND SC:O(MAX(M,N)), as space complexity is determined by the size of the resultant 
+// length of list2.
+// SC:O(MAX(M,N)), as space complexity is determined by the size of the resultant 
 // linked list. In the worst case, the resultant list will have max(M, N) + 1 nodes.
 
-var addTwoNumbers = function (list1, list2) {
-    if (list1 === null && list2 === null) {
+var addTwoNumbers = function(l1, l2){
+    if(l1 === null && l2 === null){
         return null;
     }
-
-    let newNode = new ListNode(0);
-    let temp = newNode;
+    let dummy = new ListNode(0);
+    let temp = dummy;
     let carry = 0;
-    while (list1 !== null || list2 !== null) {
-        let val1 = list1 !== null ? list1.val : 0;
-        let val2 = list2 !== null ? list2.val : 0;
-        let sum = val1 + val2 + carry;
-        carry = Math.floor(sum / 10);
-        let nodeVal = sum % 10;
-        temp.next = new ListNode(nodeVal);
+    while(l1 !== null || l2 !== null || carry !== 0){
+        let val1 = l1 !== null ? l1.val : 0;
+        let val2 = l2 !== null ? l2.val : 0;
+        let sum =  val1 + val2 + carry;
+        temp.next = new ListNode(sum % 10);
         temp = temp.next;
-           if (list1 != null) list1 = list1.next;
-           if (list2 != null) list2 = list2.next;
+        carry = Math.floor(sum / 10);
+        if(l1 !== null)l1 = l1.next;
+        if(l2 !== null)l2 = l2.next;
     }
 
-    if (carry !== 0) {
-        temp.next = new ListNode(carry);
-    }
-
-    return newNode.next;
+    return dummy.next;
 }
