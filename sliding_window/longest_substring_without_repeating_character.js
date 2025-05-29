@@ -39,11 +39,14 @@ var lengthOfLongestSubstring = function (string) {
 
 // Optimal approach: use sliding window approach using two pointer i.e slow and fast and hash set.
 // approach:
-// Instead of considering each possible substring explicitly, I will use two pointers, `start` and `end` to represent a sliding window.
-// using the `end` pointer expand the window by iterating through the string. while iterating through the current substring, add the current character
-// to the Set if it doesn't exist in the hash Set, and update the `longSubstring` variable with the maximum length.
-// but If a character is already present in the Set, it means a duplicate element has been found. In this case, I will shrink the window
-// by moving the `start` pointer to the right, removing the character pointed to by `start` from the Set.
+// Instead of considering each possible substring explicitly, I will use two pointers, `start` and `end` to 
+// represent a sliding window.
+// using the `end` pointer expand the window by iterating through the string. 
+// while iterating through the current substring, add the current character to the hash set if it doesn't exist 
+// and update the `longSubstring` variable with the maximum length.
+// but If a character is already present in the hash set, it means a duplicate element has been found. 
+// In this case, I will shrink the window by moving the `start` pointer to the right and  
+// removing the character pointed to by `start` from the hash Set.
 // and continues this process until the `end` pointer has iterated through the entire string.
 // Finally, I will return the length of the longest substring without repeating characters.
 // Time Complexity: O(N), where N is the length of the input string as each character is processed at most twice.
