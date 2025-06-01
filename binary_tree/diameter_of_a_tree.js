@@ -10,14 +10,17 @@
 //   This represents the longest path that passes through the current node.
 // - Update the global diameter if the diameter at the current node is greater than the previously recorded maximum diameter.
 // - Return the height of the current node, which is 1 + max(leftHeight, rightHeight). This return value is essential 
-//   for recursion to work correctly, as it will be used by the parent node to compute its own diameter.
+//   for recursion to work correctly which will return back to the callre function, as it will be used by the parent node to compute its own diameter.
 
 // Time Complexity (TC): O(N), where 'N' is the number of nodes in the tree, since each node is visited once to compute
 // its height and update the diameter.
 
 // Space Complexity (SC): O(N)
-// - Worst case: O(N), in the case of a completely unbalanced tree (like a linked list), due to the recursion stack depth being equal to the number of nodes.
-// - Best case: O(log N), in the case of a balanced tree, where the recursion stack depth is proportional to the height of the tree.
+// - Worst case: O(N), in the case of a completely unbalanced tree (like a linked list),
+//   due to the call stack depth being equal to the number of nodes because of recursion.
+// - Best case: O(log N), in the case of a balanced tree, where the call stack depth is
+//   proportional to the height of the tree, since at any point, only one path from root to leaf is active in the recursion stack.
+
 
 var diameterOfBinaryTree = function(root) {
     if (root === null) {
