@@ -36,8 +36,10 @@ var hammingWeight = function (n) {
 // Optimal Approach:- Using Bit Manipulation.
 // approach:-
 // I will use the bitwise AND operator (&) between the given number 'n' and 'n - 1' which effectively
-// removes the rightmost set bit (1) at each step and meanwhile increment the count to keep track of the number of set bits.
-// I will continue this process using a while loop until all the set bits of the binary representation of the given number become zero (0).
+// removes the rightmost set bit (1) at each step.
+// and i will take one count variable which will keep track of the number of set bits.
+// I will continue this process using a while loop until all the set bits of the binary representation of the 
+// given number become zero (0).
 // Explanation:-
 // - For any given 'n', the expression 'n & (n - 1)' flips the rightmost set bit to 0.
 // - Example:- If n = 6 (binary 110), n - 1 = 5 (binary 101), and n & (n - 1) = 4 (binary 100).

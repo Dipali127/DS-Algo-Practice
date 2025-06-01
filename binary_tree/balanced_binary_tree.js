@@ -5,15 +5,15 @@
 // difference between the heights of the left and right subtrees is no more than 1.
 // if the root is null, return 0 because an empty tree has a height of 0.
 // recursively calculate the height of the left subtree by calling findHeight on root.left and root.right.
-// if the left subtree is unbalanced (indicated by findHeight returning -1), immediately return -1. This serves as early termination, as there's no need to check further if the tree is already unbalanced.
+// if the left subtree is unbalanced (indicated by findHeight returning -1), immediately return -1. 
+// This serves as early termination, as there's no need to check further if the tree is already unbalanced.
 // similarly, if the right subtree is unbalanced (i.e., findHeight returns -1), return -1 immediately.
-// while calculating the height of left and right subtree , If the left subtree is unbalanced 
-// (indicated by findHeight returning -1), return -1 immediately.
-// Similarly, calculate the height of the right subtree by recursively calling findHeight on
-// root.right. If the right subtree is unbalanced, return -1 immediately.
-// if the absolute difference between the heights of the left and right subtrees is greater than 1, return -1 to indicate the current subtree is unbalanced.
-// if the tree is balanced at the current node, return the maximum height between the left and right subtrees, plus 1 to account for the current node itself.
-// the 'isBalanced function' simply checks whether findHeight returns -1. If it does, the tree is unbalanced; otherwise, the tree is balanced.
+// otherwise, if the absolute difference between the heights of the left and right subtrees is greater than 1, 
+// return -1 to indicate the current subtree is unbalanced.
+// but if the tree is balanced at the current node, return the maximum height between the left and right subtrees,
+// plus 1 to account for the current node itself.
+// the 'isBalanced function' simply checks whether findHeight returns -1. 
+// If it does, the tree is unbalanced; otherwise, the tree is balanced.
 // TC:- O(N) as each node visited once to find height of that current node and 
 // SC:- O(N), Explanation:- 
 // O(N) for a completely unbalanced (skewed) tree, where the recursive call stack depth equals the number of nodes.

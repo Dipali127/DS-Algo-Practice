@@ -14,7 +14,8 @@
 // O(N log N) for sorting each array.
 // O(N) for joining each array back into a string.
 // overall TC: O(N) + O(N log N) + O(N) = O(N log N), as sorting is the most expensive operation.
-// SC: O(N),  due to the additional space required for the arrays created by `split` and for the intermediate sorted arrays.
+// SC: O(N),  due to the additional space required for the arrays created by `split` and for the intermediate 
+// sorted arrays.
 
  var isAnagram = function(s, t) {
     s = s.split('').sort().join('');
@@ -38,25 +39,25 @@
 // SC: O(N), as the Map is used to store all characters of string s.
 
 var isAnagram = function (s, t) {
-    if (s.length !== t.length) {
+    if(s.length !== t.length){
         return false;
     }
     let map = new Map();
     for (let i = 0; i < s.length; i++) {
-        if (!map.has(s[i])) {
-            map.set(s[i], 1);
-        } else {
+        if (map.has(s[i])) {
             map.set(s[i], map.get(s[i]) + 1);
+        } else {
+            map.set(s[i], 1);
         }
     }
 
     for (let i = 0; i < t.length; i++) {
-        if (!map.has(t[i]) || map.get(t[i]) === 0) {
-            return false;
+        if (map.has(t[i]) && map.get(t[i]) > 0) {
+             map.set(t[i], map.get(t[i])-1);
         } else {
-            map.set(t[i], map.get(t[i]) - 1);
+            return false;
         }
     }
 
-    return true;
+     return true;
 }
