@@ -8,7 +8,8 @@
 // if all characters of ransomNote exist in the magazine, return true. Otherwise, return false.
 // TC: O(N^2), Explanation:
 // O(N) to convert both ransomNote and magazine strings into arrays using split() method.
-// O(N^2) to traverse through the ransomNote array and check each character of ransomNote in the magazine array using indexOf() and remove it using splice().
+// O(N^2) to traverse through the ransomNote array and check each character of ransomNote in the magazine array using 
+// indexOf() and remove it using splice().
 // overall TC: O(N) + O(N^2) = O(N^2)
 // SC: O(M + N) as we split the ransomNote and magazine strings into arrays, creating new arrays.
 
@@ -31,7 +32,8 @@ var canConstruct = function (ransomNote, magazine) {
 // use a Map to store the count of each character in the magazine string.
 // traverse the ransomNote string to check if each character exists in the Map.
 // if it exists, decrement the character's count in the Map.
-// if it does not exist or the character's count is zero, return false.
+// if it does not exist or the character's count is zero, return false immediately since, ransomeNote cannot be constructed
+// with characters of magazine.
 // if all characters of ransomNote exist in the magazine, return true.
 // TC: O(N), Explanation:
 // O(N) to traverse the magazine string and store each character's count in the Map.
