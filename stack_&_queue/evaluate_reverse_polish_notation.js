@@ -26,8 +26,9 @@
 //   negative numbers, ensuring the result is rounded toward zero.
 // - "Math.floor()" cannot be used here because it rounds down for negative numbers (away from zero).
 //   For example:
-//     console.log(Math.floor(-7 / 3)) = -3
-//     console.log(Math.trunc(-7 / 3)) = -2
+//     console.log(Math.floor(-7 / 3)),since Math.floor() goes to the next smaller integer (more negative),
+//     so since -3 is smaller than -2.333..., it returns -3.
+//     console.log(Math.trunc(-7 / 3)) = -2, since Math.trunc() just chops off the decimal part, giving you -2 in result.
 // - "Math.trunc()" provides the correct behavior, rounding the result toward zero, which is required for
 //   this problem.
 
