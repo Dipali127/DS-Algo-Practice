@@ -30,15 +30,22 @@ var findPeakElement = function (nums) {
 
 // Optimal Approach: Using Binary Search
 // approach:-
-// initialized two pointer 'low' and 'high' as 'low' starts at index 0 (beginning of the array) and 'high' starts at the
-// last index of the array (nums.length - 1). 
+// initialized two pointer 'low' and 'high' as 'low' starts at index 0 (beginning of the array) and 'high' 
+// starts at the last index of the array (nums.length - 1). 
 // Calculate the mid index using mid = Math.floor(low + (high - low) / 2).
 // Compare nums[mid] with nums[mid + 1]:-
-// - If nums[mid] < nums[mid + 1], it means the peak element lies on the right side of mid, so update low to mid + 1 (move the search to the right half).
-// - If nums[mid] > nums[mid + 1], it indicates that the peak element is either at mid or on the left side of mid, so update high to mid (move the search to the left half).
+// - If nums[mid] < nums[mid + 1], it means the peak element lies on the right side of mid, so update low to mid + 1 
+// (move the search to the right half).
+// - If nums[mid] > nums[mid + 1], it indicates that the peak element is either at mid or on the left side of mid, 
+// so update high to mid (move the search to the left half).
 // Continue the loop until 'low < high', which will give the index of the peak element.
-// O(log n), since the binary search reduces the search space by half in each iteration.
-// O(1), as no additional space is used other than the variables for pointers.
+// TC:- O(log n), since the binary search reduces the search space by half in each iteration.
+// SC:- O(1), as no additional space is used other than the variables for pointers.
+// Note:- This binary search is not like the usual one where we check if nums[mid] === target.
+// Instead, we are trying to find the peak element by narrowing down the search area.
+// We use low < high in the loop so that the search stops when only one element is left.
+// If we used low <= high, it could cause an infinite loop.
+// Once low and high point to the same index, it means we’ve found the peak element, so we return low as the answer.
 
 var findPeakElement = function(nums) {
   let low = 0, high = nums.length-1;

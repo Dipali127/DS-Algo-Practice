@@ -22,8 +22,9 @@ var search = function (nums, target) {
 // Optimal Approach: Using Binary Search
 // Approach:-
 // in each iteration, calculate the middle index 'mid'. If the element at 'mid' is equal to the target, return true.
-// if the values at low, mid, and high are all the same (nums[low] === nums[mid] && nums[mid] === nums[high]), this indicates duplicates,
-// which make it unclear which half is sorted. To handle this, increment low and decrement high to shrink the search range and 
+// if the values at low, mid, and high are all the same (nums[low] === nums[mid] && nums[mid] === nums[high]), 
+// this indicates duplicates, which make it unclear which half is sorted. 
+// To handle this, increment low and decrement high to shrink the search range and 
 // bypass the duplicates. For example: [3, 1, 2, 3, 3, 3, 3] — Here, low, mid, and high all have the same value.
 // If we incorrectly assume that the range from low to mid is sorted, it could lead to incorrect results. 
 // Thus, shrinking the search space helps to avoid such cases.
@@ -34,6 +35,7 @@ var search = function (nums, target) {
 // update low = mid + 1; otherwise, update high = mid - 1.
 // repeat the process until low exceeds high, and return false if the target is not found.
 // TC:- O(N), as in the worst case, due to duplicates, we may need to linearly shrink the search space.
+// But in the average or best-case, it's O(log n) when the array has few or no duplicates.
 // SC:- O(1), since no additional space is used.  
 
 var search = function (nums, target) {
