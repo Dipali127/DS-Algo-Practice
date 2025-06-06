@@ -28,7 +28,7 @@
 // Optimal Approach:
 // Approach:
 // check if the root is null. If root is null, return null as there is no tree to traverse.
-// check if the root's value is equal to either 'p' or 'q'. If it is, return root because the root node is equal to p or
+// check if the root is equal to either 'p' or 'q'. If it is, return root because the root node is equal to p or
 // q that means the another node (p or q lies under that root node and ancestor of a node is common node for both p and q). 
 // if not then, recursively search for 'p' and 'q' in the left and right subtrees.
 // -> After the recursive calls:

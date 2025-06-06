@@ -31,7 +31,8 @@ var kthSmallest = function(root, k) {
 // when "iterator === k", we have found the kth smallest element, and we store the current node's value in prev 
 // and return it.
 // TC:- O(N), to visits each node once during the inorder traversal.
-// SC:- O(N), O(H), where H is the height of the tree, which corresponds to the recursion stack size. It is O(log N) for a balanced tree and O(N) for a skewed tree.
+// SC:- O(N), O(H), where H is the height of the tree, which corresponds to the recursion stack size.
+//  It is O(log N) for a balanced tree and O(N) for a skewed tree.
 
 // How inorder start traversing the node of tree:-
 // The inorder traversal first goes all the way left down the tree until it hits a leaf (or null).

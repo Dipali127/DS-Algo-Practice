@@ -2,7 +2,8 @@
 // Optimal approach:
 // Approach:-
 // use the 'idx' variable in the main function 'buildTree' to keep track of the current index in the preorder array.
-// the preorder array gives the root node for each subtree, and increment 'idx' to move to the next root for recursive left subtree and right subtree calls.
+// the preorder array gives the root node for each subtree, and increment 'idx' to move to the next root for 
+// recursive left subtree and right subtree calls.
 // Base Case:-
 // In the 'construct' function, if 'start > end', it means there is no subtree to construct, so we return null.
 // the root value is taken from the preorder array using the current 'idx' (i.e., preorder[idx++]).

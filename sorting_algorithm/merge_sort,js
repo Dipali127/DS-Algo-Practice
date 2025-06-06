@@ -1,8 +1,8 @@
 // merge sort is based on divide and conquer algorithm which recursively divide the array into subarray until the
 // size of the array becomes one.
 // once the size of the array becomes one, merge function merge the array until the array will be completely merge.
-// TC:- O(NLOGN), as merge sort will take O(logN) complexity to divide the array into two halves and merge function
-// will take O(N) complexity to sort the array.
+// TC:- O(NLOGN), as mergeSort function will take O(logN) complexity to divide the array into two halves and 
+// merge function will take O(N) complexity to sort the array.
 // Worst,best and average case time complexity of merge sort is O(NlogN).
 // Space Complexity:- O(N) for recursively dividing the array and O(N) for
 // extra space used to hold the left and right subarrays during the merging process.
