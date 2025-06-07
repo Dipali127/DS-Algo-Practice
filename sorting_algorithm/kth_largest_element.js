@@ -17,12 +17,14 @@ function kthSmallest(arr, k){
 // Time Complexity (TC):
 // Worst Case:- O(N^2), occurs when the array is already sorted (either in ascending or descending order).
 //  In this scenario, the algorithm will go through each element in the array multiple times, leading to O(N^2).
-// Best Case Time Complexity: O(N), Explanation:
-// O(logN): Quickselect only needs to search one side of the array (either left or right of the pivot),
-// which reduces the search space by half each time, resulting in O(logN) recursive levels in the best case.
-// O(N): Partition function itself takes O(N) time, as it linearly compares and swaps elements around the pivot.
-// Therefore, the overall time complexity is O(N) + O(logN) ≈ O(N).
-// SC:- O(1), since no additional space is used.
+// Best/Average Case: O(N), Explanation:
+// - Quickselect only processes one side of the array (either left or right of the pivot),
+//   effectively reducing the search space by nearly half on each iteration.
+// - The partition function runs in O(N) time by comparing and swapping elements around the pivot.
+// - Although partition is called multiple times, only one side is processed at each step,
+//   so the overall expected time is O(N).
+// Space Complexity (SC): O(1), because the algorithm is implemented iteratively and uses no recursion stack or extra space.
+
 
 // Note:- why arr.length - k hold the kth largest value? => because, In a zero-indexed array, the k-th largest element
 // is located at the index arr.length - k. For example, if you want the first largest element, you'd need the element at

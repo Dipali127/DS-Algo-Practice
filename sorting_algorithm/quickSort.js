@@ -1,13 +1,18 @@
-// QuickSort is based on the "divide and conquer" algorithm, where the array is divided into subarrays around a pivot index.
-// To get the pivot index, the QuickSort calls the "partition function" which picks an element as a pivot and sorts the
-// array around the pivot such that all elements less than the pivot are left of the pivot, and all elements greater than
-// the pivot are right of it.
+// QuickSort is based on the "divide and conquer" algorithm, which recursively divides the array into subarrays around a pivot,
+// such that all elements to the left of the pivot are less than the pivot, and all elements to the right of the pivot are greater than the pivot.
+
+// The partition function selects the last element as the pivot and places it in its correct position,
+// such that all elements to the left of the pivot are less than it, and all elements to the right are greater.
+
 // Time Complexity (TC):
-// Worst Case:- O(N^2), occurs when the array is already sorted (either in ascending or descending order).
-// Best Case TC:- O(N log N), Explanation:
-// O(log N):- when the pivot divides the array evenly into two halves, ensuring the recursion depth is logarithmic.
-// O(N):- at each level of recursion, the partitioning step takes linear time (O(N)).
+// Worst Case: O(N^2), occurs when the array is already sorted (either in ascending or descending order).
+// Best Case TC: O(N log N)
+// Explanation:
+// O(log N): when the pivot divides the array evenly into two halves, ensuring the recursion depth is logarithmic.
+// O(N): at each level of recursion, the partitioning step takes linear time (O(N)).
 // Hence, the overall time complexity is O(N log N) in the best case.
+// Quick Sort is not stable sort.
+
 
 let arr = [10,80,30,90,40,50,70];
 let low = 0, high = arr.length -1;
