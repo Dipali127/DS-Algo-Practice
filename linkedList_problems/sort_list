@@ -43,6 +43,9 @@ var sortList = function(head) {
 // O(N), for merge the two sorted list.
 // overall, TC: O(N) + O(NLOGN) + O(N) = O(NLOGN).
 // SC: O(LOGN), due to the recursion stack.
+// here, slow points to the last node of the first list.
+// So, slow.next (i.e., mid.next) is the first node of the right half.
+
 var sortList = function (head) {
 
    // if the list is empty or has only one node, it is already sorted, so return the head
