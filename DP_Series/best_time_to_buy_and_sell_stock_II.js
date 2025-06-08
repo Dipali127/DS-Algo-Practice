@@ -4,7 +4,7 @@
 // Your task is to find the maximum profit you can achieve by buying and selling stocks.
 // Conditions:
 //  - You can complete as many transactions as you like (i.e., you can buy and sell the stock as many times as you want).
-//  - However, you can't buy a stock before selling it (i.e., you need to sell before buying again).
+//  - However, you can't buy a stock again before selling previous buying stock (you need to sell before buying again).
 // Brute force approach:- [Top - Down Approach](Using Recursion)
 // Approach:-
 // call a function 'maxProfits' which return the maximum profit.
@@ -13,35 +13,63 @@
 //  otherwise, at each day, you have two choices:
 //           - if it's a "buy" day, you can choose to either buy the stock or skip it (buy or not_buy).
 //           - if it's a "sell" day, you can choose to either sell the stock or skip it (sell or not_sell).
-//           - At each recursive step, calculate and update the maximum profit based on the decisions made (buy, sell, or skip).
+//           - At each recursive step, calculate and update the maximum profit based on the decisions made 
+//             (buy, sell, or skip).
 // once find the maximum profit, return it.
 // TC:- O(2^N), since on each day you have two options:- (buy or skip, sell or skip), 
 // the number of recursive calls grows exponentially, leading to O(2^n) time complexity.
 // SC:- O(N), the maximum depth of recursion is n because in the worst case, the recursion proceeds through all days. 
+// 
+
+// You are given an array 'prices' where 'prices[i]' represents the price of a given stock on the ith day.
+// Your task is to find the maximum profit you can achieve by buying and selling stocks.
+
+// Conditions:
+//  - You can complete as many transactions as you like (i.e., buy and sell the stock multiple times).
+//  - However, you must sell the previously bought stock before buying again.
+
+// 🔹 Brute Force Approach – [Top-Down using Recursion]
+
+// Approach:
+// Call a function 'maxProfits' which returns the maximum profit.
+// Inside the 'maxProfits' function:
+//  - Base Case: If 'day' is greater than or equal to 'n' (length of the prices array), return 0 as there are no more days left.
+//  - Otherwise, on each day, you have two choices:
+//      - If it's a "buy" day, you can either buy the stock or skip it (buy or not_buy).
+//      - If it's a "sell" day, you can either sell the stock or skip it (sell or not_sell).
+//  - At each recursive step, calculate and return the maximum profit based on the decisions made (buy, sell, or skip).
+
+// Time Complexity: O(2^n) – At each day, you have two choices (buy or skip, sell or skip), leading to exponential growth.
+// Space Complexity: O(n) – The maximum depth of recursion is n, as in the worst case, recursion proceeds through all days.
 
 var maxProfit = function (prices) {
     let n = prices.length;
     return maxProfits(prices, 0, true, n);
 };
 
-function maxProfits(prices, day, buy, n){
-    if(day >= n){
+function maxProfits(prices, day, buy, n) {
+    if (day >= n) {
         return 0;
     }
 
     let maxProfit = 0;
-    if(buy){
-        let take = maxProfits(prices, day+1, false, n) - prices[day];
-        let notTake = maxProfits(prices, day+1, true, n);
+    if (buy) {
+        // Subtract the current day's buy price from the profit you get from the next day (after buying)
+        let take = maxProfits(prices, day + 1, false, n) - prices[day];
+        // Skip buying today and consider buying on the next day
+        let notTake = maxProfits(prices, day + 1, true, n);
         maxProfit = Math.max(take, notTake);
-    }else{
-        let sell = prices[day] + maxProfits(prices, day+1, true, n);
-        let notSell = maxProfits(prices, day+1, false, n);
+    } else {
+        // Add the current day's sell price to the profit you get from the next day (after selling)
+        let sell = prices[day] + maxProfits(prices, day + 1, true, n);
+        // Skip selling today and consider selling on the next day
+        let notSell = maxProfits(prices, day + 1, false, n);
         maxProfit = Math.max(sell, notSell);
     }
 
     return maxProfit;
 }
+
 
 // Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization)
 // Approach:-
@@ -63,6 +91,11 @@ function maxProfits(prices, day, buy, n){
 // O(N):- to store the results of subproblems to avoid redundant calculations. Even though it's a 2D array,
 // it can be simplified to O(N) because the second dimension (2) is a constant factor.
 // overall, SC:- O(N).
+// We use flag ? 1 : 0 to convert the boolean flag to integer 1 or 0 for proper array indexing in dp because in JavaScript:
+// dp[day][true] is treated as dp[day]["true"], which is undefined
+// dp[day][false] is treated as dp[day]["false"], which is undefined
+
+
 
 var maxProfit = function (prices) {
     let n = prices.length;
