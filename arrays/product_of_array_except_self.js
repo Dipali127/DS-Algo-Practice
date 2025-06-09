@@ -85,31 +85,35 @@ var productExceptSelf = function(nums) {
 }
 
 // Optimal Approach:-
-// approach:
-// take a result array of size equal to the given array 'nums'.
-// store 1 at the 0th index of the result array.
-// calculate the left products for each element and store them in the result array.
-// calculate the right products for each element and multiply them with the left products stored in the result array.
-// after processing all elements and calculating the product, return the result array.
-// TC:- O(N), Explanation:- 
-// O(N):- to calculate the left products for each element.
-// O(N):- to calculate the right products for each element.
-// overall, TC:- O(N) + O(N) = O(2N) = O(N).
-// SC:- O(N), to store the products in the result array.
+// Approach:
+// Take a result array of the same size as the given array 'nums'.
+// Store 1 at the 0th index of the result array, since the left product for the 0th index value is 0,
+// but to correctly compute the left product for all other numbers (except the 0th index), we store 1 at the 0th index of the result array.
+// Calculate the left products for each element and store them in the result array.
+// Calculate the right products for each element and multiply them with the left products already stored in the result array.
+// After processing all elements and calculating the product, return the result array.
+
+// Time Complexity (TC):- O(N)
+// Explanation:-
+// O(N): to calculate the left products for each element.
+// O(N): to calculate the right products for each element.
+// Overall, TC = O(N) + O(N) = O(2N) = O(N).
+
+// Space Complexity (SC):- O(N), to store the products in the result array.
 
 var productExceptSelf = function (nums) {
     let n = nums.length;
     let result = new Array(n);
     result[0] = 1;
 
-// Calculate the left products of current index element and store in result array
+    // Calculate the left products of each index element and store them in the result array
     for (let i = 1; i < nums.length; i++) {
         result[i] = result[i - 1] * nums[i - 1];
     }
 
     let right = 1;
 
-// Calculate the right products of current index element and multiply them with the left products in result array
+    // Calculate the right products of each index element and multiply them with the left products in the result array
     for (let i = n - 1; i >= 0; i--) {
         result[i] = result[i] * right;
         right *= nums[i];
