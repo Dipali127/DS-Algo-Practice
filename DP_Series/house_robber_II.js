@@ -41,16 +41,16 @@ var rob = function(nums) {
      }
 
      // case 1:- if we will take 0rth house then we can't take the last house ATQ.
-     let take_0rth_index_house = solve(nums, 0, n-2);
+     let take_0rth_index_house = solve(nums, 0, n-1);
 
     // case 2:- if we will not take 0rth house then we can take the last house ATQ.
-    let take_1st_index_house = solve(nums, 1, n-1); 
+    let take_1st_index_house = solve(nums, 1, n); 
 
     return Math.max(take_0rth_index_house, take_1st_index_house); 
 };
 
 function solve(nums, i, n) {
-    if (i > n) {
+    if (i >= n) {
         return 0;
     }
     
@@ -73,9 +73,12 @@ function solve(nums, i, n) {
 // - Case 2: Skip the first house and consider the last house (n-1 index).
 // Base Case:- 
 // if there’s only one house, return its value (nums[0]).
-// if there are only two houses, return the maximum of the two (Math.max(nums[0], nums[1])), as we can only rob one of them.
-// use of a helper function 'solve' that computes the maximum money that can be robbed from house i to the last valid house (based on the circular constraint).
-// Use a 'dp' array to store intermediate results and avoid recalculating the maximum profit for houses that have already been processed.
+// if there are only two houses, return the maximum of the two (Math.max(nums[0], nums[1])), as we can only
+// rob one of them.
+// use of a helper function 'solve' that computes the maximum money that can be robbed from house i to the last 
+// valid house (based on the circular constraint).
+// Use a 'dp' array to store intermediate results and avoid recalculating the maximum profit for houses that 
+// have already been processed.
 // In the 'solve' function:-
 // Base Case: If 'i' exceeds or equals the number of houses, return 0 (no more houses to rob) 
 // if the result for the current house 'i' is already computed, return it from dp array
@@ -97,17 +100,17 @@ var rob = function(nums) {
 
      let dp1 = new Array(n+1).fill(-1);
      // case 1:- if we will take 0rth house then we can't take the last house ATQ.
-     let take_0rth_index_house = solve(nums, 0, dp1, n-2);
+     let take_0rth_index_house = solve(nums, 0, dp1, n-1);
 
      let dp2 = new Array(n+1).fill(-1);
     // case 2:- if we will not take 0rth house then we can take the last house ATQ.
-    let take_1st_index_house = solve(nums, 1, dp2, n-1); 
+    let take_1st_index_house = solve(nums, 1, dp2, n); 
 
     return Math.max(take_0rth_index_house, take_1st_index_house); 
 };
 
 function solve(nums, i, dp, n) {
-    if (i > n) {
+    if (i >= n) {
         return 0;
     }
     
@@ -124,59 +127,51 @@ function solve(nums, i, dp, n) {
 
 // Optimal Approach 2: [Using Bottom-Up DP] (Iterative Solution)
 // Approach:
-// Base Case: If the length of the given array nums is equal to 1, return the value of the first and
+// Base Case: If the length of the given array `nums` is equal to 1, return the value of the first and
 // only house (nums[0]), as there are no other houses to consider.
-// use a 'dp' array to store the maximum amount of money that can be stolen up to the i-th house.
-// dp[0] is initialized to 0, representing no houses to rob.
-// start iterating from index '1' and compute the maximum money that can be robbed for each house.
-// for each house i, there are two choices:
-//  - If we steal money from the current house (i.e., house i-1 in the nums array), we cannot rob the previous 
-// house. So, add the value of the current house (nums[i-1]) to dp[i-2] (i.e., nums[i-1] + dp[i-2]).
-// - If we skip the current house, the maximum amount up to the previous house (i-1) remains the same (i.e., dp[i-1]).
-// store the maximum of these two options in dp[i].
-// The value stored in dp[n-1] gives the maximum amount of money that can be stolen from houses 0 to n-2, excluding the last house.
-// Next, reset the dp array to start over for the second case where we skip the first house and rob the last house.
-// TC:- O(N), as each house is processed exactly once.
-// SC:- O(N), due to the dp array used to store computed values.
+// Otherwise, call the helper function twice:
+// - First, for the range from index 0 to n - 2 (excluding the last house)
+// - Second, for the range from index 1 to n - 1 (excluding the first house)
+// This is done because the first and last houses are adjacent, and both cannot be robbed together.
+// Inside maxMoney function:-
+// Use a 'dp' array to store the maximum amount of money that can be stolen up to the i-th house in the given range.
+// dp[0] is initialized with nums[start], representing the maximum if we rob only the first house in the current range.
+// If there is more than one house in the range, initialize dp[1] with the maximum of nums[start] and nums[start + 1].
+// Then, iterate from index 2 to the end of the range and compute the maximum money that can be robbed for each house.
+// For each house i, there are two choices:
+//  - If we rob the current house (nums[start + i]), we must skip the previous one. So we add nums[start + i] to dp[i - 2].
+//  - If we skip the current house, the total remains the same as dp[i - 1].
+// Store the maximum of these two options in dp[i].
+// The value stored in dp[len - 1] gives the maximum amount that can be stolen from the selected range of houses.
+// Finally, return the maximum of the two computed values.
+// Time Complexity: O(N), as each house is processed exactly once.
+// Space Complexity: O(N), due to the dp array used to store computed values.
+
 
 var rob = function(nums) {
     let n = nums.length;
-    // if there is only one house then stole money from there.
-    if(n === 1){
-        return nums[0];
+    if (n === 1) return nums[0];
+
+    return Math.max(maxMoney(nums, 0, n - 2), maxMoney(nums, 1, n - 1));
+
+    function maxMoney(nums, start, end) {
+        let len = end - start + 1;
+        let dp = new Array(len);
+        dp[0] = nums[start];
+        if (len > 1) {
+            dp[1] = Math.max(nums[start], nums[start + 1]);
+        }
+
+        for (let i = 2; i < len; i++) {
+            let take = nums[start + i] + dp[i - 2];
+            let skip = dp[i - 1];
+            dp[i] = Math.max(take, skip);
+        }
+
+        return dp[len - 1];
     }
-     if(n === 2){
-        return Math.max(nums[0], nums[1]);
-     }
-
-     let dp = new Array(n+1).fill(-1);
-     
-    // No House before i = 0
-     dp[0] = 0; 
-     // case 1:- if we will take 0rth house then we can't take the last house ATQ.
-    for(let i = 1; i <= n-1; i++){
-        let steal = nums[i-1] + (i-2 >= 0 ? dp[i-2] : 0);
-        let skip = dp[i-1];
-        dp[i] = Math.max(steal, skip);
-    }
-
-    let result1 = dp[n-1]; 
-
-    dp = [];
-     // No House before i = 0
-    dp[0] = 0;
-    // As we skip the first house, so first house value is 0.
-    dp[1] = 0;
-    // case 2:- if we will not take 0rth house then we can take the last house ATQ.
-    for(let i = 2; i <= n; i++){
-        let steal = nums[i-1] + (i-2 >= 0 ? dp[i-2] : 0);
-        let skip = dp[i-1];
-        dp[i] = Math.max(steal, skip);
-    }
-
-    let result2 = dp[n];
-    return Math.max(result1, result2);
 };
+
 
 // Optimal Approach 3 (Best Approach):- [Constant Space Complexity] 
 // Approach:
@@ -189,42 +184,33 @@ var rob = function(nums) {
 // - First, by considering the range of houses from index 0 to n-2 (i.e., robbing the first house).
 // - Second, by considering the range from index 1 to n-1 (i.e., skipping the first house).
 // we then return the maximum result from these two scenarios.
-// To solve for each range, we use two variables, 'prevprev' and 'prev', where:
-// - 'prevprev' stores the maximum money robbed before the previous house.
-// - 'prev' stores the maximum money robbed up to the previous house.
+// To solve for each range, we use two variables, 'moneyBeforeCurrent' and 'moneyBeforeAdjacent', where:
+// - 'moneyBeforeAdjacent' stores the maximum money robbed before the previous house.
+// - 'moneyBeforeCurrent' stores the maximum money robbed up to the previous house.
 // As we iterate through the houses in the range, calculate the maximum of two choices for each house:
-// 1. Skip the current house (thus, keep the max value in 'prev').
-// 2. Steal from the current house (add its value to 'prevprev').
+// 1. Skip the current house (thus, keep the max value in 'moneyBeforeCurrent').
+// 2. Steal from the current house (add its value to 'moneyBeforeAdjacent').
 // After processing all houses in each scenario, 'max' will contain the maximum money that can be stolen in that range.
 // TC:- O(N), since the given array 'nums' is processed twice for two ranges.
 // SC:- O(1), since no additional space is used other than the two variables.
 
 var rob = function(nums) {
     let n = nums.length;
-    // if there is only one house then stole money from there.
-    if(n === 1){
-        return nums[0];
+    if (n === 1) return nums[0];
+    if (n === 2) return Math.max(nums[0], nums[1]);
+
+    return Math.max(maxMoney(nums, 0, n - 2), maxMoney(nums, 1, n - 1));
+
+    function maxMoney(nums, start, end) {
+        let moneyBeforeCurrent = 0, moneyBeforeAdjacent = 0;
+        for (let i = start; i <= end; i++) {
+            let take = nums[i] + moneyBeforeAdjacent;
+            let notTake = moneyBeforeCurrent;
+            let maxMoney = Math.max(take, notTake);
+
+            moneyBeforeAdjacent = moneyBeforeCurrent;
+            moneyBeforeCurrent = maxMoney;
+        }
+        return moneyBeforeCurrent;
     }
-     if(n === 2){
-        return Math.max(nums[0], nums[1]);
-     }
-     
-    let take_first_house = solve(nums, 0, n-2);
-    let skip_first_house = solve(nums, 1, n-1);
-    return Math.max(take_first_house, skip_first_house);
 };
-
-function solve(nums, l, r){
-    let prevprev = 0;
-    let prev = 0;
-    let max;
-    for(let i = l; i <= r; i++){
-        let skip = prev;
-        let steal = nums[i] + prevprev;
-        max = Math.max(skip, steal);
-        prevprev = prev;
-        prev = max;
-    }
-
-    return max;
-}
