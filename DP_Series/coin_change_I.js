@@ -15,7 +15,8 @@
 // Brute force appraoch:
 // we use a recursive function 'solve' to explore all possible combinations of coins.
 // Inside the 'solve' function:
-// if amount === 0, it means we have found a valid way to make the exact amount, so we return 0 because no more coins are needed.
+// if amount === 0, it means we have found a valid way to make the exact amount, so we return 0 because 
+// no more coins are needed.
 // if amount < 0, return Infinity (indicating it's not possible to make the amount with this coin). 
 // Explanation: A negative amount indicates that we have taken more coins than required, leading to an invalid solution, 
 // so we return Infinity to avoid this path.
