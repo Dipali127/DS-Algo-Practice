@@ -13,7 +13,8 @@
 // these are valid combinations that sum up to 5, and you need to return the minimum number of coins which is 1()i.e, 5.
 
 // Brute force appraoch:
-// we use a recursive function 'solve' to explore all possible combinations of coins.
+// we use a recursive function 'solve' to explore all possible combinations of coins since we can use each coins 
+// infinite number of time.
 // Inside the 'solve' function:
 // if amount === 0, it means we have found a valid way to make the exact amount, so we return 0 because 
 // no more coins are needed.
@@ -24,10 +25,11 @@
 // and no valid combination is possible. 
 // Explanation: Returning 0 here would be incorrect, as it would suggest we have successfully formed the amount even 
 // when no more coins are left.
-// if the value of the current coin at coins[i] is greater than the remaining amount, we skip this coin and move to the next
-// one by recursively calling the solve function with i + 1.
+// if the value of the current coin at coins[i] is greater than the remaining amount, we skip this coin and move to the 
+// next one by recursively calling the solve function with i + 1.
 // Otherwise, if the current coin is less than or equal to the remaining amount, there are two possible choices:
-//  - Take the current coin: Reduce the amount by the value of coins[i] and keep the index i the same (as we can use the same coin multiple times).
+//  - Take the current coin: Reduce the amount by the value of coins[i] and keep the index i the same
+//  (as we can use the same coin multiple times).
 //  - Skip the current coin: Move to the next coin by incrementing the index i, leaving the amount unchanged.
 // the result is the minimum of both choices (i.e., taking the current coin and skipping the current coin), 
 // which ensures that we find the minimum number of coins required.
@@ -104,21 +106,25 @@ function solve(coins, i, amount, n, dp) {
     return dp[i][amount] = Math.min(take, skip);
 }
 
-// Optimal Approach (Best Approach): [Iterative Approach] 
-// use a 'dp' array to store the minimum number of coins required for each amount from 0 to the target amount.
-// Base case:- for amount 0, it takes 0 coins, so we initialize dp[0] to 0. 
-// for all other amounts, initially set their values to Infinity, indicating they cannot be formed with the given coins yet.
-// iterate through each amount from 1 to the target amount. 
-// for each amount, check if the current coin is less than or equal to the amount; if yes, 
-// then find the minimum number of coins required to make up the current amount 
-// by using Math.min(dp[i], dp[i - coin] + 1), where dp[i] is the current number of coins stored in the dp array for the current amount 
-// and dp[i - coin] gives the minimum number of coins used to make up the amount (i - coin) before adding the current coin.
-// by adding 1, we account for the current coin being used. 
-// Once we determine the minimum number of coins for the current amount, update it in dp[i]. 
-// After processing all amounts, return the 'nth' amount from the dp array, which represents the minimum number of coins used to make up the target amount.
-// if dp[amount] is still Infinity, it indicates it's not possible to make that amount with the given coins, so return -1.
-// TC:- O(N * M), where 'N' is the number of coins and 'M' is the target amount.
-// SC:- O(M), M is the target amount.
+// Optimal Approach (Best Approach): [Iterative Approach]
+// Use a 'dp' array to store the minimum number of coins required for each amount from 0 to the target amount.
+// Base case: For amount 0, it takes 0 coins, so we initialize dp[0] to 0. 
+// For all other amounts, initially set their values to Infinity, indicating that those amounts cannot yet be formed with the given coins.
+// Iterate through each amount from 1 to the target amount. 
+// For each amount, iterate through all coins. If the current coin is less than or equal to the amount,
+// update dp[i] using: dp[i] = Math.min(dp[i], dp[i - coin] + 1).
+// Here, dp[i] represents the minimum number of coins needed to make up the current amount.
+// dp[i - coin] is the minimum number of coins required to make up the remaining amount before including the current coin.
+// Adding 1 accounts for the inclusion of the current coin in the total count.
+// After processing all amounts, dp[amount] will contain the minimum number of coins required to form the target amount.
+// If dp[amount] is still Infinity, it means it's not possible to form that amount with the given coins, so return -1.
+// Time Complexity: O(N * M), where 'N' is the number of coins and 'M' is the target amount.
+// Space Complexity: O(M), where 'M' is the target amount.
+// In recursion, we start with the big problem and break it down into smaller subproblems (top-down approach).
+// In iterative DP, we solve smaller subproblems first and build up to the big one (bottom-up approach).
+// In the coin change problem, the iterative approach processes each amount from 1 to the target amount.
+// For each amount, we iterate through all coins and explore the smaller remaining amount (amount - coin) to find the 
+// minimum number of coins needed for the current amount.
 
 var coinChange = function(coins, amount) {
     let dp = new Array(amount + 1).fill(Infinity);
