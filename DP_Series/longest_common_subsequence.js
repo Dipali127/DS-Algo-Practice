@@ -8,6 +8,9 @@
 
 // Brute Force Approach: [Top-Down Approach] (Using Recursion)
 // Approach:
+// I will explore all the common subsequences using a recursive approach.
+// I will call the function to solve the bigger problem and recursively call for subproblems to get the common 
+// characters between them.
 // Call the function 'common' with arguments: string1, string2, index 'i', index 'j', and their lengths: length1, length2.
 // Inside the 'common' function:
 //   - Check if index 'i' (pointing to string1) or index 'j' (pointing to string2) is out of bounds. 
@@ -24,8 +27,9 @@
 // Explanation: For each index in string1 and string2, we have two choices — 
 // skip a character from string1 and take a character from string1 or skip character from string2 and take character from
 // string2. This leads to an exponential number of combinations, hence the exponential time complexity.
-// Space Complexity: O(min(M, N)), due to the recursion stack as the maximum depth of recursion
-// is determined by the length of the shorter string.
+// Space Complexity: O(M + N), due to the recursion stack.
+// In the worst case, the recursion can go as deep as M + N levels,
+// where M and N are the lengths of the two strings.
 
 
 var longestCommonSubsequence = function(text1, text2) {
@@ -69,9 +73,10 @@ function common(string1, string2, i, j, length1, length2){
 //   - Store the maximum of the two results in dp[i][j] and return it to avoid recalculating for the same subproblems.
 // TC: O(M * N) due to memoization (since there are M * N unique subproblems,
 // where M is the length of text1 and N is the length of text2).
-// SC: O(M * N) for the 2D dp array, and O(M + N) for the recursion stack in the worst case
-// (since each recursive call can go up to M + N depth in the call stack).
-// So, overall space complexity is O(M * N).
+// SC: O(M * N) for the 2D dp array, and O(M + N) for the recursion stack in the worst case,
+// since each recursive call can go up to M + N levels deep in the call stack.
+// So, the overall space complexity is O(M * N), as it dominates the recursion stack space.
+
 
 // Note:- "Array.from() is used to create a new array. The first argument { length: n1 } defines how many elements (rows)
 // the outer array should have. It's an array-like object that tells Array.from to create an array with n1 slots.
