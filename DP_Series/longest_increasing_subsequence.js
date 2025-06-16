@@ -16,8 +16,8 @@
 //   - 'skip': skip the current element and moving to the next. 
 // Return the maximum of the 'take' and 'skip' cases to explore all possible subsequences. 
 // TC:- O(2^N), because at each step, the function calls itself twice (for 'take' and 'skip').
-// SC:- O(N), due to the recursion stack space used during function calls.
-
+// SC:- O(N), due to the recursion function stack space used during function calls since half of the recursion function
+// (half of 2^n) stored in the stack at one time.
 // Note:- Always remember the 'take and skip' method when solving problems related to finding subsequences,
 // such as the longest increasing subsequence or longest common subsequence.
 
@@ -55,8 +55,13 @@ function solve(nums, i, prev, n){
 //   - Take the current element in the subsequence (if it's strictly larger than the previous one).
 //   - Skip the current element and move to the next.
 // Store the maximum between 'take' and 'skip' at dp[i][prev].
-// TC:- O(N^2) due to memoization (since there are N * N = N^2 subproblems).
-// SC:- O(N^2) for the 2D dp array and recursion stack space time complexity is O(N). So, overall SC is O(N^2)
+// TC: O(N^2) due to memoization — there are at most N * (N + 1) ≈ O(N^2) unique subproblems.
+//      Even though many recursive calls are avoided by memoization, each unique (i, prev) pair 
+//      is computed only once, leading to quadratic time in the worst case.
+//
+// SC: O(N^2) for the 2D dp array used in memoization, and O(N) for the recursion stack space.
+//      So the overall space complexity is O(N^2).
+
 
 var lengthOfLIS = function (nums) {
     let n = nums.length;
@@ -86,19 +91,20 @@ function solve(nums, i, prev, n, dp) {
 
 // Optimal Approach (Best Approach):- [Constant Space Complexity] 
 // Approach:-
-// initialize a 1D array 'dp' to track the length of the longest increasing subsequence ending at each index in 'nums'.
-// each value in the 'dp' array represents the length of the longest increasing subsequence ending at that index,
+// Initialize a 1D array 'dp' to track the length of the longest increasing subsequence ending at each index in 'nums'.
+// Each value in the 'dp' array represents the length of the longest increasing subsequence ending at that index,
 // and initially, the length ending at 'i' is 1 (the element itself).
 // 'longestSequence' is initialized to 0 to track the maximum length of increasing subsequences found so far.
-// iterate through each element 'i' of 'nums' and find the longest increasing sequence ending at 'i'.
-// for each element 'i', iterate through all previous elements using pointer 'j' to find the increasing subsequence.
-// if 'nums[j] < nums[i]', it means 'nums[i]' can extend the increasing subsequence ending at 'nums[j]'.
-// update 'dp[i]' to be the maximum of its current value i.e (dp[i]) and 'dp[j] + 1', which represents 
-// extending the subsequence with the current element.
-// after processing all 'j' for a given 'i', update 'longestSequence' with the maximum value found in 'dp[i]'.
-// finally, return the length of the longest increasing subsequence.
+// Iterate through each element 'i' of 'nums' and find the longest increasing sequence ending at 'i'.
+// For each element 'i', iterate through all previous elements using pointer 'j' to find the increasing subsequence.
+// If 'nums[j] < nums[i]', it means 'nums[i]' can extend the increasing subsequence ending at 'nums[j]'.
+// Update 'dp[i]' to be the maximum of its current value i.e., (dp[i]) or 'dp[j] + 1', which represents 
+// extending the subsequence with the current element from index 'j' to 'i'.
+// After processing all 'j' for a given 'i', update 'longestSequence' with the maximum value found in 'dp[i]'.
+// Finally, return the length of the longest increasing subsequence.
 // TC:- O(N^2), as there are nested loops iterating through the elements.
 // SC:- O(N), for the dp array used to store lengths of increasing subsequences.
+
 
 var lengthOfLIS = function (nums) {
     let n = nums.length;
