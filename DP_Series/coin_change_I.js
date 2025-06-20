@@ -84,7 +84,7 @@ function solve(coins, i, amount, n) {
 
 var coinChange = function(coins, amount) {
     let n = coins.length;
-    let dp = Array.from(Array(n+1), () => Array(amount+1).fill(-1))
+    let dp = Array.from({length: n+1}, () => Array(amount+1).fill(-1))
     let result = solve(coins, 0, amount, n, dp);
     return result === Infinity ? -1 : result;
 };
@@ -108,18 +108,21 @@ function solve(coins, i, amount, n, dp) {
 
 // Optimal Approach (Best Approach): [Iterative Approach]
 // Use a 'dp' array to store the minimum number of coins required for each amount from 0 to the target amount.
-// Base case: For amount 0, it takes 0 coins, so we initialize dp[0] to 0. 
-// For all other amounts, initially set their values to Infinity, indicating that those amounts cannot yet be formed with the given coins.
-// Iterate through each amount from 1 to the target amount. 
-// For each amount, iterate through all coins. If the current coin is less than or equal to the amount,
+// Base case: For amount 0, it takes 0 coins, so we initialize dp[0] = 0.
+// For all other amounts, initially set their values to Infinity, indicating that those amounts cannot yet be formed 
+// with the given coins.
+// Iterate through each amount from 1 to the target amount.
+// For each amount, iterate through all coins.
+// If the current coin is less than or equal to the amount,
 // update dp[i] using: dp[i] = Math.min(dp[i], dp[i - coin] + 1).
 // Here, dp[i] represents the minimum number of coins needed to make up the current amount.
-// dp[i - coin] is the minimum number of coins required to make up the remaining amount before including the current coin.
-// Adding 1 accounts for the inclusion of the current coin in the total count.
+// dp[i - coin] is the minimum number of coins required to make up the remaining amount before the current amount.
+// Adding 1 to dp[i - coin] accounts for including the current coin in the total number of coins required.
 // After processing all amounts, dp[amount] will contain the minimum number of coins required to form the target amount.
 // If dp[amount] is still Infinity, it means it's not possible to form that amount with the given coins, so return -1.
-// Time Complexity: O(N * M), where 'N' is the number of coins and 'M' is the target amount.
-// Space Complexity: O(M), where 'M' is the target amount.
+// Time Complexity: O(N * M), where 'N' is the number of coins and 'M' is the target amount, since we use a nested loop.
+// Space Complexity: O(M), where 'M' is the target amount, since we have created a dp array of size M.
+
 // In recursion, we start with the big problem and break it down into smaller subproblems (top-down approach).
 // In iterative DP, we solve smaller subproblems first and build up to the big one (bottom-up approach).
 // In the coin change problem, the iterative approach processes each amount from 1 to the target amount.
