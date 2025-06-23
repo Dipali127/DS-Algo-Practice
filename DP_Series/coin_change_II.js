@@ -15,7 +15,8 @@
 // Brute Force Approach: [Top-Down Approach] (Using Recursion)
 // we use a recursive function 'solve' to explore all possible combinations of coins.
 // Inside the 'solve' function:
-// - if 'amount === 0', it means we have found one valid way to make the exact 'amount', so we return 1 to count this combination.
+// - if 'amount === 0', it means we have found one valid way to make the exact 'amount', so we return 1 to count 
+//   this combination.
 // - if the index 'i' is greater than or equal to 'n', it means we have already checked all available coins, 
 //   and no valid way was found for the remaining 'amount', so we return 0.
 // - if the value of the current coin at 'coins[i]' is greater than the remaining 'amount', skip this coin
@@ -98,18 +99,26 @@ function solve(coins, i, amount, n, dp) {
 }
 
 
-// Optimal Approach2 (Best Approach): [Iterative Approach] 
-// use a 'dp' array to store the number of ways to make each amount start from 0 to the target amount.
+// Optimal Approach 2 (Best Approach): [Iterative Approach] 
+// Use a 'dp' array to store the number of ways to make each amount from 0 to the target amount.
 // Base case: for amount 0, there is 1 way to make it (using no coins), so we initialize dp[0] to 1. 
-// for all other amounts, initially set their values to 0, indicating they cannot be formed yet.
-// iterate through each coin available. 
-// for each coin, update the dp array for every amount from the coin's value up to the target amount. 
-// the inner loop starts from the value of the current coin to ensure that we do not consider amounts less than the coin value.
-// for each amount, update the number of ways to form that amount by adding the number of ways to form (current amount - coin value). 
-// this effectively counts how many ways we can form the current amount by including the current coin. 
-// once all coins have been processed, return dp[amount], which represents the total number of ways to make the target amount.
-// TC: O(N * M), where 'N' is the number of coins and 'M' is the target amount.
+// For all other amounts, initially set their values to 0, indicating they cannot be formed yet.
+// Iterate through each coin available. 
+// For each coin, iterate through each amount starting from that coin, which ensures that we do not consider amounts 
+// less than the current coin.
+// For each amount (starting from the current coin), update that amount. Since the coin is less than or equal to the
+// amount, it means we can include the current coin to make all amounts from the current coin up to the target amount.
+// This effectively counts how many ways we can form the current amount by including the current coin. 
+// Once all coins have been processed, return dp[amount], which represents the total number of ways to make the target amount.
+// TC: O(N * M), where 'N' is the number of coins and 'M' is the target amount, due to the use of a nested loop.
 // SC: O(M), where 'M' is the target amount.
+// Note: Counting the number of all possible ways means counting each unique way, which refers to combinations, not permutations.
+// Example:
+// Permutations: To make amount 5 with coins [1, 2], both [1, 1, 2] and [2, 1, 1] are different.
+// Combinations: To make amount 5 with coins [1, 2], [1, 1, 2] and [2, 1, 1] are considered the same — only one is counted.
+// In this problem, to ensure that we count each combination only once, we iterate through each coin first,
+// then for each amount starting from that coin to the target amount, we update the dp array.
+
 
 var change = function(amount, coins) {
     let dp = new Array(amount + 1).fill(0);

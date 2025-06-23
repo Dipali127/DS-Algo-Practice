@@ -41,16 +41,16 @@ var rob = function(nums) {
      }
 
      // case 1:- if we will take 0rth house then we can't take the last house ATQ.
-     let take_0rth_index_house = solve(nums, 0, n-1);
+     let take_0rth_index_house = solve(nums, 0, n-2);
 
     // case 2:- if we will not take 0rth house then we can take the last house ATQ.
-    let take_1st_index_house = solve(nums, 1, n); 
+    let take_1st_index_house = solve(nums, 1, n-1); 
 
     return Math.max(take_0rth_index_house, take_1st_index_house); 
 };
 
 function solve(nums, i, n) {
-    if (i >= n) {
+    if (i > n) {
         return 0;
     }
     
@@ -100,17 +100,17 @@ var rob = function(nums) {
 
      let dp1 = new Array(n+1).fill(-1);
      // case 1:- if we will take 0rth house then we can't take the last house ATQ.
-     let take_0rth_index_house = solve(nums, 0, dp1, n-1);
+     let take_0rth_index_house = solve(nums, 0, dp1, n-2);
 
      let dp2 = new Array(n+1).fill(-1);
     // case 2:- if we will not take 0rth house then we can take the last house ATQ.
-    let take_1st_index_house = solve(nums, 1, dp2, n); 
+    let take_1st_index_house = solve(nums, 1, dp2, n-1); 
 
     return Math.max(take_0rth_index_house, take_1st_index_house); 
 };
 
 function solve(nums, i, dp, n) {
-    if (i >= n) {
+    if (i > n) {
         return 0;
     }
     
