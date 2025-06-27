@@ -90,20 +90,21 @@ function solve(nums, i, prev, n, dp) {
 }
 
 // Optimal Approach (Best Approach):- [Constant Space Complexity] 
-// Approach:-
-// Initialize a 1D array 'dp' to track the length of the longest increasing subsequence ending at each index in 'nums'.
-// Each value in the 'dp' array represents the length of the longest increasing subsequence ending at that index,
-// and initially, the length ending at 'i' is 1 (the element itself).
-// 'longestSequence' is initialized to 0 to track the maximum length of increasing subsequences found so far.
-// Iterate through each element 'i' of 'nums' and find the longest increasing sequence ending at 'i'.
-// For each element 'i', iterate through all previous elements using pointer 'j' to find the increasing subsequence.
-// If 'nums[j] < nums[i]', it means 'nums[i]' can extend the increasing subsequence ending at 'nums[j]'.
-// Update 'dp[i]' to be the maximum of its current value i.e., (dp[i]) or 'dp[j] + 1', which represents 
-// extending the subsequence with the current element from index 'j' to 'i'.
-// After processing all 'j' for a given 'i', update 'longestSequence' with the maximum value found in 'dp[i]'.
-// Finally, return the length of the longest increasing subsequence.
-// TC:- O(N^2), as there are nested loops iterating through the elements.
-// SC:- O(N), for the dp array used to store lengths of increasing subsequences.
+// Approach:
+// Initialize a 1D array 'dp' where dp[i] represents the length of the longest increasing subsequence 
+// ending at index 'i' in the 'nums' array.
+// Initially, each element is set to 1, since the minimum LIS ending at any index is the element itself.
+// A variable 'longestSequence' is initialized to 0 to track the maximum length found during iteration.
+// Iterate through each element 'i' in the array:
+//   For each 'i', check all previous elements (from 0 to i - 1) using index 'j'.
+//   If nums[j] < nums[i], it means nums[i] can extend the increasing subsequence ending at nums[j].
+//   Update dp[i] = max(dp[i], dp[j] + 1), which represents extending that subsequence by including nums[i].
+// After checking all j for the current i, update longestSequence = max(longestSequence, dp[i]).
+// Finally, return longestSequence, which holds the length of the longest increasing subsequence.
+// Note: When we extend the subsequence from index j to i, it does not mean we include all values between j and i — 
+//       only those that form a valid increasing subsequence.
+// Time Complexity: O(N^2), due to the nested loop (i and j).
+// Space Complexity: O(N), for the dp array.
 
 
 var lengthOfLIS = function (nums) {

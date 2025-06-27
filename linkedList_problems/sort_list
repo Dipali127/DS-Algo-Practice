@@ -45,6 +45,9 @@ var sortList = function(head) {
 // SC: O(LOGN), due to the recursion stack.
 // here, slow points to the last node of the first list.
 // So, slow.next (i.e., mid.next) is the first node of the right half.
+// Note:- We reuse the same variable names left and right inside each recursive function call — but they point to
+// different sublists at each level.
+// Once the merge is done, the sorted sublist is returned to the previous level's left or right.
 
 var sortList = function (head) {
 
