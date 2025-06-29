@@ -34,7 +34,7 @@ var removeNthFromEnd = function(head, n) {
     return head;
 };
 
-// Optimal appraoch:- slow and fast pointer.
+// Optimal appraoch:- using Floyd's Tortoise and Hare Algorithm (slow and fast pointer).
 // initialize two pointers, fast and slow, both pointing to the head of the list.
 // i will move the fast pointer to n steps which ensures that when the fast pointer reaches the end
 // the slow pointer will be at the node just before the node we have to remove.

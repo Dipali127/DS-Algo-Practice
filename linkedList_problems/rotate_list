@@ -1,9 +1,10 @@
  // Leetcode Problem:
  // approach:-
 // check a case where list is empty or k is equal to zero means no rotation. if so, then return head.
-// traverse the list to calculate its length and find the tail node. 
-// adjust k to handle cases where k is greater than the length of the list.
-// connect the tail node back to the head to form a circular list.
+// traverse the list to calculate its length and find the tail node to connect tail node with head ofthe linked list 
+// which will be the new rotated linked list. 
+// adjust k to handle the case where k is greater than the length of the list.
+// connect the tail node back to the head to form a right rotated linked list.
 // find the new tail and new head based on the new value of k.
 // disconnect the new tail from the new head to form the rotated singly list.
 // TC: O(N), Explanation:-
@@ -12,40 +13,31 @@
 // overall, TC : O(N) + O(N-K) = O(N).
 // SC: O(1), as no extra space used.
 
-const rotateRight = (head, k) => {
+var rotateRight = function(head, k) {
     if (head === null || k === 0) {
         return head;
     }
 
+    // Step 1: Compute the length and get the tail
     let length = 1;
     let tail = head;
-    // ensure that tail not reach beyond the null 
-    while (tail.next != null) {
-        length++;
+    while (tail.next !== null) {
         tail = tail.next;
+        length++;
     }
 
-    // if k is divisible by the length of the given list then simply return head of the list.
-    if (k % length === 0) {
-        return head;
-    }
-
-    k = k % length;
-    if (k === 0) {
-        return head;
-    }
-
-    // make circular list
+    // Step 2: Make it a circular list
     tail.next = head;
 
-    let stepsToNewHead = length - k;
+    // Step 3: Find the new head after rotation
+    k = k % length;
     let newTail = head;
-    for (let i = 1; i < stepsToNewHead; i++) {
+    for (let i = 1; i < length - k; i++) {
         newTail = newTail.next;
     }
-    let newHead = newTail.next;
 
-    // Break the circular list
+    // Step 4: Break the circle
+    const newHead = newTail.next;
     newTail.next = null;
 
     return newHead;

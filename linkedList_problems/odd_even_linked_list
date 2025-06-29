@@ -64,8 +64,9 @@
     let even = head.next;
     let evenNodeHead = even;
 
-// ensure that even should not be null as well even's next should not be null because if
-// even hasn't reach to null then odd cannot because odd is at front of even.
+// ensure that even should not be null as well even's next should not be null because If `even` hasn't reached the end 
+// of the list, then `odd` also cannot be null, i because odd is at front of even.
+
     while(even !== null && even.next !== null){
         odd.next = odd.next.next;
         even.next = even.next.next;
