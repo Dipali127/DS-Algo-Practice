@@ -1,7 +1,7 @@
 // Leetcode Problem:
 // appraoch:- first, iterate through each row of given grid(matrix).
 // while iterating each row of given matrix, use of set to encounter value in each row meanwhile check
-// if current iterated value of a row is a number which is already present in the set then return
+// if current iterated value of a row is a number which is already present in the set then 
 // return false from there only as the row contain duplicate. likewise, iterate through each column
 // of given grid(matrix) and while iterating column again use of set to encounter value in each column
 //  meanwhile check if current iterated value of a column is a number which is already present in the
@@ -14,7 +14,7 @@
 // If the number is not in the Set, add it to the Set.
 // The time complexity remains O(1), because we are iterating over a fixed number of cells (81) which
 // we have 9 rows and 9 columns.
-// The space complexity is also O(1), as we are using a fixed amount of additional space
+// The space complexity is also O(1), as we are using a fixed amount of additional space (has set)
 // (3 arrays of 9 blocks).
 
 var isValidSudoku = function (board) {

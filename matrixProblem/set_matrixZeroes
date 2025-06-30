@@ -14,8 +14,10 @@
 
 // Time Complexity: O(N^2)
 // - O(N^2) due to the first nested loop that traverses the given matrix to mark the rows and columns containing zeroes.
-// - O(N^2) due to the second nested loop that updates the matrix based on the marked rows (in the worst case, all rows might be updated).
-// O(N^2) due to the third nested loop that updates the matrix based on the marked columns (in the worst case, all columns might be updated).
+// - O(N^2) due to the second nested loop that updates the matrix based on the marked rows 
+// (in the worst case, all rows might be updated when the given matrix all row contain 0).
+// O(N^2) due to the third nested loop that updates the matrix based on the marked columns 
+// (in the worst case, all columns might be updated when the given matrix all column contain 0).
 // - Overall TC: O(N^2).
 
 // Space Complexity: O(N + M)

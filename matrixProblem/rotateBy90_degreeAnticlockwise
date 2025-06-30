@@ -1,7 +1,7 @@
 // GFG PROBLEM:
 // approach:- first take transpose of a matrix by swapping the the elements at positions (i, j) with (j, i).
 // this will change the rows into colums and colums into rows.
-// after transpose, iterate over half of the row and swap the row . 
+// after transpose, iterate over half of the row and swap each values of the row . 
 // swap elements from the start of each row with elements from the end of the row.
 // this will effectively rotate the given matrix by 90 degree anticlockwise.
 // TC:O(N^2), explanation:- O(N^2) for traspose of matrix and O(N^2) for reversing the rows.
