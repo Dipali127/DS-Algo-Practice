@@ -4,8 +4,8 @@
 // complexity i.e; O(N^2), i will sort the intervals by their start so that all the overlapping intervals are 
 // adjacent to each other then i will store the first intervals in a range arrray. 
 // Then, I will iterate through each of the remaining intervals. While iterating, I will check 
-// if the current interval overlaps with the interval stored in the `range` array. If there is 
-// an overlap, I will update the `range` array's start and end times.
+// if the current interval overlaps with the previous interval(stored in the `range` array).
+// If there is an overlap, I will update the `range` array's start and end times.
 // If there is no overlap, I will add the current `range` to the result array and update the 
 // `range` with the current iterated interval.
 // This approach ensures that I only need a single iteration through the intervals after sorting, 

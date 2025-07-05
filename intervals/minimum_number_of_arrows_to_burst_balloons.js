@@ -9,8 +9,8 @@
 
 // Optimal Approach:
 // Approach:-
-// sort the balloons by their starting positions (xstart) so that the overlapping balloons are adjacent to each other which will
-// help to find the balloons which can be burst by a single arrow. 
+// sort the balloons by their starting positions (xstart) so that the overlapping balloons are adjacent to each other
+// which will help to find the balloons which can be burst by a single arrow. 
 // initialize a variable 'prev' to represent the interval of the first balloon in the sorted list.
 // This variable keeps track of the overlapping region where all previous balloons can be burst by a single arrow.
 // initialize 'count' to 1 because at least one arrow is required to burst the first balloon.

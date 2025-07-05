@@ -14,11 +14,14 @@
 // approach:-
 // convert the given path string into an array of directory names or elements by splitting it with the '/' delimiter.
 // iterate through this array. 
-//    - if the current element is a single period '.' (current directory) or an empty string (indicating multiple slashes), skip it.
-//    - if the current element is '..', pop the top of the stack (move up to the parent directory) unless the stack is already empty.
+//    - if the current element is a single period '.' (current directory) or an empty string (indicating multiple slashes),
+//      skip it.
+//    - if the current element is '..', pop the top of the stack (move up to the parent directory) unless the stack is 
+//     already empty.
 //    - otherwise, treat the element as a valid directory or file name and push it onto the stack.
 // after processing all elements, if the stack is empty, return '/' (the root directory).
-// if the stack is not empty, construct the canonical path by joining the elements in the stack with '/' and ensure the path starts with a '/'.
+// if the stack is not empty, construct the canonical path by joining the elements in the stack with '/' and ensure the 
+// path starts with a '/'.
 // TC:- O(N), Explanation:
 // -> O(N): Converting the given path string into an array.
 // -> O(N): Iterating through the array to process each element.
@@ -26,7 +29,7 @@
 // Overall, TC:- : O(3N) = O(N).
 // SC:- O(N) for storing valid directories or file names in the stack. 
 // Note:- converting the path string into array using delimeter '/' equal to path = "/home//foo/" , const parts = path.split('/') => 
-    // ["", "home", "", "foo", ""]
+    // ["", "home", "", "foo", ""], before first / there is nothing so split  method add empty string
 // Since strings in JavaScript are immutable, each time I create a new string by popping a file path from the top of
 // the stack, adding a forward slash in front of it, and then prepending this new string to the existing file path 
 // stored in the result string.
