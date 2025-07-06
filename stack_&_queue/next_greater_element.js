@@ -44,9 +44,10 @@ class Solution {
 // TC: O(N), as we iterate through the array 'arr' once.
 // Each element is pushed onto the stack once and popped at most once, 
 // resulting in an overall linear time complexity.
+// The number of push and pop operations is less than or equal to 2N.
 
 // SC: O(N), as we use an auxiliary stack to store elements. 
-// In the worst case (when the array is strictly decreasing), 
+// In the worst case (when the array is strictly increasing), 
 // the stack may store up to 'N' elements simultaneously.
 
 class Solution {
