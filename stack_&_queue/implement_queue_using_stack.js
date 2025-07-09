@@ -1,10 +1,11 @@
 // Leetcode Problem 232: Implement Queue using Stacks
 // A queue is a linear data structure that follows the FIFO (First In, First Out) principle. 
-// This means the element inserted first is the one removed from the queue first.
+// This means the element inserted first in the queue is the one who removed from the queue first.
 // A real-life example of a queue is a line of patients in a hospital, where the patient who is first in line 
 // is the one who visits the doctor first for a checkup.
 // Queue is a data structure, but it does not have any built-in structure to store elements.
-// We have to use some other data structure to implement and store elements in the queue, such as an array, stack, or linked list.
+// We have to use some other data structure to implement and store elements in the queue, such as an array, stack, or 
+// linked list.
 
 // Optimal Approach:
 // To implement a queue using stacks, I have used two stacks.
@@ -15,15 +16,15 @@
 // pop method:- Removing an element from a stack is different from removing an element from a queue.
 // In a stack, we remove an element from the top (last element), whereas in a queue, we remove an element from the front.
 // So, to remove the front value of the queue using two stacks, I will first move all elements from stack1 to stack2,
-// pop the top element from stack2 (which represents the front of the queue), and then move the remaining elements back to stack1.
+// pop the top element from stack2 (which represents the front of the queue), and then move the remaining elements back 
+// to stack1.
 
 // peek method:- Getting the front element of the queue using stacks is different from using a regular queue.
-// In a stack, we remove elements from the top (LIFO), whereas in a queue, we access the front (FIFO),
+// In a stack, we access elements from the top (LIFO), whereas in a queue, we access the front (FIFO),
 // which corresponds to the bottom of the stack.
 // So, to retrieve the front of the queue, I move all elements from stack1 to stack2,
 // read the top of stack2 (which represents the front of the queue), and then restore the elements back to stack1.
 // Unlike pop, peek does not remove the element — it just returns it.
-
 
 // isEmpty:- Just check if stack1 is empty.
 // If stack1.length is 0, it means the queue is empty; otherwise, it is not empty.
@@ -36,7 +37,7 @@
 // MyQueue is a constructor function in JavaScript. 
 // When we create a new stack using new MyQueue(), JavaScript automatically creates an object for it.
 // Instead of adding methods like push, pop, top, and empty directly to each new object, JavaScript adds them to 
-// MyQueue. prototype.
+// MyQueue.prototype.
 // This way, all stack objects share the same methods instead of each having its own copy, which saves memory. 
 // When we call a method on a stack object, JavaScript first looks for it in the object itself. If it’s not there,
 // it checks the prototype and finds the method there. This is how JavaScript allows multiple objects to use the same

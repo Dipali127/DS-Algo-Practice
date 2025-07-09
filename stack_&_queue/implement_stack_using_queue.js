@@ -1,9 +1,10 @@
 // leetcode problem:- 225
 // A stack is a linear data structure that follows the LIFO (Last In, First Out) principle.
-// This means the last element inserted onto the stack is the first one removed from it.
+// This means that, the element inserted first onto the stack is the element who removed at last.
 // A real-life example of a stack is a pile of books, where you can only pick and remove the topmost book.
 // Stack is a data structure, but it does not have any built-in structure to store elements.
-// We have to use some other data structure to implement and store elements in the stack such as array, queue or linked list.
+// We have to use some other data structure to implement and store elements in the stack such as array, queue or linked 
+// list.
 
 // optimal approach:
 // To implement a stack using a queue, I have used two queues. 
@@ -16,7 +17,7 @@
 // So, to remove a value from the stack using a queue, I will first add q1.length - 1 values to q2, 
 // then assign the last remaining value of q1 to popValue, and finally, I will add back the q2 values to q1. 
 
-// top element:- Removing an element from a queue is different from removing an element from a stack. 
+// top element:- accessing an element from a queue is different from accessing an element from a stack. 
 // In a queue, we remove an element from the front, whereas in a stack, we remove the element from the top (last element).
 // So, to get the top value of the stack using a queue, I will first add q1.length - 1 values to q2, 
 // then assign the last remaining value of q1 to topValue, add topValue back to q2, 
