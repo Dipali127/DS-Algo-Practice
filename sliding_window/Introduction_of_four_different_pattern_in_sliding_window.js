@@ -112,7 +112,7 @@ function findWindowsize(arr2,Sum){
 // between maxWindow and the size of the current window (j-i+1).
 // If sum exceeds Sum, shrink the window from the left by moving i and subtracting arr2[i]
 // from sum until sum is less than or equal to Sum.
-// Time Complexity: O(N^2), as we only pass through the array once.
+// Time Complexity: O(N), as we only pass through the array once.
 // Space Complexity: O(1), as no additional space is used.
 
 let arr3 = [2,5,1,7,10], Sum1 = 14;

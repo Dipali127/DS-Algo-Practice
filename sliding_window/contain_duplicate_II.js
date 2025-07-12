@@ -17,48 +17,38 @@ var containsNearbyDuplicate = function (arr, k) {
     }
     return false;
 };
-// Optimal approach: using sliding window and hash map
-// Approach:
-// Instead of using a nested loop to find duplicate elements, which increases time complexity, 
-// I will use a sliding window and a hash map to optimize the solution where, 
-// sliding window will always contain at most 'k' elements And hash map will store the current iterated value with its
-// index, which helps in detecting duplicates efficiently. 
-// While iterating through the given array, i will check if the current value at 'nums[end]' is already present in 
-// the hash map; if it is, compare the distance between the current index 'end' and the index stored in the hash map.
-// but if the distance is less than or equal to 'k', return true (since a duplicate exists within the required range).
-// Otherwise, update the hash map with the current index 'end' of 'nums[end]'.
-// To maintain the window size, if the window exceeds 'k' elements:
-//  - Move the pointer 'start' to the right.
-//  - Remove 'nums[start]' from the hash map to ensure only 'k' recent elements are stored in the hash map.
-// Continue this process until all elements are processed.
 
-// Time Complexity: O(N), where N is the length of the array, as each element is traversed once.
-// Space Complexity: O(min(N, k)), where N is the length of the array and k is the window size.
-// The hash map stores at most k unique elements at any given time because we remove the oldest element once 
-// the window size exceeds k.
-// In the worst case, when k ≥ N, the hash map could store up to N elements, making the space complexity O(N).
-// Otherwise, when k < N, the hash map stores at most k elements, leading to a space complexity of O(k).
-// Thus, the space complexity is O(min(N, k)).
+// Optimal Approach: Using Sliding Window and Set
+// Approach:
+// Instead of using a nested loop to find duplicate elements, which results in a time complexity of O(N²), 
+// I will use a sliding window approach combined with a has set where the hash set maintain the window size of k.
+// While iterating through the array, I will check if the current value 'nums[i]' already exists in the hash set:
+// - If it is, that means a duplicate exists then return true.
+// - If it not, add 'nums[i]' to the has set.
+// To maintain the window size of at most 'k', 
+// - If the Set size exceeds 'k', remove the element at position 'i - k' from the Set, 
+//   which will shrink the sliding window from left.
+// Continue this process for all elements in the array.
+
+// Time Complexity: O(N), Since each element is added and removed from the hash set at most once, where 'N' is the
+//  number of elements in the array.
+// Space Complexity: O(min(N, k))
+// - The has set contains at most 'k' elements at any time.
+// - In the worst case, when k ≥ N, the has set may store up to N elements.
+// - Otherwise, when k < N, the hash set stores only the last 'k' elements .
+// - So, overall space complexity is O(min(N, k)).
 
 var containsNearbyDuplicate = function(nums, k) {
-    let map = new Map();
-    let start = 0, end = 0;
-    while(end < nums.length){
-        if(map.has(nums[end])){
-            if(Math.abs(end - map.get(nums[end])) <= k){
-                return true;
-            }
-        }else{
-            map.set(nums[end], end);
-        }
+    let set = new Set();
 
-        if(end - start >= k){
-            map.delete(nums[start]);
-            start++;
-        }
+    for (let i = 0; i < nums.length; i++) {
+        if (set.has(nums[i])) return true;
 
-        end++;
+        set.add(nums[i]);
+        if (set.size > k) {
+            set.delete(nums[i - k]);
+        }
     }
 
     return false;
-};
+}
