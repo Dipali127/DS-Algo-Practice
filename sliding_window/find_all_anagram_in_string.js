@@ -2,10 +2,11 @@
 // brute force approach:
 // approach:-
 // consider each possible substring in string 's' that has the same length as string 'p'.
-// for each substring, create a map to store the frequency of each character in string 'p'.
+// for each substring, create a hash map to store the frequency of each character in string 'p'.
 // iterate through the current substring of 's' starting from the current index and 
-// check if a character exists in the map, decrement its count. 
-// after traversing the current substring, check if all values in the map are zero. it means the current substring is an anagram of string 'p'.
+// check if a character exists in the hash map, decrement its count. 
+// after traversing the current substring, check if all values in the hash map are zero. 
+// it means the current substring is an anagram of string 'p'.
 // if an anagram is found, add the starting index of the current substring to the result array.
 // once, found all the starting index in string 's' which is an anagram of string 'p' return resultArray.
 // TC: O(N * M), where N is the length of 's' and M is the length of 'p'.
