@@ -53,12 +53,12 @@ var maxSubarrayLength = function (nums, k) {
 // from the left until the condition is satisfied again (i.e., the frequency of the element becomes 
 // less than or equal to `k`).
 // Before shrinking the window, remove that current subarray element from the hash map since the element pointed 
-// by 'i' pointer in no longer part of the new window and increment pointer `i`.
+// by 'i' pointer is no longer part of the new window and increment pointer `i`.
 // Continue the above process until pointer `j` reaches the end of the array `nums`.
 // After checking all possible subarrays, return the lengthOflongestSubarray.
-
 // TC: O(N), as both pointers `i` and `j` traverse the array only once.
-// SC: O(N), because we use a map to store the frequency of elements of the window, which in the worst case, could store all elements in the array.
+// SC: O(N), because we use a map to store the frequency of elements of the window, which in the worst case, could store 
+// all elements in the array.
 
 var maxSubarrayLength = function (nums, k) {
     let map = new Map();
