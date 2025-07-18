@@ -3,12 +3,12 @@
 // approach:-
 // Consider each possible substring and for each substring iterate through each them and store their characters in hash set.
 // while iterating throguh current substring if duplicate character found then break loop.
-// After breaking, compare the current substring's length (size of the Set) with the previously stored substring length (`longestSubstring`).
+// After breaking, compare the current substring's length (size of the Set) with the previously stored substring length(`longestSubstring`).
 // If the current length is greater, update `longestSubstring`.
 // Finally, return the value of `longestSubstring`, which holds the maximum length of a substring without repeating characters.
 // Time Complexity: O(N^2), as i have use of nested loops to consider all possible substrings.
-// Space Complexity: O(N), to store the current substring characters in a hash set.
-
+// Space Complexity: O(N), to store the  characters in a hash set and In the worst case, all characters in a substring
+//  could be unique.
 // Note:- 
 // Use -Infinity if you want to handle cases where you might not find any valid substrings and need to guarantee that the first valid 
 // substring will always update the initial value.
@@ -49,7 +49,8 @@ var lengthOfLongestSubstring = function (string) {
 // removing the character pointed to by `start` from the hash Set.
 // and continues this process until the `end` pointer has iterated through the entire string.
 // Finally, I will return the length of the longest substring without repeating characters.
-// Time Complexity: O(N), where N is the length of the input string as each character is processed at most twice.
+// Time Complexity: O(N), where N is the length of the input string as each character is processed at most twice using 
+// both 's' and 'j' pointer.
 // Space Complexity: O(N), as we store unique characters in a Set.
 
 var lengthOfLongestSubstring = function (s) {

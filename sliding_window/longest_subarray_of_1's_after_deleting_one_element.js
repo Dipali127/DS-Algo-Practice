@@ -1,47 +1,38 @@
-// Leetcode Problem:- 1493
-// Brute force approach:-
-// approach:-
-// iterate through each possible subarray and for each subarray, check if the starting element of each subarray 
-// contain value zero. if it is, increment countZero, which tracks the total number of zeros in the array.
-// and we need this count because if there are no zeros in the array, the longest subarray of 1's after
-// deleting one element will be array.length - 1, as deleting any element will give us the entire array of 1's.
-// but if the starting index of the current subarray contain value zero, compute the longest subarray of 1's by skipping 
-// that particular zero meanwhile update the maximum length for current subarrays.
-// finally, return the longest subarray of 1's after deleting one element.
-// TC:- O(N^2), since we use nested loop to calculate the longest subarray of 1's after deleting one element.
-// SC:- O(1), as there is no additional space is used apart from few variables. 
+// Leetcode Problem: 1493
+// Brute Force Approach:
+// Approach:
+// Consider each possible subarray, and for each subarray take a variable `countZero` initially initialized to 0 
+// to keep track of the number of zeroes in the current subarray.
+// Iterate through the current subarray, and while iterating:
+// Check if the current number in the subarray is 0. If it is, increment `countZero` by 1.
+// Then check if `countZero` is greater than 1. If so, break the current subarray loop, 
+// since we are allowed to remove only one element from the array (as per the given problem).
+// But if `countZero` is less than or equal to 1, then update `maxLength` with the maximum 
+// between `maxLength` and `j - i`, where `j - i` gives the length of the current subarray after removing one element
+// (since we need to delete one element).
+// Time Complexity: O(N^2), since we use a nested loop to calculate the longest subarray of 1's after deleting one element.
+// Space Complexity: O(1), as no additional space is used apart from a few variables.
 
-var longestSubarray = function (nums) {
-    const n = nums.length;
-    let result = 0;
-    let countZero = 0;
-    for (let i = 0; i < n; i++) {
-        if (nums[i] === 0) {
-            countZero++;
-            let currLength = 0;
-            let maxLength = 0;
-
-            for (let j = 0; j < n; j++) {
-                if (j === i) continue;
-
-                if (nums[j] === 1) {
-                    currLength++;
-                    maxLength = Math.max(maxLength, currLength);
-                } else {
-                    currLength = 0;
-                }
+var longestSubarray = function(nums){
+    let maxLength =  0;
+    for(let i = 0; i < nums.length; i++){
+        let countZero = 0;
+        for(let j = i; j < nums.length; j++){
+            if(nums[j] === 0){
+                countZero++;
+            }
+                
+            if(countZero > 1){
+                break;
             }
 
-            result = Math.max(result, maxLength);
+            maxLength = Math.max(maxLength, j - i);
         }
     }
 
-    if (countZero === 0) {
-        return n - 1;
-    }
+    return maxLength;  
+}
 
-    return result;
-};
 
 // Optimal Approach:
 // approach:
@@ -51,8 +42,8 @@ var longestSubarray = function (nums) {
 // move the pointer 'i' to the right until 'countZero' becomes 1. it ensures that the window contains at most one zero,
 // which is valid for finding the longest subarray of 1's after deleting one zero because that one zero again deleted 
 // from current window while computing length using j - i.
-// for each position of 'j', calculate the length of the current valid window as 'j - i' which will count exact number of
-// 1 in the current window.
+// for each position of 'j', calculate the length of the current valid window as 'j - i' which gives the exact number
+//  of 1's in the current window after removing one element (i.e., the zero).
 // update 'maxLength' with the maximum value between the current 'maxLength' and the length of the current window(j-i). 
 // TC:- O(N), since we traverse the array once with two pointers (i and j).
 // SC:- O(1), since no additional space is used other than the few variables.
