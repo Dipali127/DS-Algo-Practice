@@ -28,11 +28,11 @@ var longestOnes = function(nums, k) {
 };
 
 // Optimal Approach: Using the sliding window technique
-// Instead of iterating through all possible subarrays (which increases time complexity to O(N^2)),
-// use a sliding window with two pointers. Initially, both pointers point to the start of the array.
+// Instead of iterating through all possible subarrays (which increases the time complexity to O(N^2)),
+// we use a sliding window with two pointers. Initially, both pointers point to the start of the array.
 // Expand the window using the 'end' pointer. While iterating through the window,
 // if the value at 'end' is 0, increment 'countZero' by 1.
-// If 'countZero' exceeds 'k', shrink the window from the left by moving the 'start' pointer forward
+// If 'countZero' exceeds 'k', shrink the window from the left by moving the 'start' pointer forward,
 // and decrement 'countZero' if the element at 'start' is 0.
 // Update 'maxLength' with the size of the current valid window.
 // Once the iteration completes, return 'maxLength'.
@@ -41,20 +41,21 @@ var longestOnes = function(nums, k) {
 var longestOnes = function(nums, k){
     let maxLength = 0, countZero = 0;
     let start = 0, end = 0;
+
     while(end < nums.length){
         if(nums[end] === 0){
             countZero++;
         }
-        
-        if(countZero > k){
+
+        // Shrink window until the number of zeros is at most k
+        while(countZero > k){
             if(nums[start] === 0){
                 countZero--;
             }
-
             start++;
         }
 
-        maxLength = Math.max(maxLength, end-start+1);
+        maxLength = Math.max(maxLength, end - start + 1);
         end++;
     }
 
