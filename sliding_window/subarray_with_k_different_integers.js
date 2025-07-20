@@ -2,15 +2,15 @@
 // Brute force approach:-
 // approach:-
 // consider all possible subarrays and, for each subarray, store the frequency of its elements in a hash map. 
-// And for each subarray, we check if the map's size (i.e., the number of distinct elements) is equal to 'k'. 
+// And for each subarray, check if the map's size (i.e., the number of distinct elements) is equal to 'k'. 
 // if the map's size is equal to 'k', it means the subarray has exactly 'k' distinct elements, so we 
 // increment the `totalSubarray` count.
-// after considering all possible subarrays, we return the total number of subarrays where the number 
+// after considering all possible subarrays, i will return the total number of subarrays where the number 
 // of distinct elements is exactly 'k'. 
 // TC: O(N^2), Explanation:-
 // O(N) to iterate through the starting index of each subarray.
 // O(N) to iterate through all the elements of the current subarray to store their frequency in hash map and in worst
-// case it might possible that inner loop iterate through each character of the given string.
+// case it could be possible that inner loop iterate through each character of the given string.
 // Overall TC: O(N) * O(N) = O(N^2).
 // SC: O(N), Since there is a use of hash map to store the frequency of elements of each subarray, and in the 
 // worst case, the map can contain up to 'N' elements.
@@ -43,8 +43,9 @@ var subarraysWithKDistinct = function (nums, k) {
 //   which includes all subarrays with counts from 0 up to k.
 // - The second call returns the count of subarrays with at most 'k - 1' distinct elements, 
 //   which includes all subarrays with counts from 0 up to k - 1.
-// The difference between these two function call count gives the number of subarrays with exactly 'k' 
-// distinct elements by eliminating all other subarrays.
+// The difference between these two function calls gives the number of subarrays with exactly 'k' 
+// distinct elements by eliminating all common subarrays and leaving only those where the count 
+// of unique elements is equal to k.
 // Inside the slidingWindow function:
 // - Use two pointers 'start' and 'end' to represent the current window's start and end indices.
 // - Use a hash map to store the frequency of elements within the current window.

@@ -5,7 +5,7 @@
 // For example, the string "abc" has permutations like "abc", "acb", "bac", "bca", "cab", and "cba".
 
 // Brute force approach:
-// Consider (take) each possible substring from string s2. For each substring, first store the frequency 
+// Consider (take) each possible substring from string s2 And for each substring, first store the frequency 
 // of characters of string s1 in a hash map. Then iterate through the current substring of string s2 and 
 // check if the current character exists in the hash map. If it does, decrement its count. 
 // Meanwhile, iterate through the hash map and check if all the frequencies for the current substring 
@@ -14,9 +14,7 @@
 // TC: O(N*M), where N is the length of string s1 and M is the length of string s2.
 // The outer loop iterates O(M-N+1) times, and in each iteration, substring() and isPermutation() both take O(N).
 // So, the overall time complexity is O(N*M).
-// SC: O(N), as the substring() method creates a new string of size N, and the isPermutation function 
-// uses a frequency map of size O(N). So, the overall space complexity is O(N).
-
+// SC: O(M), since for each substring we store the frequency of characters of s1 in a hash map.
 
 var checkInclusion = function(s1, s2) {
     for(let i = 0; i <= s2.length - s1.length; i++){
@@ -59,12 +57,13 @@ var checkInclusion = function(s1, s2) {
 // all the character's frequency for current substring of s2 in hash map becomes zero. if it is, it means current
 // window substring is permutation of string s1 .
 // but if not then current window substring is not a permutation of string s1 then shrink the window from left to find 
-// the new window of permutation of string s1 but before shrinking the window check first that if the current window left value
-// exist in hash map then increment its frequency since that character is not a part of a new window and we dont need it.
+// the new window of permutation of string s1 but before shrinking the window check first that if the current window left 
+// value exist in hash map then increment its frequency since that character is not a part of a new window and we dont 
+// need it.
 // once find the permutation string return true otherwise return false.
 // TC:- O(N), as this approach(sliding window) traverse each characters of both string once.
-// SC:- O(N), to store each characters of string s1 into map.
-// Note:- here, i am only maintaining the window size of 2, once window size 2 found i slide the window to get a new window
+// SC:- O(N), to store each characters of string s1 into hash map.
+// Note:-here, i am only maintaining the window size of 2, once window size 2 found i slide the window to get a new window
 
 var checkInclusion = function (s1, s2) {
     let start = 0, end = 0, map = new Map();

@@ -1,14 +1,19 @@
-// Leetcode Problem:- 1358
-// Brute force approach:-
-// approach:-
-// consider all possible substring and store the occurrence of current substring's character into hash map
-// meanwhile check if hash map length is equal to three then increment the numberSubstring by 1, it means 
-// that we found the substring where the each characters count is aleast one.
-// once find all the substring where the characters count is atleast one times then return numberSubstring.
-// TC:O(N^2), Explanation:-
-// O(N):- used by outer loop to iterate through starting index of each substring.
-// O(N):- used by inner loop to find number of subString where count of each character is alteast one times. 
-// SC:- O(1), since there is no additional space used apart from hash map which use constant space. 
+// Leetcode Problem: 1358 - Number of Substrings Containing All Three Characters
+// Brute-force Approach:
+// Approach:
+// Consider all possible substrings by iterating through each starting index `i` of the string.
+// For each starting index `i`, use a hash map to store the frequency of characters in the current substring.
+// While expanding the substring using the `j` pointer, update the character count in the map.
+// Whenever the map size becomes 3, it means the substring contains all three characters ('a', 'b', and 'c').
+// At that point, all substrings starting from index `i` and ending at `j` or any position after `j`
+// will also contain all three characters. So, add `s.length - j` to the count and break the inner loop.
+// After checking all substrings, return the total count.
+// Time Complexity: O(N^2)
+// - O(N): for the outer loop to fix the starting index of the substring.
+// - O(N): for the inner loop to find the first substring starting at index `i` that contains all three characters.
+// Space Complexity: O(1)
+// - The hash map stores at most 3 characters ('a', 'b', 'c'), so it uses constant space.
+
 
 var numberOfSubstrings = function (s) {
     let count = 0;
@@ -22,7 +27,8 @@ var numberOfSubstrings = function (s) {
             }
 
             if (map.size === 3) {
-                count++;
+                count+= s.length - j;
+                break;
             }
         }
     }
@@ -35,13 +41,13 @@ var numberOfSubstrings = function (s) {
 // extend the window by moving the `end` pointer to the right and store the occurrences of each characters of the 
 // current window into hash map , meanwhile check the length of hash map is equal to three then find the number of string
 // by using (s.length-end) after then before shrinking the window toward right check first that if hash map contain
-// the value at pointer start then remove that value from hash map and increment the pointer 'start' and once find all
+// the character at pointer start then remove that character from hash map and increment the pointer 'start' and once find 
 // all the substring where the characters count is atleast one times then return numberSubstring.
 // TC:- O(N), as each element in the string is processed at most twice (once by `j` and once by `i`) 
 // SC:- O(1), as there is no additional space used apart from map which use constant space. 
-// Note:-  the formula:- s.length - end counts all substrings starting from the current 'start index' to every possible end
-// index from 'end to s.length - 1', because once the window contains all three required characters (a, b, and c), 
-// any extension beyond 'end pointer' will also contain all three character.
+// Note:
+// The formula (s.length - end) counts all substrings starting from the current `start` index to the end of the string.
+// Once the window contains all three required characters, any extension of this window to the right will also be valid.
 
 var numberOfSubstrings = function (s) {
     let count = 0;
