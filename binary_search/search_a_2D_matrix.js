@@ -7,7 +7,7 @@
 // if the current element matches the target, return true (since the target is found).
 // if no element matches the target after iterating through the entire matrix, return false.
 // TC:- O(m * n), where 'm' is the number of rows and 'n' is the number of columns as we check each element in the matrix.
-// O(1), since no additional space is used other than loop variables.
+// SC:- O(1), since no additional space is used other than loop variables.
 
 var searchMatrix = function(matrix, target) {
     for(let i = 0;i<matrix.length;i++){

@@ -34,8 +34,8 @@ var search = function(nums, target) {
 //   - otherwise, update 'high' to mid - 1 to search the left half.  
 // continue this process until the target is found or 'low' exceeds 'high'.  
 // if the target is not found, return -1.  
-// tc: O(log N), as binary search divides the array in half in each iteration.  
-// sc: O(1), since only a few pointers are used for the search. 
+// TC: O(log N), as binary search divides the array in half in each iteration.  
+// SC: O(1), since only a few pointers are used for the search. 
 
 var search = function(nums, target) {
   let low = 0, high = nums.length-1;

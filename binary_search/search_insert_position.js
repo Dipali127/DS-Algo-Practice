@@ -2,38 +2,23 @@
 // Problem says:- 
 // find the index of the target in the sorted array nums. If the target is not found, we need to determine the 
 // appropriate index where the target should be inserted while maintaining the sorted order.
-// Brute force approach: 
-// approach:-
-// use of a for loop to iterate through the nums array to check if the target exists.
-// if the target is found, update the variable 'ind' with the index 'i' where the target is located.
-// if the target is not found after the first iteration ('ind' remains unchanged), iterate through the array again to
-// find the appropriate insertion index for the target.
-// for each element in nums, check if it is less than the target.
-// if nums[i] < target, the next position (i + 1) will be the correct place to insert the target. Update 'ind' accordingly.
-// if ind is still 0, return 0 (indicating the target would be inserted at the beginning).
-// otherwise, return 'ind' as the index where the target is either found or should be inserted.
-// TC:- O(N), as we are iterating through the array twice in the worst case (once to check for the target and again to 
-// find the appropriate insertion index).
-// SC:- O(1) since, we are only using a few extra variables (constant space).
+// Brute force approach:
+// Approach:-
+// Use a for loop to iterate through the nums array to check where the target should be placed.
+// If the target is found (i.e., nums[i] >= target), return the index 'i' as the target should be inserted at or before it.
+// If the loop completes without returning, it means the target is greater than all elements in the array.
+// In this case, return nums.length as the insertion index (i.e., the target would be inserted at the end). 
+// Time Complexity: O(N), as we may iterate through the entire array in the worst case.
+// Space Complexity: O(1), since we are only using a few extra variables (constant space).
 
 var searchInsert = function (nums, target) {
-    let ind = 0;
-    for (let i = 0; i < nums.length; i++) {
-      if (nums[i] === target) {
-        ind = i;
-      }
-    }
-    if (!ind) {
-      for (let i = 0; i < nums.length; i++) {
-        if (nums[i] < target) {
-          ind = i + 1;
+   for(let i = 0; i < nums.length; i++){
+        if(nums[i] >= target){
+            return i;
         }
-      }
     }
-    if (ind !== 0) {
-      return ind;
-    }
-    return 0;
+    
+    return nums.length;
   };
   
   

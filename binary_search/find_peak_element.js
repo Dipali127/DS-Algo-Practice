@@ -3,15 +3,16 @@
 // neighbors (the elements directly before and after it).
 // Brute force approach:
 // approach:-
-// If the array has only two elements, compare the first and second elements:-
+// If the array has only two elements(size of array is 2), compare the first and second elements:-
 //     - check if the first element is a peak by comparing it with the second element. If nums[0] > nums[1], return 0.
 //     - check if the last element is a peak by comparing it with the second-to-last element. If nums[n-1] > nums[n-2], 
 // return n-1.
-// for all other elements (from index 1 to n-2), use a loop to iterate through the array and check if the current element
-// is a peak by comparing it with both its neighbors:
+// otherwise(if size of array is more than 2)(from index 1 to n-2), i will use of a loop to iterate through the array and
+// check if the current element is a peak element by comparing it with both of its neighbors:
 // if nums[i] is greater than or equal to both nums[i-1] and nums[i+1], return i as the peak index.
-// if no peak element is found after checking all elements, return 0 as a default, assuming that the first element is the peak.
-// TC:- O(N), since we are iterating through the entire array to find the peak.
+// if no peak element is found after checking all elements, return 0 as a default, assuming that the first element is the
+// peak element.
+// TC:- O(N), since we are iterating through the entire array once to find the peak.
 // SC:- O(1), as no additional space is required beyond a few variables.
 var findPeakElement = function (nums) {
     let n = nums.length;

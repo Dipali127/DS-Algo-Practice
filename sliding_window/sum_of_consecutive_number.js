@@ -27,7 +27,8 @@ function sumTarget(arr1, target1) {
 // Instead of iterating through each element and computing the sum for each subarray (which increases time complexity to O(N^2)),
 // use the sliding window technique with two pointers: start and end.
 // Extend the window using the end pointer. While iterating through the array, add the current number to the sum.
-// If the sum becomes greater than the target, shrink the window by subtracting the number pointed to by the start pointer and incrementing start.
+// If the sum becomes greater than the target, shrink the window by subtracting the number pointed to by the start pointer
+// and incrementing start.
 // If the sum equals the target, return true.
 // Otherwise, continue adding the current number to the sum.
 // After iterating through all elements, if no such sum is found, return false.
