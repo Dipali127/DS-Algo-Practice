@@ -42,21 +42,27 @@ var insert = function (intervals, newInterval) {
 
 
 // Optimal Approach:
-// approach:
-// instead of modifying the existing intervals array (which could unnecessarily increase time complexity), 
-// I will use a result array to store the newInterval and all non-overlapping intervals.
-// i will run a while loop to iterate through the intervals array. During each iteration, I will check that:
-// If the current interval's end time is less than the newInterval's start time, this means the current interval
-// is non-overlapping, So I will insert it into the result array.
-// If the current interval's start time is greater than the newInterval's end time, it means I have found the correct
-// position to insert the newInterval. I will break the loop and then insert the newInterval.
-// If the current interval overlaps with the newInterval, I will merge the two intervals by updating the newInterval's
-// start and end time, and increment the pointer i.
-// Once all the intervals are processed and the newInterval and non-overlapping intervals are added to the result array, 
-// I will return the result array.
-// TC:- O(N), to iterated through the intervals array once.
-// SC:- O(N), as we store the intervals in the result array. In the worst case (when there are no overlapping intervals),
-// we will insert all intervals into the result array.
+// Approach:
+// Instead of modifying the existing `intervals` array (which could unnecessarily increase time complexity), 
+// I will use a `result` array to store the `newInterval` and all non-overlapping intervals.
+// 
+// I will run a while loop to iterate through the `intervals` array.
+// During each iteration, I will check:
+// - If the current interval's end time is less than the `newInterval`'s start time, this means the current interval
+//   is non-overlapping. So, I will insert it into the `result` array.
+// - If the current interval overlaps with the `newInterval`, I will merge the two intervals by updating the `newInterval`'s
+//   start and end time, and increment the pointer `i`.
+// - But if the current interval's start time is greater than the `newInterval`'s end time, it means I have found the 
+// correct position to insert the `newInterval`. So, I will break the loop and then insert the `newInterval`.
+// After inserting the `newInterval`, I will run another while loop for the remaining intervals to add them to the `result`
+// array. 
+// Once all the intervals are processed and the `newInterval` and non-overlapping intervals are added to the `result` 
+// array, 
+// I will return the `result`.
+// Time Complexity (TC): O(N), since we iterate through the `intervals` array once.
+// Space Complexity (SC): O(N), as we store the intervals in the `result` array. In the worst case (when there are no overlapping intervals),
+// we will insert all intervals into the `result` array.
+
 
 var insert = function (intervals, newInterval) {
     let result = [];

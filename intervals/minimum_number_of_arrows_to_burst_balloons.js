@@ -13,7 +13,8 @@
 // which will help to find the balloons which can be burst by a single arrow. 
 // initialize a variable 'prev' to represent the interval of the first balloon in the sorted list.
 // This variable keeps track of the overlapping region where all previous balloons can be burst by a single arrow.
-// initialize 'count' to 1 because at least one arrow is required to burst the first balloon.
+// initialize 'count' to 1 because at least one arrow is required to burst the first balloon even all the ballons are 
+// overlapped to each other.
 // iterate through the remaining balloons in the sorted list:
 //    - If the current balloon's starting point (points[i][0]) lies within the interval of the previous balloon (prev[1]), 
 //      they overlap so, update the overlapping region by setting prev[0] to the maximum starting point and 
@@ -27,7 +28,7 @@
 // overall, TC:- O(NLOGN) + O(N) = O(NLOGN).
 // SC:- O(1), since no additional space is used.
 // Note:-
-// The 'prev' variable always keeps track of the smallest interval where all previously overlapping balloons 
+// The 'prev' variable always contains the overlapping region where all previously overlapping balloons 
 // can be burst by a single arrow. By updating 'prev' with the maximum starting point and minimum ending point, 
 // we ensure that future balloons are checked against the correct overlapping region. 
 // If a balloon does not overlap, we need a new arrow.
