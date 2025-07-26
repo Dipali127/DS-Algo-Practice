@@ -53,18 +53,24 @@ var asteroidCollision = function(asteroids) {
 // - in each collision scenario, we calculate the sum of the sizes of the two asteroids.
 //   - if the sum is less than 0, means that asteroid moving to the right (top of the stack) is smaller and gets destroyed, 
 //     so we pop it from the stack and continue checking the new top, for example:- if asteroids[i] = -10 and 
-//     stack[top] = 5 then sum = -10 + 5 which is -5 < 0 so, stack[top] will exploid because  its value is smaller than 
+//     stack[top] = 5 then sum = -10 + 5 which is -5 < 0 so, stack[top] will exploid because its value is smaller than 
 //     the current iterated asteroid.
-// - but if the sum is greater than 0, means that asteroid moving to the left is smaller(current iterated asteroid value) and should be destroyed, 
-//    so we set the current iterated asteroid to 0.
+// - but if the sum is greater than 0, means that asteroid moving to the left is smaller(current iterated asteroid value)
+//     and should be destroyed, so we set the current iterated asteroid to 0.
 //    for example:- if asteroids[i] = -5 and stack[top] = 10 then sum = -5 + 10
 //    which is 5 > 0 so, asteroids[i] will exploid because  its value is smaller than the top of stack.
-// - if the sum is 0, both asteroids are equal in size and destroy each other, so we pop the stack and set the current 
-//   iterated asteroid to 0.
+// - if the sum is 0, both asteroids are equal in size and destroy each other, so we pop the top of 
+//   stack and set the current iterated asteroid to 0.
 // - after the while loop, if the current asteroid has not been destroyed (i.e., it's not 0), we push it onto the stack.
-// TC:- O(N), as we iterate through the 'asteroids' array once and each asteroid is pushed/popped from the stack at most once.
+// TC:- O(N), as we iterate through the 'asteroids' array once and each asteroid is pushed/popped from the stack at most
+// once.
 // SC:- O(N), in the worst case, the stack may store all asteroids if no collisions happen.
-// Note:- we destroy the asteroid with the smaller absolute value, not based on sign.
+// Note:-
+// Note:
+// - We destroy the asteroid with the smaller absolute value, regardless of its sign.
+// - Time complexity depends on the total number of operations performed, not just the number of nested loops.
+// - In this code, each asteroid is pushed and popped from the stack at most once,
+//   so the total number of operations is linear => Time complexity: O(n).
 
 var asteroidCollision = function(asteroids) {
     let stack = [];
