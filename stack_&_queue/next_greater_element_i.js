@@ -36,22 +36,27 @@ var nextGreaterElement = function (nums1, nums2) {
     return nums1;
 };
 
-// Optimal Approach: 
-// approach: 
-// instead of finding the next greater element for nums2 through nested loop which increase the time complexity,
-// i will use a hash map and a stack to store the next greater element of nums2 efficiently.  
-// while processing nums2, I will determine the next greater element for each value of nums2 and store it in the hash map.  
-// if a next greater element is found, i will store it in the hash map; otherwise, I will store -1 for that element.  
-// then, I will iterate through nums1 and retrieve the next greater elements from the hash map.  
-// finally, after finding next greater element for each element of nums1 i will return nums1.
-// TC: O(N), Explanation:  
-// - O(N) to iterate through each value of nums2 and store the next greater element in the hash map.  
-// - O(N) to iterate through each value of nums1 and retrieve the next greater element from the hash map.  
-// - Overall TC: O(N) + O(N) = O(2N) = O(N).  
-// SC: O(N)
-// - O(N) for the hash map to store next greater elements of nums2.
+// Optimal Approach:
+// Approach:
+// Instead of finding the next greater element for nums2 using a nested loop, which increases the time complexity,
+// I will use a hash map and a stack to store the next greater elements of nums2 efficiently.
+// While processing nums2, I will determine the next greater element for each value and store it in the hash map.
+// If a next greater element is found, I will store it in the hash map; otherwise, I will store -1 for that element.
+// Then, I will iterate through nums1 and retrieve the next greater elements from the hash map.
+// Finally, after finding the next greater element for each element in nums1, I will return nums1.
+
+// Time Complexity: O(N)
+// - O(N) to iterate through nums2 and compute the next greater element for each value using a stack.
+// - O(N) to iterate through nums1 and retrieve values from the hash map.
+// - Overall Time Complexity: O(N) + O(N) = O(2N) = O(N).
+// Note: Even though a while loop is used inside the for loop,
+//       the total number of operations is still O(N) because each element is pushed and popped from the stack at most once.
+
+// Space Complexity: O(N)
+// - O(N) for the hash map to store the next greater elements of nums2.
 // - O(N) for the stack used during processing of nums2.
-// - Total space: O(N) auxiliary space.  
+// - Total Auxiliary Space: O(N).
+
 
 var nextGreaterElement = function (nums1, nums2) {
     let map = new Map(), stack = [], n = nums2.length;
