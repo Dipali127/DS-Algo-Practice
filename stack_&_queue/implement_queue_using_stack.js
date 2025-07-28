@@ -33,17 +33,20 @@
 //      (2) O(N) - Removing the front of the queue using a stack.
 //      (3) O(N) - Returning the front of the queue using a stack.
 //      (4) O(1) - Checking if the queue is empty.
+// SC:- SC: O(N), since for removing the front value of queue and returning front value of queue I have to use a stack 
+// to store values in it.
+// even though there are two stacks, each element is stored in only one stack at a time, so total space used is O(N).
 
 // MyQueue is a constructor function in JavaScript. 
-// When we create a new stack using new MyQueue(), JavaScript automatically creates an object for it.
+// When we create a new instance using new MyQueue(), JavaScript automatically creates an object for it.
 // Instead of adding methods like push, pop, top, and empty directly to each new object, JavaScript adds them to 
 // MyQueue.prototype.
 // This way, all stack objects share the same methods instead of each having its own copy, which saves memory. 
-// When we call a method on a stack object, JavaScript first looks for it in the object itself. If it’s not there,
-// it checks the prototype and finds the method there. This is how JavaScript allows multiple objects to use the same
+// When we call a method on a stack object, JavaScript first looks for it in the object itself. If it’s not there, 
+// it checks the prototype and finds the method there. This is how JavaScript allows multiple objects to use the same 
 // methods efficiently.
-// here, JavaScript object refers to the object created when we call new MyStack(). 
-// This object is an instance of the MyStack constructor function.
+// here, JavaScript object refers to the object created when we call new MyQueue(). 
+// This object is an instance of the MyQueue constructor function.
 
 var MyQueue = function() {
   this.stack1 = [];

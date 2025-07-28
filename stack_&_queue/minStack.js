@@ -51,11 +51,22 @@
 // Optimal Approach:
 // This approach reduces the time complexity of getMin() from O(N) to O(1)
 // by maintaining an auxiliary stack (minstack) that tracks the minimum value at each level of the main stack.
-// 
 // For every push operation, we store the current minimum (between the new value and the previous minimum)
-// on the minstack. This way, getMin() can simply return the top of minstack in constant time.
-//
+// in the minstack. This way, getMin() can simply return the top of minstack in constant time.
 // Time Complexity: O(1) for all operations — push, pop, top, and getMin.
+
+// Note: minstack stores one minimum value corresponding to each element in the main stack.
+// While popping a value from the main stack, we also pop a value from the minstack
+// because the minimum value could change after the top element is removed from main stack.
+// Example:-
+// Operation	Stack	   MinStack	          getMin()
+// push(5)	    [5]	        [5]	                 5
+// push(3)	   [5, 3]	    [5, 3]	             3
+// push(7)	 [5, 3, 7]	  [5, 3, 3]	             3
+// push(2)	[5, 3, 7, 2]  [5, 3, 3, 2]	         2
+// pop()	[5, 3, 7]	   [5, 3, 3]	         3
+// pop()	[5, 3]	       [5, 3]	             3
+// pop()	[5]	            [5]	                 5
 
 
 var MinStack = function() {
