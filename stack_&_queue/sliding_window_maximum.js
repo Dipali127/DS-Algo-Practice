@@ -42,25 +42,26 @@ var maxSlidingWindow = function(nums, k) {
 //    In deque[0], if the index is less than the starting index of the current window, we delete it —
 //    since we store indices in the deque from the back and the index at the front of the deque is the oldest index.
 //  (ii) Remove indices of all elements from the back of the deque that are smaller than the
-//    current element 'nums[i]', since we are using a monotonic **decreasing** deque
+//    current element 'nums[i]', since we are using a monotonic **decreasing** dequeue
 //    (the front of the deque should always contain the maximum value).
 //  (iii) Add the current element's index to the back of the deque, since we're traversing the array from left to right.
-//  (iv) whenever we found the window (i.e., when 'i >= k - 1'),
+//  (iv) whenever we found the window of size k (i.e., when 'i >= k - 1'),
 //    add the element at the front of the deque (which is the maximum in the current window) to the 'result' array.
 
-// Time Complexity: O(N), where 'N' is the length of 'nums', as each element is added and removed from the deque at most
+// Time Complexity: O(N), where 'N' is the length of 'nums', since each element is added and removed from the deque at most
 //  once.
-// Space Complexity: O(k), to store indices of elements in the deque (with a maximum of 'k' elements at any time).
+// Space Complexity: O(k), to store indices of elements in the dequeue (with a maximum of 'k' elements at any time).
 
 // Note:
 // What is a Deque?
 // A Deque stands for Double-Ended Queue.
-// It is a linear data structure that allows you to insert and delete elements from both the front and the rear (end).
+// It is a linear data structure that allows to insert and delete elements from both the front and the rear (end).
 
 // What is a Monotonic Deque?
+// What is a Monotonic Deque?
 // A monotonic deque is a specialized form of double-ended queue (deque) where the elements are maintained in either
-// increasing or decreasing order And here in this problem i have dequeue in decreasing order since i am iterating array
-// from left to right.
+// increasing or decreasing order. And here in this problem, I have used the deque in decreasing order so that it becomes
+// easy to fetch the maximum value from the front of the deque instead of searching for that value.
 // It is commonly used in algorithmic problems that involve efficiently tracking the maximum or minimum values in a
 // sliding window or range.
 // The deque is updated in such a way that irrelevant elements (that can no longer affect the result) are removed,
