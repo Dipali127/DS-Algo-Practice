@@ -49,7 +49,7 @@
    
 var simplifyPath = function(path) {
     let stack = [];
-    path=path.split('/');
+    path = path.split('/');
     for(let i=0;i<path.length;i++){
         if(path[i] === '.' || path[i] === ''){
             continue;

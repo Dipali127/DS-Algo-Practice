@@ -18,41 +18,33 @@ var containsNearbyDuplicate = function (arr, k) {
   return false;
 };
 
-// Optimal approach: using sliding window and hash map
-// approach:-
-// extend the window by moving pointer 'j' to the right.
-// use of a hash map to store the current iterated value as the key and its index as the value in the map.
-// while iterating through each value of nums, check if the current value at 'arr[j]' is in the hash map.
-//  - if it is, compare the distance between the current index 'j' and the index stored in the hash map.
-//  - if the distance is less than or equal to 'k', return true immediately.
-//  - if not, store the current index 'j' of 'arr[j]' in the hash map.
-// if the window size exceeds given k then i will shrink the window by moving the start pointer 'i' to avoid unnecessary 
-// comparisions for those elements which are not in the valid range given k.
-// and while shrinking the window i will remove the value pointed by start pointer 'i'.
-// continue this process until all elements are processed.
-// TC:- O(N), where N is the length of the array, as each element is traversed once.
-// SC:- O(min(N, k)), where N is the length of the array and 'k' is the window size.
-// If k is smaller than or equal to N (the array length), the hash map will store up to k
-// elements, because once the window size exceeds k, elements are removed.
+// Optimal approach: Using a Hash Set
+// 
+// Approach:
+// - I will use a Hash Set to store up to 'k' elements.
+// - Traverse through the given array 'nums', and while iterating, check if the Hash Set already contains the current element.
+//     - If it does, return true immediately (a duplicate within distance 'k' is found).
+// - Otherwise, add the current element to the Hash Set.
+//     - Meanwhile, if the size of the Hash Set exceeds 'k', remove the earliest (oldest) element from the set —
+//       i.e., the element at index (i - k).
+// - After the traversal, if no such duplicate is found, return false.
+//
+// Time Complexity: O(N), where N is the length of the array, as each element is processed once.
+// Space Complexity: O(min(N, k)), because the Hash Set stores at most 'k' elements at any time.
+//     If k is smaller than or equal to N, the Hash Set will store up to k elements,
+//     since older elements are removed once the window size exceeds k.
 
-var containsNearbyDuplicate = function (arr, k) {
-    let map = new Map();
-    let i = 0, j = 0;
-    while (j < arr.length) {
-        if (map.has(arr[j])) {
-            if (Math.abs(j - map.get(arr[j])) <= k) {
-                return true;
-            }
+
+var containsNearbyDuplicate = function(nums, k) {
+    let set = new Set();
+
+    for (let i = 0; i < nums.length; i++) {
+        if (set.has(nums[i])) return true;
+
+        set.add(nums[i]);
+        if (set.size > k) {
+            set.delete(nums[i - k]);
         }
-        map.set(arr[j], j);
-        
-
-        if (map.size > k) {
-            map.delete(arr[i]);
-            i++;
-        }
-
-        j++;
     }
 
     return false;

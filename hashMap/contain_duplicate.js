@@ -21,11 +21,11 @@ var containsDuplicate = function(nums){
 
 // Optimal Approach:
 // use of a Set to store unique elements of the array and while iterating through the array, check if the current iterated
-// element already exists in the set. If it does, this means a duplicate element found, and return true.
-// And if the element is not in the Set, add it to the set and continue the iteration.
+// element already exists in the hash set. If it does, this means a duplicate element found, and return true.
+// And if the element is not in the has set, add it to the hash set and continue the iteration.
 // Once the loop completes without finding any duplicates, return false. 
-// TC:- O(N), to iterate through the array to store unique element of it into set.
-// SC:- O(N), to store element of an array into set.
+// TC:- O(N), to iterate through the array to store unique element of it into hash set.
+// SC:- O(N), to store element of an array into hash set.
 
 var containsDuplicate = function(nums) {
     let set  = new Set();
