@@ -1,55 +1,66 @@
 // LeetCode_Problem:
-// approach:
-// first store all special characters and spaces in a string.
-// initialize an empty string to store the given string without any special characters.
-// iterate through each character of the given string.
-// while iterating, if the current character is not a special character or space, convert it to
-// lowercase and append it to the new string.
-// initialize two pointers: one at the start and one at the end of the new string.
-// while the two pointers have not crossed each other:
-// - compare the characters at the positions of the two pointers.
-// - if the characters are not equal, return false.
-// - if the characters are equal, move the pointers towards the center of the string.
-// if all characters match correctly, return true, indicating that the string is a palindrome.
-// TC: O(N), Explanation:
-// O(N), to iterate through the given string to remove special characters.
-// O(N/2) to check that the new string is a palindrome or not.
-// overall, TC: O(N) + O(N/2) = O(N)
-// Note: Since the `specialChars` string is of constant length (33 characters), the time complexity
-// of the `includes()` method is O(1).
+// Approach:
+// First, check if the input string 's' is a single space. If so, return true.
+// Otherwise, initialize an empty string variable to store cleaned characters.
+// Use a regular expression 'validRegex' to allow only alphanumeric characters (a–z, A–Z, 0–9).
+// Iterate through each character of the given string 's':
+// - If the current character matches the regex, convert it to lowercase and append it to the new string.
+// Initialize two pointers: one at the start and one at the end of the cleaned string.
+// Run a while loop with the two pointers:
+// - Compare the characters at both pointers.
+// - If they are not equal, return false.
+// - If they are equal, move the pointers inward.
+// If all characters match correctly, return true, indicating that the string is a palindrome.
+//
+// Time Complexity: O(N)
+// - O(N) to iterate through the string and filter out non-alphanumeric characters.
+// - O(N/2) to check whether the cleaned string is a palindrome.
+// Overall Time Complexity: O(N)
+//
+// Note: The regex used to test alphanumeric characters runs in constant time O(1) per character,
+// because it only matches a single character against a fixed pattern.
 
-var isPalindrome = function (string) {
-    let specialChars = "!@#$%^&*()_+{}\":;'<>?/,.~`-[] ";
-    let str = "";
-    for (let i = 0; i < string.length; i++) {
-        if (!specialChars.includes(string[i])) {
-            str += string[i].toLowerCase();
-        }
+var isPalindrome = function(s) {
+    if (s === " ") {
+        return true;
     }
-    let i = 0, j = str.length - 1;
-    while (i < j) {
-        if (str[i] !== str[j]) {
-            return false;
-        } else {
-            i++;
-            j--;
-        }
-    }
-    return true;
-}
 
-// Also we can do like the below:-
-// the time complexity of below code is O(N) since the Using regex.test() is O(1)
-// per character because regex matching for a single character is a constant-time operation.
-var isPalindrome = function (s) {
-    let regex = /[a-z0-9A-Z]/;
-    let str = "";
-    s = s.split('');
+    let string = "";
+    let validRegex = /[a-zA-Z0-9]/;
+
     for (let i = 0; i < s.length; i++) {
-        if (regex.test(s[i])) {
-            str += s[i].toLowerCase();
-        } else {
-            continue;
+        if (validRegex.test(s[i])) {
+            string += s[i].toLowerCase();
+        }
+    }
+
+    let i = 0, j = string.length - 1;
+    while (i < j) {
+        if (string[i] !== string[j]) {
+            return false;
+        }
+        i++;
+        j--;
+    }
+
+    return true;
+};
+
+// Alternate approach (without regex):
+// This approach also filters alphanumeric characters manually using character code checks.
+// The time complexity is still O(N) overall.
+
+var isPalindrome = function(s) {
+    let str = "";
+
+    for (let i = 0; i < s.length; i++) {
+        let c = s[i];
+        if (
+            (c >= '0' && c <= '9') ||
+            (c >= 'a' && c <= 'z') ||
+            (c >= 'A' && c <= 'Z')
+        ) {
+            str += c.toLowerCase();
         }
     }
 
@@ -57,13 +68,40 @@ var isPalindrome = function (s) {
     while (start < end) {
         if (str[start] !== str[end]) {
             return false;
-        } else {
-            start++, end--;
         }
+        start++;
+        end--;
     }
 
     return true;
-}; 
+};
+
+
+var isPalindrome = function(s) {
+    if(s === " "){
+        return true;
+    }
+
+    let string = "";
+    let validRegex = /[a-zA-Z0-9]/;
+    for(let i = 0; i < s.length; i++){
+        if(validRegex.test(s[i])){
+            string+= s[i].toLowerCase();
+        }
+    }
+
+    let i = 0, j = string.length-1;
+    while(i < j){
+        if(string[i] !== string[j]){
+            return false;
+        }else{
+            i++;
+            j--;
+        }
+    }
+
+return true;
+};
 
 // Also we can do like this 
 // the time complexity of the below code is again O(N).

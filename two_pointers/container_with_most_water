@@ -37,9 +37,10 @@ var maxArea = function (height) {
 // instead of considering each possible pairs of container wall which increases the time complexity.
 // i will use of the two-pointer approach where low points to the 0rth index of the array height and high points to the
 // last index of the height array.
-// the idea behind using two-pointer approach is to avoid unnecessary comparisons of smaller heights since they give a smaller area.
-// i will run a while loop until left is less than right and in each iteration, i will find the area between pair of container wall and 
-// Update maxArea if the new area is greater the maxArea,
+// the idea behind using two-pointer approach is to avoid unnecessary comparisons of smaller heights since they give a 
+// smaller area.
+// i will run a while loop until left is less than right and in each iteration, i will find the area between pair of 
+// container wall and  Update maxArea if the new area is greater the maxArea,
 //  and check if height of wall pointed by left pointer is less than the height of wall pointed by right 
 // pointer, if it is then i will increment the left pointer to avoid minimum height (since minimum height give minimum area).
 // but if height of wall pointed by left pointer is greater than the height of wall pointed by right pointer,then decrement

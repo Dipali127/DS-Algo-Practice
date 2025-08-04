@@ -1,7 +1,8 @@
 // Leetcode Problem : 80
 // Brute force approach:-
 // approach:-
-// iterate through the given array 'nums' and for each element, check if it is equal to the second next element (nums[i] === nums[i+2]).
+// iterate through the given array 'nums' and for each element, check if it is equal to the second next element 
+// (nums[i] === nums[i+2]).
 // If a duplicate is found (i.e., nums[i] === nums[i+2]), remove the duplicate element using the splice method.
 // after removing an element, decrement the loop index i by 1 to ensure the next element is not skipped, 
 // as the array length decreases and the elements shift left.
@@ -22,7 +23,7 @@ var removeDuplicates = function (nums) {
 
 // Optimal Approach:-
 // take two pointers i and j, where i pointer represent to last unique element of the given array 'nums' and pointer
-// j is used to traversal the given array 'nums'.
+// j is used to traverse the given array 'nums'.
 // set i to 1. this will keep track of the position where the next unique element should be placed.
 // start j from 2, as i initially points to the second element which is considered unique.
 // while iterating, for each element at index j, check if it is different from the element at index i (nums[j] !== nums[i]).
