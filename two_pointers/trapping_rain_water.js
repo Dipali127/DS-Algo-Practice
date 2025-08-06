@@ -1,37 +1,38 @@
-// Leetcode Problem:- 42
+/// Leetcode Problem: 42
 // Understanding the Problem:
 // The goal is to calculate how much water can be trapped between the bars after it rains.
 
 // Brute Force Approach:
 // Approach:
-// The idea to solve this problem is to run a loop, and for each building (bar) in the height array,
-// I will find out the amount of water that can sit above the current bar and add it to the
-// totalWaterTrapped variable.
-// To compute the amount of water that can sit above a bar, I will first find the tallest building to the left
-// of the current bar and store it in the leftMax variable.
-// Then, I will find the tallest building to the right of the current bar and store it in the
-// rightMax variable.
-// Next, I will take the minimum between leftMax and rightMax because water can only be stored up to the
-// height of the shorter bar on either side.
-// Then, I will subtract the height of the current building from this minimum, because water starts filling
-// above the bar's height(this happen when height of left and right bar equal to current bar).
-// After calculating the amount of water that can sit above the current bar,
-// I will add it to the totalWaterTrapped variable.
-// Finally, I will return totalWaterTrapped, which contains the total amount of water that can be stored
-// between the buildings.
+// The idea is to iterate through each bar in the height array and calculate how much water can be trapped at that 
+// position. This value is then added to the `totalWaterTrapped` variable.
 
-// TC: O(N^2), because for each building, I compute `leftMax` and `rightMax`, which require an O(N) scan.
-// Since this computation is performed for every building,
-// the overall time complexity becomes O(N * N) = O(N^2).
-// SC: O(1), since no additional space is used.
-// Note:-
-// If the height of the left or right bar is equal to the current bar, no water will be trapped above that bar
-// because the water will overflow (since both sides are at the same level).
-// If the height of the left and right bars are greater than the current bar, water can be trapped above the current bar,
-//  and the amount of trapped water is determined by the smaller of the two surrounding heights (either leftMax or 
-// rightMax).
-// The reason we iterate from the current bar itself to calculate the leftMax and rightMax is that, in some cases, 
-// the current iterated bar may be the leftMax or rightMax.
+// To compute the amount of water that can be trapped above a bar:
+// 1. First, find the tallest bar to the left of the current bar and store it in `leftMax`.
+// 2. Then, find the tallest bar to the right of the current bar and store it in `rightMax`.
+// 3. The water that can be trapped at the current bar is determined by the minimum of `leftMax` and `rightMax`,
+//    because water can only store to the level of the shorter of the two surrounding bars.
+// 4. Subtract the height of the current bar from this minimum value because water cannot be stored above the top of the
+//  bar.
+// 5. Add the result to `totalWaterTrapped`.
+
+// Finally, return `totalWaterTrapped`, which represents the total amount of water that can be trapped between the bars.
+
+// Time Complexity (TC): O(N^2)
+// For each bar, we compute `leftMax` and `rightMax` by scanning the array to the left and right, respectively,
+// resulting in O(N) operations per bar. Since we do this for every bar, the total time complexity is O(N * N) = O(N^2).
+
+// Space Complexity (SC): O(1)
+// No additional space is used other than a few variables for tracking water and maximum heights.
+
+// Note:
+// - If the height of either the left or right bar is equal to the current bar,
+//   no water will be trapped above it because the water would overflow (since both sides are at the same level).
+// - If both the left and right bars are taller than the current bar,
+//   water can be trapped above current bar, and the amount is determined by the shorter of the two surrounding bars.
+// - We include the current bar in the scan for `leftMax` and `rightMax` because
+//   the current bar itself may be the maximum on one or both sides.
+
 var trap = function(height) {
     let totalWaterTrapped = 0;
     for(let i = 0; i < height.length; i++){
@@ -81,27 +82,37 @@ var trap = function(height){
     return totalWater;
 }
 
-// Most Optimal Approach: using two pointer method
-// approach:
-// Since water can only be stored up to the minimum of the tallest heights on the left and right sides, 
-// instead of precomputing these heights and storing them in extra arrays, 
-// we calculate them while iterating. To do this efficiently, we use the two-pointer approach:
-// We place one pointer (left) at the beginning and another pointer (right) at the end of the array.
-// While iterating through the array, we keep track of the maximum heights seen so far (leftMax and rightMax).
+// Most Optimal Approach: Using the two-pointer method
+
+// Approach:
+// Since water can only be trapped up to the minimum of the tallest heights on the left and right sides,
+// instead of precomputing these heights and storing them in extra arrays,
+// we calculate them dynamically while iterating. To do this efficiently, we use the two-pointer approach:
+
+// We place one pointer (`left`) at the beginning and another pointer (`right`) at the end of the array.
+// While iterating through the array, we keep track of the maximum heights seen so far (`leftMax` and `rightMax`).
+
 // If the height at the left pointer is smaller than or equal to the height at the right pointer,
-// it means that the left side will help compute the water stored at that index:
-// We update leftMax to be the maximum of the current leftMax and height[left].
-// We calculate the trapped water at the left pointer as leftMax - height[left], and add this to the total water trapped.
-// Then, we move the left pointer to the right (i.e., left++).
-// If the height at the right pointer is smaller than the height at the left pointer, the right side will 
-// help compute the water stored at that index:
-// We update rightMax to be the maximum of the current rightMax and height[right].
-// We calculate the trapped water at the right pointer as rightMax - height[right], and add this to the total
-//  water trapped.
-// Then, we move the right pointer to the left (i.e., right--).
-// This approach avoids using extra space and reduces the time complexity to O(N), as we only traverse the array once.
+// it means that the left side determines the water level at that index. 
+// We update `leftMax` to be the maximum of the current `leftMax` and `height[left]`.
+// Then, we compute the trapped water at the `left` pointer as `leftMax - height[left]`
+// (subtracting the current height because water cannot be stored above the bar).
+// We add this amount to the total water trapped.
+// Finally, we move the left pointer to the right (`left++`).
+
+// If the height at the right pointer is smaller than the height at the left pointer,
+// the right side determines the water level at that index.
+// We update `rightMax` to be the maximum of the current `rightMax` and `height[right]`.
+// We compute the trapped water at the `right` pointer as `rightMax - height[right]`,
+// and add this to the total water trapped.
+// Then, we move the right pointer to the left (`right--`).
+
+// This approach avoids using extra space and reduces the time complexity to O(N),
+// as we only traverse the array once.
+
 // Time Complexity (TC): O(N), since we traverse the array only once.
 // Space Complexity (SC): O(1), since no additional space is used.
+
 
 
 var trap = function(height){

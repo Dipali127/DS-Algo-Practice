@@ -39,27 +39,32 @@ var palindrome = function(string, i, j){
     return  true;
 }
 
-// optimal approach:
-// i will use the "expand around center" technique to find the longest palindromic substring.
+// Optimal Approach:
+// I will use the "expand around center" technique to find the longest palindromic substring.
 // This technique takes a character and expands outward as long as it finds a palindromic substring.
-// i will take one variable, maxLengthSub, to store the longest substring found so far.
-// i will iterate through each character, and for each character in the string:
-// i will call the expandAround function twice:
-// Once for odd-length palindromes (where the palindrome has a single center character).
-// Once for even-length palindromes (where the palindrome has two center characters).
-// the expandAround function uses two pointers, left and right, which start at the current center (or center pair)
-// and expand outward as long as the characters pointer by left and right found the palindromic substring.
-// The function expandAround will return the palindromis string found by expanding outward.
-// during each iteration, I will compare the lengths of even and odd palindromes. 
-// If the length of the odd palindrome is greater than the previously stored maxLengthSub, 
-// then I will update maxLengthSub with the odd-length palindrome substring; 
+// I will use one variable, `maxLengthSub`, to store the longest substring found so far.
+// I will iterate through each character of the string, and for each character:
+// I will call the `expandAround` function twice:
+//   - Once for odd-length palindromes (where the palindrome has a single center character).
+//   - Once for even-length palindromes (where the palindrome has two center characters).
+// The `expandAround` function uses two pointers, `left` and `right`, which start at the current center (or center pair),
+// and expand outward as long as the characters at `left` and `right` form a palindrome.
+// The function `expandAround` will return the palindromic substring found by expanding outward.
+// During each iteration, I will compare the lengths of the odd and even palindromes.
+// If the length of the odd palindrome is greater than the previously stored `maxLengthSub`,
+// then I will update `maxLengthSub` with the odd-length palindrome substring;
 // otherwise, I will update it with the even-length palindrome substring.
-// Finally, the substring from start to start + maxLength will give us the longest palindromic substring.
+// Finally, the longest palindromic substring is returned.
 
-// TC: O(N^2), as for each character, I call the expandAround function for both even and odd-length palindromes. 
-// In the worst case, the expandAround function can iterate through all characters of the string, expanding from the center outward, which results in a time complexity of O(N) for each center. Since there are N centers (one for each character),
-// Hence, the overall time complexity is O(N^2).
-// SC: O(1), since no additional space is used apart from a few variables to store the current center, maximum length, and start index.
+// Time Complexity: O(N^2)
+// For each character, I call the `expandAround` function for both even- and odd-length palindromes.
+// In the worst case, `expandAround` can expand to the entire string (O(N)) for each center.
+// Since there are N centers, the overall time complexity is O(N^2).
+
+// Space Complexity: O(1)
+// No additional space is used apart from a few variables to store the current result.
+// We're not using any data structures that scale with input size.
+
 
 
 var longestPalindrome = function(s) {
