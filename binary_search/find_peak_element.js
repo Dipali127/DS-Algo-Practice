@@ -43,8 +43,8 @@ var findPeakElement = function (nums) {
 // Continue the loop until 'low < high', which will give the index of the peak element.
 // TC:- O(log n), since the binary search reduces the search space by half in each iteration.
 // SC:- O(1), as no additional space is used other than the variables for pointers.
-// Note:- This binary search is not like the usual one where we check if nums[mid] === target.
-// Instead, we are trying to find the peak element by narrowing down the search area.
+// Note:- This binary search is not like the usual one where we check if nums[mid] === target or returning something 
+// inside from the while loop, Instead, we are trying to find the peak element by narrowing down the search area.
 // We use low < high in the loop so that the search stops when only one element is left.
 // If we used low <= high, it could cause an infinite loop.
 // Once low and high point to the same index, it means we’ve found the peak element, so we return low as the answer.

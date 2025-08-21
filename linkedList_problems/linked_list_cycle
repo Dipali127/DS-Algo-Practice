@@ -33,7 +33,7 @@
 // SC: O(1) as we uses a constant amount of extra space for the two pointers (fast and slow).
 
 var hasCycle = function(head) {
-    let fast = head ,slow= head;
+    let fast = head ,slow = head;
     while(fast!=null  && fast.next!=null){
         slow=slow.next;
         fast=fast.next.next;
