@@ -1,6 +1,6 @@
 // Optimal approach:-
 // approach:-
-// i will use of stack to store corresponding closing parenthesis of the opening parenthesis 
+// i will use of a stack to store corresponding closing parenthesis of the opening parenthesis 
 // and I will iterate through the given string and 
 // while iterating the string, when encountering an opening parenthesis ('(', '{', or '['), push the corresponding 
 // closing parenthesis (')', '}', or ']') onto the stack.

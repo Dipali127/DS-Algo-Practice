@@ -14,7 +14,7 @@
 // O(N log N) for sorting each array.
 // O(N) for joining each array back into a string.
 // overall TC: O(N) + O(N log N) + O(N) = O(N log N), as sorting is the most expensive operation.
-// SC: O(N),  due to the additional space required for the arrays created by `split` and for the intermediate 
+// SC: O(N),  due to the additional space required for the arrays created by `split` method and for the intermediate 
 // sorted arrays.
 
  var isAnagram = function(s, t) {
@@ -26,16 +26,17 @@
 
 // Optimal approach:
 // approach:
-// first, check if the lengths of strings `s` and `t` are not equal. If they are not, return `false` immediately since they cannot be anagrams.
+// first, check if the lengths of strings `s` and `t` are not equal. If they are not, return `false` immediately since 
+// they cannot be anagrams.
 // use of a hash map to store the count of each character of string `s`.
-// then raverse string `t` and check if each character exists in the hash map with a count greater than 0.
+// then traverse string `t` and check if each character exists in the hash map with a count greater than 0.
 //    - If it does, decrement the count in the hah map.
 //    - If it does not exist or the count is 0, return `false` immediately.
 // finally, after iterating through the hash map to check if all counts are zero. if it is return true.
-// TC: O(N), explanation:
+// TC:- O(N), Explanation:
 // - O(N) to iterate over string `s` and populate the `Map` with character counts.
 // - O(N) to iterate over string `t` and adjust counts in the `Map`.
-// - O(N) in the worst case to iterate through the `Map` and confirm all counts are zero (though in practice this may be minimal).
+// Overall, TC:- O(N) + O(N) = O(N).
 // SC: O(N), as the Map is used to store all characters of string s.
 
 var isAnagram = function (s, t) {

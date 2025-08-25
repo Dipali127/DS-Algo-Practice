@@ -1,30 +1,36 @@
-// Leetcode Problem:
-// approach:
-// use a map to store groups of anagrams together.
-// use an array to collect all the groups of anagrams.
-// while traversing each string, first sort the string and convert it back into a string.
-// then check if the sorted string already exists as a key in the hash map.
-// if it does not exist, store the sorted string as a key in the hash map and the original current iterated string
-// as its value (in an array).
-// if it already exists, push the original string to the array corresponding to the sorted string in the hash map.
-// once all groups of anagrams are found, traverse the hash map and push the hash map values
-// (which contain groups of anagrams) into the anagrams array. 
-// TC: O(N * N log N), Explanation:
-// O(N) to traverse the list of strings.
-// O(N log N) to sort each string.
-// overall, TC = O(N) * O(N log N) = O(N * N log N).
-// SC: O(N), Explanation:
-// O(N) for the map to store groups of anagrams.
-// O(N) for the anagrams array to store all possible groups of anagrams.
-// overall, SC: O(N) + O(N) = O(2N) = O(N)
+// Leetcode Problem: Group Anagrams
+// Approach:
+// - Use of hash map to store groups of anagrams together.
+// - Use of an array to collect all the groups of anagrams.
+// - While traversing each string, first sort the string and convert it back into a string,
+//   so that it will be easy to group the anagrams together.
+// - Then check if the sorted string already exists as a key in the map:
+//     - If it does not exist, store the sorted string as a key in the map,
+//       and set its value as an array containing the original string.
+//     - If it already exists, push the original string into the array
+//       corresponding to the sorted string in the map.
+// - Once all groups of anagrams are found, traverse the map and push its values
+//   (which contain groups of anagrams) into the result array.
+//
+// Time Complexity: O(N * K log K)
+// - O(N) to traverse the list of strings.
+// - O(K log K) to sort each string (K = average length of a string).
+// - Overall: O(N * K log K)
+//
+// Space Complexity: O(N * K)
+// - O(N) for the map to store groups of anagrams.
+// - O(N) for the result array to store all groups of anagrams.
+// - O(K) per string for the temporary character array used by split() method.
+// - Overall: O(N * K)
+
 
 var groupAnagrams = function (strs) {
     let map = new Map();
-    for(let i=0;i<strs.length;i++){
+    for (let i = 0; i < strs.length; i++) {
         let word = strs[i].split("").sort().join("");
-        if(map.has(word)){
+        if (map.has(word)) {
             map.get(word).push(strs[i])
-        }else{
+        } else {
             map.set(word, [strs[i]])
         }
     }
