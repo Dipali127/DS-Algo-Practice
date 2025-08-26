@@ -1,19 +1,21 @@
 // Leetcode Problem:- 424
 // Brute force approach:
-// approach:
-// i will consider each possible substring, and for each substring, I will iterate through its characters and 
-// store the frequency of each character in a hashArr.
-// meanwhile, i will compute the maximum frequency of any character in the current substring and 
+// Approach:
+// I will consider each possible substring, and for each substring, I will take a hashArr and iterate through 
+// the current substring characters to store their frequencies in hashArr.
+// Meanwhile, I will compute the maximum frequency of the currently iterated character in the current substring and 
 // update it in the maxFreq variable.
-// then, i will calculate the number of characters to be replaced by subtracting maxFreq from the current substring length.
-// if the characters_to_be_replaced is less than or equal to k, I will update maxLength, which represents the maximum 
+// Then, I will calculate the number of characters to be replaced by subtracting maxFreq from the current substring length.
+// If the characters_to_be_replaced is less than or equal to k, I will update maxLength, which represents the maximum 
 // length of a substring with all the same repeating characters.
-// after computing the maxLength for all possible substrings, I will return it.
-// TC:- O(N^2), as I use a nested loop: the outer loop considers each possible starting index of the substrings, and the inner loop iterates through each substring to calculate frequencies.
-// SC:- O(1), since Only a constant-size hashArr is used to track character frequencies, which is independent of the input size.
+// After computing maxLength for all possible substrings, I will return it.
+// TC: O(N^2), as I use a nested loop: the outer loop considers each possible starting index of the substrings, and the
+// inner loop iterates through each substring to calculate frequencies.
+// SC: O(1), since only a constant-size hashArr is used to track character frequencies, which is independent of the input size.
+// NOTE: characters_to_be_replaced returns the number of characters replaced in the current substring.
 
 var characterReplacement = function(s, k) {
-    let maxLength = 0;
+    let maxLength = 0;                
     for(let i = 0; i < s.length; i++){
         let maxFreq = 0;
         let hashArr = new Array(26).fill(0);
@@ -36,9 +38,15 @@ var characterReplacement = function(s, k) {
 
 // Optimal approach: using sliding window and two pointer start and end.
 // approach:
-// instead of considering all possible substrings, I will maintain a sliding window using two pointers (start and end), which will represent the current substring being processed. I will use a hashArr of size 26 to store the frequency of characters within the current window.
-// while expanding the window using the end pointer, I will update the frequency of the current character in hashArr and keep track of the maximum frequency of any character within the current window in the maxFreq variable.
-// i will calculate the number of characters that need to be replaced by subtracting maxFreq from the window length (end - start + 1). If the number of characters to be replaced exceeds k, I will shrink the window by moving the start pointer to the right. This reduces the number of characters to replace, ensuring that the replacement constraint is met.
+// instead of considering all possible substrings, I will maintain a sliding window using two pointers (start and end), 
+// which will represent the current substring being processed. 
+// I will use a hashArr of size 26 to store the frequency of characters within the current window.
+// while expanding the window using the end pointer, I will update the frequency of the current character in hashArr and 
+// keep track of the maximum frequency of any character within the current window in the maxFreq variable.
+// i will calculate the number of characters that need to be replaced by subtracting maxFreq from the window length 
+// (end - start + 1).
+//  If the number of characters to be replaced exceeds k, I will shrink the window by moving the start pointer to the right.
+//  This reduces the number of characters to replace, ensuring that the replacement constraint is met.
 // i will update the maxLength variable, which tracks the longest window where the number of characters to replace is less than or equal to k.
 // After iterating through the entire string, I will return the maximum length of the substring with all the same repeating characters that can be obtained.
 // Time Complexity: O(N), as we only iterate through the string once with the start and end pointers, adjusting the window efficiently.

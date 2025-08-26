@@ -4,9 +4,11 @@
 // consider all possible substrings and for each substring, store each character's frequency of string 't' into a hash map.
 // iterate through each substring to check if the current substring contains all characters of string 't'.
 // if a character exists in the hash map, decrement its frequency.
-// meanwhile, check if all values in the hash map become zero, which means the current substring contains all characters of string 't'.
+// meanwhile, check if all values in the hash map become zero, which means the current substring contains all characters 
+// of string 't'.
 // Once we find such a substring, update 'minWin' and store the current substring in 'minSubstring'.
-// After finding the first valid substring, **break the inner loop** because there's no need to check further for this starting index.
+// After finding the first valid substring, **break the inner loop** because there's no need to check further for this
+// starting index.
 // Finally, return the minimum window substring once it found that contains all characters of strng 't'.
 // TC:- O(N^2 * M), Explanation:-
 // O(N), to iterate through each starting index of all the possible subString.
@@ -23,7 +25,7 @@ var minWindow = function(s, t) {
         
         for(let j = 0; j < t.length; j++){
             map.set(t[j], (map.get(t[j]) || 0) + 1);
-        }
+        } 
 
         for(let k = i; k < s.length; k++){
             if(map.has(s[k])){
@@ -71,7 +73,7 @@ var minWindow = function(s, t) {
 // is larger than the current window size. If it is, I will update 'minWin' and 
 // 'minSubstring' accordingly, then attempt to shrink the window.
 // Before shrinking the window, I will increment the frequency of the character 
-// pointed by 'start' in the hash map because it is now excluded from the window.
+// pointed by 'start' in the hash map because it is now excluded from the window(no longer part of new window).
 // However, if this character's frequency in the hash map becomes greater than zero 
 // after incrementing, it means I need this character again, so I will increment 'requiredCount'.
 // This process continues until 'requiredCount' becomes greater than zero, at which point 
@@ -85,10 +87,9 @@ var minWindow = function(s, t) {
 //        where 'N' is the length of 's'.
 // O(N):- Used by the inner while loop to shrink the window.
 // Both the 'start' and 'end' pointers iterate independently through the string 's' (not nested).
-// In the worst case, each character of 's' can be visited twice (once by the 'end' pointer 
+// In the worst case, each character of string 's' can be visited twice (once by the 'end' pointer 
 // and once by the 'start' pointer).
 // Overall TC:- O(N + N) = O(2N) = O(N).
-
 // SC:- O(m), to store each character of string 't' in the map, where 'm' is the length of 't'.
 
  
