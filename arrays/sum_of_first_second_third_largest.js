@@ -1,5 +1,4 @@
 // question:- find the sum of first, second and third largest elements of an array.
-
 // Brute force approach:-
 // approach:-
 // sort the given array in non - increasing order.
@@ -34,8 +33,6 @@ function sum(arr){
 // return the sum of firstLargest, secondLargest, and thirdLargest.
 // TC:- O(N), where 'N' is the number of elements in the array, as we are traversing the array only once.
 // SC:- O(1), as no extra space is used other than the variables firstLargest, secondLargest, and thirdLargest.
-
-
 
 let arr1 = [-12,4,67,2,34];
 console.log(sum1(arr1));
