@@ -35,7 +35,7 @@
 // Note:- converting the path string into array using delimeter '/' equal to path = "/home//foo/" , 
 // const parts = path.split('/') =>  ["", "home", "", "foo", ""], before first / there is nothing so split method add empty 
 // string.
-// Since strings in JavaScript are immutable, each time I create a new string by popping a file path from the top of
+// Since strings in JavaScript are immutable, each time a new string created by popping a file path from the top of
 // the stack, adding a forward slash in front of it, and then prepending this new string to the existing file path 
 // stored in the result string.
 // That means result string is created each time , it does not change the original string, instead it prepend the 

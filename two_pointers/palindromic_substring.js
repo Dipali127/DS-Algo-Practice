@@ -40,7 +40,7 @@ var isPalindrome = function(string, start, end){
 // Approach:
 // i will use the "expand around center" technique to count the number of palindromic substrings.
 // The idea is to treat each character (or pair of adjacent characters for even-length palindromes) as a potential center
-//  and expand outward to check for palindromes. 
+// and expand outward to check for palindromes. 
 // i will use a `count` variable to keep track of the total number of palindromic substrings found. 
 // while iterating through the given string, i will call the `expandAround` function twice for each character:
 // Once for odd-length palindromes (where the palindrome has a single center character).

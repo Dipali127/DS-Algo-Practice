@@ -10,8 +10,8 @@
 // since we need to return only the **first greater element** to the right.
 // After the inner loop ends, add the element at `i` as the key and `greater` as its value in the map.
 // Once the map is built, iterate through nums1 and update each value with its next greater element using the hash map.
-// TC: O(N^2), since we use a nested loop to find the next greater element for each element in nums2.
-// In the worst case, the inner loop may iterate through all remaining elements of nums2.
+// TC: O(N^2 + M), since we use a nested loop to find the next greater element for each element in nums2.
+// For 'n' elements of nums2, the inner loop may in the worst case iterate through all remaining elements, giving O(n²).
 // SC: O(N), since a hash map is used to store the next greater element for each value in nums2. 
 
 var nextGreaterElement = function (nums1, nums2) {
@@ -43,7 +43,7 @@ var nextGreaterElement = function (nums1, nums2) {
 // While processing nums2, I will determine the next greater element for each value and store it in the hash map.
 // If a next greater element is found, I will store it in the hash map; otherwise, I will store -1 for that element.
 // Then, I will iterate through nums1 and retrieve the next greater elements from the hash map.
-// Finally, after finding the next greater element for each element in nums1, I will return nums1.
+// Finally, after gettingthe next greater element for each element of nums1, I will return nums1.
 
 // Time Complexity: O(N)
 // - O(N) to iterate through nums2 and compute the next greater element for each value using a stack.
