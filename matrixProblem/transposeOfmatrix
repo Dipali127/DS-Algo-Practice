@@ -1,7 +1,7 @@
 // GFG PROBLEM:
 // we only can do transpose in a square matrix.
-// appraoch:- swap the value which are below the diagonal with the value which are above 
-// the diagonal and this will change the rows into colums and colums into rows
+// approach:- swap the value which are below the diagonal with the value which are above 
+// the diagonal and this will change the rows into colums and colums into rows.
 // it means matrix[i][j] = matrix[j][i] and matrix[j][i] = matrix[i][j].
 // here in below code, outer loop iterate through all the row of matrix and inner loop iterate  
 // from start index of each row to less than diagonal value of that row.
@@ -46,7 +46,6 @@ class Solution {
 //   where N is the number of rows and M is the number of columns.
 // Space Complexity: O(N*M)
 // - We use additional space to create a new 2D array (result) that holds the transposed matrix.
-
 
 var transpose = function(matrix) {
     let row = matrix.length;

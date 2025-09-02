@@ -5,17 +5,17 @@
 // while iterateing row's element, check that if current iterated element is equal to
 // target? if it is then return true else return false.
 // TC:O(n^2) or O(m*n) and SC:O(1).
-// var searchMatrix = function(matrix, target) {
-//     for(let i = 0;i<matrix.length;i++){
-//         for(let j = 0; j<matrix[i].length;j++){
-//             if(matrix[i][j] === target){
-//                 return true;
-//             }
-//         }
-//     }
+var searchMatrix = function(matrix, target) {
+    for(let i = 0;i<matrix.length;i++){
+        for(let j = 0; j<matrix[i].length;j++){
+            if(matrix[i][j] === target){
+                return true;
+            }
+        }
+    }
 
-//     return false;
-// };
+    return false;
+};
 
 // approach:- apply binary search
 // let suppose m is no. of rows in a matrix and n is a no. of columns in a matrix.
