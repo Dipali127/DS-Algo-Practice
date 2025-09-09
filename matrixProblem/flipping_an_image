@@ -1,12 +1,17 @@
-// Leetcode Problem:
-// appraoch:- first iterate through the matrix to flip an image horizontally means that reverse
-// each row (swap each row value which are before or on the midlle of the row with value which are after 
-// the middle of the row).
-// once each row is reversed again iterate through the reverse matrix to invert the matrix means that
-// changing 0s to 1 and 1s to 0.
-// TC:O(N^2) as the below code use twice nested loop that is once for image
-// flipping and other for image inverting.
-// SC:- O(1), since no additional space is used.
+// LeetCode Problem:
+// Approach: 
+// First, iterate through the matrix to flip the image horizontally. 
+// This means reversing each row (swap elements before or at the middle of the row 
+// with the elements after the middle).
+// Once each row is reversed, iterate through the matrix again to invert the image, 
+// i.e., change 0s to 1s and 1s to 0s.
+
+// Time Complexity: O(N^2)
+// - O(N * N/2) for flipping each row horizontally
+// - O(N^2) for inverting the matrix
+// Overall: O(N^2)
+// Space Complexity: O(1), since no additional space is used.
+
 
 var flipAndInvertImage = function(image) {
     let m = image.length;

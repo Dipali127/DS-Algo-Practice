@@ -4,9 +4,9 @@
 
 // Optimal Approach (Greedy)
 // Approach:
-// Sorting the intervals by their end time helps you keep more non-overlapping intervals and reduce the overlapping ones.
+// Sorting the intervals by their end time helps you keep more non-overlapping intervals and remove the overlapping intervals.
 // For example, suppose you have multiple activities to choose from, and each activity has a time interval.
-// Your strategy should be to choose the intervals that end first so that you can participate in more activities without 
+// Your strategy would be to choose the activitiess that end first so that you can participate in more activities without 
 // overlapping. This approach also helps you easily skip intervals that overlap with the previously selected one.
 
 // After sorting, I will take a `count` variable to keep track of the number of overlapping intervals that need to be

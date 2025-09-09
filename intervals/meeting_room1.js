@@ -14,9 +14,8 @@ Output: true
 
 // Optimal Approach:
 // Approach:
-// Sort the intervals by their start time so that all overlapping intervals become adjacent.
-// Sorting the intervals by their start time helps to identify overlapping intervals early and 
-// ensures that meetings can be checked in order.
+// Sort the meetings by their start times so that a person can attend meetings in order, 
+// and it will be easier to check for overlapping meetings as well.
 
 // While iterating through the intervals:
 // Check if the current interval's start time is less than the previous interval's end time.

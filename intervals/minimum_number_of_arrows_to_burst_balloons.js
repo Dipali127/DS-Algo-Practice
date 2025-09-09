@@ -28,14 +28,16 @@
 // overall, TC:- O(NLOGN) + O(N) = O(NLOGN).
 // SC:- O(1), since no additional space is used.
 // Note:-
-// The 'prev' variable always contains the overlapping region where all previously overlapping balloons 
-// can be burst by a single arrow. By updating 'prev' with the maximum starting point and minimum ending point, 
-// we ensure that future balloons are checked against the correct overlapping region. 
-// If a balloon does not overlap, we need a new arrow.
+// The 'prev' variable always represents the current overlapping region where all previously overlapping balloons 
+// can be burst by a single arrow. 
+// By updating 'prev' with the maximum starting point and the minimum ending point, 
+// we ensure that the arrow can be correctly shot within the overlapping region to burst all those balloons at once. 
+// If a balloon does not overlap with this region, we need a new arrow.
+
 
 var findMinArrowShots = function(points) {
     points.sort((a, b) => a[0] - b[0]);
-        
+  
         let prev = points[0];
         let count = 1;
         for(let i = 1; i < points.length; i++){

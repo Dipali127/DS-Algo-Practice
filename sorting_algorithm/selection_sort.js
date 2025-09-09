@@ -1,4 +1,4 @@
-// Selection Sort selects the smallest or largest element from the unsorted array and places that 
+// In every pass, Selection Sort selects the smallest or largest element from the unsorted array and places that 
 // element at the beginning of the array to achieve the intended order (either increasing or decreasing).
 
 // TC: O(N^2) in the average, best, and worst cases, regardless of the array's initial order.

@@ -17,8 +17,6 @@
 // the largest value among all elements. In the second pass, the last two positions contain 
 // the first and second largest values, and so on.
 
-
-
 let arr = [1,2,3,4,5];
 console.log(bubblesort(arr))
 function bubblesort(arr){

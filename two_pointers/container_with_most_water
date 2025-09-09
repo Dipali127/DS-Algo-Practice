@@ -41,7 +41,7 @@ var maxArea = function (height) {
 // smaller area.
 // i will run a while loop until left is less than right and in each iteration, i will find the area between pair of 
 // container wall and  Update maxArea if the new area is greater the maxArea,
-//  and check if height of wall pointed by left pointer is less than the height of wall pointed by right 
+// and check if height of wall pointed by left pointer is less than the height of wall pointed by right 
 // pointer, if it is then i will increment the left pointer to avoid minimum height (since minimum height give minimum area).
 // but if height of wall pointed by left pointer is greater than the height of wall pointed by right pointer,then decrement
 // right pointer.

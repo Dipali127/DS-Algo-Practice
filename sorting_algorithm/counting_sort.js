@@ -26,6 +26,7 @@
 // O(N) to store the frequency of each element of the original array in countArray.
 // O(K) to find the cumulative sum of each element stored in countArray.
 // O(N) to iterate through the original array to store the elements in the correct position.
+// SC:- O(N), because we are using an additional array of size N to store the sorted elements.
 
 let array = [4, 2, 2, 8, 3, 3, 1];
 console.log(countingSort(array));

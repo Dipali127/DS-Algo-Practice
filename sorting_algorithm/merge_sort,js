@@ -1,12 +1,19 @@
-// merge sort is based on divide and conquer algorithm which recursively divide the array into subarray until the
+// merge sort is based on divide and conquer algorithm which recursively divide the array into subarray until the 
 // size of the array becomes one.
 // once the size of the array becomes one, merge function merge the array until the array will be completely merge.
-// TC:- O(NLOGN), as mergeSort function will take O(logN) complexity to divide the array into two halves and 
-// merge function will take O(N) complexity to sort the array.
-// Worst,best and average case time complexity of merge sort is O(NlogN).
-// Space Complexity:- O(N) for recursively dividing the array and O(N) for
-// extra space used to hold the left and right subarrays during the merging process.
-// So, overall SC:- O(N) + O(N) = O(N).
+//
+// Time Complexity: O(N logN)
+// - The mergeSort function recursively divides the array into two halves, which takes O(logN).
+// - At each level of mergeSort(), the merge() function is called to merge all elements, 
+//   which takes O(N) time.
+// - Therefore, the overall time complexity in the worst, best, and average cases is O(N logN).
+//
+// Space Complexity: O(N)
+// - O(logN) space is required for the recursive function call stack.
+// - O(N) extra space is required to store the left and right subarrays during merging.
+// - O(N) temporary space is also used for storing the merged output.
+// - Overall space complexity = O(N) (since O(logN) is negligible compared to O(N)).
+
 
 let arr=[4,3,9,7,6,8];
 let low = 0, high = arr.length-1;

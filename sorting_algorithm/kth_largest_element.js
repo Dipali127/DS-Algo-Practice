@@ -11,12 +11,12 @@ function kthSmallest(arr, k){
 }
 
 // Optimal Appraoch:-
-// use the Quickselect algorithm, which is similar to Quicksort, but only partitions the array until the 
+// use the Quickselect algorithm, which is similar to Quicksort, but only the partition the array until the 
 // kth element reach at its correct position.
 // Quickselect repeatedly partitions the array around a pivot until it finds the kth smallest element.
 // Time Complexity (TC):
 // Worst Case:- O(N^2), occurs when the array is already sorted (either in ascending or descending order).
-//  In this scenario, the algorithm will go through each element in the array multiple times, leading to O(N^2).
+// In this scenario, the algorithm will go through each element in the array multiple times, leading to O(N^2).
 // Best/Average Case: O(N), Explanation:
 // - Quickselect only processes one side of the array (either left or right of the pivot),
 //   effectively reducing the search space by nearly half on each iteration.
