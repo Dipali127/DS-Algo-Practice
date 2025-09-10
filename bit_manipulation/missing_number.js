@@ -20,7 +20,7 @@ var missingNumber = function (nums) {
 };
 
 
-// Optimal Approach:
+// Optimal Approach1:
 // Approach:
 // First, calculate the sum of the range from 0 to n (inclusive).
 // Then, iterate through the input array 'nums' and subtract each element from the total.
@@ -42,3 +42,30 @@ var missingNumber = function (nums) {
 
     return total;
 };
+
+// Optimal Approach2:
+// Approach:
+// First, do the XOR of all the indices in the range from 0 to n (inclusive).
+// Then, perform XOR with all numbers from the given nums array.
+// Due to the property a ^ a = 0, all duplicate numbers cancel out, leaving only the missing number.
+// Finally, return the result stored in xor.
+//
+// TC:- O(N)
+// Explanation:
+// O(N) -> to find the XOR of all numbers in the range 0 to n (inclusive).
+// O(N) -> to find the XOR of all the numbers in the given array.
+// Overall TC = O(N) + O(N) = O(2N) = O(N).
+//
+// SC:- O(1), since no additional space is used apart from a variable.
+var missingNumber = function (nums) {
+    let xor = 0; 
+    for (let i = 0; i <= nums.length; i++) {
+        xor ^= i;
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+        xor ^= nums[i];
+    }
+
+    return xor;
+}

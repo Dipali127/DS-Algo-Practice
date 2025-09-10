@@ -72,7 +72,7 @@ class Solution {
 // run a while loop that continues as long as 'n' is divisible by 2 (i.e., n % 2 === 0).
 // inside the loop, keep dividing 'n' by 2 to reduce it.
 // once the loop exits, check if 'n' is equal to 1. If it is, then the original 'n' 
-// was a power of 2, so return true. Otherwise, return false.
+// is a power of 2, so return true. Otherwise, return false.
 // TC:- O(LOGN), as the number is halved in each iteration, so it runs in logarithmic time.
 // SC:- O(1), since no additional space is used. 
 
@@ -91,22 +91,20 @@ class Solution {
 }
 
 // approach 2: Using Bit Manipulation
-// A number 'n' is a power of two if it has exactly one bit set to 1 in its binary representation.
-// For example: 
-//  - 2 (10 in binary) has one bit set.
-//  - 4 (100 in binary) has one bit set.
-// in binary, powers of two are of the form '1000...0'. Subtracting 1 from such a number 
-// flips all the bits after the rightmost set bit, resulting in a number with all bits set to 1 before the rightmost set bit.
-// Thus, the expression (n & (n - 1)) clears the rightmost set bit.  
-// If the result is 0, it means that 'n' is a power of two. Additionally, 'n' must be positive.
-// TC:- O(1), as the operation only involves a few bitwise checks, independent of input size.
-// SC:- O(1), since no additional space is used.
-
-class Solution {
-    isPowerofTwo(n) {
-        return n > 0 && (n & (n - 1)) === 0;
+// Since a power of two has only one set bit in its binary representation,
+// performing a bitwise AND operation between n and (n - 1) removes that set bit,
+// resulting in 0.
+// If (n & (n - 1)) === 0, it means n is a power of two.
+//
+// TC: O(1), since bitwise operations take constant time.
+// SC: O(1), since no extra space is used.
+var isPowerOfTwo = function(n) {
+    if (n <= 0) {
+        return false;
     }
-}
+    return (n & (n - 1)) === 0;
+};
+
 
 // Recap:- 
 // (1) Check the kth bit set or not :- use (n & 1 << k).

@@ -64,7 +64,8 @@ var singleNumber = function(nums) {
 // Otherwise, if the kth bit is set (i.e., 1), we increment countOnes.
 // after counting the occurrences of 1s and 0s at the kth bit for all numbers, check if countOnes % 3 === 1.
 // if this condition is true, it indicates that the single number contributes a 1 at the kth bit. 
-// this is because numbers that appear three times will contribute 0s at that bit position, while the single number will leave a remainder of 1.
+// this is because numbers that appear three times will contribute 0s at that bit position, while the single number will
+// leave a remainder of 1.
 // If the condition is met,update the result by performing a bitwise OR operation: 'result = result | temp'. This sets the kth bit in the result.
 // after iterating through all bit positions, the function returns result, which contains the number that appears only once in the array.
 
