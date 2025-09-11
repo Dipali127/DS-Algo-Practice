@@ -1,65 +1,49 @@
 // Leetcode Problem:- 190
-// below is the example of how it work:-
-// Step-by-Step Breakdown:
-// Initialization:
-// n = 5 (binary: 00000101)
-// reversed = 0 (this will hold the reversed number).
-// Iteration 1 (i = 0):
-// reversed = (reversed << 1) | (n & 1)
-// reversed = (0 << 1) | (5 & 1)
-// 5 & 1 gives the rightmost bit of 5, which is 1.
-// So, reversed = 1 (binary: 00000001).
-// n >>>= 1 (shift n right by 1):
-// n = 5 >>> 1 = 2 (binary: 00000010).
-// Iteration 2 (i = 1):
-// reversed = (reversed << 1) | (n & 1)
-// reversed = (1 << 1) | (2 & 1)
-// 2 & 1 gives the rightmost bit of 2, which is 0.
-// So, reversed = 2 (binary: 00000010).
-// n >>>= 1 (shift n right by 1):
-// n = 2 >>> 1 = 1 (binary: 00000001).
-// Iteration 3 (i = 2):
-// reversed = (reversed << 1) | (n & 1)
-// reversed = (2 << 1) | (1 & 1)
-// 1 & 1 gives the rightmost bit of 1, which is 1.
-// So, reversed = 5 (binary: 00000101).
-// n >>>= 1 (shift n right by 1):
-// n = 1 >>> 1 = 0 (binary: 00000000).
-// Iterations 4 to 7 (i = 3, 4, 5, 6):
-// Since n is now 0, there are no more bits to process.
-// reversed remains unchanged (still 5 in binary: 00000101).
-
-// About unsigned right shift (>>>) and unsigned left shift(<<<).
-// Unsigned Right Shift (>>>):
-// Shifts all bits to the right.
-// Removes the rightmost bit.
-// Adds 0 to the leftmost bit, ensuring no sign extension (useful for unsigned integers).
-// Unsigned Left Shift (<<):
-// Shifts all bits to the left.
-// Removes the leftmost bit.
-// Adds 0 to the rightmost bit.
-
+// Problem:- we have given number 'n' and we have to reverse the bits of the number 'n' and return decimal value of 
+// the reversed bits of given number 'n'.
+// Example:- 5, Binary of 5 = 00000000000000000000000000000101, Reversed bits = 10100000000000000000000000000000
+// Decimal Value of Reversed bits = 2684354560.
+// 
 // Optimal Approach:
-// approach:
-// initialize a variable 'reversed' to 0, which will hold the result of the reversed bits.
-// iterate over all 32 bits of the input number.
-// shift 'reversed' left by 1 position to make space for the next bit, and extract the rightmost bit from the given
-// number 'n' and add it to the 'reversed' variable.
-// shift 'n' to the right by 1 position to remove the rightmost bit and process the next one.
-// The unsigned right shift (>>>) ensures no sign extension for negative numbers.
-// return the result, forcing it to be treated as an unsigned 32-bit integer.
-// TC: O(1) because the loop runs for exactly 32 iterations (since we're always dealing with a 32-bit integer).
-// SC: O(1) because no additional space is used.
+// Approach:
+// Take a 'reversed' variable that will store the reversed binary representation of the given number 'n'.
+// Traverse through all 32 bits of the given number starting from i = 0 to 31.
+// While traversing, for each bit perform the following steps:
+// (i)  Extract the rightmost bit from the binary representation of 'n' using (n & 1).
+// (ii) Create space (room) for the extracted bit by shifting 'reversed' left using (reversed << 1).
+// (iii) Add the extracted bit to the 'reversed' variable in reverse order by combining with bitwise OR.
+// (iv) Remove the extracted bit from 'n' by shifting it right (n >> 1). This effectively discards the
+//      bit since it is already added in the 'reversed' variable. After the shift, the next bit of 'n'
+//      moves into the rightmost position, making it easy to extract in the next iteration.
+// 
+// Example: Let's say initially n = 5 (binary 000...0101).
+// - The rightmost bit is 1. Performing (n >> 1) discards it, and now n becomes 2 (binary 10).
+// - Now the rightmost bit is 0, which is the second bit of the original binary representation of 5.
+// - This process continues until all 32 bits are processed.
+// 
+// Dry Run for n = 5 (binary: 000...0101) up to 10 steps:
+// i = 0 → extractBit = 1, reversed = 1, n = 2
+// i = 1 → extractBit = 0, reversed = 2, n = 1
+// i = 2 → extractBit = 1, reversed = 5, n = 0
+// i = 3 → extractBit = 0, reversed = 10, n = 0
+// i = 4 → extractBit = 0, reversed = 20, n = 0
+// i = 5 → extractBit = 0, reversed = 40, n = 0
+// i = 6 → extractBit = 0, reversed = 80, n = 0
+// i = 7 → extractBit = 0, reversed = 160, n = 0
+// i = 8 → extractBit = 0, reversed = 320, n = 0
+// i = 9 → extractBit = 0, reversed = 640, n = 0
+//
+// After 32 steps, the reversed bits become: 10100000000000000000000000000000
+// Which is 2684354560 in decimal.
+//
+// Time Complexity: O(1), since the loop always runs for exactly 32 iterations.
+// Space Complexity: O(1), as no extra space is used.
 var reverseBits = function(n) {
     let reversed = 0;
     for (let i = 0; i < 32; i++) {
-        // Shift reversed to the left by 1 bit to make room for the next bit
-        reversed = (reversed << 1) | (n & 1); 
-        
-        // Perform an unsigned right shift on n to process the next bit
-        n >>>= 1;
+        let extractBit = n & 1;           // Step (i): extract rightmost bit
+        reversed = (reversed << 1) | extractBit; // Step (ii) + (iii): shift left and add bit
+        n >>= 1;                          // Step (iv): remove extracted bit
     }
-
-    // Ensure the result is treated as an unsigned 32-bit integer
-    return reversed >>> 0; // This forces the result to be unsigned
+    return reversed >>> 0; // force unsigned 32-bit result
 };

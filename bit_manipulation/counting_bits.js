@@ -34,29 +34,25 @@ var countBits = function(n) {
 // Approach:-
 // use the 'result' array to store the count of set bits (1s) for each number from 0 to n.
 // The idea is to utilize the fact that:
-// - for even numbers, the number of set bits is the same as i/2 (since dividing by 2 in binary shifts all 
+// - for even numbers, the number of set bits is the same as number/2  (since dividing by 2 in binary shifts all 
 // bits to the right, which does not change the number of 1s).
-// - For odd numbers, the number of set bits is one more than i/2 (because the least significant bit is 
+// - For odd numbers, the number of set bits is one more than number/2 (because the least significant bit is 
 // always 1 for odd numbers).
 // TC: O(N), because we compute the count of 1s for each number from 0 to n in constant time.
 // SC: O(N), for storing the count of set bits for each number.
 // Note:- here, i am reusing the previously computed count of bits for even and odd numbers to improve the efficiency of 
 // the algorithm.
 // Math.floor() always rounds down to the nearest integer, meaning it discards the decimal part and keeps the lower integer.
+// Performing 'i >> 1' is the same as performing Math.floor(i/2) for positive numbers,
+// because the right shift formula is: n >> k = Math.floor(n / 2^k), where 'k' is the shift amount.
+
 var countBits = function(n) {
-    let result = [];
-    if (n === 0) {
-        return [0];
-    }
-
-    // Binary of 0 has 0 number of bits set as 1
-    result.push(0);
-
-    for (let i = 1; i <= n; i++) {
-        if (i % 2 === 0) {
-            result[i] = result[i/2];
-        } else {
-            result[i] = result[Math.floor(i/2)]+1;
+    let result = [0];
+    for(let i = 1; i <= n; i++){
+        if(i % 2 === 0){
+            result[i] = result[i >> 1];
+        }else{
+            result[i] = result[i >> 1] + 1; 
         }
     }
 
