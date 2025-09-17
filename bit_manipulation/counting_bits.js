@@ -1,7 +1,7 @@
 // Leetcode Problem:- 338
 // Brute force approach
 // Approach:-
-// initialize a 'result' array to store the count of 1s (set bits) for each number from 0 to n.
+// initialize a 'result' array to store the count of 1s (set bits) for each number from 0 to n(inclusive).
 // for each number 'i' from 0 to n, use a variable 'num' to hold the value of 'i'.
 // then count the number of set bits (1s) in 'num' by repeatedly applying the bitwise operation 'num = num & (num - 1)'.
 // This operation removes the rightmost set bit (1) in 'num' during each iteration of the while loop.
@@ -13,7 +13,6 @@
 // - Therefore, the overall complexity is O(N * k).
 // Space Complexity: O(N)
 // - We store the count of set bits for each number from 0 to N in the 'result' array.
-
 
 var countBits = function(n) {
     let result = [];
@@ -32,7 +31,7 @@ var countBits = function(n) {
 
 // Optimal Appraoch:
 // Approach:-
-// use the 'result' array to store the count of set bits (1s) for each number from 0 to n.
+// use the 'result' array to store the count of set bits (1s) for each number from 0 to n(inclusive).
 // The idea is to utilize the fact that:
 // - for even numbers, the number of set bits is the same as number/2  (since dividing by 2 in binary shifts all 
 // bits to the right, which does not change the number of 1s).

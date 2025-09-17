@@ -1,28 +1,28 @@
-// Leetcode Problem:- 342
-// Brute force approach:
-// approach:-
-// check if the given 'n' is less than or equal to 0. If it is, return false since powers of 4 are always positive.
-// run a while loop that continues as long as 'n' is divisible by 4 (i.e., n % 4 === 0).
-// inside the loop, keep dividing 'n' by 4 to reduce it.
-// once the loop exits, check if 'n' is equal to 1. If it is, then the original 'n' 
-// was a power of 2, so return true. Otherwise, return false.
-// TC:- O(LOGN), as the number is halved in each iteration, so it runs in logarithmic time.
-// SC:- O(1), since no additional space is used.
+// Leetcode Problem: 342 (Power of Four)
+// Brute Force Approach:
+// - Check if the given 'n' is less than or equal to 0. If it is, return false since powers of 4 are always positive.
+// - Run a while loop that continues as long as 'n' is divisible by 4 (i.e., n % 4 === 0).
+// - Inside the loop, keep dividing 'n' by 4 to reduce it to the next smaller power of 4.
+// - Once the loop exits, check if 'n' is equal to 1. If it is, then the original 'n' 
+//   was a power of 4, so return true. Otherwise, return false.
+//
+// TC: O(log₄N) → which is equivalent to O(log N), since we divide by 4 in each step.
+// SC: O(1), since no additional space is used.
 
 var isPowerOfFour = function(n) {
-    if(n <= 0){
+    if (n <= 0) {
         return false;
     }
 
-    while(n % 4 === 0){
-        n = n/4;
+    while (n % 4 === 0) {
+        n = n / 4;
     }
 
     return n === 1;
 };
 
 // Optimal Approach:
-// approach:-
+// approach :-
 // check if any number 'n' is a power of 4 by following these properties:
 // - If 'n' is a power of 4, it must first be a power of 2. 
 // This is checked by verifying that 'n' has only one bit set (n & (n - 1)) === 0.

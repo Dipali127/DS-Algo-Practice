@@ -1,23 +1,28 @@
 // Leetcode Problem: 55
-// Optimal Approach:-
-// initialise max with 0 which will track the furthest index we can reach as we iterate through the array.
-// iterate through the array, and for each index i, update max to be the greater of the current max or the 
-// sum of the current index and the maximum jump length from this index (nums[i] + i).
-// if max is greater than or equal to the last index (nums.length - 1), return true because we can reach or 
-// exceed the end of the array.
-// if max is equal to the current index i and nums[i] is 0, it means we are stuck at this position (we can't move forward).
-// in this case, return false.
-// if the loop completes without reaching the last index, return false because we cannot reach the end.
-// TC:- O(N), in worst case we traverse the whole array.
-// SC:- O(1), as there is no additional space used.
+// Optimal Approach:
+// Approach:
+// - Initialize a variable 'reachable' = 0, which represents the farthest position we can reach  
+//   while iterating through the array.
+// - Traverse the array from left to right:
+//   - If the current index 'i' is greater than 'reachable', it means we cannot even reach
+//     the current index, so return false immediately.
+//   - Otherwise, update 'reachable = max(reachable, i + nums[i])' to extend the maximum range 
+//     we can reach. Here, 'i + nums[i]' represents the farthest index we can jump to from the 
+//     current index 'i'.
+// - After traversing the array, if we never encounter a case where 'i > reachable', it means
+//   the last index is reachable, so return true.
+//
+// Time Complexity: O(N), because we traverse the array once.
+// Space Complexity: O(1), since we only use one variable 'reachable'.
 
 var canJump = function(nums) {
-    let max = 0;
-    for(let i = 0; i<nums.length;i++){
-        max = Math.max(nums[i] + i,max);
-        if(max >= nums.length-1) return true;
-        if(max == i && nums[i] == 0) return false;
+    let reachable = 0;
+    for (let i = 0; i < nums.length; i++) {
+        if (i > reachable) {
+            return false;
+        } else {
+            reachable = Math.max(reachable, i + nums[i]);
+        }
     }
-
-    return false;
+    return true;
 };

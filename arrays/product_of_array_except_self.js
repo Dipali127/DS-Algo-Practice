@@ -88,10 +88,11 @@ var productExceptSelf = function(nums) {
 // Approach:
 // Take a result array of the same size as the given array 'nums'.
 // Store 1 at the 0th index of the result array, since the left product for the 0th index value is 0,
-// but to correctly compute the left product for all other numbers (except the 0th index), we store 1 at the 0th index 
-// of the result array.
+// but to correctly compute the left product for all other numbers (except the 0th index), we store 1 at 
+// the 0th index of the result array.
 // Calculate the left products for each element and store them in the result array.
-// Calculate the right products for each element and multiply them with the left products already stored in the result array.
+// Calculate the right products for each element and multiply them with the left products already stored
+// in the result array.
 // After processing all elements and calculating the product, return the result array.
 // Time Complexity (TC):- O(N)
 // Explanation:-
