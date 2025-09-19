@@ -1,7 +1,8 @@
 // Leetcode Problem:- 74
 // Brute force approach: 
 // approach:-
-// use of a nested 'for loop' to iterate though the matrix array where, outer loop iterate through each row of the matrix 
+// use of a nested 'for loop' to iterate though the matrix array where, outer loop iterate through each
+// row of the matrix .
 // and inner loop iterate through each element of the current row.
 // During each iteration, check if the current element is equal to the target.
 // if the current element matches the target, return true (since the target is found).
@@ -41,6 +42,8 @@ var searchMatrix = function(matrix, target) {
 // TC:- O(log(m * n)), where m is the number of rows and n is the number of columns.
 // we perform binary search on the entire matrix treated as a 1D array.
 // SC:- O(1), since no extra space is used other than a few pointers.
+// We divide by the number of columns because each row has n elements.
+// Dividing by n gives the row index, and mid % n gives the column index in that row.
 
 var searchMatrix = function (matrix, target) {
     if (matrix.length == 0) {

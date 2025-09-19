@@ -25,8 +25,8 @@ var search = function(nums, target) {
 // i will run a while loop until 'low <= high' and calculate the 'mid' index to check if the target is at mid.  
 // if the target is found at 'mid', return the mid index immediately.  
 // if not, then i will find out which part of the array is sorted (left or right) of mid.  
-// - if the left half (from 'low' to 'mid') is sorted, check if the target lies within that range, because the target will  
-//   be found in the sorted part of the array.  
+// - if the left half (from 'low' to 'mid') is sorted, check if the target lies within that range, 
+//   because the target will be found in the sorted part of the array.  
 //   - if the target is within this range, update 'high' to mid - 1 to search the left half.  
 //   - otherwise, update 'low' to mid + 1 to search the right half.  
 // - if the right half (from 'mid' to 'high') is sorted, check if the target is in this range.  
