@@ -11,10 +11,11 @@
 // If the triplet string is not already in the set, I will add it to the result array.
 // If it does exist in the set, it means the current triplet is a duplicate and should be skipped.
 // Time Complexity: O(N^3), due to the triply nested loop.
-// Space Complexity: O(N), to store the triplets in the set.
+// Space Complexity: O(N), to store the triplets in the hash set.
 
 // why we are convertig the sorting array in string instead of directly storing them as array?
-// If we store the sorted array directly in a hash set, JavaScript compares arrays by reference, not by value.
+// If we store the sorted array directly in a hash set, JavaScript compares arrays by reference,
+// not by value.
 // So even if [1,2,3] already exists in the set, when we try to insert another [1,2,3], the comparison will return false 
 // because they are two different array objects in memory (different references).
 // That’s why we convert the sorted array into a string. Unlike arrays, JavaScript compares strings by value, so '1,2,3'
@@ -59,6 +60,12 @@ var threeSum = function(nums) {
 // If the sum of the triplet is less than zero, I will move the start pointer to the right to increase the sum.
 // If the sum is greater than zero, I will move the end pointer to the left to decrease the sum.
 // Finally, I will return the result array containing all unique triplets.
+// Time Complexity: O(N^2), Explanation: 
+// Sorting the array takes O(N log N) time.
+// and the two-pointer technique runs in O(N^2) time in the 
+// worst case, since i have use nested loop where outer loop runs through each element and inner loop 
+// both pointers run through each element at most once
+// Space Complexity: O(1), Since we haven't use any extra space apart from few pointers.
 
 var threeSum = function (nums) {
     nums.sort((a,b) => a-b), result = [];

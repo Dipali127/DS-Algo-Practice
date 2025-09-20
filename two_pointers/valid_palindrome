@@ -14,7 +14,8 @@
 //
 // Time Complexity: O(N)
 // - O(N) to iterate through the string and filter out non-alphanumeric characters.
-// - O(N/2) to check whether the cleaned string is a palindrome.
+// - O(N/2) to check whether the cleaned string is a palindrome, since both pointers i and j traverse 
+//    through half of the string.
 // Overall Time Complexity: O(N)
 // Note: The regex used to test alphanumeric characters runs in constant time O(1) per character,
 // because it only matches a single character against a fixed pattern.
