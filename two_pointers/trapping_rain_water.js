@@ -1,13 +1,13 @@
 // Leetcode Problem: 42
 // Understanding the Problem:
-// The goal is to calculate how much water can be trapped above each bar after it rains.
+// The goal is to calculate how much water can be trapped after it rains.
 
 // Brute Force Approach:
 // Approach:
 // The idea is to iterate through each bar in the height array and calculate how much water can be trapped at that 
 // position. This value is then added to the `totalWaterTrapped` variable.
 
-// To compute the amount of water that can be trapped above the bars:
+// To compute the amount of water that can be trapped at each bars:
 // 1. First, find the tallest bar to the left of the current bar and store it in `leftMax`.
 // 2. Then, find the tallest bar to the right of the current bar and store it in `rightMax`.
 // 3. The water that can be trapped at the current bar is determined by the minimum of `leftMax` and `rightMax`,
@@ -16,12 +16,11 @@
 // 4. Subtract the height of the current bar from this minimum value because water cannot be stored above the top of the
 //    bar.
 // 5. Add the result to `totalWaterTrapped`.
-// Finally, return `totalWaterTrapped`, which represents the total amount of water that can be trapped between the bars.
+// Finally, return `totalWaterTrapped`, which represents the total amount of water that can be trapped at each the bars.
 
 // Time Complexity (TC): O(N^2)
 // For each bar, we compute `leftMax` and `rightMax` by scanning the array to the left and right, respectively,
 // resulting in O(N) operations per bar. Since we do this for every bar, the total time complexity is O(N * N) = O(N^2).
-
 // Space Complexity (SC): O(1)
 // No additional space is used other than a few variables for tracking water and maximum heights.
 
@@ -32,6 +31,8 @@
 //   water can be trapped above the current bar, and the amount is determined by the shorter of the two surrounding bars.
 // - We include the current bar in the scan for `leftMax` and `rightMax` because
 //   the current bar itself may be the maximum on one or both sides.
+// - The inner loop starts from the current index because it might be possible that the current bar itself is the left
+//   maximum or the right maximum, and we may not get any greater value on the left or right.
 
 
 var trap = function(height) {
@@ -56,10 +57,10 @@ var trap = function(height) {
 
 // Optimal Approach: prefix Sum
 // approach:
-// Instead of finding leftMax and rightMax for each building separately, I will precompute them using two arrays: 
-// leftMax and rightMax where, leftMax stores the maximum height for each building(bar) of the height and
-// rightMax stores the maximum height for each building(bar) of the height.
-// Using these precomputed values, I can directly determine the amount of water that can sit on top of each building 
+// Instead of finding leftMax and rightMax for each building/bar separately, I will precompute them using two arrays: 
+// leftMax and rightMax where, leftMax stores the maximum height on the left for each building(bar) and rightMax stores
+// the maximum height on the right for each building(bar) of the height array.
+// Using these precomputed values, I can directly determine the amount of water that can sit at each building/bar 
 // while iterating through the height array.
 // TC: O(N), as I only use a single loop to iterate through the height array.
 // SC: O(N), since additional arrays are used to store the leftMax and rightMax values.
@@ -110,7 +111,7 @@ var trap = function(height){
 // This approach avoids using extra space and reduces the time complexity to O(N),
 // as we only traverse the array once.
 
-// Time Complexity (TC): O(N), since we traverse the array only once.
+// Time Complexity (TC): O(N), since both pointer traverse the height array at once.
 // Space Complexity (SC): O(1), since no additional space is used.
 
 

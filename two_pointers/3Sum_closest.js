@@ -41,15 +41,22 @@ var threeSumClosest = function (nums, target) {
 
 // Optimal Approach: Using Two-Pointer Method
 // Approach:
-// sort the given array 'nums' and use two-pointer technique to get closest sum equals target.
-// use a fixed pointer 'i' for one number and two pointers 'l' and 'm' for the other two numbers.
-// the left pointer 'l' starts just after 'i', and the right pointer 'm' starts at the end of the array.
-// the sum of the three numbers is calculated, and the closest sum to the target is updated accordingly.
-// if the current sum is less than the target, increment the left pointer to increase the sum.
-// if the current sum is greater than or equal to the target, decrement the right pointer to decrease the sum.
-// TC:- O(N^2), due to nested loop.
-// SC:- O(1), since no additional space is used.
-// Note: If the problem does not ask for returning indices, first sort the array and use the two-pointer method to find the closest sum efficiently. 
+// Sort the given array 'nums' and use the two-pointer technique to find the sum closest to the target.
+// Initialize `closestSum` to Infinity to keep track of the closest sum found so far.
+// Traverse through the given array 'nums' using an outer loop. For each element, 
+// use two pointers: 'start' (pointing to the next element after the current one) 
+// and 'end' (pointing to the last element of the array).
+// Run a while loop until 'start' is less than 'end' and calculate the sum of 
+// the current element, 'start', and 'end'.
+// If the absolute difference between the target and the current sum is smaller 
+// than the absolute difference between the target and the closest sum so far, 
+// update `closestSum` with the current sum.
+// If the current sum is less than the target, increment 'start' to increase the sum.
+// If the current sum is greater than the target, decrement 'end' to decrease the sum.
+// Time Complexity: O(N^2), due to the nested loop.
+// Space Complexity: O(1), since no additional space is used.
+// Note: If the problem does not require returning indices, first sort the array 
+// and then use the two-pointer method to efficiently find the closest sum.
 
 var threeSumClosest = function (nums, target) {
     nums.sort((a, b) => a - b);

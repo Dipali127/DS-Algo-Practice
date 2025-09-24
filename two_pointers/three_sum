@@ -6,22 +6,23 @@
 // I will consider every possible triplet using three nested loops, and for each triplet,
 // I will compute the sum of its elements and check if the computed sum equals zero.
 // If it does, I will ensure the triplet is unique by verifying that it doesn’t already exist in the set.
-// To ensure this, I will sort the triplet to maintain a consistent order and convert it to a string,
-// so that I can easily check whether the current triplet is already in the hash set or not.
-// If the triplet string is not already in the set, I will add it to the result array.
+// To achieve this, I will first sort the triplet to maintain a consistent order so that only unique triplets are stored,
+// and then convert the sorted triplet into a string so that I can easily check whether the current triplet is already 
+// in the hash set.
+// If the triplet string is not already in the hash set, I will add it to the result array.
 // If it does exist in the set, it means the current triplet is a duplicate and should be skipped.
-// Time Complexity: O(N^3), due to the triply nested loop.
+// Time Complexity: O(N^3), due to the triple nested loop.
 // Space Complexity: O(N), to store the triplets in the hash set.
 
-// why we are convertig the sorting array in string instead of directly storing them as array?
+// Why are we converting the sorted array into a string instead of directly storing it as an array?
 // If we store the sorted array directly in a hash set, JavaScript compares arrays by reference,
 // not by value.
 // So even if [1,2,3] already exists in the set, when we try to insert another [1,2,3], the comparison will return false 
 // because they are two different array objects in memory (different references).
-// That’s why we convert the sorted array into a string. Unlike arrays, JavaScript compares strings by value, so '1,2,3'
-// and another '1,2,3' are considered equal, which allows the set to properly detect duplicates. 
-// Note:- while doing [nums[i] , nums[j], nums[k]] before [nums[i] , nums[j], nums[k]].sort((a,b) => a-b), reference(address)
-// for triplet array is created in memory.
+// That’s why we convert the sorted array into a string. Unlike arrays, JavaScript compares strings by value, 
+// so '1,2,3' and another '1,2,3' are considered equal, which allows the set to properly detect duplicates.
+// Note: when creating [nums[i], nums[j], nums[k]] before sorting, a new array reference (address) is created in memory.
+
 var threeSum = function(nums) {
   let set = new Set();
   let result = [];
@@ -64,7 +65,7 @@ var threeSum = function(nums) {
 // Sorting the array takes O(N log N) time.
 // and the two-pointer technique runs in O(N^2) time in the 
 // worst case, since i have use nested loop where outer loop runs through each element and inner loop 
-// both pointers run through each element at most once
+// both pointers run through each element at most once.
 // Space Complexity: O(1), Since we haven't use any extra space apart from few pointers.
 
 var threeSum = function (nums) {

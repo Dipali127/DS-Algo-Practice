@@ -1,8 +1,8 @@
 // Leetcode Problem : 80
 // Brute force approach:-
 // approach:-
-// iterate through the given array 'nums' and for each element, check if it is equal to the second next element 
-// (nums[i] === nums[i+2]).
+// iterate through the given array 'nums' and for each element, check if it is equal to the second next 
+// element (nums[i] === nums[i+2]).
 // If a duplicate is found (i.e., nums[i] === nums[i+2]), remove the duplicate element using the splice method.
 // after removing an element, decrement the loop index i by 1 to ensure the next element is not skipped, 
 // as the array length decreases and the elements shift left.

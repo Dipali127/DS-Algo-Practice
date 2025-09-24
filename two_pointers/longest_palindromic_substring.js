@@ -40,8 +40,9 @@ var palindrome = function(string, i, j){
 }
 
 // Optimal Approach:
-// I will use the "expand around center" technique to find the longest palindromic substring.
-// This technique takes a character and expands outward as long as it finds a palindromic substring.
+// I will use the "expand around center" technique to count the number of palindromic substrings.
+// In this technique, I will take the current character as a center and expand outward until I find 
+// palindromic substrings.
 // I will use one variable, `maxLengthSub`, to store the longest substring found so far.
 // I will iterate through each character of the string, and for each character:
 // I will call the `expandAround` function twice:
@@ -58,7 +59,8 @@ var palindrome = function(string, i, j){
 
 // Time Complexity: O(N^2)
 // For each character, I call the `expandAround` function for both even- and odd-length palindromes.
-// In the worst case, `expandAround` can expand to the entire string (O(N)) for each center.
+// In the worst case, `expandAround` can expand to the entire string (O(N)) for each center if the given string is 
+// already palindrome.
 // Since there are N centers, the overall time complexity is O(N^2).
 
 // Space Complexity: O(1)
