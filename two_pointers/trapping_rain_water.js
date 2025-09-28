@@ -7,20 +7,20 @@
 // The idea is to iterate through each bar in the height array and calculate how much water can be trapped at that 
 // position. This value is then added to the `totalWaterTrapped` variable.
 
-// To compute the amount of water that can be trapped at each bars:
+// To compute the amount of water that can be trapped at each bar:
 // 1. First, find the tallest bar to the left of the current bar and store it in `leftMax`.
 // 2. Then, find the tallest bar to the right of the current bar and store it in `rightMax`.
 // 3. The water that can be trapped at the current bar is determined by the minimum of `leftMax` and `rightMax`,
-//    because water can only be stored up to the shorter height of the surrounding bars (height between leftMax and 
-//    rightMax for the current bar).
-// 4. Subtract the height of the current bar from this minimum value because water cannot be stored above the top of the
-//    bar.
+//    because water can only be stored up to the shorter height of the surrounding bars.
+// 4. Subtract the height of the current bar from this minimum value, because water cannot be stored above the bar itself. 
+//    This effectively computes the exact amount of water that the current bar can trap.
 // 5. Add the result to `totalWaterTrapped`.
-// Finally, return `totalWaterTrapped`, which represents the total amount of water that can be trapped at each the bars.
+// Finally, return `totalWaterTrapped`, which represents the total amount of water that can be trapped across all bars.
 
 // Time Complexity (TC): O(N^2)
 // For each bar, we compute `leftMax` and `rightMax` by scanning the array to the left and right, respectively,
 // resulting in O(N) operations per bar. Since we do this for every bar, the total time complexity is O(N * N) = O(N^2).
+
 // Space Complexity (SC): O(1)
 // No additional space is used other than a few variables for tracking water and maximum heights.
 
@@ -31,8 +31,9 @@
 //   water can be trapped above the current bar, and the amount is determined by the shorter of the two surrounding bars.
 // - We include the current bar in the scan for `leftMax` and `rightMax` because
 //   the current bar itself may be the maximum on one or both sides.
-// - The inner loop starts from the current index because it might be possible that the current bar itself is the left
-//   maximum or the right maximum, and we may not get any greater value on the left or right.
+// - The inner loops start from the current index because it might be possible that the current bar itself is the left
+//   maximum or the right maximum, and no greater value exists on one side.
+
 
 
 var trap = function(height) {
@@ -87,17 +88,18 @@ var trap = function(height){
 // Most Optimal Approach: Using the two-pointer method
 // Approach:
 // Since water can only be trapped up to the minimum of the tallest heights on the left and right sides of each bar,
-// So, instead of precomputing these heights and storing them in extra arrays,
+// instead of precomputing these heights and storing them in extra arrays,
 // we calculate them dynamically while iterating. 
 
 // To do this efficiently, we use the two-pointer approach:
 // We place one pointer (`left`) at the beginning and another pointer (`right`) at the end of the array.
 // While iterating through the array, we keep track of the maximum heights seen so far (`leftMax` and `rightMax`).
 // If the height at the left pointer is smaller than or equal to the height at the right pointer,
-// it means that the left side determines the water level at that index. 
+// it means that the left side determines how much water can be trapped for the current bar. 
 // We update `leftMax` to be the maximum of the current `leftMax` and `height[left]`.
 // Then, we compute the trapped water at the `left` pointer as `leftMax - height[left]`
-// (subtracting the current height because water cannot be stored above the bar).
+// (subtracting the current height because water cannot be stored above the bar, and this will effectively
+// compute the exact amount of water a current bar can store).
 // We add this amount to the total water trapped.
 // Finally, we move the left pointer to the right (`left++`).
 
@@ -111,7 +113,7 @@ var trap = function(height){
 // This approach avoids using extra space and reduces the time complexity to O(N),
 // as we only traverse the array once.
 
-// Time Complexity (TC): O(N), since both pointer traverse the height array at once.
+// Time Complexity (TC): O(N), since both pointers traverse the height array once.
 // Space Complexity (SC): O(1), since no additional space is used.
 
 

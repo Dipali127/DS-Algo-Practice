@@ -17,11 +17,12 @@
 // - O(K log K) to sort each string (K = average length of a string).
 // - Overall: O(N * K log K)
 //
-// Space Complexity: O(N * K)
+// Space Complexity: O(NK)
 // - O(N) for the map to store groups of anagrams.
 // - O(N) for the result array to store all groups of anagrams.
-// - O(K) per string for the temporary character array used by split() method.
-// - Overall: O(N * K)
+// - O(K) per string for the temporary character array created by split().
+// - Overall: O(NK)
+
 
 
 var groupAnagrams = function (strs) {
