@@ -31,11 +31,13 @@ var singleNumber = function(nums) {
 };
 
 // Optimal Approach:- Using Bit Manipulation
-// - When dealing with duplicate values, the XOR operator (^) can be utilized to find the unique value among them.
-//   This approach use the properties of XOR, which are:
+// - When dealing with duplicate values, the XOR operator (^) can be utilized to find the unique value 
+//   among them.
+//  This approach use the properties of XOR, which are:
 //         (1) x ^ x = 0 (any number XORed with itself yields 0)
 //         (2) x ^ 0 = x (any number XORed with 0 yields the number itself)
-// - By XORing all numbers in the array, duplicate numbers will cancel each other out, leaving only the unique number as the result. 
+// - By XORing all numbers in the array, duplicate numbers will cancel each other out, leaving only the
+//   unique number as the result. 
 // Example:- for the input array [2, 2, 1], The operation proceeds as follows: 
 //                  - Initial result: 0
 //                  - 0 ^ 2 = 2

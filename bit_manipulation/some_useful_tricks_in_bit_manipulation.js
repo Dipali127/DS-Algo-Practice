@@ -1,4 +1,4 @@
-z// geeksForgeeks problem:
+// geeksForgeeks problem:
 // (1) Question:- Check whether the kth bit is set or not
 // Solution:
 // approach:- if the 'kth' bit using (n & (1 << k)) is zero means 'kth' bit

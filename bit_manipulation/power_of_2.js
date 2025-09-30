@@ -1,11 +1,11 @@
 // Brute force approach:
 // Approach :
-// - Check if the given 'n' is less than or equal to 0. If it is, return false since powers of 2 are always positive.
+// - Check if the given 'n' is less than or equal to 0. If it is, return false since powers of 2 are 
+//   always positive.
 // - Run a while loop that continues as long as 'n' is divisible by 2 (i.e., n % 2 === 0).
 // - Inside the loop, keep dividing 'n' by 2 to reduce it to the next smaller power of 2.
 // - Once the loop exits, check if 'n' is equal to 1. If it is, then the original 'n' 
 //   is a power of 2, so return true. Otherwise, return false.
-//
 // TC: O(log N), because the number is halved in each iteration, so it runs in logarithmic time.
 // SC: O(1), since no additional space is used. 
 

@@ -9,8 +9,8 @@
 // if 'N' is odd (remainder is 1), append '1' to the string.
 // otherwise, if 'N' is even, append '0' to the string.
 // divide 'N' by 2 to move to the next binary digit (reduce N for the next iteration).
-// the binary string is built from least significant to most significant bit,so reverse it to correct the order, 
-// then print the result.
+// the binary string is built from least significant to most significant bit,so reverse it to
+// correct the order, then print the result.
 // Time Complexity (TC): O(log N) base 2, as we divide 'N' by 2 at each step.
 // Space Complexity (SC): O(log N) due to the storage of the binary digits in the string.
 

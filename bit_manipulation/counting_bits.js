@@ -41,7 +41,8 @@ var countBits = function(n) {
 // SC: O(N), for storing the count of set bits for each number.
 // Note:- here, i am reusing the previously computed count of bits for even and odd numbers to improve the efficiency of 
 // the algorithm.
-// Math.floor() always rounds down to the nearest integer, meaning it discards the decimal part and keeps the lower integer.
+// Math.floor() always rounds down to the nearest integer, meaning it discards the decimal part and keeps 
+// the lower integer.
 // Performing 'i >> 1' is the same as performing Math.floor(i/2) for positive numbers,
 // because the right shift formula is: n >> k = Math.floor(n / 2^k), where 'k' is the shift amount.
 
