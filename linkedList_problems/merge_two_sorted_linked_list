@@ -6,6 +6,11 @@
 // Time Complexity: O(n + m) where 'n' is the length of list1 and 'm' is the length of list2.
 // Space Complexity: O(1) because we are only using a constant amount of extra space.
 
+// Note:- Even though we use a dummy linked list to merge both linked lists, the space complexity is 
+// constant because we only use one dummy node of constant space. To merge the lists, we are reusing 
+// the original linked list nodes (or references to the nodes), meaning the dummy node directly points 
+// to those existing nodes.
+
 var mergeTwoLists = function(list1, list2) {
     let newHead = new ListNode(0);
     let temp = newHead;

@@ -1,15 +1,16 @@
-// approach:- brute force appraoch
-// since there is no option to traverse linked list from last, i will calculate the length of the linked list so that
-// i can easily find the posistion from start of the given linked list to remove the nth node of linked list from end.
-// once calculate the length of list, check a case if length is equal to given n , it means that head is the
-// node to deleted and return head.next.
-// otherwise, Calculate the position of the node just before the deleted node by subtracting n from length.
-// and traverse to this node and delete the node once reach at the node just before deleted node.
-// TC: O(N), Explanation:-
-// O(N) to calculate the length 
-// O(N) to reach the postion before the deleted node
-// overall TC: O(N)+O(N) = O(2N) = O(N) 
-// SC: O(1), as we are only using a constant amount of extra space.
+// Brute Force Approach:
+// 1. Since we cannot directly traverse from the end, calculate the length of the linked list.
+// 2. If length == n, that means we need to delete the head node, so return head.next.
+// 3. Otherwise, calculate the position of the node just before the node to be deleted: (length - n).
+// 4. Traverse to that node and update its next pointer to skip the nth node from the end.
+//
+// Time Complexity: O(N)
+//   - O(N) to calculate length
+//   - O(N) in worst case to traverse again till the position before the deleted node
+//   - Worst case: if n = 1 (deleting last node), second loop runs almost till the end → O(N)
+//   - Best case: if n = length (deleting head node), second loop doesn’t run at all → O(N)
+//   - Overall: O(N)
+// Space Complexity: O(1), only constant extra space is used.
 
 var removeNthFromEnd = function(head, n) {
     let length = 0;
@@ -34,17 +35,21 @@ var removeNthFromEnd = function(head, n) {
     return head;
 };
 
-// Optimal appraoch:- using Floyd's Tortoise and Hare Algorithm (slow and fast pointer).
-// initialize two pointers, fast and slow, both pointing to the head of the list.
-// i will move the fast pointer to n steps which ensures that when the fast pointer reaches the end
-// the slow pointer will be at the node just before the node we have to remove.
-// if fast becomes null after the initial for loop, it means the node to be removed is the head node. 
-// otherwise, move both fast and slow pointers one step at a time until fast.next is null. 
-// TC: O(N),Explanation:-
-// O(N) for moving the fast pointer n steps .
-// O(N) for moving both fast and slow pointers until fast reaches the end.
-// overall TC: O(N)+O(N) = O(N).
-// SC: O(1), as we are only using a constant amount of extra space.
+
+// Optimal Approach (Two Pointers - Slow & Fast):
+// 1. Initialize two pointers (slow and fast) at head.
+// 2. Move fast pointer n steps ahead.
+// 3. If fast becomes null, then head is to be deleted → return head.next.
+// 4. Otherwise, move both slow and fast one step at a time until fast reaches the end.
+// 5. Slow will now be at the node just before the one to be deleted. Update slow.next.
+//
+// Time Complexity: O(N)
+//   - O(N) to move fast pointer n steps initially
+//   - O(N) in worst case to move both fast and slow until end
+//   - Worst case: if n = 1 (deleting last node), both pointers move almost the whole list → O(N)
+//   - Best case: if n = length (deleting head node), no second traversal → O(1)
+//   - Overall: O(N)
+// Space Complexity: O(1), only constant extra space is used.
 
 var removeNthFromEnd = function(head, n) {
     let slow = head, fast = head;
