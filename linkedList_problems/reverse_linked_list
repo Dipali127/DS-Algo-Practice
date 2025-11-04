@@ -23,9 +23,9 @@ var reverseList = function (head) {
     }
 
     return prev;
-};
+}
 
-//  recursively reverse the linked list
+// recursively reverse the linked list
 // appraoch:- recursively calls itself with the next node in the list.
 // this continues until it reaches the end of the list, at which point it starts to reverse the nodes.
 // TC: O(N) as each node is processed exactly once. 

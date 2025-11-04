@@ -21,7 +21,8 @@ var search = function (nums, target) {
 
 // Optimal Approach: Using Binary Search
 // Approach:-
-// in each iteration, calculate the middle index 'mid'. If the element at 'mid' is equal to the target, return true.
+// in each iteration, calculate the middle index 'mid'. If the element at 'mid' is equal to the target, 
+// return true.
 // if the values at low, mid, and high are all the same (nums[low] === nums[mid] && nums[mid] === nums[high]), 
 // this indicates duplicates, which make it unclear which half is sorted. 
 // To handle this, increment low and decrement high to shrink the search range and 

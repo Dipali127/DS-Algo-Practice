@@ -38,13 +38,16 @@ var numSubarraysWithSum = function(nums, goal) {
 //    with an exact sum equal to 'goal'.
 
 // Inside slidingWindowAtmost(nums, goal):
-// - I will use two pointers, 'i' and 'j', both initialized to 0, which represent the start and end of the sliding window.
-// - A variable countSubarray is initialized to 0 to keep track of the number of valid subarrays ending at index 'j'.
+// - I will use two pointers, 'i' and 'j', both initialized to 0, which represent the start and end of
+//   the sliding window.
+// - A variable countSubarray is initialized to 0 to keep track of the number of valid subarrays ending 
+//   at index 'j'.
 // - A variable sum is used to track the current sum of the window.
 // While iterating through the array 'nums', I will add nums[j] to sum.
 // - If the sum exceeds the goal, I will move pointer 'i' forward while subtracting nums[i] from the sum, 
 //   until the window sum is at most equal to the goal.
-// - After adjusting the window, I will add (j - i + 1) to countSubarray, representing all valid subarrays ending at index 'j'.
+// - After adjusting the window, I will add (j - i + 1) to countSubarray, representing all valid subarrays
+//  ending at index 'j'.
 // - Continue expanding the window by moving 'j' forward.
 // Time Complexity: O(N), since each element is processed at most twice (once by 'j' expanding the window 
 //   and once by 'i' shrinking the window).

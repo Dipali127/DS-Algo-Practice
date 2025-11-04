@@ -6,9 +6,13 @@
 // once found maximum product subarray, return it.
 // TC:- O(N^2), due to nested loop.
 // SC:- O(1), since no additional space is used.
+// Note:- why Initialise largestProduct with -Infinity?
+// Because it might be possible that the given array contains negative values,
+// and the maximum product could also be a negative number.
+// To handle such cases, I initialized largestProduct with -Infinity.
 
 var maxProduct = function(nums) {
-    let largestProduct = 0;
+    let largestProduct = -Infinity;
     for(let i = 0; i < nums.length; i++){
         let prod = 1;
         for(let j = i; j < nums.length; j++){

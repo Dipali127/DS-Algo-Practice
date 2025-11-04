@@ -1,6 +1,6 @@
 // Problem said:- We have a tree of fruits containing different types of fruits, and you have two 
-// baskets in which you can collect two different types of fruits. That means each basket can only hold a single type of 
-// fruit, and quantity doesn't matter, but only unique fruits can be held in one basket. 
+// baskets in which you can collect two different types of fruits. That means each basket can only hold a
+// single type of fruit, and quantity doesn't matter, but only unique fruits can be held in one basket. 
 // This means both baskets can only hold two types of fruits in total.
 // Also, you can start from any tree.
 
@@ -11,13 +11,13 @@
 // I will consider each possible subtree (subarray), and for each subtree (subarray),
 // I will store the fruit in a hash map.
 // While storing the fruits in the hash map, I will check if the hash map length is greater than two.
-//  If it is, I will break that subtree (subarray).
+// If it is, I will break that subtree (subarray).
 // Otherwise, I will increment the count since I have added a fruit into the hash map 
-// (Note: count will be incremented even if you are increasing that fruit's frequency, but it does not exceed more than 
-// two unique fruits).
+// (Note: count will be incremented even if you are increasing that fruit's frequency, but it does not
+// exceed more than two unique fruits).
 // Also, I will update `maxFruits` with the current count of fruits in the subtree.
-// Finally, after finding `maxFruits`, which contains the maximum number of fruits in the subtree, I will return it.
-
+// Finally, after finding `maxFruits`, which contains the maximum number of fruits in the subtree,
+// I will return it.
 // TC:- O(N^2) - because of the nested loop for each subarray (subtree).
 // SC:- O(2) - since the hash map size can't exceed 2.
 
@@ -49,14 +49,16 @@ var totalFruit = function(fruits){
 // Optimal Approach:-
 // Instead of using a nested loop, which increases the time complexity,
 // I will optimize the solution by using a sliding window and two pointers: `start` and `end`.
-// I will extend the window by using the `end` pointer and store the current fruit's frequency in a hash map. 
+// I will extend the window by using the `end` pointer and store the current fruit's frequency in a hash 
+// map. 
 // If the map size exceeds 2, then I will shrink the window by incrementing the `start` pointer.
 // But before shrinking the window, I will remove the frequency using the `start` pointer and 
-// check if that element is equal to 0. If it is, I will delete it permanently since the map can only hold up to two types
-// of fruits into the basket.
-// Otherwise, I will update `maxFruits` for the current subtree (subarray) if it is greater than the previously stored 
-// `maxFruits`.
-// Finally, after finding `maxFruits`, which contains the maximum number of fruits in the subtree, I will return it.
+// check if that element is equal to 0. If it is, I will delete it permanently since the map can only 
+// hold up to two types of fruits into the basket.
+// Otherwise, I will update `maxFruits` for the current subtree (subarray) if it is greater than the 
+// previously stored `maxFruits`.
+// Finally, after finding `maxFruits`, which contains the maximum number of fruits in the subtree,
+// I will return it.
 // TC:- O(N) - since two pointers, `start` and `end`, iterate over each element once using linear iteration.
 // SC:- O(2) - since the hash map size can't exceed 2.
 

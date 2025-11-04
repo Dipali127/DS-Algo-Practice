@@ -3,7 +3,8 @@
 // approach:
 // take a set to store the currently traversed node of linked list.
 // while traversing the linked list, check if currently traversed node is already exist in set.
-// if it is, it means a cycle is detected, return that node as the starting point of the cycle.
+// if it is, it means a cycle is detected, return that node(address of the node where the cycle begins.) 
+// as the starting point of the cycle.
 // if the node is not in the set, add it to the set.
 // if there is no cycle in the list then return null.
 // TC: O(N) to traverse the linked list to store node of linked list in set.

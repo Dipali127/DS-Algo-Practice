@@ -7,11 +7,12 @@
 //     - check if the first element is a peak by comparing it with the second element. If nums[0] > nums[1], return 0.
 //     - check if the last element is a peak by comparing it with the second-to-last element. If nums[n-1] > nums[n-2], 
 // return n-1.
-// otherwise(if size of array is more than 2)(from index 1 to n-2), i will use of a loop to iterate through the array and
-// check if the current element is a peak element by comparing it with both of its neighbors:
+// otherwise(if size of array is more than 2)(from index 1 to n-2), i will use of a loop to iterate 
+// through the array and check if the current element is a peak element by comparing it with both of its
+// neighbors:
 // if nums[i] is greater than or equal to both nums[i-1] and nums[i+1], return i as the peak index.
-// if no peak element is found after checking all elements, return 0 as a default, assuming that the first element is the
-// peak element.
+// if no peak element is found after checking all elements, return 0 as a default, assuming that the first
+// element is the peak element.
 // TC:- O(N), since we are iterating through the entire array once to find the peak.
 // SC:- O(1), as no additional space is required beyond a few variables.
 var findPeakElement = function (nums) {
@@ -43,11 +44,17 @@ var findPeakElement = function (nums) {
 // Continue the loop until 'low < high', which will give the index of the peak element.
 // TC:- O(log n), since the binary search reduces the search space by half in each iteration.
 // SC:- O(1), as no additional space is used other than the variables for pointers.
-// Note:- This binary search is not like the usual one where we check if nums[mid] === target or returning something 
-// inside from the while loop, Instead, we are trying to find the peak element by narrowing down the search area.
+// Note:- This binary search is not like the usual one where we check if nums[mid] === target or returning
+// something inside from the while loop, Instead, we are trying to find the peak element by narrowing down
+// the search area.
 // We use low < high in the loop so that the search stops when only one element is left.
 // If we used low <= high, it could cause an infinite loop.
-// Once low and high point to the same index, it means we’ve found the peak element, so we return low as the answer.
+// Once low and high point to the same index, it means we’ve found the peak element, so we return low as 
+// the answer.
+// When nums[mid] > nums[mid + 1], it means we’re on a descending slope, so the peak could be at mid 
+// itself That’s why we do high = mid instead of mid - 1, otherwise we might skip the actual peak.
+// If nums[mid] < nums[mid + 1], we’re on an ascending slope, so the peak lies on the right side — hence 
+// low = mid + 1.
 
 var findPeakElement = function(nums) {
   let low = 0, high = nums.length-1;

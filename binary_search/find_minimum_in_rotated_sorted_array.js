@@ -35,8 +35,8 @@ var findMin = function (nums) {
 // i will use of binary search to find the minimum value in the nums array.  
 // i will use two pointers, low and high, where low is initialized with 0 and high is initialized
 // with the last index of the nums array.  
-// i will run a while loop until low is less than high. First, i will find the mid index and then check if the value at
-// mid is greater than the value at high.  
+// i will run a while loop until low is less than high. First, i will find the mid index and then check 
+// if the value atmid is greater than the value at high.  
 // If nums[mid] > nums[high], it means the minimum value lies in the right part of the array (after mid), 
 // because mid is greater than high and the smallest value lies in the rotated part. So, update low = mid + 1.
 // Otherwise, if nums[mid] <= nums[high], it means the right part from mid to high is sorted, 

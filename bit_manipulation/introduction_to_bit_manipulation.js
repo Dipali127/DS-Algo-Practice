@@ -247,8 +247,8 @@ class Solution {
 // Applying the Not operator:
 // ~5 = Inverted bits: 11111111 11111111 11111111 11111010
 
-// If the result is positive, it remains as is. If the result is negative, we interpret it as a negative number in two's 
-// complement form.
+// If the result is positive, it remains as is. If the result is negative, we interpret it as a negative
+// number in two's complement form.
 // The resulting binary 11111111 11111111 11111111 11111010 is in two's complement representation.
 // To find its value, we take the two's complement:
 // 1. Invert the bits: 00000000 00000000 00000000 00000101

@@ -5,8 +5,9 @@
 // For example, the string "abc" has permutations like "abc", "acb", "bac", "bca", "cab", and "cba".
 
 // Brute force approach:
-// Consider (take) each possible substring from string s2 And for each substring, first store the frequency 
-// of characters of string s1 in a hash map. Then iterate through the current substring of string s2 and 
+// Consider (take) each possible substring from string s2 And for each substring, first store the 
+// frequency  of characters of string s1 in a hash map. 
+// Then iterate through the current substring of string s2 and 
 // check if the current character exists in the hash map. If it does, decrement its count. 
 // Meanwhile, iterate through the hash map and check if all the frequencies for the current substring 
 // of s2 are zero. If they are, it means we found a permutation of s1 in string s2 and we immediately return true.
@@ -63,7 +64,6 @@ var checkInclusion = function(s1, s2) {
 // once find the permutation string return true otherwise return false.
 // TC:- O(N), as this approach(sliding window) traverse each characters of both string once.
 // SC:- O(N), to store each characters of string s1 into hash map.
-// Note:-here, i am only maintaining the window size of 2, once window size 2 found i slide the window to get a new window
 
 var checkInclusion = function (s1, s2) {
     let start = 0, end = 0, map = new Map();

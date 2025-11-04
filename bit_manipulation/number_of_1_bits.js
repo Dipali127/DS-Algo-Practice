@@ -8,9 +8,10 @@
 
 // Brute force approach:
 // approach:-
-// I will iterate over each bit of 'n', and for each bit, I will check if the current or least significant bit (LSB) is '1'.
-// If it is, I will increment the counter 'count'. After that, I will divide the number by 2 (using floor division),
-// which effectively shifts all the bits of 'n' to the right, removing the least significant bit each time.
+// I will iterate over each bit of 'n', and for each bit, I will check if the current or least significant
+// bit (LSB) is '1', If it is, I will increment the counter 'count'. After that, I will divide the number
+// by 2 (using floor division), which effectively shifts all the bits of 'n' to the right, removing the
+// least significant bit each time.
 // This process continues until 'n' becomes 0, and finally, I return the count.
 // TC:- O(log N), Explanation:-
 // O(log N), as each division by 2 shifts the bits to the right, reducing the number of bits in the number.

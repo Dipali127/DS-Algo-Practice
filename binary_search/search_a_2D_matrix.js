@@ -25,8 +25,8 @@ var searchMatrix = function(matrix, target) {
 // Optimal Approach: Using binary search
 // approach:-
 // let 'm' be the number of rows and 'n' be the number of columns in the matrix.
-// treat the matrix as a 1D array where the first element of the matrix is at index 0 and the last element is at 
-// index m * n - 1 (total number of elements in the matrix minus 1).
+// treat the matrix as a 1D array where the first element of the matrix is at index 0 and the last element 
+// is at index m * n - 1 (total number of elements in the matrix minus 1).
 // initialize two pointers:- low = 0 (starting at the first element) and high = m * n - 1 (ending at the last element).
 // Calculate the middle index using:-
 //                  - mid = Math.floor(low + (high - low) / 2) to avoid overflow issues.
@@ -44,6 +44,11 @@ var searchMatrix = function(matrix, target) {
 // SC:- O(1), since no extra space is used other than a few pointers.
 // We divide by the number of columns because each row has n elements.
 // Dividing by n gives the row index, and mid % n gives the column index in that row.
+// Note:- We use mid = low + (high - low) / 2 to avoid integer overflow that could happen if low + high 
+// exceeds the integer limit. It’s not an issue in JavaScript because numbers are stored as 64-bit
+// floating-point values with a very large safe integer range, but it’s a good habit to follow from other
+// languages like C, C++, and Java, where overflow can occur when low + high exceeds the 32-bit integer 
+// limit.
 
 var searchMatrix = function (matrix, target) {
     if (matrix.length == 0) {

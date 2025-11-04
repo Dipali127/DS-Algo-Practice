@@ -1,11 +1,12 @@
 // Leetcode Problem:- 424
 // Brute force approach:
 // Approach:
-// I will consider each possible substring, and for each substring, I will take a hashArr and iterate through 
-// the current substring characters to store their frequencies in hashArr.
-// Meanwhile, I will compute the maximum frequency of the currently iterated character in the current substring and 
-// update it in the maxFreq variable.
-// Then, I will calculate the number of characters to be replaced by subtracting maxFreq from the current substring length.
+// I will consider each possible substring, and for each substring, I will take a hashArr and iterate 
+// through the current substring characters to store their frequencies in hashArr.
+// Meanwhile, I will compute the maximum frequency of the currently iterated character in the current 
+// substring and update it in the maxFreq variable.
+// Then, I will calculate the number of characters to be replaced by subtracting maxFreq from the current 
+// substring length.
 // If the characters_to_be_replaced is less than or equal to k, I will update maxLength, which represents the maximum 
 // length of a substring with all the same repeating characters.
 // After computing maxLength for all possible substrings, I will return it.

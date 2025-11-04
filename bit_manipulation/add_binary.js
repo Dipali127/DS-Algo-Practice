@@ -17,7 +17,8 @@
 //
 // Note:
 // "result = (sum % 2) + result;" — since strings are immutable in JavaScript, 
-// this operation creates a new string each time and appends the previous result to it.
+// this operation creates a new string each time and appends the previous result to it to get the 
+// sum in correct order.
 
 var addBinary = function(a, b) {
     let i = a.length - 1, j = b.length - 1;

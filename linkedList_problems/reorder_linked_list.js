@@ -1,10 +1,13 @@
 // Leetcode Problem:- 143
 // Brute force approach:
 // Approach:
-// First, i will add all the nodes(not the value) of the given linked list into an array. Then, traverse the array 
-// using two pointers, `start` and `end`, to add the nodes pointed by `start` and `end` 
+// First, i will add all the nodes(not the value) of the given linked list into an array. Then, traverse
+// the array using two pointers, `start` and `end`, to add the nodes pointed by `start` and `end` 
 // alternately to a new list using a `temp` pointer to reorder the list.
-// Once the linked list is reordered, I will set temp.next to null to terminate the list and avoid cycles in the linked list because, in the case of an odd-length linked list, the start and end pointers might point to the same node, and form a cycle. Finally, I will return the reordered list starting from dummyNode.next.
+// Once the linked list is reordered, I will set temp.next to null to terminate the list and avoid cycles
+// in the linked list because, in the case of an odd-length linked list, the start and end pointers might
+// point to the same node, and form a cycle. 
+// Finally, I will return the reordered list starting from dummyNode.next.
 // TC: O(N), Explanation:
 // O(N): to add the nodes of the linked list into the array.
 // O(N): to iterate through the array using the `start` and `end` pointers.
@@ -37,8 +40,8 @@ var reorderList = function(head){
  }
  
  // Optimal Approach:- tortoise and hares algorithm using slow and fast pointer
- // first find middle of linked list using slow and fast pointer then reverse the second half of the linked list
- // then merge the both halves of the linked list alternatively.
+ // first find middle of linked list using slow and fast pointer then reverse the second half of the 
+ // linked list then merge the both halves of the linked list alternatively.
  // TC:- O(N), Explanation:-
  // O(N):- to find the middle of the linked list.
  // O(N):- to reverse the second half of the linked list.
@@ -46,7 +49,8 @@ var reorderList = function(head){
  // Overall, TC:- O(N)
  // SC:- O(1), since no additional space is used.
 // Note:- When finding the middle of a linked list, I'm iterating through half of the nodes, 
-// which would be O(n/2) in terms of steps. However, in Big O notation, constants are ignored, so it's simplified to O(n)
+// which would be O(n/2) in terms of steps. However, in Big O notation, constants are ignored, so it's 
+// simplified to O(n).
 
 var reorderList = function(head) {
     if(head === null || head.next === null){

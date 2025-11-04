@@ -5,7 +5,8 @@
 // for each number 'i' from 0 to n, use a variable 'num' to hold the value of 'i'.
 // then count the number of set bits (1s) in 'num' by repeatedly applying the bitwise operation 'num = num & (num - 1)'.
 // This operation removes the rightmost set bit (1) in 'num' during each iteration of the while loop.
-// and this loop continues until 'num' becomes 0, and track how many times the loop runs, which is the count of 1 bits for 'i'.
+// and this loop continues until 'num' becomes 0, and track how many times the loop runs, which is the 
+// count of 1 bits for 'i'.
 // after finding the count of ones for current number 'i', push it into the result array and finally return it.
 // Time Complexity: O(N * k)
 // - For each number up to N, we count the set bits using the operation (num = num & (num - 1)).
