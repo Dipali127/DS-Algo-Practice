@@ -37,7 +37,7 @@
     return true;
  }
 
-// optimal approach: using the Tortoise and Hare algorithm
+// optimal approach: use of floyd's cylce finding algortihm also known as the Tortoise and Hare algorithm.
 // approach:
 // find the middle of the linked list using slow and fast pointers.
 //    - the slow pointer moves one step at a time.

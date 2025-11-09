@@ -4,13 +4,16 @@
 
 // Optimal Approach (Greedy)
 // Approach:
-// Sorting the intervals by their end time helps you keep more non-overlapping intervals and remove the overlapping intervals.
+// Sorting the intervals by their end time helps to keep more non-overlapping intervals and remove the
+// overlapping intervals.
 // For example, suppose you have multiple activities to choose from, and each activity has a time interval.
-// Your strategy would be to choose the activitiess that end first so that you can participate in more activities without 
-// overlapping. This approach also helps you easily skip intervals that overlap with the previously selected one.
+// Your strategy would be to choose the activities that end first so that you can participate in more
+// activities without overlapping activities time.
+// This approach also helps you easily skip intervals that overlap with the previously selected one.
 
-// After sorting, I will take a `count` variable to keep track of the number of overlapping intervals that need to be
-// removed. I will initialize a variable `lastInterval` to point to the first interval in the array, 
+// After sorting, I will take a `count` variable to keep track of the number of overlapping intervals that
+// need to be removed.
+// I will initialize a variable `lastInterval` to point to the first interval in the array, 
 // and set a pointer `i` to the next interval.
 
 // While iterating through the array, I will check the following conditions:
@@ -27,8 +30,8 @@
 //    as it ends earlier. Then, increment both `count` and `i`.
 //    (Example: (1,5) and (2,3)) → Overlap; remove (1,5), keep (2,3).
 
-// After iterating through all intervals, I return `count`, which represents the minimum number of overlapping intervals
-// removed.
+// After iterating through all intervals, I return `count`, which represents the minimum number of 
+// overlapping intervals removed.
 
 // Time Complexity: O(N log N)
 // - O(N log N) for sorting the intervals by end time.

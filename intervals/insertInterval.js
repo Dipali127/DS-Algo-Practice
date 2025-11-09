@@ -4,20 +4,24 @@
 // since, intervals are already sorted in ascending order that means all overlapping intervals are adjacent to each other So,
 // i will initialize a pointer i with 0.
 // i will run a while loop to iterate through each interval:
-// and check If the current interval's end time is less than the newInterval's start time, this means the current 
-// interval is non-overlapping and newInterval comes later so i simply increment the pointer i by 1.
+// and check If the current interval's end time is less than the newInterval's start time, this means the
+// current interval is non-overlapping and newInterval comes later so i simply increment the pointer i by
+//  1.
 // but if the start time of the current interval is greater than the end time of newInterval, 
 // it means I have found the correct position to insert newInterval.
 // I will insert it using splice() and return immediately, as all overlapping intervals are already merged.
-// otherwise, if the end time of the current interval is greater than or equal to the start time of newInterval, 
-// it means they overlap. I will merge them by updating newInterval to have the minimum start time and 
+// otherwise, if the end time of the current interval is greater than or equal to the start time of 
+// newInterval, it means they overlap.
+// I will merge them by updating newInterval to have the minimum start time and 
 // maximum end time of both intervals. Then, I will remove the merged interval using splice().
 // if the current interval does not overlap with newInterval, I will simply move to the next interval.
-// if newInterval is not inserted during the loop (meaning it belongs at the end), I will append it to the intervals array.
+// if newInterval is not inserted during the loop (meaning it belongs at the end), I will append it to
+// the intervals array.
 // finally, I will return the updated intervals array.
-// TC:- O(N^2), because in the worst case (where all intervals overlap with newInterval), the time complexity could be 
-// O(N²) due to the repeated calls to splice() and the shifting of elements.
-// SC:- O(1), since we modify the input array in place without using additional space, except for a few extra variables.
+// TC:- O(N^2), because in the worst case (where all intervals overlap with newInterval), the time
+// complexity could be O(N²) due to the repeated calls to splice() and the shifting of elements.
+// SC:- O(1), since we modify the input array in place without using additional space, except for a few 
+// extra variables.
 
 var insert = function (intervals, newInterval) {
     let i = 0;
@@ -42,25 +46,23 @@ var insert = function (intervals, newInterval) {
 
 // Optimal Approach:
 // Approach:
-// Instead of modifying the existing `intervals` array (which could unnecessarily increase time complexity), 
-// I will use a `result` array to store the `newInterval` and all non-overlapping intervals.
-// 
+// Instead of modifying the existing `intervals` array (which could unnecessarily increase time complexity)
+// , I will use a `result` array to store the `newInterval` and all non-overlapping intervals.
 // I will run a while loop to iterate through the `intervals` array.
 // During each iteration, I will check:
 // - If the current interval's end time is less than the `newInterval`'s start time, this means the current interval
 //   is non-overlapping. So, I will insert it into the `result` array.
-// - If the current internal overlaps with the `newInterval`, I will merge the two intervals by updating the `newInterval`'s
+// - If the current interval overlaps with the `newInterval`, I will merge the two intervals by updating the `newInterval`'s
 //   start and end time, and increment the pointer `i`.
 // - But if the current interval's start time is greater than the `newInterval`'s end time, it means I have found the 
 // correct position to insert the `newInterval`. So, I will break the loop and then insert the `newInterval`.
 // After inserting the `newInterval`, I will run another while loop for the remaining intervals to add them to the `result`
-// array. 
-// Once all the intervals are processed and the `newInterval` and non-overlapping intervals are added to the `result` 
-// array, 
-// I will return the `result`.
+// array.
+// Once all the intervals are processed and the `newInterval` and non-overlapping intervals are added to
+// the `result` array, I will return the `result`.
 // Time Complexity (TC): O(N), since we iterate through the `intervals` array once.
-// Space Complexity (SC): O(N), as we store the intervals in the `result` array. In the worst case (when there are no overlapping intervals),
-// we will insert all intervals into the `result` array.
+// Space Complexity (SC): O(N), as we store the intervals in the `result` array. In the worst case
+// (when there are no overlapping intervals), we will insert all intervals into the `result` array.
 
 
 var insert = function (intervals, newInterval) {

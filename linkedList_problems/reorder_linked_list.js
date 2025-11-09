@@ -39,7 +39,8 @@ var reorderList = function(head){
     return dummyNode.next;
  }
  
- // Optimal Approach:- tortoise and hares algorithm using slow and fast pointer
+ // Optimal Approach:- use of floyd's cylce finding algortihm also known as the tortoise and hares 
+ // algorithm using slow and fast pointer
  // first find middle of linked list using slow and fast pointer then reverse the second half of the 
  // linked list then merge the both halves of the linked list alternatively.
  // TC:- O(N), Explanation:-
@@ -85,7 +86,7 @@ var reorderList = function(head) {
         let temp = h1.next;
         h1.next = h2;
         h1=h1.next;
-        h2=temp;
+        h2=temp;                                                                                      
     }
 
 };

@@ -38,7 +38,10 @@ var removeNthFromEnd = function(head, n) {
 
 // Optimal Approach (Two Pointers - Slow & Fast):
 // 1. Initialize two pointers (slow and fast) at head.
-// 2. Move fast pointer n steps ahead.
+// 2. Move the fast pointer n steps ahead to create a gap of n nodes between slow and fast.
+//    This ensures that when fast reaches the end of the list, slow will be positioned
+//    just before the node that needs to be deleted.
+//    We use this approach because the length of the linked list is unknown.
 // 3. If fast becomes null, then head is to be deleted → return head.next.
 // 4. Otherwise, move both slow and fast one step at a time until fast reaches the end.
 // 5. Slow will now be at the node just before the one to be deleted. Update slow.next.
