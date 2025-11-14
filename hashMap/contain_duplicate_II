@@ -22,11 +22,12 @@ var containsNearbyDuplicate = function (arr, k) {
 // 
 // Approach:
 // - I will use a Hash Set to store up to 'k' elements.
-// - Traverse through the given array 'nums', and while iterating, check if the Hash Set already contains the current element.
+// - Traverse through the given array 'nums', and while iterating, check if the Hash Set already contains
+//    the current element.
 //     - If it does, return true immediately (a duplicate within distance 'k' is found).
 // - Otherwise, add the current element to the Hash Set.
-//     - Meanwhile, if the size of the Hash Set exceeds 'k', remove the earliest (oldest) element from the set —
-//       i.e., the element at index (i - k).
+//     - Meanwhile, if the size of the Hash Set exceeds 'k', remove the earliest (oldest) element from 
+//      the set — i.e., the element at index (i - k).
 // - After the traversal, if no such duplicate is found, return false.
 //
 // Time Complexity: O(N), where N is the length of the array, as each element is processed once.

@@ -1,7 +1,8 @@
 // Leetcode Problem:- 57
 // Brute force Approach:
 // approach:-
-// since, intervals are already sorted in ascending order that means all overlapping intervals are adjacent to each other So,
+// since, intervals are already sorted in ascending order that means all overlapping intervals are 
+// adjacent to each other So,
 // i will initialize a pointer i with 0.
 // i will run a while loop to iterate through each interval:
 // and check If the current interval's end time is less than the newInterval's start time, this means the
@@ -50,14 +51,15 @@ var insert = function (intervals, newInterval) {
 // , I will use a `result` array to store the `newInterval` and all non-overlapping intervals.
 // I will run a while loop to iterate through the `intervals` array.
 // During each iteration, I will check:
-// - If the current interval's end time is less than the `newInterval`'s start time, this means the current interval
-//   is non-overlapping. So, I will insert it into the `result` array.
-// - If the current interval overlaps with the `newInterval`, I will merge the two intervals by updating the `newInterval`'s
-//   start and end time, and increment the pointer `i`.
-// - But if the current interval's start time is greater than the `newInterval`'s end time, it means I have found the 
-// correct position to insert the `newInterval`. So, I will break the loop and then insert the `newInterval`.
-// After inserting the `newInterval`, I will run another while loop for the remaining intervals to add them to the `result`
-// array.
+// - If the current interval's end time is less than the `newInterval`'s start time, this means the 
+//   current interval is non-overlapping. So, I will insert it into the `result` array.
+// - If the current interval overlaps with the `newInterval`, I will merge the two intervals by updating 
+//    the `newInterval`'s start and end time, and increment the pointer `i`.
+// - But if the current interval's start time is greater than the `newInterval`'s end time, it means I 
+//   have found the correct position to insert the `newInterval`. So, I will break the loop and then 
+//   insert the `newInterval`.
+// After inserting the `newInterval`, I will run another while loop for the remaining intervals to add 
+// them to the `result` array.
 // Once all the intervals are processed and the `newInterval` and non-overlapping intervals are added to
 // the `result` array, I will return the `result`.
 // Time Complexity (TC): O(N), since we iterate through the `intervals` array once.
