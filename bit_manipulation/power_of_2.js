@@ -29,8 +29,12 @@ class Solution {
 // performing a bitwise AND operation between n and (n - 1) removes that set bit,
 // resulting in 0.
 // If (n & (n - 1)) === 0, it means n is a power of two.
-// TC: O(1), since bitwise operations take constant time.
+// TC: O(1), since bitwise operations take constant time. 
+// There is only one set bit in the binary representation of 'n', 
+// and it gets removed after performing the bitwise AND operation (n & (n - 1)), 
+// resulting in a value of 0.
 // SC: O(1), since no extra space is used.
+
 var isPowerOfTwo = function(n) {
     if (n <= 0) {
         return false;

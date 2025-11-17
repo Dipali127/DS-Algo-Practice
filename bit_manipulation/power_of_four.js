@@ -29,8 +29,11 @@ var isPowerOfFour = function(n) {
 // This is checked by verifying that 'n' has only one bit set (n & (n - 1)) === 0.
 // - Additionally, (n - 1) must be divisible by 3. This works because powers of 4 (such as 1, 4, 16, 64) 
 // minus 1 are divisible by 3.
-// TC:- O(1), as only constant time bitwise operations and modulus are used.
-// SC:- O(1), since no additional space is required.
+// TC: O(1), since bitwise operations take constant time. 
+// There is only one set bit in the binary representation of 'n', 
+// and it gets removed after performing the bitwise AND operation (n & (n - 1)), 
+// resulting in a value of 0.
+// SC: O(1), since no extra space is used.
 
 var isPowerOfFour = function(n) {
     return n > 0 && (n & (n - 1)) === 0 && (n - 1) % 3 === 0;
