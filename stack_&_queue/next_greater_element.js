@@ -41,14 +41,23 @@ class Solution {
 // element for future elements.
 // I will repeat this process until I reach the first element of the array.
 // Finally, I will return the result array containing the next greater elements for each index.
-// TC: O(N), as we iterate through the array 'arr' once.
-// Each element is pushed onto the stack once and popped at most once, 
-// resulting in an overall linear time complexity.
-// The number of push and pop operations is less than or equal to 2N.
 
-// SC: O(N), as we use an auxiliary stack to store elements. 
-// In the worst case (when the array is strictly increasing), 
-// the stack may store up to 'N' elements simultaneously.
+// Time Complexity: O(N)
+// - We iterate through the array once from right to left.
+// - Each element is pushed to the stack and popped at most once.
+// - Therefore, the total operations remain linear despite the inner while loop.
+// - Overall Time Complexity: O(N).
+
+// Space Complexity: O(N), in the worst case, the stack might store all elements of the array.
+// We iterate from right to left, and for each element:
+// - We remove (pop) only those elements from the stack that are smaller than or equal to the current value.
+// - If no greater element exists in the stack (i.e., the stack is empty initially or after popping),
+//   then the current element will be pushed into the stack, and later elements may not remove it,
+//   resulting in storing all elements in the stack.
+// - The result array also uses additional space to store the next greater elements.
+// - O(N) for the stack used while processing the array.
+// - Total auxiliary space: O(N).
+
 
 class Solution {
     // Function to find the next greater element for each element of the array.

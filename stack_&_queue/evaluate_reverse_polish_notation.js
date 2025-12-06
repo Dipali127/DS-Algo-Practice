@@ -20,23 +20,24 @@
 
 // Note:
 // - When performing division, we handle both positive and negative results.
+// - According to the problem statement:
 // - If the division result is positive, it behaves like normal integer division (fractional part discarded).
 // - If the result is negative, the division should round toward zero (closer to zero).
-// - We use "Math.trunc()" for this purpose because it discards the fractional part for both positive and
+// - When we use Math.floor() for negative results of division, it rounds down to the next lower integer 
+// (which is more negative because it goes further left on the number line that is far from zero),
+//   which is not the desired behavior.
+//   So, we use "Math.trunc()" for this purpose because it discards the fractional part for both positive and
 //   negative numbers, ensuring the result is rounded toward zero.
-// - "Math.floor()" cannot be used here because it always rounds down to the nearest integer (meaning the closest integer
-//   that is less than or equal to the number). For negative numbers, it gives a result farther from zero, but that number is
-//   the nearest lowest integer.
 //   For example:
 //     console.log(Math.floor(-7 / 3)) // since Math.floor() goes to the next smaller integer (more negative),
 //     and -3 is smaller than -2.333..., it returns -3.
-//     → Here, -3 is the nearest lower integer to -2.333... (for negative numbers, moving further left on the number line gives smaller values).
+//     → Here, -3 is the nearest lower integer to -2.333... (for negative numbers, moving further left on the 
+//       number line gives smaller values).
 //     Whereas, Math.trunc() simply discards the decimal part and returns the integer portion.
-//     console.log(Math.trunc(-7 / 3)) = -2, since Math.trunc() just removes the decimal part, giving -2 as the result.
-// - "Math.trunc()" provides the correct behavior by rounding the result toward zero, which is required for this problem.
-
-
-
+//     console.log(Math.trunc(-7 / 3)) = -2, since Math.trunc() just removes the decimal part, giving -2 as the 
+//     result.
+// - "Math.trunc()" provides the correct behavior by rounding the result toward zero, which is required for this
+//  problem.
 
 
 var evalRPN = function (tokens) {

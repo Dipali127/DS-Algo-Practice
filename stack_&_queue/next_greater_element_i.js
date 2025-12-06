@@ -38,25 +38,33 @@ var nextGreaterElement = function (nums1, nums2) {
 
 // Optimal Approach:
 // Approach:
-// Instead of finding the next greater element for nums2 using a nested loop, which increases the time complexity,
+// Instead of finding the next greater element for nums2 using a nested loop, which increases the time
+// complexity,
 // I will use a hash map and a stack to store the next greater elements of nums2 efficiently.
-// While processing nums2, I will determine the next greater element for each value and store it in the hash map.
-// If a next greater element is found, I will store it in the hash map; otherwise, I will store -1 for that element.
+// While processing nums2, I will determine the next greater element for each value and store it in the
+// hash map.
+// If a next greater element is found, I will store it in the hash map; otherwise, I will store -1 for
+// that element.
 // Then, I will iterate through nums1 and retrieve the next greater elements from the hash map.
-// Finally, after gettingthe next greater element for each element of nums1, I will return nums1.
+// Finally, after getting the next greater element for each element of nums1, I will return nums1.
 
 // Time Complexity: O(N)
 // - O(N) to iterate through nums2 and compute the next greater element for each value using a stack.
 // - O(N) to iterate through nums1 and retrieve values from the hash map.
-// - Overall Time Complexity: O(N) + O(N) = O(2N) = O(N).
 // Note: Even though a while loop is used inside the for loop,
-//       the total number of operations is still O(N) because each element is pushed and popped from the stack at most once.
+//       the total number of operations is still O(N) because each element is pushed and popped
+//       from the stack at most once.
+// - Overall Time Complexity: O(N) + O(N) = O(2N) = O(N).
 
-// Space Complexity: O(N)
-// - O(N) for the hash map to store the next greater elements of nums2.
-// - O(N) for the stack used during processing of nums2.
-// - Total Auxiliary Space: O(N).
-
+// Space Complexity: O(N), in the worst case, the stack might store all elements of the array.
+// We iterate from right to left, and for each element:
+// - We remove (pop) only those elements from the stack that are smaller than or equal to the current value.
+// - If no greater element exists in the stack (i.e., the stack is empty initially or after popping),
+//   then the current element will be pushed into the stack, and later elements may not remove it,
+//   resulting in storing all elements in the stack.
+// - The result array also uses additional space to store the next greater elements.
+// - O(N) for hash map to store next greater elements oof nums2 along with nums2 elements
+// - Total auxiliary space: O(N).
 
 var nextGreaterElement = function (nums1, nums2) {
     let map = new Map(), stack = [], n = nums2.length;

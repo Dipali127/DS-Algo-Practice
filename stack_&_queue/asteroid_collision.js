@@ -10,15 +10,22 @@
 
 // Brute force approach:
 // approach:
-// I will iterate through the asteroids array, and for each asteroid, I will check its interaction with the 
-// adjacent asteroid to determine if a collision occurs.
+// I will iterate through the asteroids array, and for each asteroid, I will check its interaction with 
+// the adjacent asteroid to determine if a collision occurs.
 // Iterate through the asteroids array using a while loop.
 // Check for collisions between adjacent asteroids:
 // If asteroids[i] > 0 and asteroids[i + 1] < 0, a collision occurs.
 // To resolve the collision, compare the absolute values of both asteroids:
-// If |asteroids[i]| > |asteroids[i+1]|, the right asteroid (asteroids[i+1]) is destroyed, so I remove it using splice(i + 1, 1).
-// If |asteroids[i]| < |asteroids[i+1]|, the left asteroid (asteroids[i]) is destroyed, so I remove it using splice(i, 1). Since the removal might affect previous asteroids, I update i = Math.max(0, i - 1) to recheck the new adjacent asteroid and also not to intialise the iterator pointer with negative index.
-// If |asteroids[i]| === |asteroids[i+1]|, both asteroids destroy each other, so I remove them using splice(i, 2). Again, I move back by setting i = Math.max(0, i - 1).
+// If |asteroids[i]| > |asteroids[i+1]|, the right asteroid (asteroids[i+1]) is destroyed, so I remove 
+// it using splice(i + 1, 1).
+// If |asteroids[i]| < |asteroids[i+1]|, the left asteroid (asteroids[i]) is destroyed, so I remove it 
+// using splice(i, 1). 
+// Since the removal might affect previous asteroids, I update i = Math.max(0, i - 1) to recheck the new 
+// adjacent asteroid and also not to intialise the iterator pointer with negative index.
+// If |asteroids[i]| === |asteroids[i+1]|, both asteroids destroy each other, so I remove them using 
+// splice(i, 2). Again, I move back by setting i = Math.max(0, i - 1) because it might possible that 
+// after updating 'i', it point to negative index if first traversed asteroid has less value that the next
+// asteroid.
 // Continue iterating through the list until all possible collisions are resolved.
 // TC:- O(N^2) , in the worst case, where every asteroid collides one by one, leading to repeated shifts of elements in the array due to splice().
 // SC:- O(1), since no additional space is used.
@@ -48,26 +55,28 @@ var asteroidCollision = function(asteroids) {
 // use of a stack to track the asteroids that are moving to the right.
 // iterate through the given array of 'asteroids' and check if we encounter an asteroid moving to the left,
 // then check:-
-// - if the current iterated asteroid is moving left (negative) and the top of the stack is moving right (positive), 
-//   a collision might happen, so we enter a while loop to resolve it.
+// - if the current iterated asteroid is moving left (negative) and the top of the stack is moving right
+//  (positive), a collision might happen, so we enter a while loop to resolve it.
 // - in each collision scenario, we calculate the sum of the sizes of the two asteroids.
-//   - if the sum is less than 0, means that asteroid moving to the right (top of the stack) is smaller and gets destroyed, 
-//     so we pop it from the stack and continue checking the new top, for example:- if asteroids[i] = -10 and 
-//     stack[top] = 5 then sum = -10 + 5 which is -5 < 0 so, stack[top] will exploid because its value is smaller than 
-//     the current iterated asteroid.
-// - but if the sum is greater than 0, means that asteroid moving to the left is smaller(current iterated asteroid value)
-//     and should be destroyed, so we set the current iterated asteroid to 0.
+//   - if the sum is less than 0, means that asteroid moving to the right (top of the stack) is smaller 
+//     and gets destroyed, so we pop it from the stack and continue checking the new top, 
+//     for example:- if asteroids[i] = -10 and stack[top] = 5 then sum = -10 + 5 which is -5 < 0 so, 
+//     stack[top] will exploid because its value is smaller than the current iterated asteroid.
+// - but if the sum is greater than 0, means that asteroid moving to the left is smaller(current iterated 
+//     asteroid value) and should be destroyed, so we set the current iterated asteroid to 0.
 //    for example:- if asteroids[i] = -5 and stack[top] = 10 then sum = -5 + 10
-//    which is 5 > 0 so, asteroids[i] will exploid because  its value is smaller than the top of stack.
+//    which is 5 > 0 so, asteroids[i] will exploid because its value is smaller than the top of stack.
 // - if the sum is 0, both asteroids are equal in size and destroy each other, so we pop the top of 
 //   stack and set the current iterated asteroid to 0.
-// - after the while loop, if the current asteroid has not been destroyed (i.e., it's not 0), we push it onto the stack.
-// TC:- O(N), as we iterate through the 'asteroids' array once and each asteroid is pushed/popped from the stack at most
-// once.
+// - after the while loop, if the current iterated asteroid has not been destroyed (i.e., it's not 0), 
+//   we push it onto the stack.
+// TC:- O(N), as we iterate through the 'asteroids' array once and each asteroid is pushed/popped from the
+//  stack at most once.
 // SC:- O(N), in the worst case, the stack may store all asteroids if no collisions happen.
 // Note:
 // - We destroy the asteroid with the smaller absolute value, regardless of its sign.
-// - Time complexity depends on the total number of operations performed, not just the number of nested loops.
+// - Time complexity depends on the total number of operations performed, not just the number of nested 
+//   loops.
 // - In this code, each asteroid is pushed and popped from the stack at most once,
 //   so the total number of operations is linear => Time complexity: O(n).
 

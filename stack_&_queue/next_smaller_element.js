@@ -43,12 +43,21 @@ function smaller(arr) {
 
 // Time Complexity: O(N), since we iterate through the array once.
 // Space Complexity: O(N), in the worst case, the stack might store all elements of the array.
-// Also, the result array uses additional space to store the next smaller elements.
+// We iterate from right to left, and for each element:
+// - We remove (pop) only those elements from the stack that are greater than or equal to the current value.
+// - If no smaller element exists in the stack (i.e., the stack is empty initially or after popping),
+//   then the current element will be pushed into the stack, and later elements may not remove it,
+//   resulting in storing all elements in the stack.
+// - The result array also uses additional space to store the next smaller elements.
+// - O(N) for the stack used while processing the array.
+// - Total auxiliary space: O(N).
+
+
 let array =  [4, 8, 5, 2, 25]
 class Solution {
     nextSmallerElement(array) {
         let stack = [];
-        let result = new Array(arr.length).fill(-1);
+        let result = new Array(array.length).fill(-1);
         
         for (let i = array.length - 1; i >= 0; i--) {
             while (stack.length > 0 && stack[stack.length - 1] >= array[i]) {

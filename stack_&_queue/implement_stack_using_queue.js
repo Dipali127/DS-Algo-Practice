@@ -15,7 +15,8 @@
 // pop method:- Removing an element from a queue is different from removing an element from a stack. 
 // In a queue, we remove an element from the front, whereas in a stack, we remove the element from the top (last element).
 // So, to remove a value from the stack using a queue, I will first add q1.length - 1 values to q2, 
-// then assign the last remaining value of q1 to popValue, and finally, I will add back the q2 values to q1. 
+// then assign the last remaining value of q1 to popValue variable, and finally, I will add back the q2 
+// values to q1. 
 
 // top element:- accessing an element from a queue is different from accessing an element from a stack. 
 // In a queue, we remove an element from the front, whereas in a stack, we remove the element from the top (last element).
@@ -31,8 +32,8 @@
 //      (3) O(N) - Returning the front of the queue using a stack.
 //      (4) O(1) - Checking if the queue is empty.
 
-// SC:- SC: O(N), since for removing the front value of queue and returning front value of queue I have to use a queue
-// to store values in it.
+// SC:- SC: O(N), since for removing the front value of queue and returning front value of queue I have
+// to use a queue to store values in it.
 // even though there are two queues, each element is stored in only one queue at a time, so total space used is O(N).
 
 // MyStack is a constructor function in JavaScript. 

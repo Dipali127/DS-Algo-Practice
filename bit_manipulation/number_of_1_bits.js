@@ -14,7 +14,8 @@
 // least significant bit each time.
 // This process continues until 'n' becomes 0, and finally, I return the count.
 // TC:- O(log N), Explanation:-
-// O(log N), as each division by 2 shifts the bits to the right, reducing the number of bits in the number.
+// O(log N), as each division by 2 shifts the bits to the right, reducing the number of bits in the number, Since
+// diving by 2 discard the right most bit(which is LSB).
 // The number of iterations is proportional to the number of bits in the binary representation of 'n'.
 // SC: O(1), as no additional space is used other than the count variable.
 // Note:- In any number n, the number of bits required to represent it is roughly log₂(n). 
