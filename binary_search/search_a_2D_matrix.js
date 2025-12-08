@@ -47,7 +47,7 @@ var searchMatrix = function(matrix, target) {
 // Note:- We use mid = low + (high - low) / 2 to avoid integer overflow that could happen if low + high 
 // exceeds the integer limit. It’s not an issue in JavaScript because numbers are stored as 64-bit
 // floating-point values with a very large safe integer range, but it’s a good habit to follow from other
-// languages like C, C++, and Java, where overflow can occur when low + high exceeds the 32-bit integer 
+// languages like C, C++, and Java, where integer overflow can occur when low + high exceeds the 32-bit integer 
 // limit.
 
 var searchMatrix = function (matrix, target) {

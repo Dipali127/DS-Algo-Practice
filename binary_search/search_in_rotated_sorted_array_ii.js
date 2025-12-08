@@ -39,6 +39,16 @@ var search = function (nums, target) {
 // But in the average or best-case, it's O(log n) when the array has few or no duplicates.
 // SC:- O(1), since no additional space is used.  
 
+// Note:-
+// (i) In the case of duplicates, we are not removing all the duplicates at once. Instead, we increment low by 1 
+// and decrement high by 1. We keep doing this again and again in each loop after finding the mid index each time.
+// If the whole array has the same number, we shrink the range one step at a time, which takes many steps. 
+// That’s why the worst-case time becomes O(n).
+// (ii) Here, In short, I first identify which half of the array is sorted, 
+// since binary search works only on sorted data.
+// If the target lies within that sorted half, I search there; 
+// otherwise, I move to the other half.
+
 var search = function (nums, target) {
     let low = 0, high = nums.length - 1;
     while (low <= high) {

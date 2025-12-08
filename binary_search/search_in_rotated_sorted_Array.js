@@ -37,6 +37,12 @@ var search = function(nums, target) {
 // TC: O(log N), as binary search divides the array in half in each iteration.  
 // SC: O(1), since only a few pointers are used for the search. 
 
+// Note: In short, I first identify which half of the array is sorted, 
+// since binary search works only on sorted data.
+// If the target lies within that sorted half, I search there; 
+// otherwise, I move to the other half.
+
+
 var search = function(nums, target) {
   let low = 0, high = nums.length-1;
   while(low <= high){

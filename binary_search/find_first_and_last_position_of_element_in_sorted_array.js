@@ -4,8 +4,8 @@
 // use of two pointers, 'first' and 'last', which are initialized to -1.
 // iterates through the array, and check if the current element equals the target.
 // If the current element equals the target check then:-
-//    - if first is still -1, it indicates that we have found the first occurrence of the target; hence, update 'first' 
-//      with the current index.
+//    - if first is still -1, it indicates that we have found the first occurrence of the target; hence, update
+//     'first' with the current index.
 //    - but if first not equals to -1, update 'last' with the current index to ensure the latest occurrence of the target.
 // TC:- O(N), as we iterate through the given array 'nums' once.
 // SC:- O(1), since no additional space is used apart from few pointers.
@@ -29,10 +29,11 @@ var searchRange = function (nums, target) {
 // Optimal Approach: Using Binary Search
 // Approach:
 // use two binary searches to find the first and last occurrence of the target in the sorted array.
-// First, two pointers 'low' and 'high' are initialized to the start and end of the array to find the first occurrence.
+// First, two pointers 'low' and 'high' are initialized to the start and end of the array to find the first 
+// occurrence.
 // In the first while loop, perform binary search to find the first index where the target element is present.
-//    - If 'mid' equals the target, update 'left' to the current 'mid' and move 'high' to 'mid - 1' to search for any 
-//      earlier occurrences of the target.
+//    - If 'mid' equals the target, update 'left' to the current 'mid' and move 'high' to 'mid - 1' to search for
+//     any earlier occurrences of the target.
 //    - If 'mid' is less than the target, move 'low' to 'mid + 1', and if 'mid' is greater than the target, move 'high' 
 //     to 'mid - 1'.
 // After the first search, the second while loop finds the last occurrence of the target in a similar manner.
