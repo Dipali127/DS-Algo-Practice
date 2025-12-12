@@ -30,10 +30,12 @@ var containsNearbyDuplicate = function (arr, k) {
 //      the set — i.e., the element at index (i - k).
 // - After the traversal, if no such duplicate is found, return false.
 //
-// Time Complexity: O(N), where N is the length of the array, as each element is processed once.
-// Space Complexity: O(min(N, k)), because the Hash Set stores at most 'k' elements at any time.
-//     If k is smaller than or equal to N, the Hash Set will store up to k elements,
-//     since older elements are removed once the window size exceeds k.
+// Time Complexity: O(N), where N is the length of the array, 
+// because each element is processed once, and Set operations (has, add, delete) are O(1) on average.
+//
+// Space Complexity: O(min(N, k)), because the Hash Set stores at most 'k' elements at any time. 
+// If k ≤ N, the set stores up to k elements, since older elements are removed once the window size exceeds k. 
+// If k > N, the set may store all N elements.
 
 
 var containsNearbyDuplicate = function(nums, k) {

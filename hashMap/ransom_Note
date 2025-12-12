@@ -1,17 +1,20 @@
-// Leetcode Problem:
-// brute force approach:
-// approach:
-// first convert both the strings into arrays so that we can easily traverse through them.
-// traverse the ransomNote array and check if the current character exists in the magazine array.
-// if it exists, fetch the index of that character from the magazine array.
-// remove that character from the magazine array so that we can check each character of ransomNote.
-// if all characters of ransomNote exist in the magazine, return true. Otherwise, return false.
-// TC: O(N^2), Explanation:
-// O(N) to convert both ransomNote and magazine strings into arrays using split() method.
-// O(N^2) to traverse through the ransomNote array and check each character of ransomNote in the magazine array using 
-// indexOf() and remove it using splice().
-// overall TC: O(N) + O(N^2) = O(N^2)
-// SC: O(M + N) as we split the ransomNote and magazine strings into arrays, creating new arrays.
+// Brute Force Approach:
+// Approach:
+// 1. Convert both strings into arrays so that we can easily traverse them.
+// 2. Traverse the ransomNote array and check if the current character exists in the magazine array.
+// 3. If it exists, fetch the index of that character from the magazine array and remove that character 
+//    so it cannot be reused.
+// 4. If any character of ransomNote does not exist in magazine, return false.
+// 5. If all characters are matched and removed from magazine, return true.
+//
+// Time Complexity: O(N²)
+// - O(N) to convert both ransomNote and magazine strings into arrays using split().
+// - O(N²) because for each character in ransomNote, we use indexOf() and splice() on the magazine array.
+// - Overall TC: O(N) + O(N²) = O(N²)
+//
+// Space Complexity: O(M + N)
+// - Splitting both strings creates two new arrays, so total space used is proportional to M + N.
+
 
 var canConstruct = function (ransomNote, magazine) {
     ransomNote = ransomNote.split('');
@@ -27,37 +30,39 @@ var canConstruct = function (ransomNote, magazine) {
     return true;
 };
 
-// optimal approach:
-// approach:
-// use a hash map to store the count of each character in the magazine string.
-// traverse the ransomNote string to check if each character exists in the Map.
-// if it exists, decrement the character's count in the Map.
-// if it does not exist or the character's count is zero, return false immediately since, ransomeNote cannot be constructed
-// with characters of magazine.
-// if all characters of ransomNote exist in the magazine, return true.
-// TC: O(N), Explanation:
-// O(N) to traverse the magazine string and store each character's count in the Map.
-// O(M) to check each character of ransomNote in the Map.
-// overall TC: O(N) + O(M) = O(N)
+// Optimal Approach:
+// Approach:
+// 1. Use a hash map to store the count of each character in the magazine string.
+// 2. Traverse the ransomNote string and check if each character exists in the map.
+// 3. If it exists with a count > 0, decrement the count in the map.
+// 4. If it does not exist or its count is zero, return false immediately because ransomNote 
+//    cannot be constructed.
+// 5. If all characters of ransomNote are found in the map with valid counts, return true.
+//
+// Time Complexity: O(N + M)
+// - O(M) to traverse the magazine string and store character frequencies in the map.
+// - O(N) to check each character of ransomNote in the map.
+// - Overall TC: O(N + M), often written as O(N).
 // SC: O(N), as the Map is used to store all characters of the magazine.
 
-var canConstruct = function (ransomNote, magazine) {
+var canConstruct = function (r, m) {
     let map = new Map();
-    for (let i = 0; i < magazine.length; i++) {
-        if (map.has(magazine[i])) {
-            map.set(magazine[i], map.get(magazine[i]) + 1);
+    for (let i = 0; i < m.length; i++) {
+        if (map.has(m[i])) {
+            map.set(m[i], map.get(m[i]) + 1);
         } else {
-            map.set(magazine[i], 1);
+            map.set(m[i], 1);
         }
     }
 
-    for (let i = 0; i < ransomNote.length; i++) {
-        if (!map.has(ransomNote[i]) || map.get(ransomNote[i]) === 0) {
+    for (let i = 0; i < r.length; i++) {
+        if (map.has(r[i]) && map.get(r[i]) > 0) {
+            map.set(r[i], map.get(r[i]) - 1);
+
+        }else{
             return false;
-        } else {
-            map.set(ransomNote[i], map.get(ransomNote[i]) - 1);
         }
     }
 
     return true;
-}
+};

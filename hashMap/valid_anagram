@@ -26,8 +26,8 @@
 
 // Optimal approach:
 // approach:
-// first, check if the lengths of strings `s` and `t` are not equal. If they are not, return `false` immediately since 
-// they cannot be anagrams.
+// first, check if the lengths of strings `s` and `t` are not equal. If they are not, return `false` immediately 
+// since they cannot be anagrams.
 // use of a hash map to store the count of each character of string `s`.
 // then traverse string `t` and check if each character exists in the hash map with a count greater than 0.
 //    - If it does, decrement the count in the hah map.

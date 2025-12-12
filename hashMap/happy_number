@@ -1,18 +1,18 @@
 // Optimal Approach:
 // approach:-
-// Use a loop to calculate the sum of the squares of each digit of the number until the number becomes 1.
-// Use a set to store previously seen sums to detect cycles. If a sum repeats, it means we are in a loop,
+// Use of a while loop to calculate the sum of the squares of each digit of the number until the number becomes 1.
+// Use a has set to store previously seen sums to detect cycles. If a sum repeats, it means we are in a loop,
 // and the number is not a happy number.
-// Otherwise, continue the process and add each sum to the set.
+// Otherwise, continue the process and add each sum to the has set.
 // Time Complexity: O(1)
-// Although there’s a loop, the sum of squares of digits always falls into a small range (less than 243), 
+// Although there’s a loop, After the first iteration, the sum of squares of digits will always be ≤ 243., 
 // so we only loop through a limited set of values
 // example:- 1² + 9² = 1 + 81 = 82  
 // 8² + 2² = 64 + 4 = 68  
 // 6² + 8² = 36 + 64 = 100  
 // 1² + 0 + 0 = 1
 // Space Complexity: O(1)
-// the set stores only a small number of sums (not dependent on input size), so space usage remains fixed.
+// the has set stores only a small number of sums (not dependent on input size), so space usage remains fixed.
 
 var isHappy = function(n) {
     let set = new Set();
