@@ -13,6 +13,8 @@
 // If the stack is not empty, return `false` as there are unmatched opening parentheses.
 // TC: O(N), as we iterate through each character exactly once.
 // SC: O(N), due to the stack used to store the expected closing parentheses.
+// In the worst case, the stack can grow up to the length of the string
+// (for example, when the string contains only opening brackets).
 
 var isValid = function (s) {
     s = s.split('');

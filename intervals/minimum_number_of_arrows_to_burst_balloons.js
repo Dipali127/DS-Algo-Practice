@@ -14,8 +14,8 @@
 // initialize a variable 'prev' to represent the interval of the first balloon in the sorted list.
 // This variable keeps track of the overlapping region where all previous balloons can be burst by a
 // single arrow.
-// initialize 'count' to 1 because at least one arrow is required to burst the first balloon even all the 
-// balloons are overlapped to each other.
+// initialize 'count' to 1 because at least one arrow is required to burst the first balloon even all
+// the balloons are overlapped to each other.
 // iterate through the remaining balloons in the sorted list:
 //    - If the current balloon's starting point (points[i][0]) lies within the interval of the previous
 //      balloon (prev[1]), they overlap so, update the overlapping region by setting prev[0] to the 
