@@ -49,8 +49,8 @@ var isPalindrome = function(string, start, end) {
 // I will call the `expandAround` function twice for each character:
 //   - Once for odd-length palindromes (where the palindrome has a single center character).
 //   - Once for even-length palindromes (where the palindrome has two center characters).
-// The `expandAround` function will return the number of palindromes found for the current center, which will be added
-// to the `count` variable in the main function (countSubstrings).
+// The `expandAround` function will return the number of palindromes found for the current center, which will be 
+// addedto the `count` variable in the main function (countSubstrings).
 // Finally, the function will return the total count of palindromic substrings.
 //
 // Time Complexity: O(N^2), because for each character, the expandAround function is called twice: 
@@ -58,8 +58,8 @@ var isPalindrome = function(string, start, end) {
 // In the worst case, if the given string is palindrome then the expandAround function can iterate through all 
 // characters of the string while expanding outward from the center, resulting in O(N) operations per center.
 // Since there are N possible centers (one for each character), the total time complexity is O(N^2).
-// Space Complexity: O(1), since no additional space is used apart from a few variables to store the current center 
-// and count, making the space complexity constant.
+// Space Complexity: O(1), since no additional space is used apart from a few variables to store the current 
+// center and count, making the space complexity constant.
 
 var countSubstrings = function(s){
     let count = 0;

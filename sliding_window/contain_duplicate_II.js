@@ -31,7 +31,7 @@ var containsNearbyDuplicate = function (arr, k) {
 // Continue this process for all elements in the array.
 
 // Time Complexity: O(N), Since each element is added and removed from the hash set at most once, where 'N' is the
-//  number of elements in the array.
+// number of elements in the array.
 // Space Complexity: O(min(N, k))
 // - The has set contains at most 'k' elements at any time.
 // - In the worst case, when k ≥ N, the has set may store up to N elements.

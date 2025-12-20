@@ -40,16 +40,16 @@ var palindrome = function(string, i, j){
 }
 
 // Optimal Approach:
-// I will use the "expand around center" technique to count the number of palindromic substrings.
+// I will use the "expand around center" technique to check the palindromic substrings.
 // In this technique, I will take the current character as a center and expand outward until I find 
 // palindromic substrings.
-// I will use one variable, `maxLengthSub`, to store the longest substring found so far.
+// I will use one variable, `maxLengthSub`, to store the longest palindromic substring found so far.
 // I will iterate through each character of the string, and for each character:
 // I will call the `expandAround` function twice:
 //   - Once for odd-length palindromes (where the palindrome has a single center character).
 //   - Once for even-length palindromes (where the palindrome has two center characters).
-// The `expandAround` function uses two pointers, `left` and `right`, which start at the current center (or center pair),
-// and expand outward as long as the characters at `left` and `right` form a palindrome.
+// The `expandAround` function uses two pointers, `left` and `right`, which start at the current center 
+// (or center pair), and expand outward as long as the characters at `left` and `right` form a palindrome.
 // The function `expandAround` will return the palindromic substring found by expanding outward.
 // During each iteration, I will compare the lengths of the odd and even palindromes.
 // If the length of the odd palindrome is greater than the previously stored `maxLengthSub`,
@@ -59,8 +59,8 @@ var palindrome = function(string, i, j){
 
 // Time Complexity: O(N^2)
 // For each character, I call the `expandAround` function for both even- and odd-length palindromes.
-// In the worst case, `expandAround` can expand to the entire string (O(N)) for each center if the given string is 
-// already palindrome.
+// In the worst case, `expandAround` can expand to the entire string (O(N)) for each center if the given string 
+// is already palindrome.
 // Since there are N centers, the overall time complexity is O(N^2).
 
 // Space Complexity: O(1)
