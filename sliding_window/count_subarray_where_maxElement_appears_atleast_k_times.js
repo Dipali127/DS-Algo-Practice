@@ -33,20 +33,22 @@ var countSubarrays = function(nums, k) {
 // Optimal approach: using sliding technique and two pointer technique
 // approach:-
 // first find the max element from the nums array.
-// extend the window by moving the `j` pointer to the right and count the occurrences of `maxElement` within that window.
+// extend the window by moving the `j` pointer to the right and count the occurrences of `maxElement` within that
+// window.
 // if the count of `maxElement` in the current window is greater than or equal to `k`, 
-// increment the `numberSubarray` by (nums.length - j), which gives exact number of subarrays ending at or after `j`.
+// increment the `numberSubarray` by (nums.length - j), which gives exact number of subarrays ending at or after 
+// `j`.
 // before shrinking the window toward right by using pointer 'i',
-// check if the element at `i` is equal to `maxElement`. if it is, decrement the count of `maxElement` and move `i` to the 
-// right and again in the shrinked window check that count is greater than equal to k continue this process until all 
-// subarrays are checked.
-// once find all the subarray where the maxElment count is atleast k times then return numberSubarray.
+// check if the element at `i` is equal to `maxElement`. if it is, decrement the count of `maxElement` and move 
+// `i` to the right and again in the shrinked window check that count is greater than equal to k continue this
+// process until all subarrays are checked.
+// once find all the subarray where the maxElement count is atleast k times then return numberSubarray.
 // TC:- O(N),because each element is processed at most twice (once by `j` and once by `i`).
 // SC:- O(1), as there is no additional space used.
 // Note:- the 'nums.length - end will count the number of subarray ending at index 'j' or after 'j'. 
-// In other words, once the window [start...end] is valid (i.e., it contains k or more max elements), any extension of 
-// that subarray ending beyond 'j' is also valid — because adding more elements can’t remove the already counted max 
-// elements. 
+// In other words, once the window [start...end] is valid (i.e., it contains k or more max elements), any 
+// extension of that subarray ending beyond 'j' is also valid — because adding more elements can’t remove the 
+// already counted max elements. 
 
 var countSubarrays = function(nums, k) {
     let maxElement = Math.max(...nums);

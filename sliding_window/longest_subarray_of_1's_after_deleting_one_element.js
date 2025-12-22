@@ -39,11 +39,11 @@ var longestSubarray = function(nums){
 // extend the window by moving the pointer 'j' to the right of the array 'nums'. 
 // and check if the value at 'nums[j]' is zero, increment the 'countZero'.
 // shrink the window if 'countZero' is greater than 1 (i.e., there are more than one zero in the current window),
-// move the pointer 'i' to the right until 'countZero' becomes 1. it ensures that the window contains at most one zero,
-// which is valid for finding the longest subarray of 1's after deleting one zero because that one zero again deleted 
-// from current window while computing length using j - i.
-// for each position of 'j', calculate the length of the current valid window as 'j - i' which gives the exact number
-//  of 1's in the current window after removing one element (i.e., the zero).
+// move the pointer 'i' to the right until 'countZero' becomes 1. it ensures that the window contains at most one
+// zero, which is valid for finding the longest subarray of 1's after deleting one zero because that one zero 
+// again deleted from current window while computing length using j - i.
+// for each position of 'j', calculate the length of the current valid window as 'j - i' which gives the exact 
+// number of 1's in the current window after removing one element (i.e., the zero).
 // update 'maxLength' with the maximum value between the current 'maxLength' and the length of the current window(j-i). 
 // TC:- O(N), since we traverse the array once with two pointers (i and j).
 // SC:- O(1), since no additional space is used other than the few variables.

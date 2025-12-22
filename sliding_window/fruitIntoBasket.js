@@ -51,9 +51,9 @@ var totalFruit = function(fruits){
 // I will optimize the solution by using a sliding window and two pointers: `start` and `end`.
 // I will extend the window by using the `end` pointer and store the current fruit's frequency in a hash 
 // map. 
-// If the map size exceeds 2, then I will shrink the window by incrementing the `start` pointer.
+// If the hash map size exceeds 2, then I will shrink the window by incrementing the `start` pointer.
 // But before shrinking the window, I will remove the frequency using the `start` pointer and 
-// check if that element is equal to 0. If it is, I will delete it permanently since the map can only 
+// check if that element is equal to 0. If it is, I will delete it permanently since the hash map can only 
 // hold up to two types of fruits into the basket.
 // Otherwise, I will update `maxFruits` for the current subtree (subarray) if it is greater than the 
 // previously stored `maxFruits`.
