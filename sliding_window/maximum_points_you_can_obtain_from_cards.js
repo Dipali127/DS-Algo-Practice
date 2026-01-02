@@ -11,12 +11,15 @@
 // I will also use a variable `maxSum` to keep track of the maximum score obtained.  
 
 // To maximize the score, I will consider `k` cards in different possible ways:  
-// (1) Take no cards from the beginning (`leftSum = 0`) and take all `k` cards from the end (`rightSum = sum of last k cards`).  
+// (1) Take no cards from the beginning (`leftSum = 0`) and take all `k` cards from the end (`rightSum = sum of 
+// last k cards`).  
 // (2) Take some cards from the beginning and the remaining from the end.  
-// (3) Take all `k` cards from the beginning (`leftSum = sum of first k cards`) and none from the end (`rightSum = 0`).  
-// I will iterate through all possible combinations and update `maxSum` accordingly cards and return it once after
-// iterating through k cards from begining and end of the cardPoints array.
-// TC: O(k²), since we are iterating through `k` possible cards, and for each card, we calculate the sum of up to `k` elements.  
+// (3) Take all `k` cards from the beginning (`leftSum = sum of first k cards`) and none from the end 
+// (`rightSum = 0`).  
+// I will iterate through all possible combinations and update `maxSum` accordingly cards and return it once 
+// after iterating through k cards from begining and end of the cardPoints array.
+// TC: O(k²), since we are iterating through `k` possible cards, and for each card, we calculate the sum of up 
+// to `k` elements.  
 // The worst-case time complexity is **O(k²)** when `k == N`.  
 // SC: O(1), since no additional space is used apart from a few variables.  
 

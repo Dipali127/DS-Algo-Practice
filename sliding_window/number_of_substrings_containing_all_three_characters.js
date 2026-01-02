@@ -44,10 +44,12 @@ var numberOfSubstrings = function (s) {
 // the character at pointer start then remove that character from hash map and increment the pointer 'start' and once find 
 // all the substring where the characters count is atleast one times then return numberSubstring.
 // TC:- O(N), as each element in the string is processed at most twice (once by `j` and once by `i`) 
-// SC:- O(1), as there is no additional space used apart from map which use constant space. 
+// SC:- O(1), Since there is no additional space used apart from hash map which use constant space. 
 // Note:
-// The formula (s.length - end) counts all substrings starting from the current `start` index to the end of the string.
-// Once the window contains all three required characters, any extension of this window to the right will also be valid.
+// The formula (s.length - end) counts all substrings starting from the current `start` index to the end of the
+// string.
+// Once the window contains all three required characters, any extension of this window to the right will also 
+// be valid.
 
 var numberOfSubstrings = function (s) {
     let count = 0;

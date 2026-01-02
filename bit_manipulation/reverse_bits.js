@@ -1,5 +1,5 @@
 // Leetcode Problem:- 190
-// Problem:- we have given number 'n' and we have to reverse the bits of the number 'n' and return decimal value of 
+// Problem:- we have given number 'n' and we have to reverse the bits of the number 'n' and return decimal
 // the reversed bits of given number 'n'.
 // Example:- 5, Binary of 5 = 00000000000000000000000000000101, Reversed bits = 10100000000000000000000000000000
 // Decimal Value of Reversed bits = 2684354560.

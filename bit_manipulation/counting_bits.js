@@ -3,11 +3,13 @@
 // Approach:-
 // initialize a 'result' array to store the count of 1s (set bits) for each number from 0 to n(inclusive).
 // for each number 'i' from 0 to n, use a variable 'num' to hold the value of 'i'.
-// then count the number of set bits (1s) in 'num' by repeatedly applying the bitwise operation 'num = num & (num - 1)'.
+// then count the number of set bits (1s) in 'num' by repeatedly applying the bitwise operation 
+// 'num = num & (num - 1)'.
 // This operation removes the rightmost set bit (1) in 'num' during each iteration of the while loop.
 // and this loop continues until 'num' becomes 0, and track how many times the loop runs, which is the 
 // count of 1 bits for 'i'.
-// after finding the count of ones for current number 'i', push it into the result array and finally return it.
+// after finding the count of ones for current number 'i', push it into the result array and finally
+// return it.
 // Time Complexity: O(N * k)
 // - For each number up to N, we count the set bits using the operation (num = num & (num - 1)).
 // - This operation runs in O(k) time, where k is the number of set bits in the current number.
@@ -34,8 +36,8 @@ var countBits = function(n) {
 // Approach:-
 // use the 'result' array to store the count of set bits (1s) for each number from 0 to n(inclusive).
 // The idea is to utilize the fact that:
-// - for even numbers, the number of set bits is the same as number/2  (since dividing by 2 in binary shifts all 
-// bits to the right, which does not change the number of 1s).
+// - for even numbers, the number of set bits is the same as number/2 (since dividing by 2 in binary shifts
+// all bits to the right, which does not change the number of 1s).
 // - For odd numbers, the number of set bits is one more than number/2 (because the least significant bit is 
 // always 1 for odd numbers).
 // TC: O(N), because we compute the count of 1s for each number from 0 to n in constant time.
