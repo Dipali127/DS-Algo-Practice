@@ -40,10 +40,10 @@ var canConstruct = function (ransomNote, magazine) {
 // 5. If all characters of ransomNote are found in the map with valid counts, return true.
 //
 // Time Complexity: O(N + M)
-// - O(M) to traverse the magazine string and store character frequencies in the map.
-// - O(N) to check each character of ransomNote in the map.
+// - O(M) to traverse the magazine string and store character frequencies in the hash map.
+// - O(N) to check each character of ransomNote in the hash map.
 // - Overall TC: O(N + M), often written as O(N).
-// SC: O(N), as the Map is used to store all characters of the magazine.
+// SC: O(N), as the hash Map is used to store all characters of the magazine.
 
 var canConstruct = function (r, m) {
     let map = new Map();

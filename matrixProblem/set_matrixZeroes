@@ -6,14 +6,18 @@
 // i will take two arrays, arrRow and arrCol of length equal to rows and columns of the given matrix and 
 // intially all the values in arrRow and arrCol are set to 1.
 // first, i will iterate through the given matrix to identify which rows and columns contain a zero.
-// Whenever I found a zero while iterating, I will update the corresponding row in arrRow and the corresponding column 
-// in arrCol to zero, after then i will iterate through `arrRow` to check which rows contain a zero.
-// once i found a index in arrRow which contain 0, i will set all the elements in the given matrix row to zero.
+// Whenever I found a zero while iterating, I will update the corresponding row in arrRow and the 
+// corresponding column in arrCol to zero, after then i will iterate through `arrRow` to check which rows
+// contain a zero.
+// once i found a index in arrRow which contain 0, i will set all the elements in the given matrix row to
+// zero.
 // similarly, i will iterate through `arrCol` to check which columns contain a zero.
-// once i found a index in arrCol which contain zero, i will set all the elements in the matrix column to zero.
+// once i found a index in arrCol which contain zero, i will set all the elements in the matrix column to
+//  zero.
 
 // Time Complexity: O(N^2)
-// - O(N^2) due to the first nested loop that traverses the given matrix to mark the rows and columns containing zeroes.
+// - O(N^2) due to the first nested loop that traverses the given matrix to mark the rows and columns 
+// containing zeroes.
 // - O(N^2) due to the second nested loop that updates the matrix based on the marked rows 
 // (in the worst case, all rows might be updated when the given matrix all row contain 0).
 // O(N^2) due to the third nested loop that updates the matrix based on the marked columns 

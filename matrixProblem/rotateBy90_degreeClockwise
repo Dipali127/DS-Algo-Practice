@@ -2,10 +2,17 @@
 // approach:- 
 // first i will take transpose of a matrix by swapping the elements at (i,j) with the elements at (j,i) 
 // which convert rows into columns and columns into rows and this help to rotate matrix 
-// after transpose, i will iterate through the half of the elements in each row and swap their values to reverse the row. 
+// after transpose, i will iterate through the half of the elements in each row and swap their values to 
+// reverse the row. 
 // this will effectively rotate the given matrix by 90 degree clockwise.
-// TC:O(N^2), explanation:- O(N^2) for transpose of matrix and O(N^2) for reversing the rows.
-// So, overall TC:- O(N^2)+O(N^2) => O(2N^2) => O(N^2) AND SC:O(1)
+// Time Complexity (TC): O(N²)
+// Explanation:
+// - Transpose step performs 0 + 1 + 2 + ... + (n−1) = n(n−1)/2 ≈ N²/2 swaps → O(N²)
+// - Reversing each row takes N × (N/2) swaps → O(N²)
+// - Constants are ignored in Big-O, so overall TC = O(N²) + O(N²) = O(2N²) = O(N²)
+//
+// Space Complexity (SC): O(1)
+// - The rotation is done in place using only a temporary variable for swapping.
 
 var rotate = function(matrix) {
     let row = matrix.length;

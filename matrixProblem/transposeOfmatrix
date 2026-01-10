@@ -35,7 +35,8 @@ class Solution {
 // Leetcode Problem:- 867
 // Optimal Approach:
 // Approach:
-// The problem does not guarantee that the matrix is square, so we must handle both square and non-square matrices.
+// The problem does not guarantee that the matrix is square, so we must handle both square and non-square 
+// matrices.
 // In the transpose of a matrix, we flip the matrix over its main diagonal (from top-left to bottom-right).
 // This operation converts rows into columns and columns into rows. 
 // For example, a 2x3 matrix becomes a 3x2 matrix after transposition.
