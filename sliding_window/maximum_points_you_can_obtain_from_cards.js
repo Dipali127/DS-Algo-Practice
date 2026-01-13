@@ -18,9 +18,9 @@
 // (`rightSum = 0`).  
 // I will iterate through all possible combinations and update `maxSum` accordingly cards and return it once 
 // after iterating through k cards from begining and end of the cardPoints array.
-// TC: O(k²), since we are iterating through `k` possible cards, and for each card, we calculate the sum of up 
-// to `k` elements.  
-// The worst-case time complexity is **O(k²)** when `k == N`.  
+// TC: O(k²), since we are iterating through `k` possible cards, and for each card, we calculate the sum 
+// of up to `k` elements.  
+// The worst-case time complexity is **O(N²)** when `k == N`.  
 // SC: O(1), since no additional space is used apart from a few variables.  
 
 var maxScore = function(cardPoints, k) {
@@ -45,18 +45,24 @@ var maxScore = function(cardPoints, k) {
     return maxSum;
 };
 
-// Optimal Approach:
-// instead of directly picking k cards from the beginning or end, which increases time complexity to O(k²) in the worst case,
-// i realized that picking k cards is the same as removing n - k consecutive cards from the middle (to the left),
-// because the remaining sum would be our maximum possible score.
-// To efficiently find the smallest sum of n - k elements, I will use of the sliding window technique:
-//  - First, I will calculate the total sum of the array.
-//  - Then, I will compute the sum of the first n - k elements (this is our initial window).
-//  - Next, I will slide the window across the array, updating the sum by adding the new element and removing the old one.
-//  - I will keep track of the minimum window sum as I move.
-// (Note:- We keep track of the smallest sum found in any sliding window because removing this minimized sum will maximize the sum of the remaining k elements.)
-//  - Finally, I will subtract this minimum sum from the total sum, which gives the maximum possible score.
-// TC: O(k), since I will iterate through k cards.
+// Optimal Approach: Using Sliding Window Technique
+// Instead of finding which k cards will give the maximum point, which increases
+// the time complexity to O(k^2), I will find out which n - k cards should be removed
+// from the cardPoints array so that I get the maximum sum.
+// First, I will find the totalSum, then I will check if the given k equals the
+// length of the cardPoints array. If yes, return totalSum since k is equal to n.
+// - Otherwise, I will find the sum of n - k cards, which would be the minimum sum
+//   subarray from the cardPoints array that I will remove, so that the remaining
+//   sum gives the maximum score.
+//   Once the minimum sum is found by taking n - k cards, I will initialize this
+//   minimum sum into the windowSum variable to find the exact window that contains
+//   the minimum sum.
+// - Next, I will slide the window across the array, updating the windowSum by
+//   adding the new element and removing the old one, while updating minWindowSum
+//   by taking the minimum between minWindowSum and windowSum.
+// - Finally, I will subtract this minimum sum from the total sum, which gives the
+//   maximum possible score.
+// TC: O(n), since we iterate through the array once.
 // SC: O(1), since no additional space is used.
 
 var maxScore = function(cardPoints, k) {
@@ -69,14 +75,13 @@ var maxScore = function(cardPoints, k) {
     let windowSize = n - k;
     let windowSum = 0;
 
-   
     for (let i = 0; i < windowSize; i++) {
         windowSum += cardPoints[i];
     }
 
     let minWindowSum = windowSum;
 
-// slide the window across array to remove n-k elements from middle to 0rth index
+    // Slide the window across the array to remove n - k elements
     for (let i = windowSize; i < n; i++) {
         windowSum += cardPoints[i] - cardPoints[i - windowSize];
         minWindowSum = Math.min(minWindowSum, windowSum);
@@ -84,4 +89,3 @@ var maxScore = function(cardPoints, k) {
 
     return totalSum - minWindowSum;
 };
-

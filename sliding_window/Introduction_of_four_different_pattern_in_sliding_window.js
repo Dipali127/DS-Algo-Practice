@@ -3,8 +3,13 @@
 
 // rarely asked pattern.
 // (1) Pattern First: Constant Window Size
+// Problems:
+
 // Example:
-// Given an array of positive and negative integers and an integer 'k', you need to find the maximum sum 
+// (1) Maximum Sum of 'k' Consecutive Elements in an Array [GFG]
+// (2) Maximum number of vowels in a substring of given length [LeetCode 1456] 
+// (3) Maximum Average Subarray I [LeetCode 643]
+// (4) Given an array of positive and negative integers and an integer 'k', you need to find the maximum sum 
 // obtainable by picking 'k' consecutive elements.
 
 // Brute Force Approach:
@@ -66,10 +71,13 @@ function findSum1(arr1,K){
 // (2) Pattern Second:- Longest subarray/substring where <condition>. 
 // subarray => any consecutive(one after another) portion of the array and substring => any consecutive
 // (one after another) portion of the string.
-// Given an array of positive and negative integers and an integer 'k', you have to find out the window 
+// Problems:
+// (1) Longest Substring Without Repeating Characters [LeetCode 3]
+// (2) Longest Subarray with Ones after Replacement [LeetCode 424]
+// (3) Longest Subarray with Equal Number of 0s and 1s [LeetCode 525]
+// (4) Given an array of positive and negative integers and an integer 'k', you have to find out the window 
 // size where the sum is less than equal to k.
 // Example:
-
 // Brute force approach:
 // approach:-
 // generate all possible subarrays and calculate sum to get maximum window size whose sum is less than
