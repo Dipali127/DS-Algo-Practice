@@ -37,7 +37,7 @@ var maxVowels = function(s, k) {
 // Before shrinking the window, check if the character pointed to by the 'start' pointer is a vowel.
 // If it is, decrement `countVowel` since that character will no longer be part of the new window.
 // Then increment `start` by 1 to shrink the window.
-// Time Complexity: O(N), where N is the length of the string, as we iterate through the string once.
+// Time Complexity: O(N), since both 'start' and 'end' pointers traverse the string at most once.
 // Space Complexity: O(1), as no additional space is used apart from a few variables.
 // Note: The `has` method on the Set takes constant time, since the Set only stores 5 vowels.
 // So the time and space complexity remain constant with respect to vowel checking.
@@ -64,3 +64,27 @@ var maxVowels = function(s, k){
 
     return maxVowel;
 }
+
+//                                                     OR
+var maxVowels = function(s, k) {
+    let maxVowel = 0;
+    let start = 0, end = 0, vowelCount = 0, vowelRegex = /[a e i o u]/;
+    while(end < s.length){
+        if(vowelRegex.test(s[end])){
+            vowelCount++;
+        }
+
+        if(end - start + 1 === k){
+            maxVowel = Math.max(maxVowel, vowelCount);
+            if(vowelRegex.test(s[start])){
+                vowelCount--;
+            }
+
+            start++;
+        }
+
+      end++;
+    }
+
+    return maxVowel;
+};

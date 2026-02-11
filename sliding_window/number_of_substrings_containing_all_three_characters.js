@@ -38,22 +38,21 @@ var numberOfSubstrings = function (s) {
 
 // Optimal approach:- using sliding window and map
 // approach:-
-// extend the window by moving the `end` pointer to the right and store the occurrences of each characters of the 
-// current window into hash map , meanwhile check the length of hash map is equal to three then find the number of string
-// by using (s.length-end) after then before shrinking the window toward right check first that if hash map contain
-// the character at pointer start then remove that character from hash map and increment the pointer 'start' and once find 
-// all the substring where the characters count is atleast one times then return numberSubstring.
+// extend the window by moving the `end` pointer to the right and store the occurrences of each characters
+// of the current window into hash map , meanwhile check the length of hash map is equal to three then 
+// find the number of string by using (s.length-end) after then before shrinking the window toward right 
+// check first that if hash map contain the character at pointer start then remove that character from 
+// hash map and increment the pointer 'start' and once find all the substring where the characters count is atleast one times then return numberSubstring.
 // TC:- O(N), as each element in the string is processed at most twice (once by `j` and once by `i`) 
 // SC:- O(1), Since there is no additional space used apart from hash map which use constant space. 
 // Note:
-// The formula (s.length - end) counts all substrings starting from the current `start` index to the end of the
-// string.
-// Once the window contains all three required characters, any extension of this window to the right will also 
-// be valid.
+// The formula (s.length - end) counts all substrings starting from the current `start` index to the end 
+// of the string not the end pointer because Once the window contains all three required characters, any extension of this window to the right will
+// also be valid.
 
 var numberOfSubstrings = function (s) {
     let count = 0;
-    let start = 0, end = 0
+    let start = 0, end = 0;
     let map = new Map();
     while(end < s.length){
         if(map.has(s[end])){

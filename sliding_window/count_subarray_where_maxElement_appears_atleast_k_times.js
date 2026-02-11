@@ -43,7 +43,7 @@ var countSubarrays = function(nums, k) {
 // `i` to the right and again in the shrinked window check that count is greater than equal to k continue this
 // process until all subarrays are checked.
 // once find all the subarray where the maxElement count is atleast k times then return numberSubarray.
-// TC:- O(N),because each element is processed at most twice (once by `j` and once by `i`).
+// TC: O(N), because both `start` and `end` pointers traverse the array at most once.
 // SC:- O(1), as there is no additional space used.
 // Note:- the 'nums.length - end will count the number of subarray ending at index 'j' or after 'j'. 
 // In other words, once the window [start...end] is valid (i.e., it contains k or more max elements), any 

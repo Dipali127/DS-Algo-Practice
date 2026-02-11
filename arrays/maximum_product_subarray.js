@@ -25,18 +25,40 @@ var maxProduct = function(nums) {
 };
 
 // Optimal approach: Using prefix and suffix product
-// approach
-// Instead of using a nested loop which leads to a time complexity of O(N^2), we use a prefix and suffix product approach.
-// Iterate through the 'nums' array, and while iterating, compute both prefixProduct and suffixProduct.
-// This is because it might be possible that all the values at the beginning of the array are negative,
-// and the maximum product subarray lies toward the end of the array.
-// Additionally, if the current product becomes 0 (due to a zero in the array), reset it to 1,
-// since multiplying any number with 0 results in 0 and breaks the product chain.
-// After updating prefixProduct and suffixProduct, update 'maxProd' with the maximum value among 
-// the current maxProd, prefixProduct, and suffixProduct.
-// Once the loop ends, return maxProd.
-// Time Complexity: O(N), since each element of the array is iterated once using a single loop.
-// Space Complexity: O(1), since no additional space is used.
+// Instead of using a nested loop which would lead to O(N^2) time, we use a prefix and suffix product
+// approach.
+// I will iterate through the 'nums' array once, computing both prefixProduct (left to right) and 
+// suffixProduct (right to left) simultaneously.
+// The reason we consider both directions is to handle negative numbers correctly: 
+// multiplying an even number of negative numbers can result in a large positive product,
+// and zeros can reset the product chain. For example, in [-2, 3, -4], the maximum product subarray is 
+// = 24, which might be missed if we only go in one direction or reset incorrectly.
+// Additionally, if the current product becomes 0 (due to a zero in the array), we reset it to 1,
+// since multiplying by 0 breaks the product chain.
+// After updating prefixProduct and suffixProduct, we update 'maxProd' with the maximum of maxProd, 
+// prefixProduct, and suffixProduct.
+// Finally, we return maxProd.
+// Time Complexity: O(N), as we traverse the array once.
+// Space Complexity: O(1), no extra space is used.
+
+// Note:- my first optimal approach fails for cases like [-2, 3, -4] because resetting on negative 
+// discards values that later become part of the maximum product when multiplied by another negative. 
+// That’s why i will use prefix and suffix products instead.
+// output for [-2, 3, -4] = 24.
+// my first optimal approach:
+// function maxProd(nums){
+//     let maxProd = 0;
+//     let prod = 1;
+//     for(let i = 0; i < nums.length; i++){
+//         prod *= nums[i];
+//         maxProd = Math.max(maxProd, prod);
+//         if(maxProd < 0){
+//             maxProd = 1;
+//         }
+//     }
+//     return maxProd;
+// }
+
 
 var maxProduct = function(nums) {
     let maxProd = -Infinity;

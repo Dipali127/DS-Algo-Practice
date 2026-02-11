@@ -9,11 +9,11 @@
 // Then calculate the length of the current subarray using (j - i + 1) and update it in lengthOflongestSubarray.
 // After checking all possible subarrays, return the lengthOflongestSubarray.
 
-// TC:- O(N^3), because we iterate through starting index of each possible subarray and for each subarray we 
-// iterate through them to store the frequency of each element in the hash map and then for each subarray we 
-// iterate through the hash map which leads to increase the time complexity to O(N^3).
-// SC:- O(N), because we use a hash map to store the frequency of elements in the subarray, and in the worst case,
-// all elements could be unique.
+// TC:- O(N^3), because we iterate through starting index of each possible subarray and for each subarray
+//  we iterate through them to store the frequency of each element in the hash map and then for each 
+// subarray we iterate through the hash map which leads to increase the time complexity to O(N^3).
+// SC:- O(N), because we use a hash map to store the frequency of elements in the subarray, and in the
+// worst case, all elements could be unique.
 
 var maxSubarrayLength = function (nums, k) {
     let longestSubarray = 0;

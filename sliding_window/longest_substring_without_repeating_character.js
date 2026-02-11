@@ -11,7 +11,7 @@
 // repeating characters.
 // Time Complexity: O(N^2), as i have use of nested loops to consider all possible substrings.
 // Space Complexity: O(N), to store the  characters in a hash set and In the worst case, all characters in a substring
-//  could be unique.
+// could be unique.
 // Note:- 
 // Use -Infinity if you want to handle cases where you might not find any valid substrings and need to guarantee that the first valid 
 // substring will always update the initial value.

@@ -30,8 +30,7 @@ var containsNearbyDuplicate = function (arr, k) {
 //   which will shrink the sliding window from left.
 // Continue this process for all elements in the array.
 
-// Time Complexity: O(N), Since each element is added and removed from the hash set at most once, where 'N' is the
-// number of elements in the array.
+// Time Complexity: O(N), Since both start and end pointer traverse the array at most once.
 // Space Complexity: O(min(N, k))
 // - The has set contains at most 'k' elements at any time.
 // - In the worst case, when k ≥ N, the has set may store up to N elements.
@@ -40,15 +39,21 @@ var containsNearbyDuplicate = function (arr, k) {
 
 var containsNearbyDuplicate = function(nums, k) {
     let set = new Set();
-
-    for (let i = 0; i < nums.length; i++) {
-        if (set.has(nums[i])) return true;
-
-        set.add(nums[i]);
-        if (set.size > k) {
-            set.delete(nums[i - k]);
+    let start = 0, end = 0;
+    while(end < nums.length){
+        if(set.has(nums[end])){
+            return true;
         }
+        
+        set.add(nums[end])
+        
+        if(set.size > k){
+            set.delete(nums[start]);
+            start++;
+        }
+        
+        end++;
     }
-
+    
     return false;
 }

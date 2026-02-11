@@ -9,8 +9,8 @@
 // (1) Maximum Sum of 'k' Consecutive Elements in an Array [GFG]
 // (2) Maximum number of vowels in a substring of given length [LeetCode 1456] 
 // (3) Maximum Average Subarray I [LeetCode 643]
-// (4) Given an array of positive and negative integers and an integer 'k', you need to find the maximum sum 
-// obtainable by picking 'k' consecutive elements.
+// (4) Given an array of positive and negative integers and an integer 'k', you need to find the maximum
+//  sum obtainable by picking 'k' consecutive elements.
 
 // Brute Force Approach:
 // Approach:
@@ -75,8 +75,9 @@ function findSum1(arr1,K){
 // (1) Longest Substring Without Repeating Characters [LeetCode 3]
 // (2) Longest Subarray with Ones after Replacement [LeetCode 424]
 // (3) Longest Subarray with Equal Number of 0s and 1s [LeetCode 525]
-// (4) Given an array of positive and negative integers and an integer 'k', you have to find out the window 
-// size where the sum is less than equal to k.
+// (4) Given an array of positive and negative integers and an integer 'k', you have to find out the 
+// window size where the sum is less than equal to k.
+// length of longest subarray with at most k frequency of each element.
 // Example:
 // Brute force approach:
 // approach:-
@@ -198,4 +199,5 @@ function findWindowsize(arr2,Sum){
 // rarely asked pattern.
 // (4) Pattern Fourth:- shortest/minimum window where <condition>
 // approach:- find the valid window and try to shrink that window which still satisfies the condition.
-// 
+// minimum size subarray sum (leetcode 209) is an example of this pattern.)
+ 

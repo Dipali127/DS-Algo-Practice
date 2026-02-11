@@ -79,17 +79,17 @@ var numberOfSubarrays = function(nums, k) {
 
 
 // Optimal Approach2: Using Sliding Window and Two Pointer
-// Instead of solving using a brute force approach which uses a time complexity of O(N²), I will use sliding
-// window with a two-way calling method, where I will:
-// Call the sliding window function first with at most k odd numbers, which includes subarrays with count 0, 1, 2,
-// ..., up to k and then Call the sliding window function again with at most k-1 odd numbers, which includes 
-// subarrays with count 0, 1, 2, ..., up to k-1.
-// Subtracting findCount(nums, k) with findCount(nums, k-1) eliminates all common subarrays between both function
-// return counts, leaving only the count of subarrays with exactly k odd numbers.
+// Instead of solving using a brute force approach which uses a time complexity of O(N²), I will use 
+// sliding window with a two-way calling method, where I will:
+// Call the sliding window function first with at most k odd numbers, which includes subarrays with count
+// 0, 1, 2,..., up to k and then Call the sliding window function again with at most k-1 odd numbers,
+// which includes subarrays with count 0, 1, 2, ..., up to k-1.
+// Subtracting findCount(nums, k) with findCount(nums, k-1) eliminates all common subarrays between both 
+// function return counts, leaving only the count of subarrays with exactly k odd numbers.
 
 // Inside findCount(nums, k):
-// - I will use two pointers, start and end, both initialized at 0, which point to the starting index of the
-//   window.
+// - I will use two pointers, start and end, both initialized at 0, which point to the starting index of
+//  the window.
 // - I will also declare two variables: oddCount and niceSubarray, both initialized to 0. 
 //   oddCount keeps track of the number of odd numbers found in the current window,
 //   and niceSubarray keeps track of all the valid subarrays ending at index 'end'.
@@ -98,11 +98,12 @@ var numberOfSubarrays = function(nums, k) {
 // - Once the oddCount is greater than k, shrink the window. But before shrinking the window, 
 //   check if the value pointed to by the 'start' pointer is odd. If it is, decrement oddCount 
 //   since that number is no longer part of the new window. Otherwise, just increment the 'start' pointer.
-// - Always add (end - start + 1) to the niceSubarray variable, which represents all valid subarrays ending at
-//   index 'end'.
+// - Always add (end - start + 1) to the niceSubarray variable, which represents all valid subarrays 
+//   ending at index 'end'.
 // - Continue expanding the window by moving 'end' forward.
 
-// Time Complexity: O(N), since each element is processed at most twice (once when 'end' expands the window and once when 'start' shrinks it).
+// Time Complexity: O(N), since each element is processed at most twice (once when 'end' expands the 
+// window and once when 'start' shrinks it).
 // Space Complexity: O(1), since no additional space is used, only a few integer variables.
 
 

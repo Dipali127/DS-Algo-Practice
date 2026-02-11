@@ -36,7 +36,7 @@ var longestOnes = function(nums, k) {
 // and decrement 'countZero' if the element at 'start' is 0.
 // Update 'maxLength' with the size of the current valid window.
 // Once the iteration completes, return 'maxLength'.
-// TC: O(N), as both 'start' and 'end' pointers traverse the array once.
+// TC: O(N), as both 'start' and 'end' pointers traverse the array at most once.
 // SC: O(1), since no additional space is used.
 var longestOnes = function(nums, k){
     let maxLength = 0, countZero = 0;

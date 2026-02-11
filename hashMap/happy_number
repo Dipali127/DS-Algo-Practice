@@ -13,7 +13,7 @@
 // 6² + 8² = 36 + 64 = 100  
 // 1² + 0 + 0 = 1
 // Space Complexity: O(1)
-// the has set stores only a small number of sums (not dependent on input size), so space usage remains 
+// the hash set stores only a small number of sums (not dependent on input size), so space usage remains 
 // fixed.
 
 var isHappy = function(n) {

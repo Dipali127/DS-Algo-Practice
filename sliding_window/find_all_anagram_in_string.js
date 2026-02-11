@@ -10,7 +10,8 @@
 // if an anagram is found, add the starting index of the current substring to the result array.
 // once, found all the starting index in string 's' which is an anagram of string 'p' return resultArray.
 // TC: O(N * M), where N is the length of 's' and M is the length of 'p'.
-// SC: O(M), for storing the frequency map of string 'p' and result array to store starting indices of all anagram.
+// SC: O(M), for storing the frequency map of string 'p' and result array to store starting indices of 
+// all anagram.
 
  
 var findAnagrams = function(s,p) {
