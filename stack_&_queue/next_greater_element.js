@@ -57,7 +57,21 @@ class Solution {
 // - The result array also uses additional space to store the next greater elements.
 // - O(N) for the stack used while processing the array.
 // - Total auxiliary space: O(N).
-
+// Note: 
+// We traverse from right to left because for every element, we need to find the next greater element on 
+// its right side. By moving from right to left, the stack already contains all the elements to the right 
+// of the current element that are greater, because we remove all the smaller elements. 
+// This allows us to efficiently maintain a monotonic decreasing stack and find the next greater element
+// in O(n) time.
+// A monotonic stack is a stack that maintains its elements in either strictly increasing or 
+// strictly decreasing order by removing elements that violate that order during insertion. 
+// A monotonic decreasing stack stores elements in decreasing order.
+// In the above solution, what is happening:
+// Before pushing the current element:
+// We remove all elements that are smaller than or equal to the current element.
+// Only elements greater than the current element remain in the stack.
+// Then we push the current element.
+// Because of this, the stack always contains elements in strictly decreasing order (from bottom to top).
 
 class Solution {
     // Function to find the next greater element for each element of the array.

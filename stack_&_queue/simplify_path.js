@@ -1,6 +1,6 @@
 // Leetcode Problem:- 71
 // Optimal approach:
-// absolute path rules:
+// absolute path rules in unix(linux) file system:
 // -> a single period '.' represents the current directory.
 // -> a double period '..' represents the parent directory.
 // -> any sequence of periods like '...' or '....' are valid file or directory names.
@@ -15,12 +15,14 @@
 // example:- "/home/user/Pictures"
 
 // approach:-
-// convert the given path string into an array of directory names or elements by splitting it with the '/' delimiter.
+// convert the given path string into an array of directory names/file names or folder names by splitting
+//  it with the '/' delimiter.
 // iterate through this array. 
-//    - if the current element is a single period '.' (current directory) or an empty string (indicating multiple slashes),
+//    - if the current element is a single period '.' (current directory) or an empty string 
+// (indicating multiple slashes),
 //      skip it.
-//    - if the current element is '..', pop the top of the stack (move up to the parent directory) unless the stack is 
-//     already empty.
+//    - if the current element is '..', pop the top of the stack (move up to the parent directory) unless
+//     the stack is already empty.
 //    - otherwise, push the current directory onto the stack.
 // after processing all elements, if the stack is empty, return '/' (the root directory).
 // if the stack is not empty, construct the canonical path by joining the elements in the stack with '/' and ensure the 
@@ -33,10 +35,11 @@
 // SC:- O(N) for storing valid directories or file names in the stack. 
 
 // Note:- converting the path string into array using delimeter '/' equal to path = "/home//foo/" , 
-// const parts = path.split('/') =>  ["", "home", "", "foo", ""], before first / there is nothing so split 
-// method add empty string.
+// const path = /home//foo/, path = path.split('/') =>  ["", "home", "", "foo", ""], before first
+// / there is nothing so split method add empty string.
 // Empty strings appear only when the delimiter is at the beginning, at the end, or repeated consecutively.
 // A single delimiter between characters never creates an empty string.
+// space for delimiter created only when we have extra separation and no space created for single delimiter right.
 // Example:- "/a/b/c" => ["", "a", "b", "c"]
 // Example:- "a/b/c/" => ["a", "b", "c", ""]
 // Example:- "a//b/c" => ["a", "", "b", "c"]
@@ -63,7 +66,6 @@ var simplifyPath = function(path) {
             stack.push(path[i]);
         }else{
             stack.pop();
-            continue;
         }
     }
     
