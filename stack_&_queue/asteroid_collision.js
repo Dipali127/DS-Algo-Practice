@@ -1,8 +1,10 @@
 // Leetcode Problem:- 735
 // we are given an array of 'asteroids' of integers where each asteroid represents its size, 
 // and the sign represents the direction of the asteroid.
-// if the asteroid is positive, it moves to the right, and if the asteroid is negative, it moves to the left.
+// if the asteroid is positive, it moves to the right, and if the asteroid is negative, it moves to the
+// left.
 
+// Asteroid only collide when they are moving in opposite directions.
 // SOME RULES FOR ASTEROID COLLISION:
 // - If two asteroids collide, the smaller one will explode (be removed).
 // - If two asteroids have the same size but opposite directions, both will explode.
@@ -51,10 +53,9 @@ var asteroidCollision = function(asteroids) {
 };
 
 // Optimal approach:
-// appraoch:-
-// use of a stack to track the asteroids that are moving to the right.
-// iterate through the given array of 'asteroids' and check if we encounter an asteroid moving to the left,
-// then check:-
+// approach:-
+// use of a stack to keep track of the asteroids that are moving to the right.
+// iterate through the given array of 'asteroids' and check;
 // - if the current iterated asteroid is moving left (negative) and the top of the stack is moving right
 //  (positive), a collision might happen, so we enter a while loop to resolve it.
 // - in each collision scenario, we calculate the sum of the sizes of the two asteroids.
@@ -68,13 +69,16 @@ var asteroidCollision = function(asteroids) {
 //    which is 5 > 0 so, asteroids[i] will exploid because its value is smaller than the top of stack.
 // - if the sum is 0, both asteroids are equal in size and destroy each other, so we pop the top of 
 //   stack and set the current iterated asteroid to 0.
+//   for example:- if asteroids[i] = -5 and stack[top] = 5 then sum = -5 + 5 which is 0 so, both will
+//   exploid because they are equal in size.
 // - after the while loop, if the current iterated asteroid has not been destroyed (i.e., it's not 0), 
 //   we push it onto the stack.
 // TC:- O(N), as we iterate through the 'asteroids' array once and each asteroid is pushed/popped from the
 //  stack at most once.
 // SC:- O(N), in the worst case, the stack may store all asteroids if no collisions happen.
 // Note:
-// - We destroy the asteroid with the smaller absolute value, regardless of its sign.
+// - We destroy the asteroid with the smaller absolute value, regardless of its sign because problem said
+//  asteroid with smaller absolute value is destroyed.
 // - Time complexity depends on the total number of operations performed, not just the number of nested 
 //   loops.
 // - In this code, each asteroid is pushed and popped from the stack at most once,
