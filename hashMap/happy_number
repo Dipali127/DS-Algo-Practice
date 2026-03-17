@@ -6,8 +6,8 @@
 // loop, and the number is not a happy number.
 // Otherwise, continue the process and add each sum to the has set.
 // Time Complexity: O(1)
-// Although there’s a loop, After the first iteration, the sum of squares of digits will always be ≤ 243., 
-// so we only loop through a limited set of values
+// Although there’s a while loop, but after the first iteration, the sum of squares of digits will always be ≤ 243., 
+// so we only loop through a limited set of values.
 // example:- 1² + 9² = 1 + 81 = 82  
 // 8² + 2² = 64 + 4 = 68  
 // 6² + 8² = 36 + 64 = 100  

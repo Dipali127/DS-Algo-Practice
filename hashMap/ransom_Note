@@ -8,9 +8,13 @@
 // 5. If all characters are matched and removed from magazine, return true.
 //
 // Time Complexity: O(N²)
-// - O(N) to convert both ransomNote and magazine strings into arrays using split().
-// - O(N²) because for each character in ransomNote, we use indexOf() and splice() on the magazine array.
-// - Overall TC: O(N) + O(N²) = O(N²)
+// - O(N) to convert both ransomNote and magazine strings into arrays using split() because split method 
+// traverse through each character of both string ransomNote and magazine to add their characters into 
+// an array.
+// - O(N²) because for each character in ransomNote, we use indexOf() and splice() on the magazine array,
+// where O(N) is used by outer loop to traverse through each character of ransomNote and for each
+// character O(N) used by indexOf and O(N) used by splice method.
+// - Overall TC: O(N) + O(N^2) = O(N²)
 //
 // Space Complexity: O(M + N)
 // - Splitting both strings creates two new arrays, so total space used is proportional to M + N.

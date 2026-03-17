@@ -34,8 +34,8 @@ var containsNearbyDuplicate = function (arr, k) {
 // because each element is processed once, and Set operations (has, add, delete) are O(1) on average.
 //
 // Space Complexity: O(min(N, k)), because the Hash Set stores at most 'k' elements at any time. 
-// If k ≤ N, the set stores up to k elements, since older elements are removed once the window size exceeds k. 
-// If k > N, the set may store all N elements.
+// If k < N, the set stores up to k elements, since older elements are removed once the window size exceeds k. 
+// If k >= N, the set may store all N elements.
 
 
 var containsNearbyDuplicate = function(nums, k) {
