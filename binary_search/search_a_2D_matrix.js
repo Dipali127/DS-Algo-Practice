@@ -25,9 +25,10 @@ var searchMatrix = function(matrix, target) {
 // Optimal Approach: Using binary search
 // approach:-
 // let 'm' be the number of rows and 'n' be the number of columns in the matrix.
-// treat the matrix as a 1D array where the first element of the matrix is at index 0 and the last element 
-// is at index m * n - 1 (total number of elements in the matrix minus 1).
-// initialize two pointers:- low = 0 (starting at the first element) and high = m * n - 1 (ending at the last element).
+// consider the matrix as a 1D array where the first element of the matrix is at index 0 and the last
+// element is at index m * n - 1 (total number of elements in the matrix minus 1).
+// initialize two pointers:- low = 0 (starting at the first element) and high = m * n - 1 (ending at the 
+// last element).
 // Calculate the middle index using:-
 //                  - mid = Math.floor(low + (high - low) / 2) to avoid overflow issues.
 // To convert the mid index from a 1D representation back to the 2D matrix, use the following formulas:-

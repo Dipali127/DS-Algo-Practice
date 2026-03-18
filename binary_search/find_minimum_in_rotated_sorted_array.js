@@ -30,22 +30,32 @@ var findMin = function (nums) {
     return min;
 };
 
-// optimal approach2:-
+// optimal approach 2:
 // approach:
-// i will use of binary search to find the minimum value in the nums array.  
-// i will use two pointers, low and high, where low is initialized with 0 and high is initialized
-// with the last index of the nums array.  
-// i will run a while loop until low is less than high. First, i will find the mid index and then check 
-// if the value atmid is greater than the value at high.  
-// If nums[mid] > nums[high], it means the minimum value lies in the right part of the array (after mid), 
-// because mid is greater than high and the smallest value lies in the rotated part. So, update low = mid + 1.
-// Otherwise, if nums[mid] <= nums[high], it means the right part from mid to high is sorted, 
-// and the minimum value could be at mid or in the left part. So, update high = mid.
-// Once low is greater than or equal to high, the loop ends, and the value pointed by low has the minimum value.  
-// I will return nums[low] because it might be possible that high moves before low, and the element before 
-// low has a greater value Thus, nums[low] is the minimum element.  
-// TC: O(log N), as only half of the array is iterated in each step.  
-// SC: O(1), since no additional space is used.  
+// I will use binary search to find the minimum value in the nums array.
+// I will use two pointers, low and high, where low is initialized to 0 
+// and high is initialized to the last index of the nums array.
+// I will run a while loop until low is less than high.
+// First, I will find the mid index and then check if the value at mid 
+// is greater than the value at high.
+
+// If nums[mid] > nums[high], it means the minimum value lies in the right part 
+// of the array (after mid), because the value at mid is greater than the value 
+// at high, indicating the rotation point is to the right.
+// So, update low = mid + 1.
+
+// Otherwise, if nums[mid] <= nums[high], it means the right part from mid to high 
+// is sorted, and the minimum value could be at mid or in the left part.
+// So, update high = mid.
+
+// Once low is equal to high, the loop ends, and the pointer low will be 
+// pointing to the minimum value.
+
+// I will return nums[low] because it points to the smallest element in the array.
+
+// TC: O(log N), as the search space is halved in each step.
+// SC: O(1), since no additional space is used.
+
 var findMin = function(nums){
   let low = 0, high = nums.length - 1;
   while(low < high){
