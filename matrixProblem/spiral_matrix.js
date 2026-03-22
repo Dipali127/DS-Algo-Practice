@@ -1,32 +1,50 @@
 // Leetcode Problem:- 54
 // Optimal Approach:
-// approach:
-// i will use of four directions variable to print the given matrix in a spiral format:
-// - The first direction is "top", which points to the first row and help to iterate through the row from left to right.
-// - The second direction is "down", which points to the last row and help to iterate through the row from right to left.
-// - The third direction is "left", which points to the first column and help to iterate through the column from down to top.
-// - The fourth direction is "right", which points to the last column and help to iterate through the column from top to down.
-// after then i will take one direction variable which will help to print the matrix in spiral format with the help of
-// top, down, right and left.
-// If the direction is 0, it means that we have to print the row from left to right.
+
+// Approach:
+// I will use four directional variables to print the given matrix in spiral format.
+
+// - The first direction is "top", which points to the first row and helps iterate 
+//   through the row from left to right.
+
+// - The second direction is "right", which points to the last column and helps 
+//   iterate through the column from top to bottom.
+
+// - The third direction is "down", which points to the last row and helps iterate 
+//   through the row from right to left.
+
+// - The fourth direction is "left", which points to the first column and helps 
+//   iterate through the column from bottom to top.
+
+// After that, I will use a direction variable to track the current direction.
+
+// If the direction is 0, we print the row from left to right.
 // Here, the row is fixed, and the column changes (i.e., matrix[top][i]).
-// Once the row from the top is printed, increment the `top` variable by 1. 
-// If the direction is 1, it means that we have to print the column from top to down.
+// After printing, increment the `top` variable by 1.
+
+// If the direction is 1, we print the column from top to bottom.
 // Here, the column is fixed, and the row changes (i.e., matrix[i][right]).
-// Once the column from the right is printed, decrement the `right` variable by 1. 
-// If the direction is 2, it means that we have to print the row from right to left.
+// After printing, decrement the `right` variable by 1.
+
+// If the direction is 2, we print the row from right to left.
 // Here, the row is fixed, and the column changes (i.e., matrix[down][i]).
-// Once the row from the bottom is printed, decrement the `down` variable by 1.
-// If the direction is 3, it means that we have to print the column from down to top.
+// After printing, decrement the `down` variable by 1.
+
+// If the direction is 3, we print the column from bottom to top.
 // Here, the column is fixed, and the row changes (i.e., matrix[i][left]).
-// Once the column from the left is printed, increment the `left` variable by 1. 
-// Repeat this process until top <= down and left <= right. Meanwhile, increment the `direction` by 1.
-// If the direction reaches 4, reset it to 0 again. 
-// Time Complexity: O(m × n), where 'm'is the number of rows and 'n' is the number of columns.
-//                  We traverse the matrix layer by layer in spiral order until all elements are visited.
-//                  Inside the while loop, based on the current direction, we run a for loop over each row or column,
-//                  ensuring each element is visited exactly once.
-// Space Complexity: O(m × n), for storing all elements in the result array.
+// After printing, increment the `left` variable by 1.
+
+// Repeat this process until top <= down and left <= right.
+// After each step, increment the direction.
+// If the direction becomes 4, reset it to 0.
+
+// Time Complexity:
+// O(M × N), where M is the number of rows and N is the number of columns.
+// Even though I used nested loops, each element is visited exactly once.
+
+// Space Complexity:
+// O(M × N) for storing the result array.
+// Auxiliary space (excluding output) is O(1).
 
 
 var spiralOrder = function (matrix) {

@@ -54,7 +54,6 @@ let luckyNumber = []
 // Overall TC: O(N^2) AND SC: O(N+M) where 𝑁 is the number of rows and M is the number of columns.
 
 var luckyNumbers  = function(matrix) {
-     let minArr = [], maxArr = [];
      let minArrmax = -Infinity;
      let maxArrmin = Infinity;
     for(let i=0;i<matrix.length;i++){
