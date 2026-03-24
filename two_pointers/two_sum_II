@@ -1,12 +1,13 @@
 // Leetcode Problem:
 // brute force approach:
 // approach:
-// use a nested loop where the outer loop considers each element and the inner loop sums it with all subsequent elements to check if the sum equals the target.
+// use a nested loop where the outer loop considers each element and the inner loop sums it with all 
+// subsequent elements to check if the sum equals the target.
 // if the sum equals the target, return the 1-based indices of the two elements, as the given array
 // uses 1-based indexing, add 1 to both indices before returning.
 // if no such pair is found after traversing the entire array, return -1.
-// TC: o(N^2), due to the use of nested loops to check each pair of elements.
-// SC: o(1), as there is no additional space used apart from the variables.
+// TC: O(N^2), due to the use of nested loops to check each pair of elements.
+// SC: O(1), since, there is no additional space used apart from the variables.
 
  var twoSum = function(arr,target){
      for(let i = 0;i<arr.length-1;i++){
@@ -21,12 +22,13 @@
 
 // optimal approach: using two pointers
 // approach:
-// take two pointers, `i` and `j`. where `i` points to the start of the array and `j` points to the end of the array.
+// take two pointers, `i` and `j`. where `i` points to the start of the array and `j` points to the end of
+// the array.
 // use a while loop to traverse the array while `i` is less than `j`.
 // inside the loop, check if the sum of the elements at the `i` and `j` pointers equals the target.
 // if the sum equals the target, return the 1-based indices of these two elements.
-// if the sum is less than the target, increment the `i` pointer to increase the sum (since the array is assumed to be sorted).
-// if the sum is greater than the target, decrement the `j` pointer to decrease the sum.
+// if the sum is less than the target, increment the `i` pointer to make the sum equals target.
+// if the sum is greater than the target, decrement the `j` pointer to make the sum equals target.
 // if no valid pair is found after the loop, return -1.
 // TC: o(N), where N is the length of the array.  as the array is traversed in a single pass..
 // SC: o(1), as there is no additional space used apart from the pointers.

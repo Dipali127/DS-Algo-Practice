@@ -1,13 +1,19 @@
 // Leetcode Problem:- 27
 // Brute force approach:-
 // approach:-
-// iterate through the given array nums and check if the current iterated value is equal to the given val. if it is, 
-// remove that value by using the splice method. 
-// after removing an element, decrement the loop index i by 1 to ensure the next element is not skipped, 
+// iterate through the given array nums and check if the current iterated value is equal to the given val. If it is,
+// remove that value by using the splice method.
+// after removing an element, decrement the loop index i by 1 to ensure the next element is not skipped,
 // as the array length decreases and the elements shift left.
-// TC: O(N^2), because the splice method is used inside the loop to remove elements, and each splice operation 
-// modifies the array.
+// TC: O(N^2), because the splice method is used inside the loop to remove elements, and each splice
+// operation modifies the array.
 // SC: O(1), as no additional space is used.
+// NOTE:- Why decrementing pointer 'i' after removing element from array 'nums'?
+//     => because after removing an element using the splice method, all elements to the right of the 
+// removed element will shift toward the left, and the pointer i will increase due to i++, which may 
+// cause it to skip an element.
+// So, to correctly traverse through each element, pointer i is decremented inside the if block of the 
+// for loop. 
 
 var removeElement = function (nums, val) {
     for(let i=0;i<nums.length;i++){
@@ -30,7 +36,8 @@ var removeElement = function (nums, val) {
 // after the loop finishes, 'j' will represent the new length of the modified array, which includes only the elements
 // that are not equal to 'val'.
 // return 'j', which contains the length of the array 'nums' after removing all occurrences of 'val'.
-// TC:- O(N), where 'N' is the number of elements in the given array 'nums', since we iterate through the array once.
+// TC:- O(N), where 'N' is the number of elements in the given array 'nums', since we iterate through the
+// array once.
 // SC:- O(1), as there is no additional space used apart from the pointer 'j'.
 
 var removeElement = function (nums, val) {
