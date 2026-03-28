@@ -64,8 +64,8 @@
     let even = head.next;
     let evenNodeHead = even;
 
-// ensure that even should not be null as well even's next should not be null because If `even` hasn't reached the end 
-// of the list, then `odd` also cannot be null, i because odd is at front of even.
+// ensure that even should not be null as well even's next should not be null because If `even` hasn't reached the 
+// end of the list, then `odd` also cannot be null, i because odd is at front of even.
 
     while(even !== null && even.next !== null){
         odd.next = odd.next.next;
@@ -75,7 +75,10 @@
         even = even.next;
     }
 
-// Join the last odd node to the head of the even nodes
-    odd.next = evenNodeHead;
-    return head;
+// Since we are rearranging the existing nodes by updating their next pointers
+// and not creating a new linked list, the head of the list remains unchanged.
+// Therefore, we return head.
+odd.next = evenNodeHead;
+return head;
+
  }

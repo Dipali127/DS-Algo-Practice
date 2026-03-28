@@ -43,6 +43,12 @@ var detectCycle = function (head) {
 // overall, TC:- O(N/2) + O(N/2) = O(2(N/2)) = O(N).
 // SC:- O(1) as there are only few pointers used.
 
+// KEEP NOTE:-
+// Although it looks like a nested loop, the second loop doesn’t iterate for each step of the first loop. 
+// The first phase moves slow/fast to detect the cycle — at most N steps. Once the cycle is detected, the
+// second phase starts, moving pointers one step at a time until they meet at the start — again at most N 
+// steps. Therefore, total operations ≈ N + N = O(N). 
+
 var detectCycle = function (head) {
     if(head === null || head.next === null){
         return null;

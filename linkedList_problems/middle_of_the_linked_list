@@ -1,7 +1,7 @@
 // Leetcode Problem:
 // brute force appraoch:- 
 // store all the nodes of linked list inside array 
-// calculate the middle index of the array  and rounding down (Math.floor) then returns the node at that index..
+// calculate the middle index of the array  and rounding down (Math.floor) then returns the node at that index.
 // TC: O(N), as each node is visited once and SC: O(N) to store all the nodes of linked list inside array.
 
  var middleNode = function(head){
@@ -22,8 +22,16 @@
 // There are two different case for getting middle node of the linked list:-
 // For an even-length linked list, when fast reaches null (end of the linked list), slow will be at the middle node of the linked list.
 // For an odd-length linked list, when fast reaches the last node of the linked list, slow will be at the middle node of linked list.
-// TC: O(N),  both pointers slow and fast traverse the list in a single pass, the time complexity is O(N).
+// TC: O(N), both pointers (slow and fast) traverse the list in a single pass.
+// Even though the loop runs about N/2 times, constant factors are ignored, so the time complexity is O(N).
 // SC: O(1) as we uses a constant amount of extra space for the two pointers (fast and slow).
+
+// Note:
+// If constraint is [1, n] → ✅ no need for null check
+// If constraint is [0, n] → ✅ MUST handle null safely like:- 
+// if (fast === null || fast.next === null) {
+//     return null;
+// }
 
 var middleNode = function(head){
     let slow = head;

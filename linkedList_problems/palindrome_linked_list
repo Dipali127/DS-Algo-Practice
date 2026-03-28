@@ -48,10 +48,11 @@
 // 4. reverse the second half of the list again to restore the original order of the linked list.
 // TC: O(N)
 // Explanation:
-// - O(N/2) to find the middle of the linked list.
-// - O(N/2) to reverse the second half of the linked list.
-// - O(N/2) to compare both the first and second halves of the linked list to check for palindrome.
-// - overall, TC: O(N/2) + O(N/2) + O(N/2) = O(3(N/2)) = O(N).
+// - O(N/2) to find the middle of the linked list using slow and fast pointers
+// - O(N/2) to reverse the second half of the linked list
+// - O(N/2) to compare the first and reversed second half for palindrome
+// Overall: O(N/2 + N/2 + N/2) = O(3N/2) → O(N)
+// SC: O(1), only a few pointers are used, taking constant space
 // SC: O(1), as only a few pointers are used, which take constant space.
   
 

@@ -1,33 +1,32 @@
-// Leetcode Problem:- 16
+// Leetcode Problem: 16
 // Brute force approach:
-// approach:-
-// use three nested loops to iterate through each possible combination of three numbers in the array.
-// - the outer loop fixes the first number of the triplet.
-// - the middle loop picks the second number after the first.
-// - and the inner loop picks the third number after the second.
-// for each triplet, calculate the sum and check if its absolute difference from the target
+// Approach:
+// Use three nested loops to iterate through each possible combination of three numbers in the array.
+// - The outer loop fixes the first number of the triplet.
+// - The middle loop picks the second number after the first.
+// - The inner loop picks the third number after the second.
+// For each triplet, calculate the sum and check if its absolute difference from the target
 // is smaller than the absolute difference of the current closest sum from the target.
 // If it is, update `closestSum` to this new sum.
 // After all combinations have been checked, return the closest sum found.
-// Note:- 
+// Note: 
 // Math.abs(target - sum): This calculates the absolute difference between the current triplet sum and 
 // the target. It tells us how far the sum is from the target.
 // Math.abs(target - closestSum): This calculates the absolute difference between the closest sum found 
 // so far and the target. It tells us how far this closest sum is from the target.
 // if (Math.abs(target - sum) < Math.abs(target - closestSum)) {
 //                   closestSum = sum;
-//               }  -> This check if the absolute difference of the current sum (sum) from the target is 
-// less than the absolute difference of the current closest sum (closestSum) from the target.
-// if it is, it means that the current sum is closer to the target than the previously stored closest sum.
-// TC:- O(N^3), due to the three nested loops.
-// SC:- O(1), since only a constant amount of additional space is used.
-// Note:- 
+//               }  -> This checks if the absolute difference of the current sum (`sum`) from the target is 
+// less than the absolute difference of the current closest sum (`closestSum`) from the target.
+// If it is, it means that the current sum is closer to the target than the previously stored closest sum.
+// Time Complexity: O(N^3), due to the three nested loops.
+// Space Complexity: O(1), since only a constant amount of additional space is used.
+// Note: 
 // (1) Why use Math.abs(target - sum) < Math.abs(target - closestSum)?
-// We use this formula to compare distances from the target and keep the sum that has the
-// minimum absolute difference.
-// (2) Why we use minimum difference as closest sum?
-// We use minimum difference because the closest sum is the one whose absolute difference from the 
-// target is smallest
+// I use this formula to compare distances from the target and keep the current sum if the minimum absolute
+// difference between the target and the current sum is less than the minimum absolute difference between the target and 
+// the already stored sum in `closestSum`.
+// I am taking the sum with the minimum difference because it gives the closest sum to the target.
 
 var threeSumClosest = function (nums, target) {
     let closestSum = Infinity;

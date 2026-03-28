@@ -1,6 +1,6 @@
 // Brute Force Approach:
 // 1. Since we cannot directly traverse from the end, calculate the length of the linked list.
-// 2. If length == n, that means we need to delete the head node, so return head.next.
+// 2. If length == n, that means we need to delete the head node from the end, so return head.next.
 // 3. Otherwise, calculate the position of the node just before the node to be deleted: (length - n).
 // 4. Traverse to that node and update its next pointer to skip the nth node from the end.
 //
@@ -37,10 +37,10 @@ var removeNthFromEnd = function(head, n) {
 
 
 // Optimal Approach (Two Pointers - Slow & Fast):
-// 1. Initialize two pointers (slow and fast) at head.
-// 2. Move the fast pointer n steps ahead to create a gap of n nodes between slow and fast.
-//    This ensures that when fast reaches the end of the list, slow will be positioned
-//    just before the node that needs to be deleted.
+// 1. Initialize two pointers (slow and fast) both points to head.
+// Instead of calculating the length of the linked list, we maintain a gap of n nodes between the fast and slow 
+// pointers so that when the fast pointer reaches the end, the slow pointer is at the node just before the one to
+// be deleted.
 //    We use this approach because the length of the linked list is unknown.
 // 3. If fast becomes null, then head is to be deleted → return head.next.
 // 4. Otherwise, move both slow and fast one step at a time until fast reaches the end.

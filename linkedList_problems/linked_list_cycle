@@ -1,12 +1,13 @@
 // Leetcode Problem:
 // brute force approach:-
-// i will use of a set to store the address (the whole object) of a node in hash set.
+// i will use of a hah set to store the address (the whole object) of a node in hash set.
 // then i will traverse through the linked list until found that node of a linked list which is already 
-// in set.
-// once i found a case where the current iterated node is already exist in the set then return true
+// in hash set.
+// once i found a case where the current iterated node is already exist in the hash set then return true
 // immediately otherwise return false.
 // TC: O(N) to iterated through the linked list.
-// SC: O(N) to store all the values of linked list in set.
+// SC: O(N) to store values of linked list in hash set and in worst case it might possible hash set store
+// all nodes of linked list.
 
  var hasCycle = function(head){
     let temp = head;
@@ -25,12 +26,13 @@
  }
 
 // optimal appraoch:- use of floyd's cylce finding algortihm also known as the Tortoise and Hare algorithm
-// which uses two pointers slow and fast where slow pointer move one step at a time and fast pointer move twice as fast 
-// as slow.
+// which uses two pointers slow and fast where slow pointer move one step at a time and fast pointer move 
+// twice as fast as slow or one step ahead of slow.
 // i will run a while loop until the fast pointer is not equal to null or fast.next is not equal to null
-// inside the loop, first i will move slow pointer to its next and fast pointer move to twice as fast as slow,
-// meanwhile i will check if both slow and fast pointer point to same node, if it is then i will return true immediately 
-// otherwise after processing through each node if i haven't found any cycle then i will return false. 
+// inside the loop, first i will move slow pointer to its next and fast pointer move to twice as fast as 
+// slow, meanwhile i will check if both slow and fast pointer point to same node, if it is then i will 
+// return true immediately otherwise after processing through each node if i haven't found any cycle then 
+// i will return false. 
 // TC: O(N) to traverse all the nodes in the list to detect a cycle.
 // SC: O(1) as we uses a constant amount of extra space for the two pointers (fast and slow).
 
