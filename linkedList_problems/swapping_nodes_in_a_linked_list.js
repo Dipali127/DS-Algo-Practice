@@ -36,7 +36,8 @@ var swapNodes = function (head, k) {
 
 // Optimal Approach1:
 // Approach:-
-// calculate the length of the linked list. This will help in finding the kth node from both the start and the end of the list.
+// calculate the length of the linked list. This will help in finding the kth node from both the start and the end 
+// of the list.
 // traverse the list to find the kth node from the start and store the address of this node in 'node1'.
 // traverse the list again to find the kth node from the end and store the address of this node in 'node2'.
 // swap the values of 'node1' and 'node2'.
@@ -86,12 +87,14 @@ var swapNodes = function (head, k) {
 // Optimal Approach: Using Single Traversal
 // Approach:-
 // initialize the pointer 'temp', which will traverse through the linked list, and two pointers 'p1' and 'p2'.
-// 'p1' will point to the k-th node from the start, and 'p2' will point to the k-th node from the end after traversal is complete.
+// 'p1' will point to the k-th node from the start, and 'p2' will point to the k-th node from the end after 
+//  traversal is complete.
 // iterate through the linked list using a 'while' loop.
-// during the first k iterations, the algorithm finds the k-th node from the start (p1).
-// once 'p1' is assigned, 'p2' is initialized to 'head' to begin locating the k-th node from the end.
-// as the loop continues, 'p2' moves forward with 'temp' until 'temp' reaches the end of the list.
-// at this point, 'p1' points to the k-th node from the start, and 'p2' points to the k-th node from the end.
+// inside while loop, i will first find out kth node from the beginning of linked list by decrementing k by 1;
+// once i will get kth node from the start, i will initialize p1 to temp which is kth node from start and also
+// initialize p2 to head.
+// Now, p1 will not move since, it is already at its correct position and p2 will move to find the kth node from
+// end.
 // finally, the values of 'p1' and 'p2' are swapped.
 // TC:- O(N), where 'N' is the number of nodes in the list, since each node is traversed once.
 // SC:- O(1), as no additional space is used other than a few pointers.

@@ -46,8 +46,15 @@ var sortList = function(head) {
 // here, slow points to the last node of the first list.
 // So, slow.next (i.e., mid.next) is the first node of the right half.
 // Note:- We reuse the same variable names left and right inside each recursive function call — but they point to
-// different sublists at each level.
+// different sublists at each level and left and right are reference that means they point to address of new left
+// sublist and new right sublist.
 // Once the merge is done, the sorted sublist is returned to the previous level's left or right.
+
+// NOTE:-
+// We say log N because each time we split the list, the size reduces half:
+// Level 0: N nodes
+// Level 1: N/2 + N/2
+// Level 2: N/4 + N/4 + N/4 + N/4 … until each sublist has 1 node
 
 var sortList = function (head) {
 
