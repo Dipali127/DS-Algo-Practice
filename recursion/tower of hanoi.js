@@ -1,23 +1,52 @@
-// Explanation:
-// first, I will move the top (N-1) disks from the source rod to the helper rod, using the destination rod as an auxiliary.
-// next, I will move the Nth (largest) disk directly from the source rod to the destination rod.
-// finally, I will move the N-1 disks from the helper rod to the destination rod, using the source rod as an auxiliary.
-// TC:- O(2^N) because, for each value of N, the function is recursively called twice, leading to an exponential growth in the number of calls.
-// SC:- O(N), which accounts for the maximum depth of the recursion stack used to store function calls during execution.
-// The minimum number of moves required to solve the Tower of Hanoi problem with N disks is given by the formula:
-// Moves = 2^𝑁-1
+// GFG Problem:
+// Problem:- In the Tower of Hanoi problem, we need to count the number of moves required to transfer all disks
+// from source to destination. 
+// Rules to move disk from source to destination:-
+//                            We can move only one disk at a time.
+//                            We cannot place a larger disk on top of a smaller disk.
+// Approach:
+// First, i will recursively move n−1 disks from source to helper using destination.
+// Then, we move the largest disk from source to destination that is count incremented.
+// Finally, again recursively move the n−1 disks from helper to destination using source.
+// Even though, i dont know how to move n−1 disks directly, but i trust the recursive function to do it correctly.
+// I know the solution for one disk that when n is equal to 1, i will simply move that one disk from source to destination.
+// 
+// For counting the number of moves:
+// Count increments at the base case for each smallest disk move and once per recursive level for moving the largest disk.
+// Time Complexity = O(2ⁿ), because each function makes two recursive calls, and the total number of calls across all 
+// levels forms a geometric series: 1 + 2 + 4 + 8 + ... + 2ⁿ⁻¹ = 2ⁿ − 1 ≈ O(2ⁿ)
 
-function towerOFhanoi(n, source, helper, destination) {
-    if (n === 1) {
-      console.log(`Move disk 1 from ${source} to ${destination}`);
-      return;
+// Example of recursive calls at each level:
+// Level 0 → 2⁰ = 1 call
+// Level 1 → 2¹ = 2 calls
+// Level 2 → 2² = 4 calls
+// ...
+// Level n−1 → 2ⁿ⁻¹ calls
+// S = 2⁰ + 2¹ + 2² + ... + 2ⁿ⁻¹
+// This is a geometric series: S = 2ⁿ − 1
+// The total is 2ⁿ − 1, and in Big-O we ignore the constant term (−1), so it becomes O(2ⁿ).
+
+// Space Complexity = O(n),because at any time the recursion stack stores only one path (either left or right recursive
+// calls), and the maximum depth of recursion is n.
+
+class Solution {
+    towerOfHanoi(n, source, helper, destination) {
+        let count = 0;
+        toh(n, source, helper, destination)
+        function toh(n, source, helper, destination){
+            if(n === 1){
+                count++;
+                return;
+            }
+            
+            toh(n-1, source, destination, helper)
+            count++;
+            toh(n-1, helper, destination, source)
+            
+        }
+        
+        return count;
+        
     }
-    
-    towerOFhanoi(n - 1, source, destination, helper);
-    console.log(`Move disk ${n} from ${source} to ${destination}`);
-    towerOFhanoi(n - 1, helper, source, destination);
-  }
-  
-  let n = 3;
-  towerOFhanoi(n, "A", "B", "C");
+}
   

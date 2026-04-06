@@ -1,11 +1,13 @@
 // In every pass, Bubble Sort compares the adjacent elements and swaps their positions if they are not in 
-// the intended order (either increasing or decreasing), and moves the sorted values to the right of the array.
+// the intended order (either increasing or decreasing), and moves the sorted values to the right of the 
+// array.
 // if (!swapFlag means value of swapFlag is false), that means no swapping happened inside the inner loop,
-// so it breaks the outer loop early if no swaps occur in one complete pass, confirming the array is already sorted.
+// so it breaks the outer loop early if no swaps occur in one complete pass, confirming the array is 
+// already sorted.
 // TC: O(N^2) because of the nested loop, where the inner loop traverses for each element of the outer loop.
 // If the array is already sorted in ascending or descending order, then 
-// Best Case TC: O(N), because only the outer loop will run, no swapping will be performed, and the inner loop 
-// traverses only once for the first outer loop iteration, not for each element of the outer loop.
+// Best Case TC: O(N), because only the outer loop will run, no swapping will be performed, and the inner
+// loop traverses only once for the first outer loop iteration, not for each element of the outer loop.
 // SC:- O(1), since no additional space is used.
 // Bubble Sort is a stable sort as it maintains the relative order of array elements after sorting.
 // Note: Why does the outer loop run only up to arr.length - 1 (i.e., n - 1)?

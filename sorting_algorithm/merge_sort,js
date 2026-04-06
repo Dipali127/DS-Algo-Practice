@@ -2,69 +2,62 @@
 // size of the array becomes one.
 // once the size of the array becomes one, merge function merge the array until the array will be completely merge.
 //
-// Time Complexity: O(N logN)
-// - The mergeSort function recursively divides the array into two halves, which takes O(logN).
-// - At each level of mergeSort(), the merge() function is called to merge all elements, 
-//   which takes O(N) time.
-// - Therefore, the overall time complexity in the worst, best, and average cases is O(N logN).
+// Time Complexity: O(NlogN)
+// Explanation:
+// - logn:- used by mergeSort function to recursively divides the array into subarrays until size of
+// array will become 1. That's mean recursive levels can go deep until size of array becomes 1, So
+// total levels for division of array into subarray until it reach to 1 is logN.
+//
+// And if at each level of mergeSort(), the merge() function is called to merge all elements of current 
+// level (i.e; left and right subarray) into single sorted array, which takes O(N) time complexity.
+// So, for logN levels, Time Complexity will be O(NLOGN).
 //
 // Space Complexity: O(N)
-// - O(logN) space is required for the recursive function call stack.
+// - O(logN) space is used by stack to store recursive function.
 // - O(N) extra space is required to store the left and right subarrays during merging.
-// - O(N) temporary space is also used for storing the merged output.
-// - Overall space complexity = O(N) (since O(logN) is negligible compared to O(N)).
+// - Overall space complexity = O(logN) + O(N) = O(N). 
 
 
-let arr=[4,3,9,7,6,8];
-let low = 0, high = arr.length-1;
-console.log(mergeSort(arr, low, high));
+let arr = [6,5,4,3,2];
+console.log(mergeSort(arr, 0, arr.length - 1));
 function mergeSort(arr, low, high){
     if(low < high){
-        let mid = Math.floor(low + (high - low)/2);
+        let mid = Math.floor(low + (high-low)/2);
         mergeSort(arr, low, mid);
         mergeSort(arr, mid+1, high);
-        merge(arr, low, mid, high);
+        merge(arr,low, mid, high);
     }
     
     return arr;
 }
 
-function merge(arr, low, mid, high){
-    let l1 = mid - low + 1;
-    let l2 = high - mid;
+function merge(arr, low,mid, high){
+    let arr1 = new Array(mid-low+1);
+    let arr2 = new Array(high-mid);
     
-    let arr1 = new Array(l1);
-    let arr2 = new Array(l2);
-    
-    for(let i = 0; i  < l1; i++){
-        arr1[i] = arr[i+low];
+    for(let i = 0; i < arr1.length; i++){
+        arr1[i] = arr[low +i]
     }
     
-    for(let i = 0; i  < l2; i++){
-        arr2[i] = arr[mid + i + 1];
+    for(let i = 0; i < arr2.length; i++){
+        arr2[i] = arr[mid+1+i]
     }
     
-    let i = 0, j = 0, k = 0;
-    let temp =  new Array();
-    while(i < l1 && j < l2){
-        if(arr1[i] <= arr2[j]){
-            temp[k++] = arr1[i++];
+    let i = 0, j = 0;
+    while(i < arr1.length && j < arr2.length){
+        if(arr1[i] < arr2[j]){
+            arr[low++] = arr1[i++];
         }else{
-            temp[k++] = arr2[j++]
+            arr[low++] = arr2[j++];
         }
     }
     
-    while(i < l1){
-        temp[k++] = arr1[i++]; 
+    while(i < arr1.length){
+        arr[low++] = arr1[i++];
     }
     
-    while(j < l2){
-        temp[k++] = arr2[j++];
-    }
-    
-    let x = low;
-    for(let i = 0; i < temp.length; i++){
-        arr[low++] = temp[i];
+    while(j < arr2.length){
+        arr[low++] = arr2[j++];
     }
     
     return arr;

@@ -1,11 +1,13 @@
-// In every pass, Selection Sort selects the smallest or largest element from the unsorted array and places that 
-// element at the beginning of the array to achieve the intended order (either increasing or decreasing).
+// In every pass, Selection Sort selects the smallest or largest element from the unsorted array and 
+// places that element at the beginning of the array to achieve the intended order (either increasing or decreasing).
 
 // TC: O(N^2) in the average, best, and worst cases, regardless of the array's initial order.
 // Why is the time complexity O(N^2) even in the best case and not O(N)?
-// Because for each element in the outer loop (or for every pass), the inner loop compares it with every other value.
+// Because for each element of the array (or for every pass), the inner loop compares it with every 
+// other value to find minimum even the array is sorted.
 // So for n elements, there will be approximately n comparisons per pass.
 // In general, if there are n elements, around n^2 comparisons would be performed.
+// In selection sort swapping will be n if there are n elements in the array.
 // Hence, TC = O(N^2).
 // SC: O(1), since no additional space is used.
 
