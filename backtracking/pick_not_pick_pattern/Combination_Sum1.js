@@ -95,21 +95,22 @@
 // After exploring all values of the nums array, return result which contains all possible combinations where sum equals 
 // target.
 
-// Time Complexity: ~ O(2^target)), since at each step there are two recursive calls (pick / not pick),
-// and the recursion can go as deep as the target value (in worst case when we keep picking same elements).
+// Time Complexity: ~ O(2^target), since at each step there are two recursive calls (pick / not pick),
+// and the recursion can go as deep as the target value (in the worst case when we keep picking the same element).
 
 // Explanation:
 // Level 0 -> 2^0 = 1 call
 // Level 1 -> 2^1 = 2 calls
 // Level 2 -> 2^2 = 4 calls
 // ...
-// Level t -> 2^t calls   (where t = target in worst case)
+// Level t -> 2^t calls   (where t = target in the worst case)
 
 // Total calls = 2^0 + 2^1 + 2^2 + ... + 2^t = 2^(t+1) - 1 ≈ O(2^target)
 
-// Space Complexity: O(target), since at any time the recursion stack can go as deep as target and stack store recursive
-// calls until target becomes 0 or negative.
-// (in worst case when we keep picking the same element multiple times).
+
+// Space Complexity: O(target), since at any time the recursion stack can go as deep as target,
+// and it stores recursive calls until the target becomes 0 or negative
+// (in the worst case when we keep picking the same element multiple times).
 
 // Why result.push([...path])?
 // Because arrays in JavaScript are passed by reference. When we add path directly to result, it stores the reference.
