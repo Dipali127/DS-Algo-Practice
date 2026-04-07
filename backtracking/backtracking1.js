@@ -61,7 +61,6 @@ function backtrack(start, path) {
 // “print all paths”
 
 // Examples:
-
 // Subsets
 // Combination Sum
 // Permutations

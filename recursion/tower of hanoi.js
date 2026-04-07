@@ -5,9 +5,13 @@
 //                            We can move only one disk at a time.
 //                            We cannot place a larger disk on top of a smaller disk.
 // Approach:
-// First, i will recursively move n−1 disks from source to helper using destination.
-// Then, we move the largest disk from source to destination that is count incremented.
-// Finally, again recursively move the n−1 disks from helper to destination using source.
+
+// To solve this problem, I’ll use recursion because the problem has a natural recursive structure.
+// To move n disks from source to destination:
+// First, I move n-1 disks from source to auxiliary using destination as helper.
+// Then, I move the nth (largest) disk from source to destination.
+// Finally, I move the n-1 disks from auxiliary to destination using source as helper.
+// This breaks the problem into smaller subproblems, which makes recursion a good fit.
 // Even though, i dont know how to move n−1 disks directly, but i trust the recursive function to do it correctly.
 // I know the solution for one disk that when n is equal to 1, i will simply move that one disk from source to destination.
 // 
@@ -26,7 +30,7 @@
 // This is a geometric series: S = 2ⁿ − 1
 // The total is 2ⁿ − 1, and in Big-O we ignore the constant term (−1), so it becomes O(2ⁿ).
 
-// Space Complexity = O(n),because at any time the recursion stack stores only one path (either left or right recursive
+// Space Complexity = O(n), because at any time the recursion stack stores only one path (either left or right recursive
 // calls), and the maximum depth of recursion is n.
 
 class Solution {

@@ -11,7 +11,7 @@
 // [2,3]
 // [1,2,3]
 
-// This Problem comes under pick/not pick because for every element, you have two choices: either take it or skip it.
+// This Problem comes under pick/not pick pattern because for every element, you have two choices: either take it or skip it.
 // Example: [1,2]
 //            []
 //          /    \
@@ -63,8 +63,9 @@
 // Hint:- always use tree diagram which will help to find base case, space complexity and what options we have?
 // Solution:-
 // Approach:-
-// Create a function called dfs by passing parameters: index, which will traverse through each value of the array,
-// and path array, which is initially empty and will store elements while exploring one path completely.
+// Since, this problem is about generating all subsets, so it follows a pick/not-pick pattern.
+// For each element, we either include it or exclude it, forming a decision tree.
+// So I’ll use recursion with backtracking to explore all possible combinations and generate all subsets.
 
 // Inside function dfs:-
 // Base Case:- If index equals the length of the given array nums, it means we have explored one path completely,
@@ -99,6 +100,9 @@
 // How recursion works:
 // After the base case returns, control goes back to the previous function, which continues executing its remaining code.
 // Once all statements are executed, the function automatically returns to its parent.
+
+// Nested loops only generate contiguous subarrays, whereas subsets require independent pick/not-pick decisions for each 
+// element. So, we use recursion with backtracking to explore all possible combinations
 
 var subsets = function(nums) {
     let result = [];
