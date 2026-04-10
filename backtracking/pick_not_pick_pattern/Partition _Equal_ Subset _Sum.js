@@ -38,9 +38,11 @@
 // Level 2 -> 2^2 = 4 calls
 // ...
 // Level n -> 2^n calls
-// Total calls = 2^0 + 2^1 + 2^2 + ... + 2^n = 2^(n+1) - 1 ≈ O(2^n)
+// Total calls = 2^0 + 2^1 + 2^2 + ... + 2^n = 2^(n+1) - 1 ≈ O(2^n).
 
-// Space Complexity: O(n), since at any time the recursion stack stores at most n calls (depth of recursion).
+// Space Complexity: O(n), since at any time the recursion stack stores at most n recursive calls.
+// The number of recursive calls in the stack depends on the depth of recursion,
+// and the depth of recursion is equal to n because there are n levels in this problem.
 
 // Why return in pick and not-pick recursive calls?
 // Because if we don’t return immediately at any recursive level, 
@@ -80,7 +82,7 @@ var canPartition = function(nums) {
 
 // Approach:
 // I will first solve the problem using recursion with the pick/not-pick pattern.
-// Then, I will optimize it using memoization to avoid recomputing the same states.
+// Then, I will optimize it using memoization to avoid recomputing the same recursive calls.
 
 // For memoization:
 // I will use a 2D DP array where dp[index][currentSum] stores whether it is possible 
@@ -117,10 +119,28 @@ var canPartition = function(nums) {
 // Return dp[index][currentSum].
 
 // Time Complexity (DP):
-// O(n * partitionSum), since each state (index, currentSum) is computed only once.
+// O(n * partitionSum), since each recursive call/recursive state is computed only once and at each recursive call we
+// computed sum. So, for n calls partitionSum = n*partitionSum.
+
+// Time Complexity (DP):
+// O(n * partitionSum), since there are at most n * partitionSum unique states defined by (index, currentSum), and 
+// each state is computed only once due to memoization.
+
+// Example:
+// A state like (0, 1) means index = 0 (row) and currentSum = 1 (column).
+// From this state, we have two choices:
+// take → (1, 1 + nums[0])
+// skip → (1, 1)
+// For example:
+// (1, 1) → (2, 6) or (2, 1)
+// (1, 0) → (2, 5) or (2, 0)
+// Because of DP, if a state is already computed, we do not recompute it again.
+
+// DP Time Complexity is number of unique states * work onn each state
+// In this problem work is constant at each recursive state/recursive call. So, overall TC:- O(N*partitionSum). 
 
 // Space Complexity:
-// O(n * partitionSum) for DP array + O(n) recursion stack.
+// O(n) for DP array + O(n) recursion stack = O(N).
 
 // Why DP works:
 // DP avoids recomputing the same (index, currentSum) states multiple times,
@@ -131,12 +151,30 @@ var canPartition = function(nums) {
 // index → 0 to 2 and currentSum → 0 to 3
 // So dp array will have 3 rows and 4 columns.
 
+// What is happening at each recursive call?
+// At each recursive call:
+// First, both calls are evaluated:
+// pick = dfs(...)
+// notPick = dfs(...)
+// Then the result is computed:
+// true || false → true
+// or false || false → false.
+
+// Why initially store undefined in dp array?
+// We use undefined initially to represent that a state has not been visited or computed.
+// This helps us distinguish between:
+// - uncomputed state (undefined)
+// - computed false result (false)
+// - computed true result (true)
+
+
+// Finally, we store the result in the dp array at dp[index][currentSum].
+
 var canPartition = function (nums) {
     let totalSum = nums.reduce((acc, itrt) => acc + itrt, 0);
     if (totalSum % 2 !== 0) return false;
     let partitionSum = totalSum / 2;
-    let dp = new Array(nums.length).fill(0).map(() => new Array(partitionSum + 1).fill
-        (undefined));
+    let dp = Array.from({ length: nums.length }, () => Array(partitionSum + 1).fill(undefined));
     return dfs(0, 0, dp)
     function dfs(index, currentSum, dp) {
         if (currentSum === partitionSum) return true;

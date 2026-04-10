@@ -29,8 +29,7 @@ function fun(n) {
 // Space Complexity of Recursive Functions:
 // Space complexity is mostly about recursive function stored on stack (how deep the recursive function goes on stack), 
 // plus any extra memory used inside the function.
-// Recursion stack: Each recursive function call is stored on the call stack until it returns 
-// or it reach to base case.
+// Recursion stack: Each recursive function call is stored on the call stack until it returns or it reach to base case.
 // Extra memory/Auxiliary space: Any arrays or objects created inside the recursion/recursive function.
 
 // Example: Factorial of a Number

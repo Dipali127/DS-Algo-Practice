@@ -81,6 +81,8 @@
 
 // Time Complexity: O(2^n), since at each level there are two recursive calls and the recursion goes n levels deep.
 // Total number of subsets = 2^n.
+// Levels are defined by how many recursive calls are made until the base case is reached.
+// In this problem, the index increases by 1 at each recursive call, so the recursion depth (levels) is n.
 
 // Explanation:-
 // Level 0 -> 2^0 = 1 call
@@ -90,7 +92,9 @@
 // Level n -> 2^n calls
 // Total calls = 2^0 + 2^1 + 2^2 + ... + 2^n = 2^(n+1) - 1 ≈ O(2^n)
 
-// Space Complexity:- O(n), since at any time the recursion stack stores at most n calls (depth of recursion).
+// Space Complexity: O(n), since at any time the recursion stack stores at most n recursive calls.
+// The number of recursive calls in the stack depends on the depth of recursion,
+// and the depth of recursion is equal to n because there are n levels in this problem.
 
 // Why result.push([...path])?
 // Because arrays in JavaScript are passed by reference. When we add path directly to result, it stores the reference.
@@ -100,6 +104,21 @@
 // How recursion works:
 // After the base case returns, control goes back to the previous function, which continues executing its remaining code.
 // Once all statements are executed, the function automatically returns to its parent.
+
+// In each recursive call, a new execution context (lexical environment) is created.
+
+// Memory Creation Phase:
+// - A new variable 'index' is created in stack memory for this function call.
+// - A new variable 'path' is also created in stack memory.
+
+// Execution Phase:
+// - 'index' gets the value passed (like index + 1).
+// - 'path' gets a reference to the same array object stored in heap memory.
+
+// Important:
+// - 'index' is a primitive, so each call has its own independent copy.
+// - 'path' is a reference type, so all recursive calls share the same underlying array,
+//   but each call has its own reference variable in the stack.
 
 // Nested loops only generate contiguous subarrays, whereas subsets require independent pick/not-pick decisions for each 
 // element. So, we use recursion with backtracking to explore all possible combinations

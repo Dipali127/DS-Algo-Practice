@@ -4,8 +4,8 @@
 // Rules to move disk from source to destination:-
 //                            We can move only one disk at a time.
 //                            We cannot place a larger disk on top of a smaller disk.
-// Approach:
 
+// Approach:
 // To solve this problem, I’ll use recursion because the problem has a natural recursive structure.
 // To move n disks from source to destination:
 // First, I move n-1 disks from source to auxiliary using destination as helper.

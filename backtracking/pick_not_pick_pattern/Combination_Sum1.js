@@ -1,5 +1,5 @@
 // Leetcode Problem:- 39
-// Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of
+// Given an array of distinct integers candidates and a integer target, return a list of all unique combinations of
 // candidates where the chosen numbers sum to target. You may return the combinations in any order.
 // The same number may be chosen from candidates an unlimited number of times.
 
@@ -95,23 +95,19 @@
 // After exploring all values of the nums array, return result which contains all possible combinations where sum equals 
 // target.
 
-// Time Complexity: ~ O(2^target), since at each step there are two recursive calls (pick / not pick),
-// and the recursion can go as deep as the target value (in the worst case when we keep picking the same element).
+// Time Complexity: O(N^(T / M)), where
+// N = number of candidates
+// T = target
+// M = minimum candidate value
+// Explanation: At each recursive call, we have two choices: pick or skip. In the worst case, we may keep picking the same
+// smallest value multiple times, So, the recursion depth depends on how many times we can subtract the minimum value from 
+// the target.
 
-// Explanation:
-// Level 0 -> 2^0 = 1 call
-// Level 1 -> 2^1 = 2 calls
-// Level 2 -> 2^2 = 4 calls
-// ...
-// Level t -> 2^t calls   (where t = target in the worst case)
+// Space Complexity: O(target / M), since at any time the stack stores recursive calls 
+// until the target divided by the minimum value becomes 0 or negative.
 
-// Total calls = 2^0 + 2^1 + 2^2 + ... + 2^t = 2^(t+1) - 1 ≈ O(2^target)
-
-
-// Space Complexity: O(target), since at any time the recursion stack can go as deep as target,
-// and it stores recursive calls until the target becomes 0 or negative
-// (in the worst case when we keep picking the same element multiple times).
-
+// Key Point:-
+// we only add value in path array or remove from target when we are deciding to pick it.
 // Why result.push([...path])?
 // Because arrays in JavaScript are passed by reference. When we add path directly to result, it stores the reference.
 // Since we reuse the same path array across all recursive calls, any change to path will also affect the stored results.
