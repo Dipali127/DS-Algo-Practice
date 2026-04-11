@@ -8,7 +8,9 @@
 
 // Solution:
 // Approach:
-// Since, we don't know the index for first character of word started from which cell in board matrix, i will run nested
+// Since the problem is about finding a valid path in the board that matches the characters of the given word, I will use
+// a recursive backtracking approach.
+// And, we don't know the index for first character of word started from which cell in board matrix, i will run nested
 // for loop and check each cell character equals to first character of word.
 // Once i found valid index in board matrix where the first character of word exist, i will call dfs function with current
 // index cell on board matrix and index of word which is 0 in the first call.
@@ -29,15 +31,16 @@
 // After exploring all possible direction, return found which is true, that mean's we found valid path on board matrix
 // for given word.
 
-// Time Complexity: O(M * 3^L), where M = m*n and L = word length.
-// O(M) comes from the nested loops used to traverse each cell of the board matrix as a starting point.
+// Time Complexity: O(M × 3^L), where M = m × n (total number of cells in the board) and L = length of the word.
+// O(M) comes from the nested loops used to traverse each cell of the board as a starting point.
 // For each cell, we perform DFS to search for the word.
+
 // In DFS:
-// - At the first step, we can explore up to 4 directions.
-// - But after the first step, we cannot go back to the previous cell (since it is already marked as visited),
-//   so at each next step we have at most 3 choices.
-// Therefore, in the worst case, the DFS explores up to 3^L paths for each starting cell.
-// So, overall Time Complexity: O(M * 3^L).
+// At the first step, we can explore up to 4 directions.
+// After the first step, we cannot go back to the previous cell (since it is already marked as visited), so at each step
+// we have at most 3 choices.
+// Therefore, in the worst case, the number of recursive calls is approximately 3^L.
+// So, the overall time complexity is O(M × 3^L).
 
 // Space Complexity: O(M + L), Explanation:
 // O(M) used by the visited 2D array to mark whether a cell is visited or not.

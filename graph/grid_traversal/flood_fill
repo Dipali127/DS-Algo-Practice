@@ -1,0 +1,67 @@
+// Leetcode Problem:- 733
+// You are given:
+// A grid (image), a starting cell (sr, sc), and a new color.
+// Your task: Change the color of the starting cell and all connected cells (same color) to the new color.
+
+// Key Idea
+// Start from (sr, sc).
+// Check its neighbors (up, down, left, right).
+// If a neighbor has the same original color → change it too.
+// Then, check the neighbors of that updated cell. If they also have the same original color,
+// change them as well.
+// Repeat this process until no more adjacent pixels with the same original color are left.
+
+// Approach:
+// Since the problem is about filling the starting pixel and all its adjacent pixels (horizontally or vertically)
+// with a new color, I will use a recursive approach (DFS) to fill all connected pixels having the same original color.
+
+// Inside floodFill function:
+// If the color of the starting pixel is equal to the new color, return the image immediately,
+// since the image is already filled with that color.
+
+// Inside DFS function:
+// Base Case:
+// If sr or sc is out of bounds, or the current pixel does not match the original color,
+// return immediately. This means the adjacent pixel does not have the same color as the starting pixel.
+
+// Recursive Logic:
+// (i) Visit the current cell and change its color.
+// (ii) Explore all four directions to check and update adjacent pixels if they have the same original color
+//      as the starting pixel.
+
+// After changing all the pixel colors in the image, return the updated image.
+
+// Time Complexity: O(M * N), since in the worst case, if all cells have the same color,
+// we make m * n recursive calls and visit each cell at most once.
+
+// Space Complexity: O(M * N), since in the worst case, when all cells have the same color,
+// the recursion stack can store up to m * n calls at a time. That means the depth of the recursion stack is O(M * N).
+
+var floodFill = function(image, sr, sc, color) {
+    let m = image.length, n = image[0].length;
+
+    let originalColor = image[sr][sc];  
+
+    // edge case
+    if (originalColor === color) return image;
+
+    dfs(sr, sc);
+
+    function dfs(sr, sc){
+        // Base Case
+        if (sr < 0 || sc < 0 || sr >= m || sc >= n || image[sr][sc] !== originalColor){
+            return;
+        }
+        
+        // Visit current cell and change the color with new given color
+        image[sr][sc] = color;
+
+        // Explore all four directions 
+        dfs(sr + 1, sc); // Down
+        dfs(sr, sc + 1); // Right
+        dfs(sr, sc - 1); // Left
+        dfs(sr - 1, sc); // Up
+    }
+
+    return image;   
+};

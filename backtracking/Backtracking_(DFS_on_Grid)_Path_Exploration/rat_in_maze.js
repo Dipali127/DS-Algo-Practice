@@ -46,13 +46,14 @@
 
 // After exploring all valid paths, return the result array.
 
-// Time Complexity: ~O(4^(N^2)) because from each cell rat can explore all 4 directions, and in the worst case if all cells
-// are open, rat can move to all the four direction from each cells resulting in O(4^(N^2)) time complexity.
+// Time Complexity: ~O(3^(N²)) because, in the worst case, if all cells are open, the rat can initially move in all four 
+// directions. However, after the first move, the rat can only move in three directions from each cell 
+// (since one direction is already visited), resulting in an approximate time complexity of O(3^(N²)).
 
 // Space Complexity: O(N^2), Explanation:
 // - O(N*N) for visited 2D array.
-// - O(N^2) used by stack to store all the possible path of matrix maze if all cells are open(that is 1) in worst case,
-//   That means, depth of recursion stack is number of cells in matrix maze.
+// - O(N^2) used by stack to store all recursive calls and in the worst case,  all cells are open(that is 1), rat can move
+//   to all the four directions from each cell. That means, depth of recursion stack is number of cells in matrix maze.
 // Overall, Space Complexity: O(N^2) + O(N^2) = O(2(N^2)) = O(N^2).
 
 class Solution {
