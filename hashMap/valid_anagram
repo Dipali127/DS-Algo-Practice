@@ -35,10 +35,10 @@
 //    - If it does not exist or the count is 0, return `false` immediately.
 // finally, after iterating through the hash map to check if all counts are zero. if it is return true.
 // TC:- O(N), Explanation:
-// - O(N) to iterate over string `s` and populate the `Map` with character counts.
+// - O(N) to iterate over string `s` and populate the hash Map with character counts.
 // - O(N) to iterate over string `t` and adjust counts in the `Map`.
 // Overall, TC:- O(N) + O(N) = O(N).
-// SC: O(N), as the Map is used to store all characters of string s.
+// SC: O(N), as the hash Map is used to store all characters of string s.
 
 var isAnagram = function (s, t) {
     if(s.length !== t.length){

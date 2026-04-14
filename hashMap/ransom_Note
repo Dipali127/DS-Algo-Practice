@@ -37,11 +37,11 @@ var canConstruct = function (ransomNote, magazine) {
 // Optimal Approach:
 // Approach:
 // 1. Use a hash map to store the count of each character in the magazine string.
-// 2. Traverse the ransomNote string and check if each character exists in the map.
-// 3. If it exists with a count > 0, decrement the count in the map.
+// 2. Traverse the ransomNote string and check if each character exists in the hash map.
+// 3. If it exists with a count > 0, decrement the count in the hash map.
 // 4. If it does not exist or its count is zero, return false immediately because ransomNote 
 //    cannot be constructed.
-// 5. If all characters of ransomNote are found in the map with valid counts, return true.
+// 5. If all characters of ransomNote are found in the hash map with valid counts, return true.
 //
 // Time Complexity: O(N + M)
 // - O(M) to traverse the magazine string and store character frequencies in the hash map.

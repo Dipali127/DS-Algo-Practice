@@ -28,12 +28,13 @@ var majorityElement = function(nums) {
 // Leetcode Problem:- 169
 // Optimal Approach:-
 // approach:-
-// use a Map to store the frequency of each element in the array `nums`.
-// traverse the array and update the frequency count for each element in the map.
-// after building the frequency map, iterate through its entries to find the element whose count is greater than `nums.length / 2`.
+// use a hash map to store the frequency of each element in the array `nums`.
+// traverse the array and update the frequency count for each element in the hash map.
+// after building the frequency hash map, iterate through its entries to find the element whose count is greater than 
+// `nums.length / 2`.
 // return that element as the majority element.
-// Time Complexity (TC): O(N), to traverse the array once and then iterate over the map entries.
-// Space Complexity (SC): O(N), to store the frequency of each unique element in the map.
+// Time Complexity (TC): O(N), to traverse the array once and then iterate over the hash map entries.
+// Space Complexity (SC): O(N), to store the frequency of each unique element in the hash map.
 
 
 var majorityElement = function(nums){
