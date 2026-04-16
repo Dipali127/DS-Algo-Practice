@@ -21,10 +21,17 @@ function fun(n) {
   fun(n - 1); // recursive case
 }
 
-// Time Complexity of Recursive Functions:
-// The time complexity depends on:
-// 1. How many times the function is called
-// 2. How much work is done at each call
+// Time Complexity of Recursion (General)
+
+// 1. The time complexity depends on:
+//    a) Number of recursive calls
+//    b) Work done at each call
+
+// 2. Based on number of recursive calls per function:
+//    a) If each call makes only ONE recursive call (linear recursion):
+//       - Total calls ≈ depth
+//    b) If each call makes MULTIPLE recursive calls (tree recursion):
+//       - Total calls ≈ (branching factor)^(depth)
 
 // Space Complexity of Recursive Functions:
 // Space complexity is mostly about recursive function stored on stack (how deep the recursive function goes on stack), 

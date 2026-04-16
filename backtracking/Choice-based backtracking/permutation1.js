@@ -92,16 +92,88 @@
 // Time Complexity: O(N · N!).
 // Explanation: 
 // There are N! permutations in total.
-// Each permutation requires O(N) time to construct (including traversal and copying of the path) to generate unique 
-// permutation.
+// Each permutation requires O(N) time to construct (including traversal and copying of the path) unique permutation.
 // Therefore, total time complexity is O(N · N!).
+
+// At each recursive call, we try all unused elements. As recursion goes deeper, the number of unused elements decreases,
+// so branching reduces from N → N-1 → N-2 → … → 1. This forms a factorial recursion tree with N! leaves.
+
+// Permutation (Leetcode 46) - Level Wise Explanation
+// nums = [1,2,3]
+
+// ---------------------------------
+// Level 0
+// ---------------------------------
+// Node:
+// dfs([])
+
+// nodes = 1
+// choices = 3 (1,2,3)
+
+// Creates:
+// dfs([1]), dfs([2]), dfs([3])
+
+// ---------------------------------
+// Level 1
+// ---------------------------------
+// Nodes:
+// dfs([1]), dfs([2]), dfs([3])
+
+// nodes = 3
+
+// choices per node = 2
+
+// Example:
+// dfs([1]) → [1,2], [1,3]
+// dfs([2]) → [2,1], [2,3]
+// dfs([3]) → [3,1], [3,2]
+
+// Total nodes at next level = 3 × 2 = 6
+
+// ---------------------------------
+// Level 2
+// ---------------------------------
+// Nodes:
+// dfs([1,2]), dfs([1,3]), dfs([2,1]),
+// dfs([2,3]), dfs([3,1]), dfs([3,2])
+
+// nodes = 6
+
+// choices per node = 1
+
+// Each node leads to 1 final permutation
+
+// Total nodes at next level = 3 × 2 × 1 = 6
+
+// ---------------------------------
+// Level 3 (Leaf level)
+// ---------------------------------
+// Nodes:
+// dfs([1,2,3]), dfs([1,3,2]), dfs([2,1,3]),
+// dfs([2,3,1]), dfs([3,1,2]), dfs([3,2,1])
+
+// nodes = 3! = 6
+
+// ---------------------------------
+// Final Idea
+// ---------------------------------
+
+// - Level 0: 1 node
+// - Level 1: n nodes
+// - Level 2: n × (n-1)
+// - Level 3: n × (n-1) × (n-2)
+// - Leaf level: n!
+
+// Time Complexity:
+// O(n × n!)
 
 // Space Complexity: O(N)
 // Explanation:
 // -  O(N) used by stack to store N recursive calls at any time because depth of recursion/recursive call depends on
 //    number of elements given in an array. 
-// -  O(N) space is used by hash set stores up to N elements at any point in the recursion.
+// -  O(N) space is used by hash set and path array stores up to N elements at any point in the recursion.
 // -  So, Overall space complexity is O(N + N) = O(2N) = O(N).
+
 var permute = function(nums) {
     let result = [], set = new Set();
     function dfs(path, set){

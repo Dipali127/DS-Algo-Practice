@@ -95,16 +95,25 @@
 // After exploring all values of the nums array, return result which contains all possible combinations where sum equals 
 // target.
 
-// Time Complexity: O(N^(T / M)), where
-// N = number of candidates
+// Time Complexity: O(2^(T / M)), where
+// 2 = branching factor (number of recursive calls at each level).
+//     In this problem, we have two choices at each step: pick or skip.
 // T = target
 // M = minimum candidate value
-// Explanation: At each recursive call, we have two choices: pick or skip. In the worst case, we may keep picking the same
-// smallest value multiple times, So, the recursion depth depends on how many times we can subtract the minimum value from 
-// the target.
 
-// Space Complexity: O(target / M), since at any time the stack stores recursive calls 
-// until the target divided by the minimum value becomes 0 or negative.
+// Explanation:
+// At each recursive call, we have two choices: pick or skip.
+// In the worst case, we keep picking the smallest element multiple times until the target becomes negative. 
+// So, the recursion depth depends on how many times we can subtract the minimum value from the target.
+
+// We do not use "target = 0" to determine the depth of recursion because it is possible to reach target = 0 earlier
+// through a shorter path.
+// Instead, we consider the maximum depth (longest path), which occurs when we repeatedly pick the smallest element.
+
+// Space Complexity: O(T / M)
+// Explanation:
+// At any time, the recursion stack can go as deep as T/M calls, since we keep subtracting the smallest element from the
+// target  until it becomes 0 or negative.
 
 // Key Point:-
 // we only add value in path array or remove from target when we are deciding to pick it.

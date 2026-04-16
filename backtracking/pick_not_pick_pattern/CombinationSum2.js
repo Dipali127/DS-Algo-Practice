@@ -32,9 +32,12 @@
 // target.
 
 // Time Complexity: O(2^n), since at each recursive call we have two choices: either pick or skip.
-// In the worst case, the recursion tree explores all possible combinations of the array, leading to 2^n states.
+// In the worst case, the recursion tree explores all elements of the candidates array, leading to 2^n states.
 //
-// The while loop is used to skip duplicates, and although it may skip multiple elements in a single call,
+// In this problem, the longest path occurs when we explore all elements until the index reaches the length of the array,
+// so depth = n. Since each call has two choices (pick or skip), the total complexity is O(2^n).
+//
+// The while loop is used to skip duplicates. Although it may skip multiple elements in a single call,
 // each element is skipped only a limited number of times across all recursive calls. Therefore, it does not
 // increase the overall time complexity.
 

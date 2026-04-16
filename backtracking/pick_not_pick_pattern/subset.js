@@ -121,7 +121,7 @@
 //   but each call has its own reference variable in the stack.
 
 // Nested loops only generate contiguous subarrays, whereas subsets require independent pick/not-pick decisions for each 
-// element. So, we use recursion with backtracking to explore all possible combinations
+// element. So, we use recursion with backtracking to explore all possible combinations.
 
 var subsets = function(nums) {
     let result = [];

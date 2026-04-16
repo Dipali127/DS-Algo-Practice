@@ -64,3 +64,15 @@ function backtrack(start, path) {
 // Subsets
 // Combination Sum
 // Permutations
+
+// Time Complexity of Backtracking:-
+// Exact number of recursive calls is difficult to compute, So we estimate using recursion tree.
+//  Identify:
+//    a) Branching Factor (B) = number of choices at each step.
+//    b) Depth (D) = maximum length of path (worst case).
+// Total recursive calls (approx): ≈ B^D
+// Final Time Complexity:O(B^D × work per solution)
+
+// Notes:
+// - Backtracking often generates all possible solutions. So, complexity is usually exponential or factorial.
+// - Sometimes extra cost is added (like copying arrays).

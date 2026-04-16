@@ -68,7 +68,7 @@
 // So, I will use recursion with backtracking to explore all possible combinations and generate all subsets.
 
 // Additionally, the given array may contain duplicate values, which can generate duplicate subsets.
-// To avoid duplicate subsets, I will sort the array so that duplicate elements become adjacent,
+// To avoid generating duplicate subsets, I will sort the array so that duplicate elements become adjacent,
 // making it easier to skip them.
 
 // Inside function dfs:
