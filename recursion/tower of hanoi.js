@@ -30,8 +30,8 @@
 // This is a geometric series: S = 2ⁿ − 1
 // The total is 2ⁿ − 1, and in Big-O we ignore the constant term (−1), so it becomes O(2ⁿ).
 
-// Space Complexity = O(n), because at any time the recursion stack stores only one path (either left or right recursive
-// calls), and the maximum depth of recursion is n.
+// Space Complexity = O(n), because at any time the recursion stack stores only one path (either left or right 
+// recursive calls), and the maximum depth of recursion is n.
 
 class Solution {
     towerOfHanoi(n, source, helper, destination) {

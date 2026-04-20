@@ -13,7 +13,7 @@
 
 // Inside dfs function:
 // Base Case:
-// If the length of the string is equal to twice the given 'n', it means we have found one valid combination of parentheses.
+// If the length of the string is equal to twice the given 'n', it means we have found one valid pair of parentheses.
 // Add it to the result and return to the previous recursive call.
  
 // Recursive Logic:
@@ -21,8 +21,8 @@
 // (i) First, check if openCount is less than the given 'n'. If yes, we can add an open parenthesis
 // to the string. After adding it, recursively call dfs by incrementing openCount by 1 and appending "(" to the string.
 
-// (ii) Then, check if closeCount is less than openCount. If yes, we can add a close parenthesis
-// to the string. After adding it, recursively call dfs by incrementing closeCount by 1 and appending ")" to the string.
+// (ii) Then, check if closeCount is less than openCount. If yes, we can add a close parenthesis to the string.
+//  After adding it, recursively call dfs by incrementing closeCount by 1 and appending ")" to the string.
 
 // After generating all possible n pairs of parentheses, return the result.
 

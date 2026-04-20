@@ -31,16 +31,9 @@
 // After exploring all possible direction, return found which is true, that mean's we found valid path on board matrix
 // for given word.
 
-// Time Complexity: O(M × 3^L), where M = m × n (total number of cells in the board) and L = length of the word.
+// Time Complexity: O(M × 4^L), where M = m × n (total number of cells in the board) and L = length of the word.
 // O(M) comes from the nested loops used to traverse each cell of the board as a starting point.
-// For each cell, we perform DFS to search for the word.
-
-// In DFS:
-// At the first step, we can explore up to 4 directions.
-// After the first step, we cannot go back to the previous cell (since it is already marked as visited), so at each step
-// we have at most 3 choices.
-// Therefore, in the worst case, the number of recursive calls is approximately 3^L.
-// So, the overall time complexity is O(M × 3^L).
+// O(4^L) is used by each cell of board to explore all four directions.
 
 // Space Complexity: O(M + L), Explanation:
 // O(M) used by the visited 2D array to mark whether a cell is visited or not.

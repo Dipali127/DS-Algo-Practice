@@ -16,8 +16,13 @@
 // But for a different path, that same cell can be used again
 // for example; if for one path rat visit 0,0 so for different path it again can use 0,0.
 
-// Solution:
 // Approach:
+// Since we need to find all possible paths from the start to the destination in a grid with constraints 
+// (like not revisiting cells and only moving in valid directions), this is a classic backtracking problem. 
+// I will explore all paths using recursion and backtracking, marking cells as visited while exploring and unmarking
+// them while returning.
+
+// Solution:
 // Take a result array to store all valid paths that the rat can take to reach the destination.
 // Take another 2D array called visited to mark whether a cell is visited or not since the problem said that rat cannot
 // visit the same cell in the same path.
@@ -46,19 +51,23 @@
 
 // After exploring all valid paths, return the result array.
 
-// Time Complexity: ~O(3^(N²)) because, in the worst case, if all cells are open, the rat can initially move in all four 
-// directions. However, after the first move, the rat can only move in three directions from each cell 
-// (since one direction is already visited), resulting in an approximate time complexity of O(3^(N²)).
+// NOTE:- A valid path is counted only when the rat starts from the source and successfully reaches the destination.
+// Intermediate recursive calls are only for exploration. If a path gets blocked, we backtrack to the previous state
+// and try another direction.
+
+// Time Complexity: ~O(4^(N²)) Since, in the worst case, if all cells are open, the rat can explore all four 
+// directions from each cells. 
 
 // Space Complexity: O(N^2), Explanation:
-// - O(N*N) for visited 2D array.
-// - O(N^2) used by stack to store all recursive calls and in the worst case,  all cells are open(that is 1), rat can move
-//   to all the four directions from each cell. That means, depth of recursion stack is number of cells in matrix maze.
+// - O(N*N) for visited 2D array to mark true for the visited cells.
+// - O(N^2) used by stack to store all recursive calls and in the worst case if all cells are open(that is 1),
+//   rat can move to all the four directions from each cell. That means, depth of recursion stack is number of cells
+//   in matrix maze.
 // Overall, Space Complexity: O(N^2) + O(N^2) = O(2(N^2)) = O(N^2).
 
 class Solution {
     ratInMaze(maze) {
-        let result = [], m = maze.length, n = maze[0].length;
+       let result = [], m = maze.length, n = maze[0].length;
        let visited = Array.from({ length: m }, () => new Array(n).fill(false));
         
         // If the starting cell or last cell is blocked, no path exists.
@@ -104,4 +113,34 @@ class Solution {
         
         return result;
     }
-}
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,8 @@
 // Recursion:
-// Recursion is a technique where a function calls itself to solve smaller sub-problems of the same problem. 
-// It has a base case to stop the recursion and a recursive case to reduce the size of the problem.
+// Recursion is a technique where a function calls itself to solve smaller sub-problems of the same problem until
+// it reaches a base case. 
+// It means , recursive function has a base case to stop the recursion and a recursive case to reduce the size of 
+// the problem.
 
 // Types of Recursion:
 // 1) Head Recursion:-
@@ -28,9 +30,9 @@ function fun(n) {
 //    b) Work done at each call
 
 // 2. Based on number of recursive calls per function:
-//    a) If each call makes only ONE recursive call (linear recursion):
-//       - Total calls ≈ depth
-//    b) If each call makes MULTIPLE recursive calls (tree recursion):
+//    a) If there is only one recursive call at each level then this is linear recursion.
+//       - Total calls ≈ depth of recursive function of all levels.
+//    b) If there is multiple recursive call at each level then this is tree recursion.
 //       - Total calls ≈ (branching factor)^(depth)
 
 // Space Complexity of Recursive Functions:
@@ -45,6 +47,9 @@ function fun(n) {
 // Each function call does O(1) work (multiplication)
 // The function is called n times (n -> n-1 -> ... -> 1)
 // So, the total time complexity = O(n)
+// Time complexity is O(n) because this is a linear recursion. At each level, there is only one recursive call, and 
+// the work done per call is constant (multiplication). Since the recursion goes from n to 1, there are n levels, 
+// so the overall time complexity is O(n).
 
 // Space Complexity = O(n), due to the stack space used by recursive function calls
 // Explanation:

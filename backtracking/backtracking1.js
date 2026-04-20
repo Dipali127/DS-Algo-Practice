@@ -1,7 +1,7 @@
 //                                              About Backtracking
 // Definition
 // Backtracking is a recursive technique where we explore all possible choices and undo (backtrack/remove) our 
-// decisions to try other possibilities.
+// previous choice to try other choices/possibilities.
 // Note:- While backtracking/reversing, we remove previously made choices to explore new possibilities.
 // Simple Words:- Try → Explore → Undo/remove → Try next new path
 // 
@@ -76,3 +76,7 @@ function backtrack(start, path) {
 // Notes:
 // - Backtracking often generates all possible solutions. So, complexity is usually exponential or factorial.
 // - Sometimes extra cost is added (like copying arrays).
+
+// Space complexity of Backtracking: O(D) due to recursion stack and path storage, where D is the depth of recursion.
+// If we include result storage, space complexity can grow to O(number of solutions × size of each solution), which
+// can be exponential or factorial.

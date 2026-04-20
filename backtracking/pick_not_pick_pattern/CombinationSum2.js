@@ -31,18 +31,20 @@
 // After exploring all values of the nums array, return result which contains all possible combinations where sum equals 
 // target.
 
-// Time Complexity: O(2^n), since at each recursive call we have two choices: either pick or skip.
-// In the worst case, the recursion tree explores all elements of the candidates array, leading to 2^n states.
-//
-// In this problem, the longest path occurs when we explore all elements until the index reaches the length of the array,
-// so depth = n. Since each call has two choices (pick or skip), the total complexity is O(2^n).
-//
-// The while loop is used to skip duplicates. Although it may skip multiple elements in a single call,
-// each element is skipped only a limited number of times across all recursive calls. Therefore, it does not
-// increase the overall time complexity.
+// Time Complexity: O(2^n * n), since at each recursive call, we have two choices: either pick or skip the current element.
+// In the worst case, when all elements are unique, they collectively generate 2^n combinations.
+// For each valid combination, we copy the current path into the result array, which takes O(n) time.
+// Therefore, the overall time complexity becomes O(2^n * n).
+// Here, the maximum depth of the recursive function is n, since we can pick each element at most once.
 
-// Space Complexity: O(N), since at any time the recursion stack stores at most N recursive calls,
-// where N is the length of the array. In the worst case, recursion can go as deep as picking all elements once.
+// The while loop is used to skip duplicates. Although it may skip multiple elements in a single call,
+// each element is skipped only a limited number of times across all recursive calls,
+// so it does not increase the overall time complexity.
+
+// Space Complexity: O(n)
+// At any time, the recursion stack stores at most n recursive calls,
+// where n is the length of the array.
+// In the worst case, recursion can go as deep as n levels.
 
 // Key Point:-
 // we only add value in path array or remove from target when we are deciding to pick it.
@@ -53,9 +55,9 @@
 
 var combinationSum2 = function(nums, target) {
     nums.sort((a,b) => a-b);
-    let result = [];
-    dfs(0, target, []);
-    function dfs(index, target, path){
+    let result = [], path = [];
+    dfs(0, target);
+    function dfs(index, target){
         if(target === 0){
             result.push([...path]);
             return ;
@@ -66,13 +68,13 @@ var combinationSum2 = function(nums, target) {
         }
          
         path.push(nums[index]);
-        dfs(index+1, target-nums[index], path);
+        dfs(index+1, target-nums[index]);
         path.pop();
         let nextIndex = index;
         while(nextIndex+1 < nums.length && nums[nextIndex] === nums[nextIndex+1]){
             nextIndex++;
         }
-        dfs(nextIndex+1, target, path);
+        dfs(nextIndex+1, target);
     }
 
     return result;
