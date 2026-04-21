@@ -1,31 +1,39 @@
 // Leetcode Problem:- 145
 // Optimal approach:
-//  Visit the current node after visiting all the nodes of the left and right subtrees.
-//   Here, the traversal is left child – right child – root.  
+// Postorder Traversal(left-right-root):
+// In this traversal, the order is: left -> right -> root(LRN)
+//  This means visit the current node after visiting all the nodes of the left and right subtrees.
 // It means that the left child has traversed first then the right child and finally its root node. 
 
 // (1) Recursive approach:-
 // The "postOrder" function uses the helper function "postorderTraversalr"
 // to traverse the binary tree in postOrder manner i.e., (left, right, root).
-// Time Complexity (TC):- O(N), to iterate through all the nodes of the binary tree.
-// Space Complexity (SC):- O(N) - Explanation:
-// O(N) to store all the values of the tree in the array.
-// O(N) for the recursive call stack. 
-// Overall, SC: O(N) + O(N) = O(2N) = O(N).
 
-var postOrder = function(root,result){
-    if(root == null){
-        return result;
+// Time Complexity: O(N), since every node of a tree is visited exactly once.
+// Space Complexity (SC):- O(N) - Explanation:
+// O(N) is used by the 'result array' to store the preorder traversal of the tree.
+// O(H) is used by the recursion stack to store recursive function/function call in the worst case 
+// (when the tree is completely unbalanced, like a left-skewed or right-skewed tree).
+// 'H' is the height of the tree from root to leaf.
+// Overall, SC:- O(N) + O(H)
+
+var postorderTraversal = function (root) {
+    let result = [];
+    if (root === null) {
+        return [];
     }
 
-    postOrder(root.left,result);
-    postOrder(root.right,result);
-    result.push(root.val);
-}
-var postorderTraversal = function(root) {
-   let result = [];
-   postOrder(root,result);
-   return result;
+    postOrder(root)
+    return result;
+    function postOrder(root) {
+        if (root === null) {
+            return;
+        }
+
+        postOrder(root.left);
+        postOrder(root.right);
+        result.push(root.val);
+    }
 };
 
 // (2) Iterative Approach:
@@ -40,7 +48,7 @@ var postorderTraversal = function(root) {
 // Time Complexity (TC): O(N) — each node is visited exactly once.
 // Space Complexity (SC):
 // - O(N) in the worst case (e.g., for an unbalanced tree), as the stack can hold up to N nodes.
-// - O(N) to store all node values in the result array.
+// - O(N) is used by the 'result array' to store the postorder traversal of the tree.
 // - Overall, SC = O(N)
 
 

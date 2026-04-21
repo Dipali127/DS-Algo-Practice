@@ -1,43 +1,49 @@
-// Leetcode Problem:-  144
-// Optimal approach:
-// Preorder Traversal (current-left-right: Visit the current node before visiting any nodes inside the left or right
-//  subtrees. Here, the traversal is root – left child – right child(nlr). 
-// It means that the root node is traversed first then its left child and finally the right child. 
+/// Optimal approach:
+// Preorder Traversal (root-left-right):
+// In this traversal, the order is: root → left → right (NLR)
+// This means we visit the current node before traversing its left and right subtrees.
 
-// (1) Recursive approach:-
+// Recursive approach:
 // The "preorderTraversal" function uses the helper function "printPreorder"
-// to traverse the binary tree in preorder manner i.e., (root, left, right).
-// Time Complexity (TC):- O(N), to iterate through all the nodes of the binary tree.
+// to traverse the binary tree in preorder manner (root, left, right).
+
+// Time Complexity: O(N), since every node of a tree is visited exactly once.
 // Space Complexity (SC):- O(N) - Explanation:
-// O(N) to store all the values of the tree in the array.
-// O(N) for the recursive call stack. 
-// Overall, SC: O(N) + O(N) = O(2N) = O(N).
+// O(N) is used by the 'result array' to store the preorder traversal of the tree.
+// O(H) is used by the recursion stack to store function calls in the worst case 
+// (when the tree is completely unbalanced, like a left-skewed or right-skewed tree).
+// 'H' is the height of the tree from root to leaf.
+// Overall, SC:- O(N) + O(H)
 
 var preorderTraversal = function(root) {
     let result = [];
-    return printPreorder(root, result);
+    printPreorder(root, result);
+    return result;
 };
 
 var printPreorder = function(root, result){
-    if(root === null) {
-        return result;
-    }
+    if(root === null) return;
+
     result.push(root.val);
     printPreorder(root.left, result);
     printPreorder(root.right, result);
-    return result;
-}
+};
 
-// (2) Iterative approach:
-// nodes are processed using a stack (LIFO - Last In, First Out), which allows for preorder traversal.
-// the pop() operation retrieves and removes the top node from the stack, so to achieve the (root, left, right) order.
-// when a node is processed, its value (node.val) is added to the result array.
-// right child nodes are pushed onto the stack before left child nodes to ensure the correct preorder traversal order.
-// Time Complexity (TC):- O(N), to visit each node once.
-// Space Complexity (SC):- O(N), Explanation:-
-// O(N):- to store all the nodes of the tree in the result array.
-// O(N):- to store the node onto the stack as in the worst case (i.e., when the tree is completely unbalanced, such as a
-// right-skewed or left-skewed tree), the stack may need to hold all 'N' nodes at some point during the traversal..
+
+// (2) Iterative Approach (Preorder):
+// - Take a result array to store the nodes of the tree in preorder.
+// - Use a stack (LIFO) to help achieve preorder traversal iteratively..
+// - Run a while loop as long as the stack is not empty.
+// - Pop a node from the stack and add its value to the result array.
+// - Push the right child first, then the left child onto the stack.
+//   This ensures that the left child is processed first (due to LIFO nature of stack).
+
+// Time Complexity (TC): O(N) — each node is visited exactly once.
+
+// Space Complexity (SC):
+// - O(N) in the worst case (e.g., skewed tree), as the stack can hold up to N nodes.
+// - O(N) for the result array to store all node values.
+// - Overall, SC = O(N)
 
 // Note: let stack = [root] means that the stack holds only the reference (address) to the root node.
 // It does not directly store the left and right child nodes. However, since the root node contains

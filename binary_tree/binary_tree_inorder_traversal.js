@@ -1,44 +1,52 @@
 // Leetcode Problem:- 94
 // Optimal approach:
-// Visit the current node after visiting all nodes in the left subtree, but before visiting any node in the right subtree.
-// In this traversal, the order is: left child → root → right child.
-// This means that the left subtree is traversed first, followed by the current (root) node, and finally the right subtree.
+// Inorder Traversal(left-current-right):- 
+// In this traversal, the oreder is left child - root - right child.
+// This means, left subtree is traversed first then visit the current (root) node, before visiting the right subtree.
 // (1) Recursive approach:-
-// The "inorderTraversal" function uses the helper function "inOrder"
-// to traverse the binary tree in inorder manner i.e., (left, root, right).
-// Time Complexity (TC):- O(N), to iterate through all the nodes of the binary tree.
+// The "inorderTraversal" function uses the helper function "inOrder" to traverse the binary tree in inorder manner
+//  i.e., (left, root, right).
+
+// Time Complexity (TC in worst and best case):- O(N), because every node of the tree is visited exactly once.
 // Space Complexity (SC):- O(N) - Explanation:
-// O(N) for the 'output array' that stores the traversal result.
-// O(N) for the 'recursive call stack' in the worst case (when the tree is completely unbalanced).
-// Overall, SC:- O(N) + O(N) = O(2N) = O(N).
-var inorderTraversal = function (root) {
-    let output = [];
-    inOrder(root, output);
-    return output;
+// O(N) is used by the 'result array' to store the inoreder traversal of the tree.
+// O(H) is used by the recursion stack to store function calls in the worst case 
+// (when the tree is completely unbalanced, like a left-skewed or right-skewed tree).
+// 'H' is the height of the tree from root to leaf.
+// Overall, SC:- O(N) + O(H)
+
+var inorderTraversal = function(root) {
+    let result = [];
+    if(root === null){
+        return result;
+    } 
+
+    inorder(root);
+    return result;
+    function inorder(root){
+        if(root === null){
+            return;
+        }
+
+        inorder(root.left);
+        result.push(root.val);
+        inorder(root.right);
+    }
 };
 
-function inOrder(node, output) {
-    if (node === null) {
-        return;
-    }
-    inOrder(node.left, output);
-    let num = node.val;
-    output.push(num);
-    inOrder(node.right, output);
-}
 
+// (2) Iterative approach:
+// The iterative approach uses a stack to traverse the tree in inorder (left, root, right).
+// - First, traverse the left subtree and push nodes onto the stack.
+// - Once all the left subtree nodes are processed, pop a node from the stack.
+//   (Popping a node means we are visiting the current/root node.)
+// - After visiting the current node, move to its right subtree and repeat the process.
 
-// (2) Iterative approach:-
-// the iterative approach uses a stack to traverse the tree inorder (left, root, right).
-// - first, we traverse the leftmost nodes, pushing them onto the stack.
-// - once all the leftmost nodes are traversed, we pop them from the stack 
-// (pop the node from stack means we visit the root node/current node).
-// - after visiting the root node, we traverse the right subtree and repeat the process.
-// Time Complexity (TC):- O(N), because every node is pushed to and popped from the stack exactly once.
+// Time Complexity (TC):- O(N), because every node of the tree is visited exactly once.
 // Space Complexity (SC):- O(N), Explanation:
-// - as in the worst case, the stack will store up to O(N) nodes (in an unbalanced tree), especially when the tree is skewed.
-// - the result array also requires O(N) space to store all node values of given tree.
-// So, overall space complexity is O(N).
+// - In the worst case (skewed tree), the stack can store up to O(N) nodes.
+// - The result array also requires O(N) space to store all node values.
+// Overall Space Complexity: O(N)
 
 var inorderTraversal = function (root) {
     let result = [];

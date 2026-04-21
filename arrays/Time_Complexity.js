@@ -1,9 +1,7 @@
 //                                          Time Complexity
 
-// Time Complexity is the measure of how an algorithm’s running time increases as the size of the input 
-// increases.
-// In short:
 // Time Complexity is the number of operations performed by an algorithm as a function of input size.
+// That means, time complexity increases with the increase in the data size.
 
 // Example:
 // Let’s suppose we have an array and we need to print all the values of the array.
