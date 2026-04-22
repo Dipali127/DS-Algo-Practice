@@ -8,7 +8,6 @@
 // 'p' and 'q' tree if the value at 'p' and 'q' are same.
 
 // Solution:-
-
 // Base Case:-
 // (i) if both trees (p and q) are empty (i.e., both p == null and q == null), return true because two empty trees 
 // are considered identical(same).
@@ -19,13 +18,6 @@
 // if the values of the current nodes on both 'p' and 'q' are equal, recursively call for left and righ subtree
 // to check the left and right subtrees in both trees are same.
 // But if the values of the current nodes on both trees (p.val and q.val) are not equal, return false .
-
-// Time Complexity (TC):- O(N), where 'N' is the number of nodes in the smaller of the two trees as each node 
-// in both trees are visited exactly once.
-// Space Complexity (SC):- O(h), where 'h' is the height (or depth) of the smaller tree. 
-// This represents the space used by the recursive function call stack. 
-// In the worst case, if the tree is completely unbalanced, the recursion depth would be O(N),
-// but in the best case of a balanced tree, it would be O(log N).
 
 // Time Complexity (TC):- O(N), where N is the number of nodes in the trees.
 // In the worst case, we may need to visit all nodes when both trees are identical.

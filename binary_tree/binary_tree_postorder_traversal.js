@@ -1,8 +1,8 @@
 // Leetcode Problem:- 145
 // Optimal approach:
-// Postorder Traversal(left-right-root):
-// In this traversal, the order is: left -> right -> root(LRN)
-//  This means visit the current node after visiting all the nodes of the left and right subtrees.
+// Postorder Traversal(left-right-root/current_node):
+// In this traversal, the order is: left -> right -> root/current_node(LRN)
+// This means visit the current node after traversing all the nodes of the left and right subtrees.
 // It means that the left child has traversed first then the right child and finally its root node. 
 
 // (1) Recursive approach:-
@@ -49,8 +49,12 @@ var postorderTraversal = function (root) {
 // Space Complexity (SC):
 // - O(N) in the worst case (e.g., for an unbalanced tree), as the stack can hold up to N nodes.
 // - O(N) is used by the 'result array' to store the postorder traversal of the tree.
-// - Overall, SC = O(N)
+// - SC = O(N) + O(H)
 
+// This solution first generates a modified preorder traversal in the order:
+// root → right → left (NRL).
+// However, postorder traversal requires left → right → root (LRN).
+// So, we reverse the result array at the end to obtain the correct postorder traversal.
 
 var postorderTraversal = function(root) {
    if(!root){

@@ -1,38 +1,48 @@
 // Leetcode Problem:- 101
 // Optimal Approach:
-// approach:-
-// if the root is null, return true, as an empty tree is symmetric by definition.
-// if the root is not null, then recursivley call the symmetry by comparing the left and right subtrees of the root.
-// compare the values of the left and right nodes.
-//  Recursively check:-
+// Approach:
+// To solve this problem, I will use DFS traversal.
+// I will recursively compare two subtrees to check whether they are mirror images of each other.
+// For each recursive call:
+// - I will compare the left subtree of one node with the right subtree of the other node.
+// - Similarly, I will compare the right subtree of one node with the left subtree of the other node.
+// If all corresponding pairs match, the tree is symmetric.
+
+// Solution:
+// Base Case:-
+// (i) if both trees (p and q) are empty (i.e., both p == null and q == null), return true because two empty trees 
+// are considered symmetric.
+// if one tree is empty and the other is not (i.e., p === null || q === null), return false since one tree has more 
+// nodes than the other, making them different. 
+// But if value of both tree are different, return false since they are not symmetric.
+
+//  Recursively Logic:-
 //     (1) - the left node's left subtree with the right node's right subtree .
 //     (2) - the left node's right subtree with the right node's left subtree .
-// 3. return true if both recursive checks pass and the values at the current nodes are equal; otherwise, return false.
+
 // TC:- O(N), where 'N' is the number of nodes in the tree, as each node is visited once.
 // SC: O(H), where 'H' is the height (or depth) of the tree. 
 //     - In the worst case (for a skewed tree), the space complexity is O(N).
 //     - For a balanced tree, the space complexity is O(logN) due to the height being proportional to logN.
 
-
 var isSymmetric = function(root) {
-    if(root === null){
+    return dfs(root.left, root.right);
+    function dfs(p, q){
+       if(p === null && q === null){
         return true;
-    }
-    
-    return symTree(root.left, root.right);
-    function symTree(t1, t2){
-        if(t1 === null && t2 === null){
-            return true;
-        }
+       } 
 
-        if(t1 === null || t2 === null){
-            return false;
-        }
+       if(p === null || q === null){
+        return false;
+       }
 
-        if(t1.val !== t2.val){
-            return false;
-        }
+       if(p.val !== q.val){
+        return false;
+       }
 
-        return symTree(t1.left, t2.right) && symTree(t1.right, t2.left)
+       if(p.val === q.val){
+        return (dfs(p.left, q.right) && dfs(p.right, q.left));
+       }
+
     }
 };

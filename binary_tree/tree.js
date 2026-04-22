@@ -10,9 +10,9 @@
 //  / \    \
 // 1  10    12
 
-// (i) Parent Node: A node that is an immediate predecessor of another node.
+// (i) Parent Node: A node that comes just above another node
 // Example: 35 is the parent of 3 and 6.
-// (ii) Child Node: A node that is an immediate successor of another node.
+// (ii) Child Node: A node that comes just below another node
 // Example: 3 and 6 are children of 35.
 // (iii) Root Node: The topmost node in a tree, which does not have a parent.
 // Example: 15 is the root node.
@@ -36,6 +36,8 @@
 // Depth(3) = 2
 // Depth(10) = 3
 // So, Depth means, "How far am I from root?" And Height means “How far can I go down from here?”.
+// Keep Point:- Height of a tree can be defined as the number of edges or nodes on the longest path from root to a 
+// leaf, depending on the convention used.
 
 //                                    Binary Tree Definition
 // A Binary Tree is a non-linear hierarchical data structure where each node has at most two children.
@@ -72,7 +74,6 @@ function dfs(node) {
     if (!node) return;
 
     // process node (depends on traversal type)
-    
     dfs(node.left);
     dfs(node.right);
 }

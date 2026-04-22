@@ -1,6 +1,6 @@
 /// Optimal approach:
-// Preorder Traversal (root-left-right):
-// In this traversal, the order is: root → left → right (NLR)
+// Preorder Traversal (root/current_node-left-right):
+// In this traversal, the order is: root/current_node → left → right (NLR)
 // This means we visit the current node before traversing its left and right subtrees.
 
 // Recursive approach:
@@ -10,10 +10,11 @@
 // Time Complexity: O(N), since every node of a tree is visited exactly once.
 // Space Complexity (SC):- O(N) - Explanation:
 // O(N) is used by the 'result array' to store the preorder traversal of the tree.
-// O(H) is used by the recursion stack to store function calls in the worst case 
-// (when the tree is completely unbalanced, like a left-skewed or right-skewed tree).
+// O(H) is used by the recursion stack to store function calls at any time.
+// In the worst case (completely unbalanced tree, like a left-skewed or right-skewed tree), H = N.
+// In a balanced tree, H = log N.
 // 'H' is the height of the tree from root to leaf.
-// Overall, SC:- O(N) + O(H)
+// Overall, SC = O(N) + O(H), which simplifies to O(N).
 
 var preorderTraversal = function(root) {
     let result = [];

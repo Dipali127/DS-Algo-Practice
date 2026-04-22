@@ -1,27 +1,43 @@
 // Leetcode problem:- 226
-// Optimal Approach 1: Using DFS
+// Optimal Approach :-
+
 // Approach:
+// I will use DFS traversal and For each node, I will swap its left and right children.
+// Then I will recursively apply the same process to the left and right subtrees.
+
+// Solution:
 // First, check if the root is null. If so, return null since we can't invert an empty tree.
-// Otherwise, swap the current node's left and right subtrees (note: the node values are not swapped, 
+// Otherwise call dfs function to invert the given tree.
+
+// inside dfs function:
+// Base Case:
+// if root is null return, since we cannot invert an empty tree.
+
+// Recursive Logiv:
+// for each node, swap the current node's left and right subtrees (note: the node values are not swapped, 
 // only their references).
-// After swapping the current node, recursively call the function 'invertTree' on the left and right subtrees to invert them.
+// After swapping the current node, recursively call the function 'invertTree' on the left and right subtrees to 
+// invert them.
 // Finally, return the root, which now contains the inverted tree.
-// Time Complexity: O(N), where 'N' is the number of nodes in the tree, since each node is visited once.
-// Space Complexity: O(H), where 'H' is the height (depth) of the tree, due to the recursive call stack.
 
-var invertTree = function(root) {
-    if (root === null) {
-        return null;
-    }
+// TC:- O(N), where 'N' is the number of nodes in the tree, as each node is visited once.
+// SC: O(H), where 'H' is the height (or depth) of the tree. 
+//     - In the worst case (for a skewed tree), the space complexity is O(N).
+//     - For a balanced tree, the space complexity is O(logN) due to the height being proportional to logN.
 
-    let temp = root.left;
-    root.left = root.right;
-    root.right = temp;
-
-    invertTree(root.left);
-    invertTree(root.right);
-    
+var invertTree = function (root) {
+    if (root === null) return null;
+    dfs(root);
     return root;
+    function dfs(root) {
+        if (root === null) return;
+        let temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
+        dfs(root.left);
+        dfs(root.right);
+    }
 };
 
 // Optimal Approach 2: Using BFS

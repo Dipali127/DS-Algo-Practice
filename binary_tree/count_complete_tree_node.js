@@ -7,7 +7,7 @@
 // And in the last level, nodes are filled from left to right (no gaps)
 
 // Approach:
-// To count the number of nodes in a complete binary tree, I’ll use a DFS traversal. I recursively traverse the 
+// To count the number of nodes in a complete binary tree, I’ll use a DFS traversal. I will recursively traverse the 
 // left and right subtrees, and for each visited node, I will increment a count by 1. 
 
 // Solution:-
