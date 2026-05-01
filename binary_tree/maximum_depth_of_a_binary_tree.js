@@ -6,26 +6,27 @@
 // Optimal approach:
 // Approach:-
 // To solve this problem, I will use DFS traversal. I will recursively call the left and right subtrees to compute
-// their height. For each recursive call, I will compute the maximum height obtained from the left and right 
-// subtrees by adding 1 to include the current node, and then return it to the previous recursive call and continue
-// this process until it reaches the root call.
-// Computing the height of the root (i.e., longest path from root to a leaf) gives the maximum depth of the tree.
-// In below implementation, height is measured in terms of nodes in the treee not in terms of number of edges.
+// their depth. For each recursive call, I will compute the maximum depth obtained from the left and right 
+// subtrees by adding 1 to include the current visited node, and return that value to the previous/parent recursive call 
+// so that the parent can compute its own depth correctly and continue this process until it reaches the root call.
 
 // Solution:-
-// First, check if the root is null. If it is, return 0 because the height of an empty tree is 0, 
+// First, check if the root is null. If it is, return 0 because the depth of an empty tree is 0, 
 // and the height of a tree with only a root node is 1.
-// Recursively calculate the height of the left and right subtrees by calling the maxDepth function
+// Recursively calculate the depth of the left and right subtrees by calling the maxDepth function
 // on the left and right children.
-// After calculating the height of the left and right subtrees, take the maximum of both and add 1 
+// After calculating the depth of the left and right subtrees, take the maximum of both and add 1 
 // to account for the current root node.
-// Finally, return this value as the result, which gives the maximum height of the tree.
+// Finally, return this value as the result, which gives the maximum depth of the tree.
 
-// Time Complexity (TC):- O(N), where 'N' is the number of nodes in the tree, as each node is visited once.
-// Space Complexity (SC):- O(H), where 'H' is the height of the tree.
-// In the worst case (completely unbalanced tree), SC = O(N), as the depth of the recursion stack is proportional 
+// Time Complexity (TC):- O(N), where 'N' is the number of nodes in the tree, as each node of the tree is visited once.
+// Space Complexity (SC):- O(H), where 'H' is the height of the tree and is used by the recursive call stack.
+// In the worst case (completely unbalanced tree), SC = O(N), as the depth of the recursion stack is proportional
 // to the number of nodes in the tree.
 // In a balanced tree, SC = O(log N), as the depth of the recursion stack is proportional to the height of the tree.
+
+// In an unbalanced tree, height H = N because all nodes lie on a single path.
+// In a balanced tree, height H = log N because nodes grow exponentially level by level.
 
 var maxDepth = function(root){
     if(root == null){

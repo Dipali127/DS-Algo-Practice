@@ -18,10 +18,9 @@
 // Example: 15 is the root node.
 // (iv) Leaf Node (External Node): Nodes that do not have any children.
 // Example: 1, 10, 12, and 60 are leaf nodes.
-// (v) Ancestor: Any node on the path from the root to a given node (excluding the node itself).
-//               OR Nodes above a given node on the path to root.
+// (v) Ancestor: An ancestor of a node is any node on the path from that node up to the root node.
 // Example:- From 15 to 3 → 15 and 35 are ancestors of 3.
-// (vi) Descendant: A node below a given node in its subtree.
+// (vi) Descendant: Any node below a given node in its subtree.
 // Example:- Descendants of 35 → 3, 6, 1, 10, 12 And Descendants of 15 → all nodes except 15.
 // (vii) Sibling: Nodes that share the same parent.
 // (viii) Level of a Node: Number of edges from root to that node. Root is at level 0.
@@ -61,7 +60,7 @@ const root = new BinaryTree(2);
 root.left = new BinaryTree(1);
 root.right = new BinaryTree(3);
 
-//                                                   DFS vs BFS
+//                                  Types of Traversal on a Tree:- DFS vs BFS
 // 1) DFS (Depth First Search):
 // Explores one path completely (goes deep) and then backtracks to explore other branches.
 // Used for:

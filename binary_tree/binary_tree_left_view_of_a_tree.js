@@ -4,87 +4,106 @@
 // Suppose, a person stands on the left side of the tree. The task is to print all the node values that the person
 // can see from the left side.
 
-// Optimal Approach: Using BFS (Breadth-First Search).
-// approach:-
-// traverse the tree level by level using a queue.
-// for each level, check the first visited node (i.e., the leftmost node), 
-// as it will be the node visible from the left side.
-// if it is the first node at the current level (i.e., i === 0), add it to the 'result' array.
-// continue traversing the tree level-by-level until all nodes are processed, then return the result.
-// TC: O(N), where 'N' is the number of nodes in the tree, as each node is visited exactly once.
-// SC: O(N), as in the worst case, the queue size can grow to O(N) for a tree with many nodes at the same level (wide tree).\ but in a balanced
-// tree, the result array will store O(log N) nodes, but in the worst case (skewed tree), the result array can store up to O(N) nodes.
+// Optimal Approach: Using BFS (Breadth-First Search)
+// Approach:
+// - Take a queue to traverse the tree level by level and get the left side view of the tree.
+// - First, push the root node into the queue to traverse tree from root level.
+// - Then, run a while loop until the queue is not empty.
+// - For each iteration, I will get the size of the queue (let n = queue.length),
+//   which represents the number of nodes at the current level.
+// - Then, I will use a loop with a pointer 'i' starting from 0 to n - 1 to iterate through all nodes at the current level.
 
+// - For each iteration:
+//     - Remove a node from the queue.
+//     - If i === 0, it means this is the leftmost node of the current level,
+//       so I will add it to the result array.
+//     - Then, push its left child (if it exists) into the queue.
+//     - Then, push its right child (if it exists) into the queue.
+// - Repeat this process for all levels.
+
+// Note:- Even though we only pick the first node at each level, we still process all nodes at that level to ensure the
+// next level is traversed correctly.
+
+// Time Complexity (TC): O(N), where N is the number of nodes in the tree, as each node is visited exactly once.
+// Space Complexity (SC): O(N), because in the worst case, the queue can store up to O(N) nodes (for a very wide tree).
 class Solution {
     leftView(root) {
-        if (root === null) {
-            return [];
-        }
-
         let result = [];
-        let queue = [root]; 
-
-        while (queue.length > 0) {
-            let n = queue.length; 
+        if(root === null){
+            return result;
+        }
+        
+        let queue = [root];
+        while(queue.length > 0){
+            let n = queue.length;
             let i = 0;
-
-            while (i < n) {
-                let temp = queue[i]; 
-                if (i === 0) {
-                    result.push(temp.data);
+            while(i < n){
+                let node = queue.shift();
+                if(i === 0){
+                    result.push(node.data);
                 }
-
-                if (temp.left !== null) {
-                    queue.push(temp.left);
+                
+                if(node.left){
+                    queue.push(node.left);
                 }
-                if (temp.right !== null) {
-                    queue.push(temp.right);
+                
+                if(node.right){
+                    queue.push(node.right);
                 }
-
+                
                 i++;
             }
-            
-            queue.splice(0,n);
         }
-
+        
         return result;
+        
     }
 }
 
-// Second Appraoch:
-// approach:-
-// traverse the tree by calling a function 'dfs' that recursively visits the left subtree first and then the right subtree.
-// for each node, if the current depth is equal to the length of the result array, it means this node is the node 
-// viewer can view from the left side of a tree, so add it to the result.
-// after processing all the nodes in the tree, return the result.
-// TC:- O(N), where 'N' is the number of nodes in the tree, as each node is visited exactly once.
-// SC:- O(N), Explanation:
-// O(N):- Space is used by the result array to store the nodes visible from the left view in the worst case (for a skewed tree), 
-// but in a balanced tree, the space complexity for storing nodes in the result is O(log N).
-// O(N):- Stack space used by the recursive function call ('dfs function') as in the worst case (skewed tree), the recursion depth can be O(N), 
-// but in a balanced tree, the depth will be O(log N).
+
+// Second Approach: Using DFS (Depth-First Search).
+// Approach:
+// I will use DFS traversal. I will recursively traverse the tree level by level and at each level, I will first explore 
+// the lef subtree and then right subtree to achieve left side view of tree.
+
+// Inside rightSideView function:
+// - Take a result array to store the left side view of the tree.
+// - Create a dfs function by passing the root of the tree and depth,
+//  where depth is used to keep track of the current level of the tree.
+
+// Inside dfs:
+// For each node:
+// - If the current depth is equal to the length of the result array,
+//   it means this is the first node we are visiting at this level.
+//   Since we traverse the left subtree first, this node is the leftmost node.
+// - Then, recursively traverse the left subtree first (to capture leftmost nodes), and then the right subtree.
+// After processing all nodes, return the result.
+
+// Time Complexity (TC): O(N), where N is the number of nodes in the tree, as each node is visited once.
+// Space Complexity (SC): O(H), where H is the height of the tree.
+// In the worst case (completely unbalanced tree), SC = O(N),
+// as the recursion stack depth is proportional to the number of nodes.
+// In a balanced tree, SC = O(log N),
+// as the recursion stack depth is proportional to the height of the tree.
+
 class Solution {
     leftView(root) {
         let result = [];
-        if (root === null) {
+        if(root === null){
             return result;
         }
-        dfs(root,0);
-        
-        function dfs(root,depth){
-            if(root === null){
-                return;
-            }
-            
+        dfs(root, 0);
+        function dfs(root, depth){
+            if(root === null) return;
             if(depth === result.length){
                 result.push(root.data);
             }
             
-            dfs(root.left,depth+1);
-            dfs(root.right,depth+1);
+            dfs(root.left, depth+1);
+            dfs(root.right, depth+1);
         }
         
         return result;
+        
     }
 }
-

@@ -8,17 +8,18 @@
 // The "inorderTraversal" function uses the helper function "inOrder" to traverse the binary tree in inorder manner
 //  i.e., (left, root, right).
 
-// Time Complexity (TC in worst and best case):- O(N), because every node of the tree is visited exactly once.
-// Space Complexity (SC):- O(N) - Explanation:
-// O(N) is used by the 'result array' to store the inorder traversal of the tree.
-// O(H) is used by the recursion stack to store function calls at any time.
-// In the worst case (completely unbalanced tree, like a left-skewed or right-skewed tree), H = N.
-// In a balanced tree, H = log N.
-// 'H' is the height of the tree from root to leaf.
-// Overall, SC = O(N) + O(H), which simplifies to O(N).
+// Time Complexity (TC in both worst and best cases):- O(N), because every node of the tree is visited exactly once.
+// Space Complexity (SC):- O(H), where 'H' is the height of the tree and is used by the recursive call stack.
+// In the worst case (completely unbalanced tree), SC = O(N), as the depth of the recursion stack is proportional
+// to the number of nodes in the tree.
+// In a balanced tree, SC = O(log N), as the depth of the recursion stack is proportional to the height of the tree.
+// O(N) space is also used by the result array to store all node values.
+// Overall SC:- O(H + N)
+// Since the result array stores all N nodes, the overall space complexity is commonly considered O(N).
 
-// In an unbalanced tree, height H = N because all nodes are in one path.
+// In an unbalanced tree, height H = N because all nodes lie on a single path.
 // In a balanced tree, height H = log N because nodes grow exponentially level by level.
+
 
  var inorderTraversal = function(root) {
     let result = [];

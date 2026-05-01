@@ -1,20 +1,25 @@
 // Leetcode Problem:- 98
-// Brute force appraoch:- 
-// appraoch:- 
-// perform an inorder traversal of the given binary search tree (BST).
-// Since, an inorder traversal of a valid BST produces a sorted list of node values,
-// the task is to check whether the resulting inorderArr is sorted in strictly increasing order.
-// if the inorder traversal array is sorted in ascending order, the given BST is valid and the function returns true.
-// if the array is not sorted, the BST is invalid, and the function returns false.
-// TC:- O(N), Explanation:-
-// O(N):- to perform the inorder traversal of the tree.
-// O(N):- to check whether the array is sorted.
+// Brute force approach:
+// Approach:
+// I will perform an inorder traversal on the given binary tree.
+// Since an inorder traversal of a valid BST returns a sorted list of node values,
+// while performing the traversal, I will store each visited node's value in a result array.
+
+// After that, I will traverse the result array and check whether it is strictly increasing.
+// If any current value is greater than or equal to the next value, I will return false immediately.
+// Otherwise, after checking all elements, I will return true, which means the given tree is a valid BST.
+
+// Time Complexity:- O(N), Explanation:-
+// O(N):- to perform the inorder traversal of the tree, as each node of the tree are visited exactly once.
+// O(N):- to check whether the result array is sorted and following BST property.
 // overall, TC:- O(N) + O(N) = O(2N) = O(N).
-// SC:- O(N), Explanation:-
-// O(N):- to store all values of tree in 'inorderArr' array.
-// O(H):- for the recursion stack, where H is the height of the BST.
-// This could be O(log N) for a balanced tree or O(N) for a skewed tree.
-// overall, SC:- O(N)
+
+// Space Complexity: O(H), where 'H' is the height of the tree due to the recursion stack.
+// In a balanced tree, H = O(log N), as the recursion depth is proportional to the height of the tree.
+// In an unbalanced tree (either left-skewed or right-skewed), H = O(N), as the recursion depth is proportional
+// to the number of nodes in the tree.
+// O(N) used by 'result' array to store all nodes of given BST in sorted order.
+// Overall, SC:- O(N).
 
 var isValidBST = function (root) {
     let result = [];
@@ -39,10 +44,15 @@ var isValidBST = function (root) {
 };
 
 // Optimal Approach: Inorder Traversal with `prev` variable
-// Idea:
-// In a valid Binary Search Tree (BST), an inorder traversal yields
-// a strictly increasing sequence of node values (left < root < right).
-// approach:
+// Approach:-
+// I will perform an inorder traversal on the given binary tree.
+// Since an inorder traversal of a valid BST returns a sorted list of node values(strictly increasing order).
+// Also i will maintain one variable 'prev' to keep track of the previously visited node.
+// while performing the traversal, i will check that if value at prev is greater than or equal to current visited value
+// then i will immediately return false.
+// But If the traversal completes without violation, I will return true. 
+
+// Solution:
 // Use an inorder traversal to visit nodes in sorted order.
 // maintain a variable `prev` to store the value of the previously visited node.
 // - During traversal:
@@ -54,26 +64,36 @@ var isValidBST = function (root) {
 //   4. Recursively traverse the right subtree.
 // - If all nodes follow the strictly increasing order, return true.
 
-// Time Complexity: O(N), Since each node is visited exactly once.
-// Space Complexity: O(H)
-// - H is the height of the tree (space used by the call stack during the recursive inorder traversal).
-// - For a balanced tree, it’s O(log N). For a skewed tree, it’s O(N).
-var isValidBST = function(root) {
-    let prev = null;
-    //inorder(root);
-    function inorder(root){
-        if(root === null){ // An empty tree is considered a valid BST
-            return true;
-        }
+// Time Complexity: O(N), to perform the inorder traversal of the tree, as each node of the tree are visited exactly once.
 
-        if(!inorder(root.left)){return false}
-        if(prev!=null && prev>=root.val){
+// Space Complexity: O(H), where 'H' is the height of the tree due to the recursion stack.
+// In a balanced tree, H = O(log N), as the recursion stack depth is proportional to the height of the tree.
+// In an unbalanced tree (either left-skewed or right-skewed), H = O(N), as the recursion stack depth is proportional
+// to the number of nodes in the tree.
+
+// NOTE:
+// Why do we use early return here?
+// Because if any subtree (either left or right) is not following BST property then, there is no point in continuing
+// traversal on the remaining subtree.
+
+var isValidBST = function (root) {
+    let prev = null;
+    return inorder(root);
+    function inorder(root) {
+        if (root === null) return true;
+
+        if (!inorder(root.left)) {
             return false;
         }
-        prev = root.val;
-        if(!inorder(root.right)){return false}
+
+        if (prev !== null && prev.val >= root.val) return false;
+        prev = root;
+
+        if (!inorder(root.right)) {
+            return false;
+        }
 
         return true;
     }
-     return inorder(root)
-}
+
+};

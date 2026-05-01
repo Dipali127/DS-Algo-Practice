@@ -4,8 +4,9 @@
 // Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
 
 // Approach:-
-// To solve this problem , i will use DFS recursion where i will recursively call the left and right subtree for both
-// 'p' and 'q' tree if the value at 'p' and 'q' are same.
+// To solve this problem , i will use DFS traversal. I will recursively call the left and right subtree for both
+// tree 'p' and 'q' only if the value at 'p' and 'q' are same.
+
 
 // Solution:-
 // Base Case:-
@@ -19,14 +20,14 @@
 // to check the left and right subtrees in both trees are same.
 // But if the values of the current nodes on both trees (p.val and q.val) are not equal, return false .
 
-// Time Complexity (TC):- O(N), where N is the number of nodes in the trees.
-// In the worst case, we may need to visit all nodes when both trees are identical.
-// In the best case, if a mismatch is found at the root, the recursion stops immediately (O(1)).
-
-// Space Complexity (SC):- O(H), where 'H' is the height of the tree.
-// In the worst case (completely unbalanced tree), SC = O(N), as the recursion stack depth is proportional 
+// Time Complexity (TC):- O(N), where 'N' is the number of nodes in the tree, as each node of the tree is visited once.
+// Space Complexity (SC):- O(H), where 'H' is the height of the tree and is used by the recursive call stack.
+// In the worst case (completely unbalanced tree), SC = O(N), as the depth of the recursion stack is proportional
 // to the number of nodes in the tree.
-// In a balanced tree, SC = O(log N), as the recursion stack depth is proportional to the height of the tree.
+// In a balanced tree, SC = O(log N), as the depth of the recursion stack is proportional to the height of the tree.
+
+// In an unbalanced tree, height H = N because all nodes lie on a single path.
+// In a balanced tree, height H = log N because nodes grow exponentially level by level.
 
 var isSameTree = function (p, q) {
     if (p == null && q == null) {

@@ -1,12 +1,27 @@
-// Leetcode problem:- 872 
+// Leetcode Problem:- 872 
 // Optimal Approach: Using DFS (Depth First Search)
+
 // Approach:
-// - Use two arrays, 'leaf1' and 'leaf2', to store the leaf nodes of both trees.
-// - Call the 'dfs' function to gather all the leaf nodes of the trees.
-// - After collecting the leaf nodes, compare the two arrays directly by converting them into strings and checking equality.
-// Note:- In JavaScript, arrays are passed by reference. This means when we pass 'leaf1' or 'leaf2' into the dfs function,
-// any change made to the 'leaf' parameter inside the function (like pushing values) directly reflects in the original array.
-// So, pushing values into 'leaf' inside the function modifies 'leaf1' or 'leaf2' as expected.
+// I will use DFS traversal. I will recursively call the left and right subtrees for both given trees.
+// While traversing, if I reach a leaf node, I will add that node's value into the result array.
+
+// Inside leafSimilar function:
+// Call the dfs function once for tree1 and once for tree2 to gather all the leaf nodes of both trees.
+// Initialize their return values (arrays) into leaf1 and leaf2 variables.
+// Then compare leaf1 and leaf2 after converting the arrays into strings.
+
+// Inside dfs function:
+// If root is null, return.
+// If the current node is a leaf node, add its value into the result array.
+// Otherwise, recursively call the left and right subtrees.
+
+// Time Complexity:- O(N), where 'N' is the total number of nodes in both trees (as we visit each node once).
+// Space Complexity (SC):- O(H), where 'H' is the height of the tree.
+// In the worst case (completely unbalanced tree), SC = O(N), as the recursion stack depth is proportional to the number
+// of nodes.
+// In a balanced tree, SC = O(log N), as the recursion stack depth is proportional to the height of the tree.
+// Additionally, O(N) space is used to store leaf node values in the arrays.
+// → Overall space complexity is O(N).
 
 // We use join(' ') to convert arrays like [1, 2, 3] into the string "1 2 3" for easy comparison without iteration.
 // How string comparison works:
@@ -14,40 +29,26 @@
 // - If lengths are equal, it compares each character one by one from left to right.
 // - It stops early if any mismatch is found.
 // - This comparison is efficient and optimized by the JavaScript engine.
-// Time Complexity:- O(N), where 'N' is the total number of nodes in both trees (as we visit each node once).
-// Space Complexity: O(N), due to:
-// - O(N) for storing leaf node values.
-// - O(H) for recursive call stack, where H is the height of the tree.
-//   → Worst case: O(N) for skewed trees, Best case: O(log N) for balanced trees.
-//   → Overall, space complexity is O(N).
+
+// Note:
+// First call → result points to leaf1 array.
+// Second call → result points to leaf2 array.
+// So each DFS call gets a separate array reference.
+// Arrays are passed by reference in JavaScript, so all recursive calls within a single DFS share the same array instance.
 
 
-var leafSimilar = function (root1, root2) {
-    let leaf1 = [];
-    let leaf2 = [];
-
-    dfs(root1, leaf1);
-    dfs(root2, leaf2);
-
-    // this below code help us to directly compare both the array by converting them into string without
-    // iterating both the leaf1 and leaf2 array
-    // here, join(' ') convert array like [1,2,3] in '123' and comparing the both leaf1 and leaf2 becomes easy even 
-    // we dont need to iterate.
+var leafSimilar = function(root1, root2) {
+    let leaf1 = dfs(root1, []), leaf2 = dfs(root2, []);
     return leaf1.join(' ') === leaf2.join(' ');
-};
+    function dfs(root, result){
+        if(root === null) return;
+        if(root.left === null && root.right === null){
+            result.push(root.val);
+        }
 
-var dfs = function (root, leaf) {
-    if (root == null) {
-        return;
+        dfs(root.left, result);
+        dfs(root.right, result);
+
+        return result;
     }
-
-    if (root.left == null && root.right == null) {
-        leaf.push(root.val);
-        return;
-    }
-
-    dfs(root.left, leaf);
-    dfs(root.right, leaf);
-
-    return leaf;
 };

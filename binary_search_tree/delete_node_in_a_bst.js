@@ -1,74 +1,98 @@
 // Leetcode Problem:- 450
 // Optimal Approach:
-// To delete a node from a Binary Search Tree (BST), handle three cases based on the node's structure:
-// 1. Node has no children (it's a leaf node):- simply remove the node.
-// 2. Node has one child:- replace the node with its child.
-// 3. Node has two children: find the node's in-order successor (smallest node in the right subtree), 
-//   replace the node's value with the successor's value, and delete the successor. 
 
-// approach: Using DFS (Depth-First Search)
-// Start from the root and search for the node with the given key.
-// Once the node is found:
-// - If the node has no children, delete it.
-// - If the node has one child, replace the node with its child.
-// - If the node has two children, find the in-order successor (the smallest node in the right subtree), 
-//   replace the node's value with the successor's value, and recursively delete the in-order successor.
+// Approach:
+// I will use the BST property by traversing either the left or right subtree.
+// While traversing, I will check if the given key is less than the root node value.
+// If the key is smaller, I will move to the left subtree; if the key is greater, I will move to the right subtree.
+// Once I find the node whose value is equal to the key, I will delete it.
 
-// Example:- given root = [5,3,6,2,4,null,7] and key = 3, once we find the node with value `3`, 
-// we replace it with the smallest node from the right subtree (`4`).
-// After replacing, we still need to remove the original `4`. we call the `deleteNode` function to 
-// find and remove the node `4` from the right subtree of the replaced node.
-// Logic to remove node `4` (in the right subtree of the replaced node):
-//    - find `4` in the right subtree (where it originally was).
-//    - since `4` does not have any children (it's a leaf node), we can delete it by returning `null`.
+// In this way, the search space is reduced at each step, and the time complexity becomes O(log N)
+// instead of O(N), since we are only exploring one side of the tree (either left or right)
+// based on where the value may exist.
 
-// TC:- O(N), Explanation:- 
-//  - O(N), to traverse each node of the tree once.
-//  - O(N), to find the smallest node in the right subtree in the worst case.
-// Overall, TC:-  O(N) + O(N) = O(2N) = O(N).
-// SC:- O(N), the space used by the recursion stack is proportional to the height of the tree (O(N)) in the worst case.
+// Inside deleteNode function:
+// If root is null, then return null.
+// If key < root.val, then recursively call the left subtree and attach the updated subtree back to previous recursive
+// call like this:- root.left = deleteNode(root.left, key)
+// If key > root.val, then recursively call the right subtree and attach similarly:
+// root.right = deleteNode(root.right, key)
+// If root.val === key, it means we have found the node to delete.
 
-var deleteNode = function(root, key) {
-    if (root === null) {
-        return null;
-    }
+// To delete a node from a Binary Search Tree (BST), we handle three cases:
 
-// here, the 'root.right' and 'root.left' is updated to point to the new subtree after the node with the
-//  specified key has been deleted.
+// 1. If the node has no children (leaf node):
+//    → simply remove that node by returning null.
+
+// 2. If the node has one child:
+//    → replace the node with its non-null child (either left or right).
+
+// 3. If the node has two children:
+//    → find the node's inorder successor (smallest node in the right subtree),
+//    → replace the node's value with its inorder successor's value (smallest node in the right subtree).
+//    → delete that successor node from the right subtree.
+
+// TC: O(log N) in the best and average case, as we only traverse one path in a balanced BST.
+// In the worst case, if the tree is unbalanced (either left-skewed or right-skewed),
+// the time complexity becomes O(N).
+
+// Space Complexity (SC): O(H), where 'H' is the height of the tree due to the recursion stack.
+// In a balanced tree, H = O(log N), as the recursion stack depth is proportional to the height of the tree.
+// In an unbalanced tree (either left-skewed or right-skewed), H = O(N), as the recursion depth is proportional
+// to the number of nodes in the tree.
+
+// Example:
+    //     5
+    //    / \
+    //   3   6
+    //  / \   \
+    // 2   4   7
+
+// Given root = [5,3,6,2,4,null,7] and key = 3:
+// Once we find the node with value 3, we replace it with the smallest node from the right subtree, which is 4.
+// After replacing, we still need to remove the original 4. So, we again call the deleteNode function
+// to find and remove the node 4 from the right subtree of the replaced node.
+
+// Logic to remove node 4:
+// - Find 4 in the right subtree (where it originally exists).
+// - Since 4 has no children (it's a leaf node), we delete it by returning null.
+// - This null value is returned to its parent node, which updates its right child accordingly.
+
+// Note:-
+// root inside getMin(root):
+// It is a temporary pointer/reference used only for traversal.
+// It starts from the given subtree root and keeps moving left until it reaches the leftmost node.
+
+var deleteNode = function (root, key) {
+    if (root === null) return null;
+
     if (key < root.val) {
-        root.left = deleteNode(root.left, key); 
-    } else if (key > root.val) {
-        root.right = deleteNode(root.right, key);  
+        root.left = deleteNode(root.left, key);
+    } else if(key > root.val){
+        root.right = deleteNode(root.right, key);
     } else {
-        // once node found, perform deletion
-        // Case 1: Node has no children (it's a leaf node)
+        // Case 1: No Child
         if (root.left === null && root.right === null) {
             return null;
         }
-        
-        // Case 2: Node has only one child
-        if (root.left === null) {
-            return root.right;
-        }
-        if (root.right === null) {
-            return root.left;
+
+        // Case 2: One Child
+        if (root.left === null) return root.right;
+        if (root.right === null) return root.left;
+
+        // Case 3: Two Children
+        let minNode = getMin(root.right);
+        root.val = minNode.val;
+        root.right = deleteNode(root.right, minNode.val);
+    }
+
+    function getMin(root) {
+        while (root.left !== null) {
+            root = root.left
         }
 
-        // Case 3: Node has two children, then call the right subtree to find the inorder successor of the node which is 
-        // equal to 'key'.
-        let minNode = findMin(root.right);
-        root.val = minNode.val;  
-        root.right = deleteNode(root.right, minNode.val);  
+        return root;
     }
+
     return root;
 };
-
-// Helper function to find the minimum value node in the subtree
-// 'node = node.left' means that node will iterate through the left subtree until it finds null.
-function findMin(node) {
-    while (node.left !== null) {
-        node = node.left;
-    }
-     // return the address of node with the smallest value in the subtree
-    return node;
-}

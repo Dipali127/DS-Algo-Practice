@@ -1,47 +1,66 @@
 // Leetcode Problem:- 110
-// Optimal approach:
-// approach:-
-// Definition of a balanced binary tree:- A binary tree is balanced if, for every node in the tree, the 
-// difference between the heights of the left and right subtrees is no more than 1.
-// if the root is null, return 0 because an empty tree has a height of 0.
-// recursively calculate the height of the left subtree by calling findHeight on root.left and root.right.
-// if the left subtree is unbalanced (indicated by findHeight returning -1), immediately return -1. 
-// This serves as early termination, as there's no need to check further if the tree is already unbalanced.
-// similarly, if the right subtree is unbalanced (i.e., findHeight returns -1), return -1 immediately.
-// otherwise, if the absolute difference between the heights of the left and right subtrees is greater than 1, 
-// return -1 to indicate the current subtree is unbalanced.
-// but if the tree is balanced at the current node, return the maximum height between the left and right subtrees,
-// plus 1 to account for the current node itself.
-// the 'isBalanced function' simply checks whether findHeight returns -1. 
-// If it does, the tree is unbalanced; otherwise, the tree is balanced.
-// TC:- O(N) as each node visited once to find height of that current node and 
-// SC:- O(N), Explanation:- 
-// O(N) for a completely unbalanced (skewed) tree, where the recursive call stack depth equals the number of nodes.
-// O(log N) for a balanced binary tree, as the depth of the recursive call stack will be proportional to the height of the tree, which is log N.
+// Given a binary tree, determine if it is height-balanced.
+
+// Definition of Balanced Binary Tree:- 
+// A binary tree is balanced if, for every node in the tree, the absolute difference between the height of its left 
+// subtree and the height of its right subtree is less than or equal to  1.
+// Mathematically: |height(left) - height(right)| ≤ 1
+// That means the valid height difference can be 0 or 1 and -1 (absolute difference ≤ 1).
+
+// Optimal Approach:
+// Approach:-
+// I will use DFS traversal. I will recursively call the left and right subtrees to compute their heights.
+// For each recursive call, I will check whether the current subtree is balanced or not using the heights obtained
+// from the left and right subtrees.
+
+// Inside isBalanced:
+// - If the root is null, return true since an empty tree is balanced.
+// - Call the dfs function. If it returns -1, it means the tree is unbalanced.
+
+// Inside dfs function:
+// Base Case:
+// - If the root is null, return 0 since the height of an empty tree is 0.
+
+// Recursive Logic:
+// - Recursively call the left and right subtrees to compute their heights.
+// - If either the left or right subtree is unbalanced, return -1 immediately to avoid further unnecessary computations.
+// - Check if the absolute difference between left and right subtree heights is greater than 1.
+//   If yes, return -1 since the tree is unbalanced.
+// - Otherwise, return the height of the current node by taking:- 1 + max(leftHeight, rightHeight).
+
+// Note:- I use -1 as a special value to represent an unbalanced subtree while keeping the DFS return type consistent
+// as a numeric height.
+// Here, the height of a tree is defined as the number of nodes from the current node to the deepest leaf node along one path.
+
+// Time Complexity (TC):- O(N), where 'N' is the number of nodes in the tree, as each node of the tree is visited once.
+// Space Complexity (SC):- O(H), where 'H' is the height of the tree and is used by the recursive call stack.
+// In the worst case (completely unbalanced tree), SC = O(N), as the depth of the recursion stack is proportional
+// to the number of nodes in the tree.
+// In a balanced tree, SC = O(log N), as the depth of the recursion stack is proportional to the height of the tree.
+
+// In an unbalanced tree, height H = N because all nodes lie on a single path.
+// In a balanced tree, height H = log N because nodes grow eaxponentially level by level.
 
 var isBalanced = function (root) {
-    return findHeight(root) != -1;
-    function findHeight(root) {
-        if (root == null) {
+    if (root === null) return true;
+    return dfs(root) !== -1;
+
+    function dfs(root) {
+        if (root === null) {
             return 0;
         }
 
-        let left = findHeight(root.left);
-        if (left === -1) {
-            return -1;
-        }
-        let right = findHeight(root.right);
-        if (right === -1) {
+        let leftHeight = dfs(root.left);
+        let rightHeight = dfs(root.right);
+
+        if (leftHeight === -1 || rightHeight === -1) {
             return -1;
         }
 
-        if (Math.abs(left - right) > 1) {
+        if (Math.abs(leftHeight - rightHeight) > 1) {
             return -1;
         }
 
-        return Math.max(left, right) + 1;
+        return Math.max(leftHeight, rightHeight) + 1;
     }
-
 };
-
-

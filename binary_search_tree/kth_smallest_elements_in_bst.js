@@ -1,73 +1,87 @@
 // Leetcode Problem:- 230
-// brute force appraoch:- using inorder traversal.
-// store inorder traversal of the given bst in 'inorderArr' array.
-// once the inorder traversal is complete, simply return the kth smallest element from the inorderArr.
-// TC:- O(N) , to visit all nodes of given bst using inorder traversal. 
-// SC:- O(N), Explanation:-
-// O(N):- to store all values of tree in 'inorderArr' array.
-// O(H):- stack space used by the recursive function, where 'H' is the height of the BST. 
-// And this could be O(log N) for a balanced tree or O(N) for a skewed tree.
-// overall, SC:- O(N)
+// Problem:
+// Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values
+// of the nodes in the tree.
+
+// Brute Force Approach:
+// Approach:
+// I will perform an inorder traversal on the given Binary Search Tree (BST).
+// Since an inorder traversal of a valid BST visits nodes from smallest to largest (in strictly increasing order),
+// while performing the traversal, I will store each visited node’s value in a result array.
+
+// After that, I will return the (k - 1)th value from the result array, since arrays use 0-based indexing.
+
+// Time Complexity:- O(N), Explanation:-
+// O(N):- to perform the inorder traversal of the tree, as each node of the tree is visited exactly once.
+
+// Space Complexity: O(H), where 'H' is the height of the tree due to the recursion stack.
+// In a balanced tree, H = O(log N), as the recursion stack depth is proportional to the height of the tree.
+// In an unbalanced tree (either left-skewed or right-skewed), H = O(N), as the recursion stack depth is proportional
+// to the number of nodes in the tree.
+// O(N) is also used by the result array to store all nodes of the given BST in sorted order.
+// Overall, SC:- O(N).
 
 var kthSmallest = function(root, k) {
-    let inorderArr = inorder(root,[]);
-    function inorder(root,result){
-        if(root === null){
-            return;
-        }
-        inorder(root.left,result);
-        result.push(root.val);
-        inorder(root.right,result);
+    let result = [];
+    inorder(root);
+    function inorder(root){
+        if(root === null)return;
 
-        return result;
+        inorder(root.left);
+        result.push(root.val);
+        inorder(root.right);
     }
 
-    return inorderArr[k-1];
+    return result[k-1];
 };
 
-// optimal appraoch:- use of inorder traversal.
-// use inorder traversal, but instead of storing all node values in an array,
-// we increment an iterator counter as we visit each node.
-// when "iterator === k", we have found the kth smallest element, and we store the current node's value in prev 
-// and return it.
-// TC:- O(N), to visits each node once during the inorder traversal.
-// SC:- O(N), O(H), where H is the height of the tree, which corresponds to the recursion stack size.
-//  It is O(log N) for a balanced tree and O(N) for a skewed tree.
+// Optimal Approach: Inorder Traversal with `prev` variable
+// Approach:
+// I will perform an inorder traversal on the given binary search tree (BST).
+// Since an inorder traversal of a BST (Left → Root → Right) visits the smaller values of the tree first,
+// I will use a counter 'i' to keep track of how many nodes have been visited so far.
 
-// How inorder start traversing the node of tree:-
-// The inorder traversal first goes all the way left down the tree until it hits a leaf (or null).
-// When the left node is null, it means we are at the leftmost leaf or beyond.
-// Then it starts processing nodes going back up (backtracking):
-// At each node, increment the counter i (which counts how many nodes have been visited so far in sorted order).
-// Check if i === k (means we've found the k-th smallest).
-// If yes, save the node value and stop further traversal.
-// If not found, move to the right subtree and repeat the same process.
-// So the traversal order for your example [3,1,4,null,2] with k=1 is:
-// Go left: from 3 → 1 → left of 1 is null (go back)
-// At node 1: increment i to 1 → equals k → found the answer → return
-// Stop here without going further.
+// While traversing:
+// - I will first recursively traverse the left subtree.
+// - Then I will increment the counter 'i' for the current node.
+// - If 'i' becomes equal to k, it means the current node is the kth smallest,
+//   so I will store its value in the 'prev' variable and stop further traversal.
+// - Otherwise, I will continue traversing the right subtree.
 
+// To optimize, I will use early return (boolean) so that once the kth smallest element is found,
+// the recursion stops immediately without exploring unnecessary nodes.
 
-var kthSmallest = function(root, k) {
-    let prev = null;
-    let iterator = 0;
-    
-    function inOrder(root) {
-        if (root === null) {
-            return;
-        }
+// Time Complexity in worst case: O(N), as we may visit all nodes of the tree in inorder traversal,
+// since each node is visited exactly once.
+// O(H + k) in the best/average case due to early stopping, where 'H' is the height of the tree and 'k' is the kth element.
+// Due to early stopping, we only traverse nodes until we reach the k-th smallest element in inorder traversal,
+// so we avoid visiting all N nodes in the tree.
 
-        inOrder(root.left);
-        
-        iterator++;
-        if (iterator === k) {
-            prev = root.val;
-            return;
-        }
+// Space Complexity: O(H), where 'H' is the height of the tree due to the recursion stack.
+// In a balanced tree, H = O(log N), as the recursion stack depth is proportional to the height of the tree.
+// In an unbalanced tree (either left-skewed or right-skewed), H = O(N), as the recursion depth is proportional
+// to the number of nodes in the tree.
 
-        inOrder(root.right);
-    }
+// Note:-
+// What if we only use return and not a boolean return value?
+// A simple return exits only the current recursive call, whereas a boolean return value enables early termination by
+// signaling previous recursive calls to stop further traversal.
 
-    inOrder(root);
+var kthSmallest = function (root, k) {
+    let i = 0, prev = null;
+    inorder(root);
     return prev;
-}
+    function inorder(root) {
+        if (root === null) return false;
+
+        // if left subtree itself found kth smallest, return true to stop further traversal.
+        if (inorder(root.left)) return true;
+        i++;
+        if (i === k) {
+            prev = root.val;
+            return true;
+        }
+        // if right subtree itself found kth smallest, return true to stop further traversal.
+        if (inorder(root.right)) return true;
+    }
+};

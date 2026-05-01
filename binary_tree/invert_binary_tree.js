@@ -2,8 +2,8 @@
 // Optimal Approach :-
 
 // Approach:
-// I will use DFS traversal and For each node, I will swap its left and right children.
-// Then I will recursively apply the same process to the left and right subtrees.
+// I will use DFS traversal. For each node, I will swap its left and right pointers, and then recursively apply the same
+// process to its left and right subtrees.
 
 // Solution:
 // First, check if the root is null. If so, return null since we can't invert an empty tree.
@@ -13,17 +13,22 @@
 // Base Case:
 // if root is null return, since we cannot invert an empty tree.
 
-// Recursive Logiv:
-// for each node, swap the current node's left and right subtrees (note: the node values are not swapped, 
-// only their references).
-// After swapping the current node, recursively call the function 'invertTree' on the left and right subtrees to 
+// Recursive Logic:
+// for each node, swap its left and right child pointers(note: the node values are not swapped, 
+// only their references and after swapping, root's left pointer points to right subtree and root's right pointer points
+// to the left subtree).
+// After swapping the current node, recursively call the function 'dfs' on the left and right subtrees to 
 // invert them.
 // Finally, return the root, which now contains the inverted tree.
 
-// TC:- O(N), where 'N' is the number of nodes in the tree, as each node is visited once.
-// SC: O(H), where 'H' is the height (or depth) of the tree. 
-//     - In the worst case (for a skewed tree), the space complexity is O(N).
-//     - For a balanced tree, the space complexity is O(logN) due to the height being proportional to logN.
+// Time Complexity (TC):- O(N), where 'N' is the number of nodes in the tree, as each node of the tree is visited once.
+// Space Complexity (SC):- O(H), where 'H' is the height of the tree and is used by the recursive call stack.
+// In the worst case (completely unbalanced tree), SC = O(N), as the depth of the recursion stack is proportional
+// to the number of nodes in the tree.
+// In a balanced tree, SC = O(log N), as the depth of the recursion stack is proportional to the height of the tree.
+
+// In an unbalanced tree, height H = N because all nodes lie on a single path.
+// In a balanced tree, height H = log N because nodes grow exponentially level by level.
 
 var invertTree = function (root) {
     if (root === null) return null;
@@ -43,7 +48,7 @@ var invertTree = function (root) {
 // Optimal Approach 2: Using BFS
 // Approach:
 // First, check if the root is null. If so, return null since we can't invert an empty tree.
-// Otherwise, add the root node to a queue which to help invert the tree level by level.
+// Otherwise, add the root node to a queue to help invert the tree level by level.
 // Iterate through the queue, and for each node, swap its left and right subtrees.
 // If the current node has a left or right child, add them to the queue.
 // Finally, return the root, which now contains the inverted tree.

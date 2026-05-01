@@ -3,9 +3,8 @@
 // Optimal approach: Using DFS (Depth-First Search)
 
 // Approach:
-// I will use DFS traversal.
-// I will recursively traverse the left and right subtrees and increment the count
-// whenever I encounter a leaf node.
+// I will use DFS traversal, and for each node, I will check if it is a leaf node. If yes, then I will increment the 
+// count otherwise, i will recursively call the left and right subtree.
 
 // Solution:
 // Inside countLeaves function:
@@ -24,10 +23,15 @@
 
 // After traversal is complete, return the count.
 
-// Time Complexity (TC): O(N), where N is the number of nodes in the tree.
-// Space Complexity (SC): O(H), where H is the height of the tree.
-// - Worst case (skewed tree): O(N)
-// - Balanced tree: O(log N)
+// Time Complexity (TC):- O(N), where 'N' is the number of nodes in the tree, as each node of the tree is visited once.
+// Space Complexity (SC):- O(H), where 'H' is the height of the tree and is used by the recursive call stack.
+// In the worst case (completely unbalanced tree), SC = O(N), as the depth of the recursion stack is proportional
+// to the number of nodes in the tree.
+// In a balanced tree, SC = O(log N), as the depth of the recursion stack is proportional to the height of the tree.
+
+// In an unbalanced tree, height H = N because all nodes lie on a single path.
+// In a balanced tree, height H = log N because nodes grow exponentially level by level.
+
 
 class Solution {
     countLeaves(root) {
