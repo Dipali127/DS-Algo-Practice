@@ -5,8 +5,9 @@
 // if the current substring is a palindrome, update the longPal variable with the new length of the palindrome
 // substring and also update longSub.
 // after iterating through each possible substring, return the longest palindromic substring, longSub.
-// Time Complexity: O(N^3), to consider each possible substring and iterate through each substring 
-// while calling the function isPalindrome from the inner loop.
+// Time Complexity: O(N^3), to consider each possible substring and to iterate through each substring 
+// by calling function palindrome from the inner loop.
+// In worst case, if the entire substring is palindrome, palidrome function traverse through the entire substring.
 // Space Complexity: O(1), since no additional space is used apart from the longPal and longSub variables,
 //  which take constant space.
 
@@ -18,7 +19,7 @@ var longestPalindrome = function(s) {
             if(palindrome(s, i, j)){
                 if(longPal < j-i+1){
                     longPal = j-i+1;
-                    longSub= s.substr(i,j+1);
+                    longSub= s.substr(i, j-i+1);
                 }
             }
         }

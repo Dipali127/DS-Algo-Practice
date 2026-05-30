@@ -56,6 +56,7 @@ var swapNodes = function (head, k) {
         length++;
         temp = temp.next;  
     }
+    
     let i = 1, node1 = null, node2 = null;
     let current = head;
 
@@ -91,8 +92,8 @@ var swapNodes = function (head, k) {
 //  traversal is complete.
 // iterate through the linked list using a 'while' loop.
 // inside while loop, i will first find out kth node from the beginning of linked list by decrementing k by 1;
-// once i will get kth node from the start, i will initialize p1 to temp which is kth node from start and also
-// initialize p2 to head.
+// once i will get kth node from the start, i will initialize p1 to temp which is kth node from start and 
+// also initialize p2 to head.
 // Now, p1 will not move since, it is already at its correct position and p2 will move to find the kth node from
 // end.
 // finally, the values of 'p1' and 'p2' are swapped.

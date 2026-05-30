@@ -14,21 +14,27 @@
 // overall, TC: O(N) + O(N) = O(2N) = O(N).
 // SC: O(N), as extra space is used to store the rotated array.
 
-let nums = [1,2,3,4,5,6,7], k = 3; 
-console.log(rotateRight(nums,k));
-function rotateRight(nums, k){
+var rotate = function (nums, k) {
     let n = nums.length;
+    // if k is greater than length of array, make k less than or equal to length of array.
+    k = k % n;  
+
     let newArr = [];
-    for(let i = n-k;i<n;i++){
+
+    for (let i = n - k; i < n; i++) {
         newArr.push(nums[i]);
     }
 
-    for(let i = 0;i<n-k;i++){
+    for (let i = 0; i < n - k; i++) {
         newArr.push(nums[i]);
     }
+    
+    for(let i = 0; i < nums.length; i++){
+        nums[i] = newArr[i];
+    }
 
-    return newArr;
-}
+    return nums;
+};
 
 // Optimal Approach:
 // Approach:

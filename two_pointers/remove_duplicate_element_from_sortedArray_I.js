@@ -13,7 +13,7 @@
 var removeDuplicates = function(nums) {
     for(let i=0;i<nums.length;i++){
         if(nums[i] === nums[i+1]){
-            nums.splice(i,1);
+            nums.splice(i, 1);
             i--;
         }
     }
@@ -26,7 +26,8 @@ var removeDuplicates = function(nums) {
 // and pointer j is used to traversal the given array 'nums'.
 // set i to 0. this will keep track of the position where the next unique element should be placed.
 // start j from 1, as i initially points to the first element which is considered unique.
-// while iterating, for each element at index j, check if it is different from the element at index i (nums[j] !== nums[i]).
+// while iterating, for each element at index j, check if it is different from the element at index i
+// (nums[j] !== nums[i]).
 // if the current element nums[j] is different from nums[i], it is a new unique element:-
 //       - increment i to move to the next position for the unique element.
 //       - assign nums[j] to nums[i] to place the new unique element in the correct position.

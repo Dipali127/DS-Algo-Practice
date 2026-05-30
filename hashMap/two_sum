@@ -41,3 +41,7 @@ var twoSum = function(nums, target){
         }
     }
 }
+
+// Why not two pointer?
+// Because for two pointer, we have to sort the array and sorting the array changes the indices of the elements but the
+// problem requires original indices.

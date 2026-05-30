@@ -20,8 +20,8 @@ var containsDuplicate = function(nums){
 }
 
 // Optimal Approach:
-// use of a Set to store unique elements of the array and while iterating through the array, check if the current iterated
-// element already exists in the hash set. If it does, this means a duplicate element found, and return true.
+// use of a hash set to store unique elements of the array and while iterating through the array, check if the current 
+// iterated element already exists in the hash set. If it does, this means a duplicate element found, and return true.
 // And if the element is not in the has set, add it to the hash set and continue the iteration.
 // Once the loop completes without finding any duplicates, return false. 
 // TC:- O(N), to iterate through the array to store unique element of it into hash set.

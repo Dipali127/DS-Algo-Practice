@@ -38,9 +38,9 @@ var detectCycle = function (head) {
 // start index of the cycle.
 // if there is no cylce in the list then return null.
 // TC: O(N), Explanation:-
-// O(N/2):- to detect loop in linked list(first phase) 
-// O(N/2):- to find start index of the cycle(second phase).
-// overall, TC:- O(N/2) + O(N/2) = O(2(N/2)) = O(N).
+// O(N):- to detect loop in linked list(first phase) 
+// O(N):- to find start index of the cycle(second phase).
+// overall, TC:- O(N) + O(N) = O(2(N)) = O(N).
 // SC:- O(1) as there are only few pointers used.
 
 // KEEP NOTE:-

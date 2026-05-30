@@ -1,4 +1,46 @@
-// Insertion:-
+// What is Linked List?
+// A Linked List is a linear data structure where elements are stored in nodes and each node is connected 
+// using pointers/references/address. That means each node stores the address/reference of the next node.
+
+// Unlike Arrays where elements  are stored in continuous memory locations, Linked lists store elements/nodes 
+// anywhere in memory and Nodes are later connected using links.
+
+// Structure of a Node:
+
+// A node usually contains:-
+// data/value.
+// pointer/reference to another node.
+
+// Example:
+// [10 | next] -> [20 | next] -> [30 | null]
+
+// Here:
+// 10, 20, 30 are values.
+// next stores address/reference of next node.
+// null means end of list.
+
+// Why Linked List?
+// Main advantage:
+// Linked List has easy insertion and deletion, Because you don't need to shift elements like arrays.
+
+// Types of Linked List:-
+// -> Singly Linked List
+// -> Doubly Linked List
+
+// (i) Singly Linked List:-
+// Singly linked list is a linear data structure that contains a single next pointer in each node, where the next
+// pointer points to the next node.
+
+// (ii) Doubly Linked List:-
+// Doubly linked list is a linear data structure that contains two pointers in each node: previous and next, where
+// the previous pointer points to the previous node and the next pointer points to the next node.
+
+// Base Case for all linked list problem based on problem statement:-
+// Before accessing node.next, ensure node is not null.
+// Before accessing node.next.next, ensure both node and node.next are not null.
+
+//     
+//                                        DELETION
 // (1) delete node from head of linked list:-
 // approach:- 
 // Take a pointer temp which points to the head of the linked list (the node to be deleted).
@@ -107,7 +149,8 @@ printList(head);
 
 // (3)Delete kth node from the linked list:-
 // appraoch:- 
-// if k is 1, delete the head node by moving the head to the next node and set the old head's next pointer to null with the help of temp.
+// if k is 1, delete the head node by moving the head to the next node and set the old head's next pointer to 
+// null with the help of temp.
 // use temp to traverse the list and prev to keep track of the previous node.
 // traverse the list until you reach the k-th node. 
 // if k is not equal to 1, update prev.next to temp.next to skip the current node and set temp.next to null.
@@ -167,10 +210,10 @@ function printList(head) {
 
 printList(head);
 
-// Insetion:-
-// Insert node at head of linked list:-
-// appraoch:- 
-// change newNode next to head;
+//                                            INSERTION:-
+// (1) Insert node at head of linked list:-
+// approach:- 
+// change newNode next to head.
 // change head to newNode which is new head of the linked list.
 // TC: O(N) Explanation:- 
 // O(1) to insert the new node at the head.
@@ -211,7 +254,7 @@ function printList(head) {
 printList(head);
 
 // (2) Insert node at last of the linked list:-
-// appraoch:- 
+// approach:- 
 // Check if the head is null. If so then set the head to the new node and return it.
 // otherwise, travers the list until reach to the last node.
 // once reach at last node then update last node next by new node.
@@ -300,6 +343,7 @@ function insertKth(head,newNode,k){
         if(count === k){
             newNode.next = temp.next;
             temp.next = newNode;
+            break;
         }
         temp = temp.next;
     }

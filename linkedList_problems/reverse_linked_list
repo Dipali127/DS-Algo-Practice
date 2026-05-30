@@ -1,6 +1,7 @@
 // Leetcode Problem:
-// appraoch:- take prev pointer which is intialised with null as This will become the new head of  the
-// the reversed list as the original head's next pointer will become null when the list is reversed.
+// appraoch:- take prev pointer which is intialised with null as This will help to reverse the list and becomes
+// the new head of the the reversed list as the original head's next pointer will become null when the list is 
+// reversed.
 // traverse the list using current pointer (which is intially pointing to head of linked list) until
 // the current!=null.
 // Traverse the list while current is not null.

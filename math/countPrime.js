@@ -11,14 +11,15 @@
 // I will run a loop from 2 to less than num to check if the number is divisible by any other number.
 // if the number is divisible by any other number, I will immediately return false, indicating that it's not prime.
 // if no divisors are found, i will return true, indicating that the number is prime.
-// Time Complexity: O(N²) because the outer loop runs n times, and for each number, the isPrime function checks divisibility from 2 to num-1.
+// Time Complexity: O(N²) because the outer loop runs n times, and for each number, the isPrime function checks 
+// divisibility from 2 to num-1.
 // In the worst case, this results in O(n * n) time complexity.
 // SC:- O(1) since no auxiliary space(additional) space is used apart from count variable.
 
 var countPrimes = function(n) {
     let count = 0;
     for(let i = 2; i < n; i++){
-        if(isPrime){
+        if(isPrime(i)){
             count++;
         }
     }
@@ -39,9 +40,10 @@ var countPrimes = function(n) {
 // Optimal approach: using Sieve of Eratosthenes
 // approach:
 // Instead of checking for each number whether it is prime or not, which increases the time complexity, 
-// I will use the Sieve of Eratosthenes. This approach marks all multiples of a given number as non-prime 
-// since they are divisible by a prime number. 
-// what i wil do, i will run a loop until the square root of 'n' because all numbers greater than the square root must have already been marked by smaller numbers as non-prime.
+// I will use the Sieve of Eratosthenes. This approach marks all multiples of current prime number as non-prime 
+// since they are divisible by a current prime number. 
+// what i wil do, i will run a loop until the square root of 'n' because all numbers greater than the square root
+// must have already been marked by smaller numbers as non-prime.
 // and In each iteration, if the current number is prime, I will mark all of its multiples as non-prime 
 // (set them to 0) because multiples of any prime number cannot be prime themselves. 
 // TC:- O(N LOG LOG N) 

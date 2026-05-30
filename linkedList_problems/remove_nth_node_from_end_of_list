@@ -48,7 +48,7 @@ var removeNthFromEnd = function(head, n) {
 //
 // Time Complexity: O(N)
 //   - O(N) to move fast pointer n steps initially
-//   - O(N) in worst case to move both fast and slow until end
+//   - O(N) in worst case to move both fast and slow until end of the linked list.
 //   - Worst case: if n = 1 (deleting last node), both pointers move almost the whole list → O(N)
 //   - Best case: if n = length (deleting head node), no second traversal → O(1)
 //   - Overall: O(N)

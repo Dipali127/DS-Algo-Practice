@@ -1,7 +1,8 @@
 // Leetcode Problem:- 83
 // Optimal Approach  
 // Approach:-  
-// Base Case: If head is null or head.next is null, return head because the list is either empty or has only one node.  
+// Base Case: If head is null or head.next is null, return head because the list is either empty or has
+// only one node.  
 // Otherwise, use a pointer 'temp' pointing to the head of the linked list.  
 // Run a while loop until 'temp.next' is not null, and while running the loop:  
 // - If temp.val === temp.next.val, update temp.next to temp.next.next to remove the duplicate node.  

@@ -2,14 +2,15 @@
 // Brute Force Approach:
 // Approach:
 // I will use DFS traversal to construct the tree recursively.
-// I will recursively build the left and right subtrees based on the current root node taken from the preorder array.
-// To get the root node, I will use the preorder array.
+// I will recursively build the left and right subtrees based on the current root node taken from the preorder 
+// array.
 // To divide the tree into left and right subtrees based on the current root node, I will use the inorder array.
 
 // Solution:
-// I will use the 'idx' variable in the main function 'buildTree' to keep track of the current root in the preorder array.
-// Since the preorder array always gives the root node first for each subtree, I will use preorder[idx++] to get the
-// current root node and then increment 'idx' to move to the next root for recursive left and right subtree calls.
+// I will use the 'idx' variable in the main function 'buildTree' to keep track of the current root in the preorder
+// array.
+// Since the preorder array always gives the root node first for each subtree, I will use preorder[idx++] to get
+// the current root node and then increment 'idx' to move to the next root for recursive left and right subtree calls.
 
 // Base Case:
 // In the 'construct' function, if 'start > end', it means there is no subtree to construct, so I return null.
@@ -73,10 +74,10 @@
 // = O(N log N)
 
 // Space Complexity (SC): O(H), where 'H' is the height of the constructed tree due to the recursion stack.
-// If the constructed tree is balanced, then H = O(log N), as the recursion stack depth is proportional to the height of
-// the tree.
-// If the constructed tree is unbalanced (either left-skewed or right-skewed), then H = O(N), as the recursion stack
-// depth is proportional to the number of nodes in the tree.
+// If the constructed tree is balanced, then H = O(log N), as the depth of recursion stack is proportional to the 
+// height of the tree.
+// If the constructed tree is unbalanced (either left-skewed or right-skewed), then H = O(N), as the depth of
+// recursion stack depth is proportional to the number of nodes in the tree.
 
 // Extra Space:
 // O(N) for the constructed tree nodes themselves (output tree).
@@ -143,8 +144,8 @@ var buildTree = function(preorder, inorder) {
 // To divide the tree into left and right subtrees based on the current root node, I will use the HashMap.
 
 // Why HashMap?
-// In the brute-force approach, for every root node, linearly scanning through the inorder array to find the current root
-// node’s index increases the time complexity.
+// In the brute-force approach, for every root node, linearly scanning through the inorder array to find the 
+// current root node’s index increases the time complexity.
 // But with a HashMap, lookup for the current root node is reduced to O(1).
 
 // Example:
@@ -190,10 +191,11 @@ var buildTree = function(preorder, inorder) {
 // So overall:
 // O(N) + O(N) = O(2N) = O(N)
 
-// Space Complexity (SC):
-// O(H), where 'H' is the height of the constructed tree due to recursion stack.
-// If the constructed tree is balanced, then H = O(log N).
-// If the constructed tree is unbalanced (left-skewed or right-skewed), then H = O(N).
+// Space Complexity (SC): O(H), where 'H' is the height of the constructed tree due to the recursion stack.
+// If the constructed tree is balanced, then H = O(log N), as the depth of recursion stack is proportional to the 
+// height of the tree.
+// If the constructed tree is unbalanced (either left-skewed or right-skewed), then H = O(N), as the depth of
+// recursion stack depth is proportional to the number of nodes in the tree.
 
 // Additional Space:
 // O(N) for the HashMap storing inorder value → index.

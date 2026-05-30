@@ -1,24 +1,35 @@
 // Leetcode Hard Problem:- 987
 // Problem:-
-// Given the root of a binary tree, calculate the vertical order traversal of the binary tree.
+// Given the root of a binary tree, return the vertical order traversal of the binary tree.
 // Group nodes column-wise (vertical) from left to right.
 // Inside each column:
 // Traverse top → bottom (based on row)
 // If multiple nodes have the same row AND same column, then sort them by value
 
 // Approach:
-// I will use BFS traversal and traverse the nodes level by level along with their horizontal distance and row.
-// I will group the nodes based on the same horizontal distance in a hash map to get the vertical view of the tree.
+// I will use BFS traversal to traverse the tree level by level along with each node’s horizontal distance by 
+// imagining vertical lines across the tree.
+// I will use hash map to group all the nodes corresponding to each vertical line(horizontal distance) to get the 
+// vertical view of the tree.
 
-// Horizontal distance assigns a column index to each node in a tree, which helps group nodes vertically from left to 
-// right. Nodes with the same horizontal distance belong to the same vertical column.
+// That means I will not only perform level-by-level traversal, but I will also store the horizontal distance of 
+// each node to compute the vertical view of the tree.
+
+// In the case of vertical traversal, Horizontal distance assigns a column index to each node in a tree, which
+// helps to group the nodes vertically from left to right.
+// Nodes with the same horizontal distance belong to the same vertical column.
+
+// Horizontal distance assigns a column index to each node in a tree, which helps group nodes vertically from left 
+// to right.
+// Nodes with the same horizontal distance belong to the same vertical column.
 
 // Solution:
 // Call the verticalTraversal function and return its result to get the vertical view of the tree.
 
 // Inside verticalTraversal function:
 // - Take a result array to store the vertical view of the tree.
-// - Take a hash map where the key is horizontal distance and the value is the group of nodes for that horizontal distance.
+// - Take a hash map where the key is horizontal distance and the value is the group of nodes for that horizontal
+//   distance.
 // - Take a queue to perform level-by-level traversal.
 // - Initially, store the root node along with its horizontal distance (0) and row (0) in the queue.
 
@@ -32,20 +43,36 @@
 //   - For each column, sort nodes by row first, and if rows are the same, then sort by value.
 //   - Extract the values and add them to the result array.
 
-// Time Complexity:- O(N log N)
-// Explanation:
-// - BFS traversal takes O(N)
-// - Sorting nodes inside each column takes O(N log N) in the worst case
+// Time Complexity:- O(N + K log K), Explanation:-
+// O(N) is used to traverse each node of the tree exactly once.
+// O(K log K) is used for sorting the map entries based on horizontal distance.
+// In the worst case, if the tree is unbalanced (left-skewed or right-skewed),
+// where each node has a unique horizontal distance then K = N.
+// So, in the worst case, the time complexity becomes O(N log N).
 
 // Space Complexity:- O(N), Explanation:-
-// O(N) is used by the queue to store nodes, and in the worst case when the tree is balanced,
+// O(N) is used by the queue to store nodes, and in the worst case, when the tree is balanced,
 // the queue stores the maximum number of nodes at the last level.
-// O(N) is used by the result array to store the vertical traversal of the tree.
-// O(N) is used by the hash map to store nodes grouped by horizontal distance.
-// So, overall SC:- O(N)
+
+// O(N) is used by the result array to store the vertical view nodes of the tree.
+// In the worst case, if the tree is unbalanced (either left-skewed or right-skewed),
+// each node has a unique horizontal distance, so all nodes will appear in the vertical view.
+
+// O(N) is used by the hash map to store vertical view nodes.
+// In the worst case, if the tree is unbalanced (either left-skewed or right-skewed),
+// where each node has a unique horizontal distance, all nodes will be stored in the hash map.
+
+// So, overall SC:- O(N) + O(N) + O(N) = O(3N) = O(N).
+
+// Why we sort in vertical View?
+// Because BFS traversal processes nodes like:- level 0 → level 1 → level 2.
+// But the final output of the vertical view should be: HD -2 → -1 → 0 → 1 → 2, that is, nodes from smallest HD to
+// largest HD.
+// That's why we sort the map entries to arrange nodes from smallest Horizontal Distance to largest Horizontal
+// Distance.
 
 
-// For nodes in the same column (same HD): first sort by row (top to bottom).
+// For nodes in the same column (same HD): first sort by row (top to bottom of the tree).
 // If rows are the same, then sort by value.
 
 // Take below example for how same row can contain same hd(column).
@@ -72,9 +99,7 @@
 //   [ 1, [ [1,4] ]]
 // ]
 
-
-// Value at horizontal distance 0 = [ [0,3], [2,5], [2,2] ]
-// where first value is row and second is node value.
+// Value at horizontal distance 0 = [ [0,3], [2,5], [2,2] ], where first value is row and second is node value.
 
 // So, how sorting works:-
 // At [0,3] and [2,5], rows are different, so sort by row → no change.

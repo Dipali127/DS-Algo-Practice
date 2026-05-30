@@ -39,10 +39,26 @@ var reorderList = function(head){
     return dummyNode.next;
  }
  
- // Optimal Approach:- use of floyd's cycle finding algortihm also known as the tortoise and hares 
- // algorithm using slow and fast pointer.
-// First, find the middle of the linked list using slow and fast pointers. Then, reverse the nodes after the middle
-// node and merge them alternately with the first half of the list.
+// Optimal Approach:- use of floyd's cycle finding algortihm also known as the tortoise and hares 
+// algorithm using slow and fast pointer.
+// Approach:-
+
+// "To reorder the linked list according to the problem statement, I divide the list into two halves.
+// I use the slow and fast pointer approach to find the middle node of the linked list. 
+// Slow moves one step at a time, while fast moves two steps at a time. When fast reaches the end, 
+// slow will be at the middle.
+// After finding the middle, I reverse the second half of the linked list starting from slow.next, and
+// then disconnect the first half by setting slow.next = null.
+
+// The reason for reversing the second half is that the required order is:
+// L0 → Ln → L1 → Ln-1 → L2 → Ln-2
+
+// So after taking the first node from the first half, we need the last node of the list next. 
+// Reversing the second half gives us direct access to nodes from the end in the required order.
+
+// Finally, I merge both halves alternately:
+// first node from first half, first node from reversed second half, and so on.
+
  // TC:- O(N), Explanation:-
  // O(N):- to find the middle of the linked list.
  // O(N):- to reverse the second half of the linked list.

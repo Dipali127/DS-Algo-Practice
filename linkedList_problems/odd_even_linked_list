@@ -30,6 +30,7 @@
         arr.push(even.val);
         even = even.next.next;
     }
+
     if(even !== null){
         arr.push(even.val);
     }
@@ -44,7 +45,7 @@
  }
 
 // optimal appraoch:-
-// appraoch:- separate the given linked list into two parts where one part contain all odd nodes indices
+// approach:- separate the given linked list into two parts where one part contain all odd nodes indices
 // and another part contain all even nodes indices.
 // for separating the list take two pointers where one pointer points to odd node index of the given list 
 // and another pointer points to even node index of the given list.
@@ -64,8 +65,9 @@
     let even = head.next;
     let evenNodeHead = even;
 
-// ensure that even should not be null as well even's next should not be null because If `even` hasn't reached the 
-// end of the list, then `odd` also cannot be null, i because odd is at front of even.
+// We use even && even.next because during each iteration we access even.next.next.
+// Since odd and even pointers move together in this pattern, if even is valid, odd is also safely 
+// positioned, so no separate check for odd is needed.
 
     while(even !== null && even.next !== null){
         odd.next = odd.next.next;

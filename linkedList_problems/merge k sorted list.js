@@ -12,6 +12,9 @@
 // - Overall: O(N) + O(NLOGN) + O(N) = O(NLOGN)
 // Space Complexity: O(N) to use an array to store all the nodes of the k linked lists.
 
+// Note:- Although, i have use nested loops to add nodes of k list into array, nodes of all k list are travesed only
+// once.
+
 var mergeKLists = function(lists) {
     let arr = [];
     for(let i = 0; i < lists.length; i++){
@@ -37,7 +40,8 @@ var mergeKLists = function(lists) {
 // I will use a MinPriorityQueue to maintain a priority queue and store the first node of each linked list into the heap.
 // Then, I will create a dummy node to merge the linked lists into one by iterating through the heap.
 // while iterating through the heap:
-// I will extract the top node (smallest value) from the min-heap and add it to the dummyNode list because the top of the heap always contains the node with the minimum value.
+// I will extract the top node (smallest value) from the min-heap and add it to the dummyNode list because the top of the 
+// heap always contains the node with the minimum value.
 // I will then check if the current node has a next node. If it exists, I will add that next node to the heap and the heap will automatically reorder itself to maintain the min-heap property, ensuring that the node with the smallest value is always at the top.
 // After processing through all the nodes in the heap, I will return the dummyNode.next, which will point to the head of the merged linked list.
 // Time Complexity: O(N * log K)

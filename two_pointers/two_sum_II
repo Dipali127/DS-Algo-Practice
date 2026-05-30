@@ -33,6 +33,10 @@
 // TC: o(N), where N is the length of the array.  as the array is traversed in a single pass..
 // SC: o(1), as there is no additional space used apart from the pointers.
 
+// Note:-
+// regex.test(s[i]) checks whether the current character is alphanumeric (a letter or digit). 
+// If it matches the regular expression, I convert it to lowercase and add it to the new string; otherwise, I ignore it.
+
 var twoSum = function(arr, target) {
     let i = 0;
     let j = arr.length-1;

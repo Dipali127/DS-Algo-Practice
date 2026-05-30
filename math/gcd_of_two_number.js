@@ -25,6 +25,7 @@ function findgcd(a, b) {
     if (a === b) {
         return a;
     }
+    
     return a > b ? findgcd(a - b, b) : findgcd(a, b - a);
 }
 

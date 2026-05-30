@@ -36,33 +36,6 @@ var mergeKLists = function(lists) {
 
 
 
-// What is Heap?
-// Heap data structure is a complete binary tree that satisfies the heap property(either the min heap or the max heap).
-// What is a Min-Heap?
-// Min Heap data structure is a complete binary tree that satisfies the min heap property.
-// Min-Heap Property:
-// The smallest element is always at the root (top) and Every parent node's value is smaller than or equal to its child nodes' values.
-// How Does a Min-Heap Work?
-// The smallest element is always at the root of the heap.
-// When inserting or removing elements:
-// The heap adjusts itself to maintain the min-heap property.
-// This involves operations like:
-// Heapify: Rearranges the elements to satisfy the heap property.
-// Bubble Up: Moves an element upward to maintain the heap property during insertion.
-// Bubble Down: Moves an element downward to maintain the heap property during removal.
-
-// Declaring a Min-Heap in JavaScript
-// we can create a min-heap using the MinPriorityQueue from the @datastructures-js/priority-queue library or a similar library.
-// Example:
-// let heap = new MinPriorityQueue({ priority: (x) => x.val });
-// Explanation of the Code
-// let heap = new MinPriorityQueue({...}), Creates a priority queue that functions as a min-heap.
-// and Custom Priority Function: { priority: (x) => x.val, Defines how the heap calculates the priority of each element.
-// Here:
-// x represents an object (e.g., a node of a linked list).
-// x.val specifies the value of the object that determines its priority.
-
-
 // Optimal Approach:
 // i will use of a min-heap (using the MinPriorityQueue) to maintain a priority queue. The heap will store the head node of each linked list, not just an individual value. Storing the head node means we are storing the entire linked list object, which includes its left (or previous) and right (or next) pointers
 // next, i will create a dummy node to merge the linked lists into one by iterating through the heap.

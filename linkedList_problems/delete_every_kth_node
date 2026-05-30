@@ -8,28 +8,28 @@
 // reset count to 0 if a node is deleted.
 // Time Complexity: O(N) for iterating through the linked list.
 // Space Complexity: O(1) as no extra space is used, only a few extra pointers.
-class Solution {
-    deleteK(head,k){
-        let dummyNode = new Node(0);
-        dummyNode.next = head;
-        let prev = dummyNode;
-        let itrt = head;
+
+  class Solution {
+    deleteK(head, k) {
+        if(head === null) return head;
+        
         let count = 0;
+        let itrt = head;
+        let prev = null;
+        
         while(itrt !== null){
             count++;
             if(count === k){
+                count = 0;
                 prev.next = itrt.next;
                 itrt.next = null;
                 itrt = prev.next;
-                count = 0;
             }else{
                 prev = itrt;
                 itrt = itrt.next;
             }
-      }
-      
-       return dummyNode.next;
-  }
-    
-  }
-  
+        }
+        
+        return head;
+    }
+}
