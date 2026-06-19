@@ -19,14 +19,10 @@
 //               }  -> This checks if the absolute difference of the current sum (`sum`) from the target is 
 // less than the absolute difference of the current closest sum (`closestSum`) from the target.
 // If it is, it means that the current sum is closer to the target than the previously stored closest sum.
+// And i am using this formula because i am selecting the sum whose distance from the target is minimum.
 // Time Complexity: O(N^3), due to the three nested loops.
 // Space Complexity: O(1), since only a constant amount of additional space is used.
-// Note: 
-// (1) Why use Math.abs(target - sum) < Math.abs(target - closestSum)?
-// I use this formula to compare distances from the target and keep the current sum if the minimum absolute
-// difference between the target and the current sum is less than the minimum absolute difference between the target and 
-// the already stored sum in `closestSum`.
-// I am taking the sum with the minimum difference because it gives the closest sum to the target.
+
 
 var threeSumClosest = function (nums, target) {
     let closestSum = Infinity;
@@ -61,6 +57,7 @@ var threeSumClosest = function (nums, target) {
 // If the current sum is greater than the target, decrement 'end' to decrease the sum.
 // Time Complexity: O(N^2), due to the nested loop.
 // Space Complexity: O(1), since no additional space is used.
+
 // Note: If the problem does not require returning indices, first sort the array 
 // and then use the two-pointer method to efficiently find the closest sum.
 

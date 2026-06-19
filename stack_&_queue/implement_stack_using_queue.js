@@ -1,17 +1,17 @@
 // leetcode problem:- 225
 // A stack is a linear data structure that follows the LIFO (Last In, First Out) principle.
-// This means that, the element inserted first onto the stack is the element who removed at last.
-// A real-life example of a stack is a pile of books, where you can only pick and remove the topmost book.
-// Stack is a data structure, but it does not have any built-in structure to store elements.
-// We have to use some other data structure to implement and store elements in the stack such as array, queue or linked 
-// list.
+// This means that the last added element will be the first one to be removed from the stack.
+// A real-life example of a stack is a pile of books, where only the topmost book can be accessed or removed.
+// A stack is a logical data structure that does not have its own built-in storage mechanism.
+// Therefore, we use other data structures such as arrays, queues, or linked lists to implement it.
 
 // optimal approach:
-// To implement a stack using a queue, I have used two queues. 
-// q1 stores the elements as they come, while q2 is used to perform stack-like behavior. 
+// To implement a stack using queues, I will use two queues.
+// q1 stores the elements as they come, while q2 is used as a helper queue to perform stack-like operations such as pop 
+// and top.
 
-// push method:- Adding an element in a stack and a queue is the same, 
-// so I will not do anything extra, just simply add the value to q1. 
+// push method:- Adding an element in a stack and a queue is the same, which means adding an element into a queue goes to the
+// bottom of the stack. So, I will not do anything extra, just simply add the value to q1.
 // pop method:- Removing an element from a queue is different from removing an element from a stack. 
 // In a queue, we remove an element from the front, whereas in a stack, we remove the element from the top (last element).
 // So, to remove a value from the stack using a queue, I will first add q1.length - 1 values to q2, 
@@ -46,6 +46,8 @@
 // methods efficiently.
 // here, JavaScript object refers to the object created when we call new MyStack(). 
 // This object is an instance of the MyStack constructor function.
+// 'this' refers to the instance created for MyStack() constructor function and is used to attach properties inside the 
+// constructor function to the instance.
 
 
 var MyStack = function() {

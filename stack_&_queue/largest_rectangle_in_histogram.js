@@ -5,8 +5,8 @@
 
 // Brute-force Approach:
 // Approach:
-// Traverse through each bar of the histogram, and for every bar i, expand the left and right pointers
-// until you find bars whose heights are shorter than the current bar (i.e., keep moving left and right
+// I will traverse through each bar of the histogram, and for each bar, i will traverse to left and right of current bar
+// until i will find bars whose heights are shorter than the current bar (i.e., keep moving left and right
 // while the heights are greater than or equal to height[i]).
 //
 // Once the left and right boundaries are found (these boundaries help determine the ending points of the
@@ -39,6 +39,7 @@ var largestRectangleArea = function (height) {
         while (right < height.length && height[right] >= height[i]) {
             right++;
         }
+
         let width = right - left - 1;
         let area = width * height[i];
         maxArea = Math.max(maxArea, area);
@@ -102,6 +103,15 @@ var largestRectangleArea = function (height) {
 // In the worst case, the space complexity is O(N). This happens when the given array is in strictly increasing 
 // order, and no smaller height bar is found for either the previous smaller or next smaller elements. 
 // In this case, the stack stores all bar indices.
+
+// Next Smaller
+// In the Next Smaller array, we store the indices of those bars in stack that are waiting for their next smaller height
+// bar. Once a bar gets its next smaller height bar, we pop its index from the stack.
+
+// Previous Smaller
+// In the Previous Smaller array, we store the indices of those bars in stack that can act as the previous smaller height
+// bar for future upcoming (untraversed) bars. They stay in the stack until we reach the end of the height array because
+// those stored bars can serve as the previous smaller height bar for bars on their right.
 
 var largestRectangleArea = function (height) {
     let maxArea = 0;

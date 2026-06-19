@@ -4,7 +4,7 @@
 // and I will iterate through the given string and 
 // while iterating the string, when encountering an opening parenthesis ('(', '{', or '['), push the corresponding 
 // closing parenthesis (')', '}', or ']') onto the stack.
-// while iterating the strig if you encounter the closing parenthesis (')', '}', or ']'), check if it matches the top 
+// while iterating the string if you encounter the closing parenthesis (')', '}', or ']'), check if it matches the top 
 // character of the stack. 
 // if it does, pop the top of the stack element. 
 // if it doesn't match or if the stack is empty return `false` immediately.

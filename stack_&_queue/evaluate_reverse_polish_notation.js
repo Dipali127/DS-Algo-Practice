@@ -29,7 +29,7 @@
 //   So, we use "Math.trunc()" for this purpose because it discards the fractional part for both positive and
 //   negative numbers, ensuring the result is rounded toward zero.
 //   For example:
-//     console.log(Math.floor(-7 / 3)) // since Math.floor() goes to the next smaller integer (more negative),
+//     console.log(Math.floor(-7 / 3)) // since Math.floor() return the next smaller integer (more negative),
 //     and -3 is smaller than -2.333..., it returns -3.
 //     → Here, -3 is the nearest lower integer to -2.333... (for negative numbers, moving further left on the 
 //       number line gives smaller values).

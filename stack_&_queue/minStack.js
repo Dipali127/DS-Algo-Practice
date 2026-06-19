@@ -1,3 +1,9 @@
+// Leetcode Problem:- 155
+// In the LeetCode JavaScript template, MinStack is a function expression that is used as a constructor function. 
+// It serves the same purpose as a class because instances are created using the new keyword, and methods are attached 
+// through the prototype. This is similar to how JavaScript classes work internally, where methods are stored on the class'
+// s prototype and shared among all instances.
+
 // TC:- O(N), because of the iteration through the stack to get minimum value in getMin function
 // var MinStack = function() {
 //     this.stack = [];
@@ -55,7 +61,7 @@
 // in the minstack. This way, getMin() can simply return the top of minstack in constant time.
 // Time Complexity: O(1) for all operations — push, pop, top, and getMin.
 
-// Note: minstack stores one minimum value corresponding to each element in the main stack.
+// Note: minstack stores one minimum value corresponding to each element added in the main stack.
 // While popping a value from the main stack, we also pop a value from the minstack
 // because the minimum value could change after the top element is removed from main stack.
 // Example:-

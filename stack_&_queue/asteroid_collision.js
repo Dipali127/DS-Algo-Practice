@@ -76,6 +76,7 @@ var asteroidCollision = function(asteroids) {
 // TC:- O(N), as we iterate through the 'asteroids' array once and each asteroid is pushed/popped from the
 //  stack at most once.
 // SC:- O(N), in the worst case, the stack may store all asteroids if no collisions happen.
+
 // Note:
 // - We destroy the asteroid with the smaller absolute value, regardless of its sign because problem said
 //  asteroid with smaller absolute value is destroyed.
