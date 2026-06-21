@@ -51,6 +51,10 @@ var maxArea = function (height) {
 // TC: O(N), as we traverse the given height array using two pointers in a single pass.
 // SC: O(1), as no additional space is used apart from maxArea.
 
+// Why not sort the height array?
+// Since the width depends on the original indices of the bars, we cannot sort the array because sorting
+// would change the positions and produce incorrect widths.
+
 var maxArea = function(height) {
     let maxArea = 0; 
     let left = 0, right = height.length - 1;

@@ -20,6 +20,7 @@
 // less than the absolute difference of the current closest sum (`closestSum`) from the target.
 // If it is, it means that the current sum is closer to the target than the previously stored closest sum.
 // And i am using this formula because i am selecting the sum whose distance from the target is minimum.
+// Subtracting target from Infinity for the first time = Inifinity because every finite distance is smaller than Infinity.
 // Time Complexity: O(N^3), due to the three nested loops.
 // Space Complexity: O(1), since only a constant amount of additional space is used.
 
