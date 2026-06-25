@@ -1,7 +1,7 @@
 //                                         About Monotonic Stack
 
-// A monotonic stack is a stack that maintains elements in either strictly increasing or strictly decreasing order
-// by removing elements that violate that order during insertion.
+// A monotonic stack is a stack that maintains elements in either strictly increasing or strictly 
+// decreasing orderby removing elements that violate that order during insertion.
 
 // Increasing stack (visual representation of current state):
 // bottom → smaller values → larger values → top

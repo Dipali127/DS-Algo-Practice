@@ -59,23 +59,24 @@ var nextGreaterElement = function (nums1, nums2) {
 // given array is in increasing order like : [1, 2, 3, 4].
 // We iterate from right to left, and for each element:
 // - We remove (pop) only those elements from the stack that are smaller than or equal to the current value.
-// - If no greater element exists in the stack (i.e., the stack is empty initially or after popping),
+// - If greater element exists in the stack (i.e., the stack is empty initially or after popping),
 //   then the current element will be pushed into the stack, and later elements may not remove it,
 //   resulting in storing all elements in the stack.
-// - The result array also uses additional space to store the next greater elements.
 // - O(N) for hash map to store next greater elements of nums2 along with nums2 elements.
 // - Total auxiliary space: O(N).We traverse from right to left because for every element, we need to find the next 
-// greater element on its right side. By moving from right to left, the stack already contains the valid elements that
-// can act as the next greater element for the current element, because all smaller or equal elements are removed.
-// This allows us to efficiently maintain a monotonic decreasing stack and find the next greater element in O(n) time.
+// greater element on its right side. By moving from right to left, the stack already contains the valid
+// elements that can act as the next greater element for the current element, because all smaller or equal
+// elements are removed.
+// This allows us to efficiently maintain a monotonic decreasing stack and find the next greater element
+// in O(n) time.
 
 // Note: 
 // We traverse from right to left because, for every element, we need to find the next greater element on
 // its right side.
-// By moving from right to left, the stack already maintains elements that can be greater for the current traversed
-// element or left-side untraversed elements of the current traversed element.
-// This allows us to efficiently maintain a monotonic decreasing stack[from bottom to top] and find the next greater
-// element in O(n) time.
+// By moving from right to left, the stack already maintains elements that can be greater for the current
+// traversed element or left-side untraversed elements of the current traversed element.
+// This allows us to efficiently maintain a monotonic decreasing stack[from bottom to top] and find the
+// next greater element in O(n) time.
 
 // In the above solution, what is happening:
 // Before pushing the current element:
@@ -84,8 +85,8 @@ var nextGreaterElement = function (nums1, nums2) {
 // When the current element is pushed, it becomes smaller than the previous top.
 // Because of this, the stack always contains elements in strictly decreasing order (from bottom to top).
 
-// Example to see that how stack maintain monontonic decreasing order even if the given array contains random order of
-// elements:-
+// Example to see that how stack maintain monontonic decreasing order even if the given array contains
+// random order of elements:-
 
 // Consider [4, 1, 7, 3, 9, 2].
 // Since we traverse from right to left:
@@ -126,26 +127,28 @@ var nextGreaterElement = function (nums1, nums2) {
 // Instead of finding the next greater element for nums2 using a nested loop, which increases the time
 // complexity,
 // I will use a hash map to store the next greater elements for each element of nums2.
-// And I will take a stack to store the indices of the elements whose next greater element is not found or who are waiting
-// for their next greater element.
-// I will traverse the given array nums2 from left to right to find the next greater element for the elements who are on
-// the left of the current traversed element.
+// And I will take a stack to store the indices of the elements whose next greater element is not found or
+// who are waiting for their next greater element.
+// I will traverse the given array nums2 from left to right to find the next greater element for the 
+// elements who are on the left of the current traversed element.
 //
 // Inside the for loop:-
-// Run a while loop and check if the top index element of the stack is smaller than the current traversed element. It means
-// the current traversed element is the next greater element for the top index element of the stack. If this is the
-// case, then pop the top index from the stack and add the current traversed element in the map for that index.
+// Run a while loop and check if the top index element of the stack is smaller than the current traversed
+// element. It means the current traversed element is the next greater element for the top index element 
+// of the stack. If this is the case, then pop the top index from the stack and add the current traversed
+// element in the map for that index.
 //
 // Continue this process until the stack becomes empty.
-// But if the top index element of the stack is not smaller than the current traversed element, then skip it and add the
-// index of the current traversed element onto the stack.
+// But if the top index element of the stack is not smaller than the current traversed element, 
+// then skip it and add the index of the current traversed element onto the stack.
 // Repeat this process until I reach the last element of the array.
 // Finally, return the result array containing next greater elements for each element of the array.
 //
 // Time Complexity: O(N + M), Explanation:-
-// - O(N) to iterate through the array once from left to right, and each element is pushed to the stack and popped out of the
-//   stack at most once.
-// - O(M) to iterate through nums1 and retrieve values from the hash map.
+// - O(N) to iterate through the array once from left to right, and each element is pushed to the stack
+//    and popped out of the stack at most once.
+// - O(M) to iterate through nums1 and retrieve values from the hash map to update nums1 with their next
+//    greater element.
 // Note: Even though a while loop is used inside the for loop,
 //       the total number of operations is still O(N) because each element is pushed and popped
 //       from the stack at most once.
@@ -161,15 +164,16 @@ var nextGreaterElement = function (nums1, nums2) {
 // - Total auxiliary space: O(N).
 //
 // Note:-
-// In left → right traversal, the current element may be the next greater element for some elements on the left that are 
-// still waiting for a greater value in stack.
+// In left → right traversal, the current element may be the next greater element for some elements on the
+// left that are still waiting for a greater value in stack.
 //
 // Why indices and not elements like in right to left traversal?
-// Because in right to left traversal, the stack already maintains/store elements that can be greater for current
-// traversed element or left-side untraversed elements of the current traversed element.
-// But in left to right traversal, the next greater element is “unknown in advance”, that's why the stack stores the 
-// indices of those elements whose next greater element is still not found and storing index will help to easily know about
-// index of the element store onn stack so that we can easily get element and store its next greater element in hash map.
+// Because in right to left traversal, the stack already maintains/store elements that can be greater for 
+// current traversed element or left-side untraversed elements of the current traversed element.
+// But in left to right traversal, the next greater element is “unknown in advance”, that's why the stack
+// stores the indices of those elements whose next greater element is still not found and storing index 
+// will help to easily know about index of the element store on stack so that we can easily get element 
+// and store its next greater element in hash map.
 //
 // In the above solution, what is happening:
 // Before pushing the current element index:

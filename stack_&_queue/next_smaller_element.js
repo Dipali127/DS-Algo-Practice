@@ -34,20 +34,23 @@ function smaller(arr) {
 // approach:
 // I will take a result array of size equal to the given array and initialize all values with -1.
 // I will also take a stack to store the next smaller elements.
-// I will start iterating from the last index of the array to maintain next smaller element for future untraversed element.
+// I will start iterating from the last index of the array to maintain next smaller element for future
+// untraversed element.
 
 // Inside for loop:-
-// Run a while loop and check, If the top element of the stack is greater than or equal to the current element, pop elements
+// Run a while loop and check, If the top element of the stack is greater than or equal to the current 
+// element, pop elements
 // from the stack until this condition is false or the stack becomes empty.
 // Otherwise, the top of the stack is the next smaller element for the current element, 
 // which I will store in the result array.
-// After that, I will push the current element into the stack, as it may be the next smaller element for future elements.
+// After that, I will push the current element into the stack, as it may be the next smaller element for
+// future elements.
 // Repeat this process until I reach the first element of the array.
 // Finally, return the result array containing the next greater elements for each element of the array.
 
 // Time Complexity: O(N), Explanation:-
-// - We iterate through the array once from right to left And each element is pushed to the stack and popped out of a 
-//   stack at most once.
+// - We iterate through the array once from right to left And each element is pushed to the stack and
+//  popped out of a stack at most once.
 // - Therefore, the total operations remain linear despite the inner while loop.
 // - Overall Time Complexity: O(N).
 
@@ -64,10 +67,10 @@ function smaller(arr) {
 // Note: 
 // We traverse from right to left because for every element, we need to find the next smaller element on 
 // its right side. 
-// By moving from right to left, the stack already maintains elements that can be greater for current traverse 
-// element or left-side untraversed elements of current traverse element.
-// This allows us to efficiently maintain a monotonic increasing stack[bottom to top] and find the next smaller element
-// in O(n) time.
+// By moving from right to left, the stack already maintains elements that can be greater for current
+//  traverse element or left-side untraversed elements of current traverse element.
+// This allows us to efficiently maintain a monotonic increasing stack[bottom to top] and find the next
+// smaller element in O(n) time.
 
 // In the above solution, what is happening:
 // Before pushing the current element into stack:
@@ -103,23 +106,23 @@ class Solution {
 // Approach:-
 // I will take a result array of size equal to the given array and initialize all values with -1.
 // I will take a stack to store the indices of the elements whose next smaller element is not found.
-// I will traverse the given array from left to right to find the next smaller element for the elements who are on the 
-// left of the current traversed element.
+// I will traverse the given array from left to right to find the next smaller element for the elements
+// who are on the left of the current traversed element.
 // 
 // Inside the for loop:-
-// Run a while loop and check if the top index element of the stack is greater than the current traversed element, it means 
-// the current traversed element is the next smaller element for the top index element of the stack. And if this is the
-// case, then pop the top index from the stack and add the current traversed element in the result array at the top index 
-// of the stack.
+// Run a while loop and check if the top index element of the stack is greater than the current traversed
+// element, it means the current traversed element is the next smaller element for the top index element 
+// of the stack. And if this would be the case, then pop the top index from the stack and add the current 
+// traversed element in the result array for the top index of the stack.
 // And continue this process until the stack becomes empty.
-// But if the top index element of the stack is not greater than the current traversed element, then skip it and add the 
-// index of the current traversed element onto the stack.
+// But if the top index element of the stack is not greater than the current traversed element, then skip
+// it and add the index of the current traversed element onto the stack.
 // Repeat this process until I reach the last element of the array.
-// Finally, return the result array containing next greater elements for each element of the array
+// Finally, return the result array containing next smaller elements for each element of the array
 
 // Time Complexity: O(N), Explanation:-
-// - We iterate through the array once from left to right. And each element is pushed to the stack and popped out of the 
-//   stack at most once.
+// - We iterate through the array once from left to right. And each element is pushed to the stack and 
+//   popped out of the stack at most once.
 // - Therefore, the total operations remain linear despite the inner while loop.
 // - Overall Time Complexity: O(N).
 
@@ -138,14 +141,15 @@ class Solution {
 // a smaller value.
 
 // Why indices and not elements like in right to left traversal?
-// Because in right to left traversal, the stack already maintains/store elements that can be greater for current 
-// traversed element or left-side untraversed elements of the current traversed element.
-// But in left to right traversal, the next smaller element is hidden that's why stack stores the indices of those elements
-// of the array whose next smaller element is still not found.  
+// Because in right to left traversal, the stack already maintains/store elements that can be greater for 
+// current traversed element or left-side untraversed elements of the current traversed element.
+// But in left to right traversal, the next smaller element is hidden that's why stack stores the indices
+// of those elements of the array whose next smaller element is still not found.  
 
 // FINAL NOTE:-
-// In "right to left", we are storing those elements onto the stack who can be the next smaller element for the current 
-// traversed element or left-side untraversed elements of the current traversed element.
+// In "right to left", we are storing those elements onto the stack who can be the next smaller element
+// for the current traversed element or future untraversed elements who are on the left of the current
+// traversed element.
 // And In "left to right", we store those indices onto the stack whose next smaller element is still not found.
 
 class Solution {

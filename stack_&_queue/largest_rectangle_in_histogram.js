@@ -43,7 +43,7 @@ var largestRectangleArea = function (height) {
         let width = right - left - 1;
         let area = width * height[i];
         maxArea = Math.max(maxArea, area);
-    }
+""    }
 
     return maxArea;
 };
@@ -72,22 +72,25 @@ var largestRectangleArea = function (height) {
 // since the left pointer may move out of bounds (before index 0). 
 // If it does, that means there is no previous smaller height, so we keep the default value -1.
 // Use a stack to keep track of the previous smaller index for each bar.
+// Stack maintain the next smaller for the future untraversed bar.
 // Traverse through each bar and for each bar, 
-// Run a 'while loop' until the stack is not empty and the top of stack index bar is greater than or equal to the
-// current bar height, if it is then pop the index from the stack since we need a smaller height bar index.
+// Run a 'while loop' until the stack is not empty and the top of stack index bar is greater than or equal
+// to the current bar height, if it is then pop the index from the stack since we need a smaller height 
+// bar index.
 // If the stack is not empty after popping, the top of the stack now gives the index of the previous smaller 
 // height, which we update in `ps[i]`.
 // Always push the current index onto the stack.
 
 // Inside the `nextSmaller` function:
 // Create an array `ns` of size `height.length` and fill all elements with `height.length`, 
-// since the right pointer may move out of bounds (beyond the last index of height array), which means there is
-// no next smaller bar.
+// since the right pointer may move out of bounds (beyond the last index of height array), which means
+// there is no next smaller bar.
 // Use a stack to keep track of next smaller index for each bar. 
+// Stack store those indices who are waiting for their next smaller or whose next smaller is not found.
 // Traverse through each bar and for each bar,
-// Run a 'while loop' until the stack is not empty and the top of stack index bar is greater than the current bar
-// height, if it is then pop the index from the stack and store current index on that popped index in ns array,
-// because the current index is the next smaller for that popped index.
+// Run a 'while loop' until the stack is not empty and the top of stack index bar is greater than the
+// current bar height, if it is then pop the index from the stack and store current index on that popped 
+// index in ns array, because the current index is the next smaller for that popped index.
 // Always push the current index onto the stack.
 
 // Time Complexity: O(N)
@@ -100,18 +103,21 @@ var largestRectangleArea = function (height) {
 // - Due to stack space used to store indices.
 
 // Note:
-// In the worst case, the space complexity is O(N). This happens when the given array is in strictly increasing 
-// order, and no smaller height bar is found for either the previous smaller or next smaller elements. 
+// In the worst case, the space complexity is O(N). This happens when the given array is in strictly
+// increasing order, and no smaller height bar is found for either the previous smaller or next smaller 
+// elements. 
 // In this case, the stack stores all bar indices.
 
 // Next Smaller
-// In the Next Smaller array, we store the indices of those bars in stack that are waiting for their next smaller height
-// bar. Once a bar gets its next smaller height bar, we pop its index from the stack.
+// In the Next Smaller array, we store the indices of those bars in stack that are waiting for their next 
+// smaller height bar.
+// Once a bar gets its next smaller height bar, we pop its index from the stack.
 
 // Previous Smaller
-// In the Previous Smaller array, we store the indices of those bars in stack that can act as the previous smaller height
-// bar for future upcoming (untraversed) bars. They stay in the stack until we reach the end of the height array because
-// those stored bars can serve as the previous smaller height bar for bars on their right.
+// In the Previous Smaller array, we store the indices of those bars in stack that can act as the previous
+// smaller height bar for future upcoming (untraversed) bars. 
+// They stay in the stack until we reach the end of the height array because those stored bars can serve 
+// as the previous smaller height bar for bars on their right.
 
 var largestRectangleArea = function (height) {
     let maxArea = 0;
@@ -156,6 +162,6 @@ function nextSmaller(height) {
         
         stack.push(i);
     }
-    
+                                                                                                                                         
     return ns;
 }

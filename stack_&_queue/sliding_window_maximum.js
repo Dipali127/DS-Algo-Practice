@@ -17,7 +17,7 @@
 var maxSlidingWindow = function(nums, k) {
     let arr = new Array();
     for(let i = 0; i <= nums.length - k; i++){
-        let max = 0;
+        let max = nums[i];
         for(let j = i; j < i + k; j++){
             max = Math.max(max, nums[j]);
         }
@@ -30,23 +30,24 @@ var maxSlidingWindow = function(nums, k) {
 
 // Optimal Approach: Using 'Monotonic Deque'
 // Approach:
-// Use a 'deque' to store indices of useful elements in the current window that are part of current window.
+// Use a 'deque' to store indices of useful elements that are part of current window.
 // This deque will maintain a decreasing order of values from front to back,
 // ensuring that the maximum element of the current window is always at the front of the deque.
 // Use an array 'result' to store the maximum values for each window of size 'k'.
 
 // While iterating through the array 'nums', perform the following operations:
-//  (i) Remove indices from the deque that are out of the current window (i.e., indices less than 'i - k + 1')
-//  from the front of the deque.
-//    i - k + 1 is the starting index of the current window.
-//    In deque[0], if the index is less than the starting index of the current window, we delete it —
-//    since we store indices in the deque from the back and the index at the front of the deque is the oldest index.
-//  (ii) Remove indices of all elements from the back of the deque that are smaller than the
-//    current element 'nums[i]', since we are using a monotonic **decreasing** dequeue
-//    (the front of the deque should always contain the maximum value).
-//  (iii) Add the current element's index to the back of the deque, since we're traversing the array from left to right.
-//  (iv) whenever we found the window of size k (i.e., when 'i >= k - 1'),
-//    add the element at the front of the deque (which is the maximum in the current window) to the 'result' array.
+// Step 1: We are removing those indices from the front of the queue that are not part of the current window so that the
+// queue always maintains elements belonging to the current window.
+// In this way, the space complexity will never exceed k.
+// i - k + 1 represents the starting index of the current window. Any index in the deque that is smaller than 
+// i - k + 1 lies outside the current window, so we remove it from the front of the deque.
+
+// Step 2: We are removing those elements from the queue that are smaller than the current element, even though those
+//  elements are part of the current window, because those elements will not contribute to finding the maximum element of 
+//  the current window.
+
+// Step 3: Add the current element's index.
+// Step 4: Check whether we have reached a window of size k. If yes, it means we have found the maximum element of the current window, which is at the front of the queue.
 
 // Time Complexity: O(N), where 'N' is the length of 'nums', since each element is added and removed from the deque at most
 //  once.
