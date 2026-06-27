@@ -15,10 +15,10 @@
 // To compute the amount of water that can be trapped at each bar:
 // 1. First, find the tallest bar to the left of the current bar and store it in `leftMax`.
 // 2. Then, find the tallest bar to the right of the current bar and store it in `rightMax`.
-// 3. The water level at each bar (index) is determined by the minimum of the left maximum height bar and the right maximum 
-// height bar because water can only be stored up to the shorter height of the surrounding bars.
-// We then subtract the current height bar from the minimum height bar value because water can only occupy the space above 
-// the current bar up to the shorter height of the surrounding bars.
+// 3. The water level at each bar (index) is determined by the minimum of the left maximum height bar and the right 
+// maximum height bar because water can only be stored up to the shorter height of the surrounding bars.
+// We then subtract the current height bar from the minimum height bar value because water can only occupy the space 
+// above the current bar up to the shorter height of the surrounding bars.
 // 5. Add the result to `totalWaterTrapped`.
 // Finally, return `totalWaterTrapped`, which represents the total amount of water that can be trapped across all bars.
 
@@ -122,10 +122,11 @@ var trap = function(height){
 // Time Complexity (TC): O(N), since both pointers traverse the height array once.
 // Space Complexity (SC): O(1), since no additional space is used.
 
-// Note:- When height[left] <= height[right], the right side is already tall enough, so the current left bar only needs
-// to worry about its tallest left boundary (leftMax). Therefore, the trapped water is leftMax - height[left].
-
-var trap = function(height){
+// Note:- When height[left] <= height[right], it means that for current bar we will use height of left bar which has 
+// minimum value as compared to height of bar at right pointer and this height of bar at left has maximum than current bar
+// so, height of bar at left is sufficient to compute that how much water current bar will store.
+// And after getting minimum between leftMax and rightMax for current bar, subtracting current height bar from that 
+// minimum height bar between leftMax and rightMax will decide that how much water level will be store on the current bar.
     let totalwaterTrapped = 0;
     let left = 0, right = height.length - 1;
     let leftMax = height[left], rightMax = height[right]

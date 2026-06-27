@@ -30,43 +30,47 @@ var maxSlidingWindow = function(nums, k) {
 
 // Optimal Approach: Using 'Monotonic Deque'
 // Approach:
-// Use a 'deque' to store indices of useful elements that are part of current window.
+// Use a 'deque' to store indices of the elements that are part of current window.
 // This deque will maintain a decreasing order of values from front to back,
 // ensuring that the maximum element of the current window is always at the front of the deque.
 // Use an array 'result' to store the maximum values for each window of size 'k'.
 
 // While iterating through the array 'nums', perform the following operations:
-// Step 1: We are removing those indices from the front of the queue that are not part of the current window so that the
-// queue always maintains elements belonging to the current window.
-// In this way, the space complexity will never exceed k.
-// i - k + 1 represents the starting index of the current window. Any index in the deque that is smaller than 
-// i - k + 1 lies outside the current window, so we remove it from the front of the deque.
 
-// Step 2: We are removing those elements from the queue that are smaller than the current element, even though those
-//  elements are part of the current window, because those elements will not contribute to finding the maximum element of 
-//  the current window.
+// Step 1: We are removing those indices from the front of the deque that are not part of the current 
+// window so that the queue always maintains elements belonging to the current window.
+// In this way, the space complexity will never exceed k.
+// i - k + 1 represents the starting index of the new window. Any index in the deque that is smaller 
+// than i - k + 1, it means those indices in a deque are not part of the new window.
+
+// Step 2: We are removing those indices from the deque that have smaller element than the current element,
+// even though those elements are part of the current window, because those elements will not contribute 
+// to finding the maximum element of the current window.
 
 // Step 3: Add the current element's index.
-// Step 4: Check whether we have reached a window of size k. If yes, it means we have found the maximum element of the current window, which is at the front of the queue.
+// Step 4: Check whether we have reached a window of size k. If yes, it means we have found the maximum
+// element of the current window, which is at the front of the deque.
 
-// Time Complexity: O(N), where 'N' is the length of 'nums', since each element is added and removed from the deque at most
-//  once.
-// Space Complexity: O(k), to store indices of elements in the dequeue (with a maximum of 'k' elements at any time).
+// Time Complexity: O(N), where 'N' is the length of 'nums', since each element is added and removed from 
+// the deque at most once.
+// Space Complexity: O(k), to store indices of elements in the dequeue (with a maximum of 'k' elements at 
+// any time).
 
 // Note:
 // What is a Deque?
 // A Deque stands for Double-Ended Queue.
-// It is a linear data structure that allows to insert and delete elements from both the front and the rear (end).
+// It is a linear data structure that allows to insert and delete elements from both the front and the 
+// rear (end).
 
 // What is a Monotonic Deque?
-// A monotonic deque is a specialized form of double-ended queue (deque) where the elements are maintained in 
-// either increasing or decreasing order.
+// A monotonic deque is a specialized form of double-ended queue (deque) where the elements are maintained
+// in either increasing or decreasing order.
 // And here in this problem, I have used the deque in decreasing order so that it becomes
 // easy to fetch the maximum value from the front of the deque instead of searching for that value.
-// It is commonly used in algorithmic problems that involve efficiently tracking the maximum or minimum values 
-// in a sliding window or range.
-// The deque is updated in such a way that irrelevant elements (that can no longer affect the result) are removed,
-// maintaining only the potential candidates for the min or max.
+// It is commonly used in algorithmic problems that involve efficiently tracking the maximum or minimum
+// values in a sliding window or range.
+// The deque is updated in such a way that irrelevant elements (that can no longer affect the result) are
+// removed, maintaining only the potential candidates for the min or max.
 
 var maxSlidingWindow = function(nums, k) {
     let n = nums.length;

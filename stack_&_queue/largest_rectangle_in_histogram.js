@@ -48,7 +48,7 @@ var largestRectangleArea = function (height) {
     return maxArea;
 };
 
-// Optimal Approach:
+// Optimal Approach 1: left to right traversal
 // Approach:
 // Instead of using a nested loop to find the bar whose height is greater than or equal to the current bar, 
 // I use two stacks to store the previous smaller index and the next smaller index for each bar. 
@@ -165,3 +165,117 @@ function nextSmaller(height) {
                                                                                                                                          
     return ns;
 }
+
+
+// Optimal Approach 2: right to left traversal
+// Approach:
+// Instead of using a nested loop to find the bar whose height is greater than or equal to the current bar,
+// I use two stacks to store the previous smaller index and the next smaller index for each bar.
+// In the brute-force approach, the left and right indices stop iterating once they find a bar whose height
+// is smaller than the current bar. This observation helps us optimize the approach using stacks.
+
+// In the stack-based approach, I do the same thing as in the brute-force approach. That means I take
+// two stacks, 'previousSmaller' and 'nextSmaller', where I store the indices of the previous and next
+// smaller for each bar.
+
+// I will call a function `previousSmaller`, which returns an array containing the indices of all the
+// previous smaller heights for each bar.
+// Then, I will call a function `nextSmaller`, which returns an array containing the indices of all the
+// next smaller heights for each bar.
+// I then iterate through the `height` array, and for each bar, compute the width using the
+// `previousSmaller` and `nextSmaller` arrays.
+// Finally, I compute the area using the width and the current height while updating `maxArea`.
+
+// Inside the `previousSmaller` function:
+// Create an array `ps` of size `height.length` and initially fill all the elements with -1,
+// since the left pointer may move out of bounds (before index 0).
+// If it does, that means there is no previous smaller height, so we keep the default value -1.
+// Use a stack to keep track of previous smaller indices.
+// The stack stores the indices of those bars that are waiting for their previous smaller height.
+// Traverse the histogram from right to left.
+// For every current bar, while the current bar is smaller than the bar represented by the top
+// of the stack, pop that index and store the current index as its previous smaller index in `ps`,
+// because the current bar is the first smaller bar on its left.
+// Always push the current index onto the stack.
+
+// Inside the `nextSmaller` function:
+// Create an array `ns` of size `height.length` and initially fill all the elements with
+// `height.length`, since the right pointer may move out of bounds (beyond the last index),
+// meaning there is no next smaller bar.
+// Use a stack to keep track of indices that can act as the next smaller bar for future
+// untraversed bars.
+// Traverse the histogram from right to left.
+// While the stack is not empty and the height of the top index is greater than or equal to
+// the current bar height, pop those indices because they cannot be the next smaller bar for
+// the current bar.
+// If the stack is not empty after popping, the top of the stack gives the index of the
+// nearest next smaller bar, so store it in `ns[i]`.
+// Always push the current index onto the stack.
+
+// Time Complexity: O(N)
+// - O(N): To get previous smaller indices.
+// - O(N): To get next smaller indices.
+// - O(N): To compute the maximum rectangle area.
+// Overall TC = O(N + N + N) = O(N)
+
+// Space Complexity: O(N)
+// - Due to stack space used to store indices.
+
+// Note:
+// In the worst case, the space complexity is O(N). This happens when the histogram heights
+// are in strictly decreasing order while computing previous smaller or strictly increasing
+// order while computing next smaller, causing the stack to store all indices.
+
+// Previous Smaller:
+// The stack stores the indices of those bars that are waiting to find their previous
+// smaller bar. Once a previous smaller bar is found, we pop that index and store its
+// previous smaller index.
+
+// Next Smaller:
+// The stack stores the indices of those bars that can act as the next smaller bar for
+// future untraversed bars. After removing all bars that are greater than or equal to the
+// current bar, the top of the stack becomes the nearest next smaller bar for the current
+// index.
+
+var largestRectangleArea = function (height) {
+    let maxArea = 0;
+    let ps = previousSmaller(height), ns = nextSmaller(height);
+
+    for (let i = 0; i < height.length; i++) {
+        let width = ns[i] - ps[i] - 1;
+        let area = width * height[i];
+        maxArea = Math.max(maxArea, area);
+    }
+
+    function previousSmaller(height) {
+        let stack = [], ps = new Array(height.length).fill(-1);
+        for (let i = height.length - 1; i >= 0; i--) {
+            while (stack.length && height[i] < height[stack[stack.length - 1]]) {
+                ps[stack.pop()] = i;
+            }
+
+            stack.push(i);
+        }
+
+        return ps;
+    }
+
+    function nextSmaller(height) {
+        let stack = [], ns = new Array(height.length).fill(height.length);
+        for (let i = height.length - 1; i >= 0; i--) {
+            while (stack.length && height[stack[stack.length - 1]] >= height[i]) {
+                stack.pop();
+            }
+
+            if (stack.length) {
+                ns[i] = stack[stack.length - 1];
+            }
+
+            stack.push(i);
+        }
+
+        return ns;
+    }
+
+    return maxArea;
+};  
