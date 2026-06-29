@@ -214,6 +214,23 @@ var nextGreaterElement = function (nums1, nums2) {
 // traversed element or left-side untraversed elements of the current traversed element.
 // And in "left to right", we store indices of elements whose next greater element is still not found.
 
+
+// How to decide whether the stack should be monotonic increasing or monotonic decreasing?
+
+// Ask yourself:
+
+// "What does the while condition remove?"
+
+// 1. If the while loop removes smaller elements
+//    (current > top or current >= top),
+//    then after pushing the current element, the stack remains
+//    monotonically decreasing.
+
+// 2. If the while loop removes larger elements
+//    (current < top or current <= top),
+//    then after pushing the current element, the stack remains
+//    monotonically increasing.
+
 var nextGreaterElement = function(nums1, nums2) {
     let map = new Map();
     let stack = [];
@@ -236,3 +253,4 @@ var nextGreaterElement = function(nums1, nums2) {
 
     return nums1;
 };
+
