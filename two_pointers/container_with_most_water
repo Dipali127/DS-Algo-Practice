@@ -2,22 +2,24 @@
 // problem statement: given an array 'height' representing the heights of the container walls,
 // find the maximum area of water that the container can hold.
 
+
 // brute force approach:
 // approach:
 // use nested loops to calculate the area for every possible pair of container walls.
 // iterate over each element in the array using two nested loops.
 // for each pair of elements, calculate the minimum height between the two elements
-// (since water only store upto the minimum height of container after then water will start falling out).
+// (since water can only be stored up to the minimum height of the container; after that, the water will
+// start falling out).
 // calculate the width (distance) between the two walls.
 // calculate the area using the formula: area = minHeight * width.
 // keep track of the maximum area found during the iteration.
-// once all possible areas are calculated, return the maximum area that can contain the most water.
+// once all possible areas are calculated, return the maximum area that can hold the most water.
 
 // Note: the reason for taking the minimum height between the two walls is that water can only be held
 // up to the height of the shorter wall to prevent overflow.
 // TC: O(N^2) - due to the use of nested loops to find the area for each possible pair.
 // SC: O(1) - no additional space is used apart from the variable 'maxArea'.
-// Here, width represent the distance between two vertical lines not the number of elements between them.
+// Here, width represents the distance between two vertical lines, not the number of elements between them.
 
 var maxArea = function (height) {
     let maxArea = 0;
@@ -35,25 +37,27 @@ var maxArea = function (height) {
 
 // optimal approach: use of two pointers
 // approach:
-// instead of considering each possible pairs of container wall which increases the time complexity.
-// i will use of the two-pointer approach where low points to the 0rth index of the array height and high
+// instead of considering every possible pair of container walls, which increases the time complexity,
+// i will use the two-pointer approach where left points to the 0th index of the height array and right
 // points to the last index of the height array.
-// the idea behind using the two-pointer approach is to avoid unnecessary comparisons of smaller heights 
-// since they give a smaller area and are not helpful for future area computation.
-// i will run a while loop until left is less than right and in each iteration, i will find the area 
-// between pair of container wall and  Update maxArea if the new area is greater the maxArea,
-// and check if height of wall pointed by left pointer is less than the height of wall pointed by right 
-// pointer, if it is then i will increment the left pointer to avoid minimum height (since minimum height
-// give minimum area).
-// but if height of wall pointed by left pointer is greater than the height of wall pointed by right 
-// pointer,then decrement right pointer.
-// once left is greater than right, while loop break and return maxArea.
+// the idea behind using the two-pointer approach is to avoid unnecessary comparisons of smaller heights
+// because they give a smaller area and are not helpful for future area computation.
+// So, instead of taking that minimum height of the container with all the other containers like we did in
+// the brute force approach, it's better to skip it after using it to find the area.
+// i will run a while loop until left is less than right, and in each iteration, i will find the area
+// between the pair of container walls and update maxArea if the new area is greater than maxArea.
+// check if the height of the wall pointed by the left pointer is less than the height of the wall pointed
+// by the right pointer. if it is, then i will increment the left pointer to avoid the minimum height
+// (since the minimum height gives the minimum area).
+// but if the height of the wall pointed by the left pointer is greater than the height of the wall pointed
+// by the right pointer, then decrement the right pointer.
+// once left is no longer less than right, the while loop breaks and returns maxArea.
 // TC: O(N), as we traverse the given height array using two pointers in a single pass.
 // SC: O(1), as no additional space is used apart from maxArea.
 
 // Why not sort the height array?
-// Since the width depends on the original indices of the bars, we cannot sort the array because sorting
-// would change the positions and produce incorrect widths.
+// Since finding the width depends on the original indices of the container bars, we cannot sort the height
+// array because sorting would change the original positions of the height bars and produce incorrect widths.
 
 var maxArea = function(height) {
     let maxArea = 0; 
@@ -73,4 +77,3 @@ var maxArea = function(height) {
 
     return maxArea; 
 };
-

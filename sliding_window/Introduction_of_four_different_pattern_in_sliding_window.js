@@ -1,19 +1,42 @@
-// Introduction to Sliding Window:-
+//----------------------------------- Introduction to Sliding Window:--------------------------------------//
+
+// What is Sliding Window?
+// A sliding window is an optimization technique used to process a contiguous part (window) of an array or 
+// string without repeatedly traversing the same elements.
+
+// Why do we use Sliding Window?
+// We use the "sliding window" technique to reduce the time complexity of a problem from O(N^2) to O(N).
+// Without the sliding window technique, we repeatedly traverse the same elements
+// while processing every subarray or substring.
+
+// When do we use Sliding Window?
+// The biggest clue is:
+// The problem involves a contiguous subarray or contiguous substring.
+// Words like these are strong hints:
+// contiguous
+// consecutive
+// substring
+// subarray
+// window
+// segment
+
 // Four Different Patterns of Sliding Window:-
 
-// rarely asked pattern.
-// (1) Pattern First: Constant Window Size
+// (1) Pattern First:  Fixed Size Window
 // Problems:
-
-// Example:
 // (1) Maximum Sum of 'k' Consecutive Elements in an Array [GFG]
 // (2) Maximum number of vowels in a substring of given length [LeetCode 1456] 
 // (3) Maximum Average Subarray I [LeetCode 643]
-// (4) Given an array of positive and negative integers and an integer 'k', you need to find the maximum
-//  sum obtainable by picking 'k' consecutive elements.
+// (4) Find All Anagrams in a String [Leetcode 438]
+// (5) Permutation of a String [Leetcode 567]
+// (6) Number of Sub-arrays of Size K and Average ≥ Threshold [Leetcode 1343]
+// (7) Maximum Sum of Distinct Subarrays With Length K [Leetcode 2461]
 
+// Example:
 // Brute Force Approach:
 // Approach:
+// Given an array of positive and negative integers and an integer 'k', you need to find the maximum
+// sum obtainable by picking 'k' consecutive elements.
 // use of nested loop, where the outer loop iterates from the start of the array to 
 // the position where a complete window of size 'k' can reach and for each element, the inner loop calculates 
 // the sum of the next 'k' consecutive elements.
@@ -67,17 +90,19 @@ function findSum1(arr1,K){
     return maxSum;
 }
 
-// most asked pattern.
-// (2) Pattern Second:- Longest subarray/substring where <condition>. 
+// (2) Pattern Second:- Variable Size Window (Longest subarray/substring where <condition>).
 // subarray => any consecutive(one after another) portion of the array and substring => any consecutive
 // (one after another) portion of the string.
+
 // Problems:
 // (1) Longest Substring Without Repeating Characters [LeetCode 3]
-// (2) Longest Subarray with Ones after Replacement [LeetCode 424]
-// (3) Longest Subarray with Equal Number of 0s and 1s [LeetCode 525]
-// (4) Given an array of positive and negative integers and an integer 'k', you have to find out the 
+// (2) Longest Repeating Character Replacement [LeetCode 424]
+// (3) Given an array of positive and negative integers and an integer 'k', you have to find out the 
 // window size where the sum is less than equal to k.
-// length of longest subarray with at most k frequency of each element.
+// (4) length of longest subarray with at most k frequency [Leetcode  2958]
+// (5) Fruit Into Baskets [Leetcode 904]
+// (6) Maximum Consecutive Ones III [Leetcode 1004]
+
 // Example:
 // Brute force approach:
 // approach:-
@@ -156,42 +181,35 @@ function findWindowsize(arr2,Sum){
 // => Use only when all elements of the array and k are non-negative and the condition is exact.
 //
 // Approach:
-// (find number of subarrays where sum <= k)
-// - (find number of subarrays where sum <= (k - 1))
+// (find number of subarrays where sum <= k) - (find number of subarrays where sum <= (k - 1))
+// Exactly K = At Most K − At Most (K − 1)
+// For counting, use the formula:
+// count += end - start + 1
 //
 // Problems:
 // (1) Count Number of Nice Subarrays [LeetCode 1248]
 // (2) Binary Subarrays With Sum [LeetCode 930]
-//
-// For counting, use the formula:
-// count += end - start + 1
+// (3) Subarray with k different integers [Leetcode 992]
 //
 // ----------------------------------------------------
 
-// 3.2) Pattern 3B: Number of subarrays with an <At Least Condition> (>= k)
-// => Used when the problem asks for COUNT of subarrays
-//    and the condition is "at least".
-//
-// There are TWO ways to count:
-//
-// ----------------------------------------------------
-// Case 1: General At-Least Condition (Safe Method)
-// We cannot count "at least k" directly in most problems.
-// So we use the complement:
-// count(>= k) = totalSubarrays - count(<= k - 1)
-// Where count(<= k - 1) is computed using a sliding window.
+// 3.2.i) Pattern 3B: Number of subarrays with an <At Least Condition> (>= k)
+// => Used when the problem asks for COUNT of subarrays or substrings greater than or equal to k.
 
-// ----------------------------------------------------
-// Case 2: Frequency-Based + Monotonic Validity (Shortcut)
-// Use ONLY when:
-// - The condition is frequency-based (count of elements)
-// - Once the window becomes valid, extending it never makes it invalid
 // Counting Formula:
-// count += array.length - end
-//
+// count += array.length - end, which gives the number of valid subarrays or substrings starting from the current 'start'
+// and ending anywhere from 'end' to the last index.
 // ----------------------------------------------------
 // Problem:
-// (1) Count Subarrays Where the Maximum Element Appears At Least k Times
+// (1) Count Subarrays Where the Maximum Element Appears At Least k Times.
+// (2) Number of Substrings containing all three characters.
+
+// 3.2.ii) Pattern 3BB: Number of subarrays or substrings with a strictly less than condition (< k)
+// Counting Formula:
+// count += end - start + 1;
+//
+// Problem:
+// (1) Subarray Product Less Than K (LeetCode 713)
 
 
 
@@ -199,5 +217,6 @@ function findWindowsize(arr2,Sum){
 // rarely asked pattern.
 // (4) Pattern Fourth:- shortest/minimum window where <condition>
 // approach:- find the valid window and try to shrink that window which still satisfies the condition.
-// minimum size subarray sum (leetcode 209) is an example of this pattern.)
- 
+// Problem:
+// (1) minimum size subarray sum (leetcode 209) is an example of this pattern.)
+// (2) Minimum Window Substring (leetcode 76)

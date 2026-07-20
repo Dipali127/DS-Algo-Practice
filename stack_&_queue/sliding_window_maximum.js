@@ -28,7 +28,7 @@ var maxSlidingWindow = function(nums, k) {
     return arr;
 };
 
-// Optimal Approach: Using 'Monotonic Deque'
+// Optimal Approach: Using 'Monotonic Deque or Monotonic Decreasing Deque'
 // Approach:
 // Use a 'deque' to store indices of the elements that are part of current window.
 // This deque will maintain a decreasing order of values from front to back,
@@ -92,8 +92,8 @@ var maxSlidingWindow = function(nums, k) {
         // Add the current element index to the back of the deque.
         deque.push(i);
 
-        // Element at the front of the deque is the largest in the current window, so add that to the 'result'
-        // array.
+        // Element at the front of the deque is the largest in the current window, so add that to the 
+        // 'result' array.
         if (i >= k - 1) {
             result.push(nums[deque[0]]);
         }

@@ -32,8 +32,12 @@ var numSubarrayProductLessThanK = function(nums, k){
 // but if the product is less than k , that means i have found a subarray and i wil increment the count by adding 
 // current window size which give exact number of subarray in that window.
 // after finding all the subarray whose product is less than k , i will return the count of it. 
-// TC: O(N), as each element are traversed once using start and end pointer.
-// SC: O(1), as there is no additional space used.
+// TC: O(N), as each element is traversed once using the 'i' and 'j' pointers.
+// Even though a nested while loop is used, each number is multiplied into and divided from the prod variable at most
+// once.
+// Both the i and j pointers traverse the given array at most once.
+//
+// SC: O(1), since no additional space is used apart from a few variables.
 
 var numSubarrayProductLessThanK = function (nums, k) {
     if (k <= 1) {

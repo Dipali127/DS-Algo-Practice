@@ -39,7 +39,6 @@ var totalFruit = function(fruits){
 
             count++;
         }
-
         maxFruits = Math.max(maxFruits, count);
     }
 
@@ -59,8 +58,13 @@ var totalFruit = function(fruits){
 // previously stored `maxFruits`.
 // Finally, after finding `maxFruits`, which contains the maximum number of fruits in the subtree,
 // I will return it.
-// TC:- O(N) - since two pointers, `start` and `end`, iterate over each element once using linear iteration.
-// SC:- O(2) - since the hash map size can't exceed 2.
+
+// TC: O(N) - Both `start` and `end` pointers traverse the array at most once.
+// Although a nested `while` loop is used, the overall time complexity is still O(N)
+// because each element is added to the hash map once (by `end`) and removed from
+// the hash map at most once (by `start`).
+
+// SC: O(2) = O(1) - The hash map stores at most 2 distinct fruit types, so the extra space used is constant.
 
 var totalFruit = function (fruits) {
     let maxFruits = 0;

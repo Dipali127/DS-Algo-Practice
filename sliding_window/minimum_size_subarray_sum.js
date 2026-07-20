@@ -33,18 +33,22 @@ var minSubArrayLen = function(target, nums) {
     return minWindow === Infinity ? 0 : minWindow;
 };
 
-// optimal approach:- using sliding window and two pointer technique
-// approach:-
-// extending the window by moving pointer 'j' to the right and adding `nums[j]` to `sum`.
-// if the `sum` of the current window is greater than or equal to the target, 
-// update `minLength` with the smaller value between `minLength` and the current window size (`j - i + 1`).
-// then, try to find a smaller window that still meets the condition (i.e sum greater than equal to target),
-// by shrink the window by moving pointer 'i' to the right but before shrinking the window subtract`nums[i]` from `sum`.
-// continue this process until the pointer 'j' reach to end.
-// after iterating through all possible subarrays, return `minLength` if a valid subarray was found. 
-// if no such subarray is found, return 0.
-// TC: O(N), as the array 'nums' is traversed once using pointers 'i' and 'j'.
-// SC: O(1), since there is no additional space used apart from a few variables.
+// Optimal Approach: Using Sliding Window and Two-Pointer Technique
+// Approach:
+// Extend the window by moving the `end` pointer to the right and adding `nums[end]` to `sum`.
+// If the `sum` of the current window is greater than or equal to the target,
+// update `minWindow` with the smaller value between `minWindow` and the current window size (`end - start + 1`).
+// Then, try to find a smaller window that still meets the condition (i.e., sum is greater than or equal to the target)
+// by shrinking the window by moving the `start` pointer to the right. Before shrinking the window, subtract `nums[start]` from `sum`.
+// Continue this process until the `end` pointer reaches the end.
+// After iterating through all possible subarrays, return `minWindow` if a valid subarray is found.
+// If no such subarray is found, return 0.
+//
+// TC: O(N), since both the `start` and `end` pointers traverse the array at most once.
+// Even though a while loop is used, the total number of operations is still O(N) because each element
+// is added to and removed from `sum` at most once.
+//
+// SC: O(1), since no additional space is used apart from a few variables.
 
 var minSubArrayLen = function (target, nums) {
     let start = 0, end = 0;

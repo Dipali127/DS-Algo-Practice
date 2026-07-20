@@ -32,7 +32,8 @@ var numSubarraysWithSum = function(nums, goal) {
 //    which includes subarrays with sums 0, 1, 2, ..., up to 'goal'.
 // 2. Then, call the slidingWindowAtmost function again with the sum at most equal to 'goal - 1', 
 //    which includes subarrays with sums 0, 1, 2, ..., up to 'goal - 1'. 
-//    This is because there's no direct way using the sliding window to count subarrays with exactly 'goal' sum.
+//    This is because there's no direct way using the sliding window to count subarrays with exactly 'goal'
+//    sum.
 // 3. Subtracting slidingWindowAtmost(nums, goal - 1) from slidingWindowAtmost(nums, goal) 
 //    eliminates all common subarrays between both calls, leaving only the count of subarrays 
 //    with an exact sum equal to 'goal'.
@@ -49,8 +50,11 @@ var numSubarraysWithSum = function(nums, goal) {
 // - After adjusting the window, I will add (j - i + 1) to countSubarray, representing all valid subarrays
 //  ending at index 'j'.
 // - Continue expanding the window by moving 'j' forward.
-// Time Complexity: O(N), since each element is processed at most twice (once by 'j' expanding the window 
-//   and once by 'i' shrinking the window).
+// Time Complexity: O(N), since each element is added to the sum at most once and removed from the sum at
+// most once.
+// Even though a nested while loop is used, the time complexity is still O(N) because each element is added
+// to and removed from the sum at most once.
+// Also, both the start and end pointers only move forward and never move backward.
 // Space Complexity: O(1), since no extra space is used—only a few integer variables.
 
 

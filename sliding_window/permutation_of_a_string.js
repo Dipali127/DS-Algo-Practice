@@ -14,7 +14,8 @@
 // return true.
 // If, after checking all substrings, we haven’t found a permutation of string s1 in s2, then return false.
 // TC: O(N*M), where N is the length of string s1 and M is the length of string s2.
-// The outer loop iterates O(M-N+1) times, and in each iteration, substring() and isPermutation() both take O(N).
+// The outer loop iterates O(M-N+1) times, and in each iteration, substring() and isPermutation() both
+// take O(N).
 // So, the overall time complexity is O(N*M).
 // SC: O(M), since for each substring we store the frequency of characters of s1 in a hash map.
 
@@ -63,7 +64,7 @@ var checkInclusion = function(s1, s2) {
 // window left value exist in hash map then increment its frequency since that character is not a part of a new 
 // window and we dont need it.
 // once find the permutation string return true otherwise return false.
-// TC:- O(N), as this approach(sliding window) traverse each characters of both string once.
+// TC:- O(N), Since both the start and end pointer traverse through the string at most once.
 // SC:- O(N), to store each characters of string s1 into hash map.
 
 var checkInclusion = function (s1, s2) {

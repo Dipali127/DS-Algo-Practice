@@ -56,11 +56,10 @@ var lengthOfLongestSubstring = function (string) {
 // twice using both 'i' and 'j' pointer.
 // Space Complexity: O(N), as we store unique characters in a Set.
 
-// Why increment the end pointer inside the if statement? 
-// This will not remove a unique character. At the time a duplicate is found, we only have to increment 
-// the start pointer to recheck whether the value at end, after shrinking the start pointer, contains a 
-// unique value or not. If the value at end, after shrinking start, is unique, then we will again add that
-// value.
+// Why increment the `j` pointer inside the if statement?
+// Because if we increment `j` outside the if statement, we might skip the current duplicate
+// character. Instead, we first shrink the window until the character becomes unique, then
+// add it to the set and increment `j`.
 
 var lengthOfLongestSubstring = function (s) {
     if(s === ""){

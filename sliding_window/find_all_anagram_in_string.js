@@ -5,7 +5,7 @@
 // for each substring, create a hash map to store the frequency of each character in string 'p'.
 // iterate through the current substring of 's' starting from the current index and 
 // check if a character exists in the hash map, decrement its count. 
-// after traversing the current substring, check if all values in the hash map are zero. 
+// after\ traversing the current substring, check if all values in the hash map are zero. 
 // it means the current substring is an anagram of string 'p'.
 // if an anagram is found, add the starting index of the current substring to the result array.
 // once, found all the starting index in string 's' which is an anagram of string 'p' return resultArray.
@@ -61,7 +61,11 @@ var findAnagrams = function(s,p) {
 // to the right.
 // once all starting indices of substrings in string 's' which are anagrams of string 'p' are found, 
 // return resultArray.
-// TC: O(N), where N is the length of 's', since each character is traversed once using start and end pointers.  
+// TC: O(N), where N is the length of 's', since each character is traversed once using start and end 
+// pointers.
+// Although there is a nested loop to check the frequency map, the map contains at most 26 lowercase English
+// letters, so scanning it takes constant time. 
+// Therefore, the overall time complexity is O(N) for this problem  
 // SC: O(K), where K is the number of distinct characters in 'p' (for hash map storage) and result array 
 // to store starting indices of all anagram.
 

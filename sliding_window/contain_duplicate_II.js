@@ -23,7 +23,7 @@ var containsNearbyDuplicate = function (arr, k) {
 // Instead of using a nested loop to find duplicate elements, which results in a time complexity of O(N²), 
 // I will use a sliding window approach combined with a has set where the hash set maintain the window size of k.
 // While iterating through the array, I will check if the current value 'nums[i]' already exists in the hash set:
-// - If it is, that means a duplicate exists then return true.
+// - If it is, that means a duplicate exists then return true immediately.
 // - If it not, add 'nums[i]' to the has set.
 // To maintain the window size of at most 'k', 
 // - If the Set size exceeds 'k', remove the element at position 'i - k' from the Set, 

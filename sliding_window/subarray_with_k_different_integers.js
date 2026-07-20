@@ -46,7 +46,7 @@ var subarraysWithKDistinct = function (nums, k) {
 // The difference between these two function calls gives the number of subarrays with exactly 'k' 
 // distinct elements by eliminating all common subarrays and leaving only those where the count 
 // of unique elements is equal to k.
-// Inside the slidingWindow function:
+// Inside the goodSubarray function:
 // - Use two pointers 'start' and 'end' to represent the current window's start and end indices.
 // - Use a hash map to store the frequency of elements within the current window.
 // - Extend the window by moving the 'end' pointer to the right and updating the hash map 
@@ -59,33 +59,40 @@ var subarraysWithKDistinct = function (nums, k) {
 //   of subarrays ending at 'end' with at most 'k' distinct elements.
 // Finally, return the difference between slidingWindow(nums, k) and slidingWindow(nums, k - 1), 
 // which gives the total number of subarrays with exactly 'k' distinct elements.
-// Time Complexity: O(N), since each element is added to and removed from the hash map at most once.
+// Time Complexity: O(N), since both 'start' and 'end' pointer traverse through the array at most once.
+// Even though nested while loop is used, each element is added to and removed from the hash map at most once.
 // Space Complexity: O(N), due to the hash map that can contain up to N elements in the worst case.
 
 var subarraysWithKDistinct = function (nums, k) {
-    return slidingWindow(nums, k) - slidingWindow(nums, k - 1);
+    return goodSubarray(nums, k) - goodSubarray(nums, k - 1);
+    function goodSubarray(nums, k) {
+        let count = 0;
+        let map = new Map();
 
-    function slidingWindow(nums, k) {
-        let goodSubarray = 0;
-        let start = 0, end = 0, map = new Map();
-
+        let start = 0, end = 0;
         while (end < nums.length) {
-            map.set(nums[end], (map.get(nums[end]) || 0) + 1);
+            if (map.has(nums[end])) {
+                map.set(nums[end], map.get(nums[end]) + 1);
+            } else {
+                map.set(nums[end], 1);
+            }
 
             while (map.size > k) {
-                map.set(nums[start], map.get(nums[start]) - 1);
-                if (map.get(nums[start]) === 0) {
-                    map.delete(nums[start]);
+                if (map.has(nums[start])) {
+                    map.set(nums[start], map.get(nums[start]) - 1);
                 }
+
+                if (map.get(nums[start]) === 0) {
+                    map.delete(nums[start])
+                }
+
                 start++;
             }
 
-            goodSubarray += end - start + 1;
+            count += end - start + 1;
             end++;
         }
-
-        return goodSubarray;
+        return count;
     }
-}
 
-
+};

@@ -104,6 +104,9 @@ var numberOfSubarrays = function(nums, k) {
 
 // Time Complexity: O(N), since each element is processed at most twice (once when 'end' expands the 
 // window and once when 'start' shrinks it).
+// Even though a nested while loop is used, the overall time complexity remains O(N), since each element
+// is visited at most twice: once when the end pointer expands the window and at most once when the start 
+// pointer shrinks it. Both pointers only move forward and never move backward or restart from index 0.
 // Space Complexity: O(1), since no additional space is used, only a few integer variables.
 
 

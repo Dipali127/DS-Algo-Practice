@@ -36,7 +36,10 @@ var longestOnes = function(nums, k) {
 // and decrement 'countZero' if the element at 'start' is 0.
 // Update 'maxLength' with the size of the current valid window.
 // Once the iteration completes, return 'maxLength'.
-// TC: O(N), as both 'start' and 'end' pointers traverse the array at most once.
+// TC: O(N), because both the start and end pointers traverse the array at most once. 
+// Even though a nested while loop is used, the overall time complexity remains O(N), since each element is
+// visited at most twice: once when the end pointer expands the window and at most once when the start 
+// pointer shrinks it. Both pointers only move forward and never move backward or restart from index 0.
 // SC: O(1), since no additional space is used.
 var longestOnes = function(nums, k){
     let maxLength = 0, countZero = 0;

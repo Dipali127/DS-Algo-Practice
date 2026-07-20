@@ -5,7 +5,8 @@
 // for each substring, create a map to store the frequency of each character in string 'pat'.
 // iterate through the current substring of 'txt' starting from the current index and 
 // check if a character exists in the map, decrement its count. 
-// after traversing the current substring, check if all values in the map are zero. it means the current substring is an anagram of string 'pat'.
+// after traversing the current substring, check if all values in the map are zero. 
+// it means the current substring is an anagram of string 'pat'.
 // if an anagram is found, increment the count.
 // once, found all the starting index in string 'txt' which is an anagram of string 'pat' return resultArray.
 // TC: O(N * M), where N is the length of 'txt' and M is the length of 'pat'.
@@ -50,13 +51,15 @@ class Solution {
 
 // Optimal approach:- using sliding window and map.
 // first store all the characters of string 'pat' into hash map.
-// extend the window by moving pointer 'j' towards right meanwhile check if current iterated character exists in 
-// the hash map then decrement that character's count in the hash map.
-// once the window size is equal to the length of 'pat', check if all character counts in the hash map are zero.
+// extend the window by moving pointer 'j' towards right meanwhile check if current iterated character exists
+// in the hash map then decrement that character's count in the hash map.
+// once the window size is equal to the length of 'pat', check if all character counts in the hash map are 
+// zero.
 // if they are zero, it means we found the substring in string 'txt' which is an anagram of string 'pat'.
 // if an anagram is found, increment the count.
-// after that, shrink the current window. Before shrinking, check if the character pointed by pointer 'i' exists
-// in the hash map. if it does, increment its count in the hash map and then move the pointer 'i' to the right.
+// after that, shrink the current window. Before shrinking, check if the character pointed by pointer 'i' 
+// exists in the hash map. if it does, increment its count in the hash map and then move the pointer 'i' to
+// the right.
 // once all starting indices of substrings in string 'txt' which are anagrams of string 'pat' are found, 
 // return resultArray.
 // TC: O(N), where N is the length of 'txt'. as each characters are traversed a constant number of times.

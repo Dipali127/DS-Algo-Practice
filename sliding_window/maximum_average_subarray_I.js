@@ -26,31 +26,30 @@ var findMaxAverage = function (nums, k) {
 
 // Optimal approach:
 // approach:
-// extend the window by moving pointer 'j' to the right of the given array 'nums' and calculate the sum by adding the value at index 'j'.
+// extend the window by moving pointer 'end' to the right of the given array 'nums' and calculate the sum by
+// adding the value at index 'end'.
 // once the window size reaches 'k', calculate the average and update maxAvg if the current average is higher.
-// then, slide the window to the right by subtracting the value at index 'i' from the sum and incrementing pointer 'i' 
-// to get the next subarray of size 'k'. 
+// then, slide the window to the right by subtracting the value at index 'start' from the sum and incrementing
+// pointer 'start' to get the next subarray of size 'k'. 
 // continue this process until all possible subarrays of size 'k' are considered. 
-// TC: O(N), as we are iterating through the array only once.
-// SC: O(1), as we are using a constant amount of extra space.
+// TC: O(N), Since both 'start' and 'end' pointer traverse through the array once.
+// SC: O(1), Since no additional space is used apart from few variables.
 
-var findMaxAverage = function (nums, k){
-    let i = 0, j = 0, sum = 0, maxAvg = -Infinity;
-    while(j<nums.length){
-        sum += nums[j];
-        if(j-i+1 === k){
-            let avg = sum/k;
+var findMaxAverage = function (nums, k) {
+    let maxAvg = -Infinity;
+    let sum = 0; let start = 0, end = 0;
+    while (end < nums.length) {
+        sum += nums[end];
+        if (end - start + 1 === k) {
+            let avg = sum / k;
             maxAvg = Math.max(maxAvg, avg);
-
-            // once 'k' size subarray found, slide the window to get the next subarray.
-            sum-= nums[i];
-            i++;
+            sum-= nums[start++];
         }
-
-       
-
-        j++;
+        
+        end++;
     }
 
     return maxAvg;
-}
+};
+
+    
