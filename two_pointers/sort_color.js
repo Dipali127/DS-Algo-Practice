@@ -85,11 +85,13 @@ var sortColors = function(nums) {
 // So we must re-check the current mid value instead of moving forward.
 
 // KEY POINT:
-// The array is divided into regions:
-// [0 ... left-1] → all 0s
-// [left ... mid-1] → all 1s
-// [mid ... right] → unknown
-// [right+1 ... end] → all 2s
+// During the execution of the algorithm, the array is conceptually divided into four regions:
+// [0 ... left-1] → all 0s (already sorted)
+// [left ... mid-1] → all 1s (already sorted)
+// [mid ... right] → unknown elements that are yet to be processed
+// [right+1 ... end] → all 2s (already sorted)
+
+// As the pointers move and swapping takes place, these four regions are formed and continuously updated.
 
 var sortColors = function(nums){
     let left = 0, mid = 0, right = nums.length - 1;

@@ -1,33 +1,37 @@
 // Leetcode Problem: 15
+
 // Brute-force approach:
 // Approach:
-// I will use a result array to store unique triplets and a hash set to quickly check 
+// I will use a result array to store unique triplets and a hash set to quickly check
 // whether a triplet already exists in it, so that I can avoid adding duplicate triplets to the result
 // array.
 // I will consider every possible triplet using three nested loops.
-// For Each Triplets,
-// I will compute the sum of its elements and check if the computed sum equals zero.
+// For each triplet,
+// I will compute the sum of its elements and check whether the computed sum equals zero.
 // If it does, I will ensure that the triplet is unique by verifying that it doesn’t already exist in the hash set.
-// To achieve this, I will first sort the triplet to maintain a consistent order Since output result triplets are in 
-// sorted order given in the problem and then convert the sorted triplet into a string so that I can easily check whether
-// the current triplet is already exist in the hash set.
-// If the triplet string is not already exist in the hash set, I will add it to the result array.
+// If the triplet string does not already exist in the hash set, I will add it to the result array.
 // If it does exist in the hash set, it means the current triplet is a duplicate and should be skipped.
-// Time Complexity: O(N^3), due to the triple nested loop.
-// Space Complexity: O(N), to store the triplets in the hash set.
+
+// Time Complexity: O(N^3), due to the triple nested loops.
+// Space Complexity: O(N), to store the unique triplets in the hash set.
 
 // Why are we converting the sorted array into a string instead of directly storing it as an array in a hash set?
-// Because , when we store array into hash set, it store reference of array not the array directly and when we compare
-// the new array which has the same triplet as already computed triplet array , Javascript compare them by reference not
-// by value.
-// If we store the sorted array directly in a hash set, JavaScript compares arrays by reference,
-// not by value.
-// That’s why we convert the sorted array into a string. 
-// On the other hand converting them into a string like '1,2,3' and another '1,2,3' are considered equal, which allows the
-// hash set to properly detect duplicates.
+// Because when we store an array in a hash set, JavaScript stores the reference of the array, not the array itself.
+// When we compare a new triplet array with an existing triplet array in the hash set,
+// JavaScript compares them by reference, not by value.
+// That’s why we convert the triplet into a string.
+// On the other hand, strings like '1,2,3' and another '1,2,3' are considered equal which allows the hash set to properly 
+// detect duplicates.
 
-// Note: when creating [nums[i], nums[j], nums[k]] before sorting, a new array reference (address) is 
-// created in memory.
+// NOTE: When creating triplets like [nums[i], nums[j], nums[k]], a new array reference (memory address)
+// is created in memory.
+
+// Why do we sort the triplet before converting it into a string and then storing the string in the hash set?
+// Because the strict equality operator compares both strings character by character from left to right.
+// If two triplets are not in the same order, the strict equality operator returns false,
+// even if both triplets contain the same numbers in a different order.
+// That's why we sort the triplet before converting it into a string and then storing the string in the hash set.
+
 
 var threeSum = function(nums) {
   let set = new Set();
@@ -51,27 +55,37 @@ var threeSum = function(nums) {
 }
 
 
-// Optimal approach: using two pointers (after sorting)
+// Optimal approach: Using two pointers (after sorting)
+
 // Approach:
 // I will sort the array to apply the two-pointer technique for finding triplets and avoiding duplicates.
 // I will iterate through the array to find valid triplets.
-// In the outer loop, I will check if the current element is the same as the previous one.
+// In the outer loop, I will check whether the current element is the same as the previous one.
 // If it is, I will skip it to avoid duplicate triplets.
 // For each unique element, I will set two pointers:
-// - start pointer will point to the next element after the current element (i + 1)
-// - end pointer will point to the last element of the array.
-// I will run a while loop until start is less than end to check for triplets where the sum is zero.
+// - The start pointer will point to the next element after the current element (i + 1).
+// - The end pointer will point to the last element of the array.
+// I will run a while loop until start is less than end to check for triplets whose sum is zero.
 // If the sum of the triplet is zero, I will add it to the result array and move both pointers inward (start++ and end--).
-// After updating the pointers, I will use two while loops to skip any duplicate values at the start and 
-// end positions to ensure we don’t process the same number multiple times and add duplicate triplets.
+// After updating the pointers, I will use two while loops to skip any duplicate values at the start and
+// end positions to ensure that we don’t process the same number multiple times and add duplicate triplets.
 // If the sum of the triplet is less than zero, I will move the start pointer to the right to increase the sum.
 // If the sum is greater than zero, I will move the end pointer to the left to decrease the sum.
 // Finally, I will return the result array containing all unique triplets.
-// Time Complexity: O(N^2), Explanation: 
-// Sorting the array takes O(N log N) time.
-// and the two-pointer technique runs in O(N^2) time in the worst case, since i have use nested loop where outer loop
-// runs through each element and inner loop both pointers run through each element at most once.
-// Space Complexity: O(1), Since we haven't use any extra space apart from few pointers.
+
+// Time Complexity: O(N^2)
+// Explanation:
+// Sorting the array takes O(N log N) time,
+// and the two-pointer technique runs in O(N^2) time in the worst case because I have used a nested loop,
+// where the outer loop iterates through each element and the two pointers together traverse the remaining
+// elements at most once for each iteration of the outer loop.
+
+// Space Complexity: O(1), since we haven't used any extra space apart from a few pointers.
+
+// KEY POINT:
+// After sorting, duplicate values become adjacent to each other, which helps us skip duplicate triplets easily.
+// Sorting also enables the two-pointer technique because the array is in sorted order.
+// Based on whether the current sum is too small or too large, I can move the left or right pointer accordingly.
 
 var threeSum = function (nums) {
     nums.sort((a,b) => a-b), result = [];

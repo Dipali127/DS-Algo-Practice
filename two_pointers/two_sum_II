@@ -34,8 +34,9 @@
 // SC: o(1), as there is no additional space used apart from the pointers.
 
 // Note:-
-// regex.test(s[i]) checks whether the current character is alphanumeric (a letter or digit). 
-// If it matches the regular expression, I convert it to lowercase and add it to the new string; otherwise, I ignore it.
+// The problem asks us to return the indices using 1-based indexing, whereas arrays are indexed using 0-based indexing in
+// JavaScript. Therefore, when I find the valid pair at indices left and right, I simply add 1 to both indices before 
+// returning them to convert the 0-based indices into the required 1-based indices.
 
 var twoSum = function(arr, target) {
     let i = 0;

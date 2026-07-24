@@ -5,8 +5,8 @@
 // if the current substring is a palindrome, update the longPal variable with the new length of the palindrome
 // substring and also update longSub.
 // after iterating through each possible substring, return the longest palindromic substring, longSub.
-// Time Complexity: O(N^3), to consider each possible substring and to iterate through each substring 
-// by calling function palindrome from the inner loop.
+// Time Complexity: O(N^3), because the two nested loops generate all possible substrings (O(N²)), and for each substring,
+// the palindrome function may traverse the entire substring in the worst case (O(N)).
 // In worst case, if the entire substring is palindrome, palidrome function traverse through the entire substring.
 // Space Complexity: O(1), since no additional space is used apart from the longPal and longSub variables,
 //  which take constant space.
@@ -52,9 +52,8 @@ var palindrome = function(string, i, j){
 // The `expandAround` function uses two pointers, `left` and `right`, which start at the current center 
 // (or center pair), and expand outward as long as the characters at `left` and `right` form a palindrome.
 // The function `expandAround` will return the palindromic substring found by expanding outward.
-// During each iteration, I will compare the lengths of the odd and even palindromes.
-// If the length of the odd palindrome is greater than the previously stored `maxLengthSub`,
-// then I will update `maxLengthSub` with the odd-length palindrome substring;
+// During each iteration, I compare the lengths of the odd- and even-length palindromes with the currently stored
+// maxLengthSub. If either palindrome is longer, I update maxLengthSub accordingly.
 // otherwise, I will update it with the even-length palindrome substring.
 // Finally, the longest palindromic substring is returned.
 
@@ -68,6 +67,11 @@ var palindrome = function(string, i, j){
 // No additional space is used apart from a few variables to store the current result.
 // We're not using any data structures that scale with input size.
 
+// Keep Point:
+// When the "while loop" stops:-
+// - left is one position before the palindrome.
+// - right is one position after the palindrome.
+// Therefore, we use left + 1 as the starting index. We do not use right - 1 because slice() excludes the ending index.
 
 
 var longestPalindrome = function(s) {
