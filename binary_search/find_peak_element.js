@@ -3,14 +3,11 @@
 // both of its neighbors (the elements directly before and after it).
 // Brute force approach:
 // approach:-
-// If the array has only two elements(size of array is 2), compare the first and second elements:-
-//     - check if the first element is a peak by comparing it with the second element,
-//       If nums[0] > nums[1], return 0.
-//     - check if the last element is a peak by comparing it with the second-to-last element,
-//       If nums[n-1] > nums[n-2], return n-1.
-// otherwise(if size of array is more than 2)(from index 1 to n-2), i will use of a loop to iterate 
-// through the array and check if the current element is a peak element by comparing it with both of its
-// neighbors:
+// First, check whether the first element is a peak by comparing it with the second element.
+// If nums[0] > nums[1], return 0. Then check whether the last element is a peak by comparing it with the second-to-last 
+// element. If nums[n-1] > nums[n-2], return n-1.
+// Otherwise, run a loop from index 1 to n-2 to iterate through the array and check whether the current element is a 
+// peak element by comparing it with both of its neighbors.
 // if nums[i] is greater than or equal to both nums[i-1] and nums[i+1], return i as the peak index.
 // if no peak element is found after checking all elements, return 0 as a default, assuming that the first
 // element is the peak element.
@@ -34,8 +31,8 @@ var findPeakElement = function (nums) {
 
 // Optimal Approach: Using Binary Search
 // approach:-
-// initialized two pointer 'low' and 'high' as 'low' starts at index 0 (beginning of the array) and 'high' 
-// starts at the last index of the array (nums.length - 1). 
+// initialize two pointer 'low' and 'high', where 'low' starts at index 0 (the beginning of the array) and 'high' 
+// starts at the last index of the array (nums.length - 1).
 // Calculate the mid index using mid = Math.floor(low + (high - low) / 2).
 // Compare nums[mid] with nums[mid + 1]:-
 // - If nums[mid] < nums[mid + 1], it means the peak element lies on the right side of mid, so update low
@@ -45,16 +42,16 @@ var findPeakElement = function (nums) {
 // Continue the loop until 'low < high', which will give the index of the peak element.
 // TC:- O(log n), since the binary search reduces the search space by half in each iteration.
 // SC:- O(1), as no additional space is used other than the variables for pointers.
+
 // Note:- This binary search is not like the usual one where we check if nums[mid] === target or 
-// returning something inside from the while loop, Instead, we are trying to find the peak element by 
+// returning from inside the while loop, Instead, we are trying to find the peak element by 
 // narrowing down the search area.
 // We use low < high in the loop so that the search stops when only one element is left.
 // If we used low <= high, it could cause an infinite loop.
-// Once low and high point to the same index or high moves before low, it means we’ve found the peak 
-// element, so we return low as the answer.
-// When nums[mid] > nums[mid + 1], it means we’re on a descending slope, so the peak could be at mid 
+// Once low and high point to the same index, we've found the peak element, so we return low as the answer.
+// When nums[mid] > nums[mid + 1], it means we’re on a descending slope from mid, so the peak could be at mid 
 // itself That’s why we do high = mid instead of mid - 1, otherwise we might skip the actual peak.
-// If nums[mid] < nums[mid + 1], we’re on an ascending slope, so the peak lies on the right side — hence 
+// If nums[mid] < nums[mid + 1], we’re on an ascending slope from mid, so the peak lies on the right side — hence 
 // low = mid + 1.
 
 var findPeakElement = function(nums) {

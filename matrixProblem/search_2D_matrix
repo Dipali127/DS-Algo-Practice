@@ -17,14 +17,23 @@ var searchMatrix = function(matrix, target) {
     return false;
 };
 
-// approach:- apply binary search
+// Approach:- apply binary search
+// consider 2d matrix as 1d array to apply binary search
 // let suppose m is no. of rows in a matrix and n is a no. of columns in a matrix.
-//  initalise low with 0 and high with m*n-1 (last index of the matrix when treated as a 1D array).
+// initalise low with 0 and high with m*n-1 (last index of the matrix when considered 2d array as a 1D array).
 // calculate mid index and for getting mid index value in 2D array use the formula as given below.
 // If midValue equals the target, return true.
 // If midValue is less than the target, move low to mid + 1.
 // If midValue is greater than the target, move high to mid - 1.
 //TC:O(log(m*n)),where m is number of rows and n is number of columns and SC:O(1);
+
+// NOTE:-
+// We do division to find the exact row in the 2D array because division tells us how many complete rows we have to skip
+// before reaching the computed mid index after considering the 2D matrix as a 1D array.
+// Once we know how many rows we have to skip to reach that mid index, we then need to find the exact column within that
+// row.
+// For that, we use the modulo operator (`%`) because it tells us how many elements we have to skip inside the current
+// row to reach that index.
 
 var searchMatrix = function (matrix, target) {
     if (matrix.length == 0) {

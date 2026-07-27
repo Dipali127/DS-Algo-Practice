@@ -24,9 +24,9 @@ var search = function(nums, target) {
 // and high is initialized with nums.length - 1.  
 // i will run a while loop until 'low <= high' and calculate the 'mid' index to check if the target is at mid.  
 // if the target is found at 'mid', return the mid index immediately.  
-// if not, then i will find out which part of the array is sorted (left or right) of mid.  
-// - if the left half (from 'low' to 'mid') is sorted, check if the target lies within that range, 
-//   because the target will be found in the sorted part of the array.  
+// if not, then i will find out which part of the array is sorted (left or right) of mid because binary search can be
+// applied only on sorted part of the array.  
+// - if the left half (from 'low' to 'mid') is sorted, check if the target lies within that range. 
 //   - if the target is within this range, update 'high' to mid - 1 to search the left half.  
 //   - otherwise, update 'low' to mid + 1 to search the right half.  
 // - if the right half (from 'mid' to 'high') is sorted, check if the target is in this range.  
@@ -34,13 +34,16 @@ var search = function(nums, target) {
 //   - otherwise, update 'high' to mid - 1 to search the left half.  
 // continue this process until the target is found or 'low' exceeds 'high'.  
 // if the target is not found, return -1.  
-// TC: O(log N), as binary search divides the array in half in each iteration.  
+// TC: O(log N), At every iteration, search space is discarded, so the search space is reduced by approximately 
+// half, giving a time complexity of O(log N).
 // SC: O(1), since only a few pointers are used for the search. 
 
-// Note: In short, I first identify which half of the array is sorted, 
-// since binary search works only on sorted data.
-// If the target lies within that sorted half, I search there; 
-// otherwise, I move to the other half.
+// Note: 
+// Why do you use target < nums[mid] instead of target <= nums[mid]?
+// Because before checking the sorted half, I've already checked whether nums[mid] is equal to the target.
+// If nums[mid] === target, I immediately return mid. Therefore, when deciding which half to search, 
+// I know the target cannot be at mid anymore, so I exclude mid from the range by using < or >.
+
 
 
 var search = function(nums, target) {

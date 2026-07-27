@@ -23,9 +23,10 @@ var search = function (nums, target) {
 // Approach:-
 // in each iteration, calculate the middle index 'mid'. If the element at 'mid' is equal to the target, 
 // return true.
+// from the given array it is clearly visible that array contain duplicates at low and high so i will check;
 // if the values at low, mid, and high are all the same (nums[low] === nums[mid] && nums[mid] === nums[high]), 
-// this indicates duplicates, which make it unclear which half is sorted. 
-// To handle this, increment low and decrement high to shrink the search range and 
+// this indicates array contains duplicates and make it unclear that which half of the array is sorted. 
+// To handle this condition, increment low and decrement high to shrink the search range and 
 // bypass the duplicates. For example: [3, 1, 2, 3, 3, 3, 3] — Here, low, mid, and high all have the same value.
 // If we incorrectly assume that the range from low to mid is sorted, it could lead to incorrect results. 
 // Thus, shrinking the search space helps to avoid such cases.
@@ -44,10 +45,8 @@ var search = function (nums, target) {
 // and decrement high by 1. We keep doing this again and again in each loop after finding the mid index each time.
 // If the whole array has the same number, we shrink the range one step at a time, which takes many steps. 
 // That’s why the worst-case time becomes O(n).
-// (ii) Here, In short, I first identify which half of the array is sorted, 
-// since binary search works only on sorted data.
-// If the target lies within that sorted half, I search there; 
-// otherwise, I move to the other half.
+// (ii) Here, In short, I first identify which half of the array is sorted, since binary search works only on sorted data.
+// If the target lies within that sorted half, I search there; otherwise, I move to the other half.
 
 var search = function (nums, target) {
     let low = 0, high = nums.length - 1;

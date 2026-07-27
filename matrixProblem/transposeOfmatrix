@@ -13,7 +13,7 @@
 // Within the inner loop, there are constant time operations: swapping two elements of the
 // matrix. So, the total number of iterations can be approximated as the sum of the series:
 // 1 + 2 + 3 + ... + n
-// This is a triangular series, and the sum of the first n natural numbers is given by 
+// This is the sum of the first n natural numbers is given by 
 // n*(n+1)/2.
 // Therefore, the total number of iterations is approximately (n*(n+1))/2. Since this is 
 // proportional to n^2, the time complexity of the code is O(N^2) and SC:O(1).
