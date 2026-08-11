@@ -60,7 +60,7 @@ const root = new BinaryTree(2);
 root.left = new BinaryTree(1);
 root.right = new BinaryTree(3);
 
-//                                  Types of Traversal on a Tree:- DFS vs BFS
+//                               Types of Traversal on a Tree:- DFS vs BFS
 // 1) DFS (Depth First Search):
 // Explores one path completely (goes deep) and then backtracks to explore other branches.
 // Used for:
@@ -101,17 +101,23 @@ function bfs(root) {
     }
 }
 
-// How to compute "Time Complexity" of Tree
-// Time Complexity = (number of nodes visited) × (work done per node)
+// How to compute "Time Complexity" of a Tree
+// Time Complexity — for both DFS and BFS = (number of nodes visited) × (work done per node)
 
-// How to compute "Space Complexity" of Tree
+// How to compute "Space Complexity" of a Tree
 // (i) For DFS (Recursion):-
-// Space = height of tree (H) that means at any time recursion stack stores 'h' number of recursive calls.
-// Balanced tree → O(log N)
-// Skewed tree → O(N)
+// Space Complexity = height of the tree (H), which means that at any time, the recursion stack stores
+// 'H' number of recursive calls.
+// And 'H' depends on the type of the tree.
+// If the tree is a "Balanced Tree" → H = O(log N), as the depth of the recursion stack is proportional
+// to the number of nodes in the tree.
+// In a balanced tree, SC = O(log N), as the depth of the recursion stack is proportional to the height
+// of the tree.
+// In a balanced tree, nodes grow exponentially level by level..
 
-// For BFS (Queue)
-// Space = maximum number of nodes present in the queue at any time (≈ width of tree, worst case O(N)).
+// (ii) For BFS (Queue):-
+// Space Complexity = maximum number of nodes at any level (maximum width of the tree).
+
 
 // Extra space 
 // Add any extra data structures used (array, map, etc.)

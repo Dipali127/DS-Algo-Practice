@@ -1,36 +1,21 @@
 // GeeksForGeeks Problem:-
-// Given the root of a Binary Tree, find the vertical traversal of the tree starting from the leftmost level to the rightmost level.
-// Note: If there are multiple nodes passing through a vertical line, then they should be printed as they appear in level order traversal of the tree.
+// Given the root of a Binary Tree, find the vertical traversal of the tree starting from the leftmost level to the 
+// rightmost level.
+// Note: If there are multiple nodes passing through a vertical line, then they should be printed as they appear in level 
+// order traversal of the tree.
 
 // Approach:
-// I will use BFS traversal to traverse the tree level by level along with each node’s horizontal distance by 
-// imagining vertical lines across the tree.
-// I will use hash map to group all the nodes corresponding to each vertical line(horizontal distance) to get the 
-// vertical view of the tree.
-
-// That means I will not only perform level-by-level traversal, but I will also store the horizontal distance of 
-// each node to compute the vertical view of the tree.
-
-// In the case of vertical traversal, Horizontal distance assigns a column index to each node in a tree, which
-// helps to group the nodes vertically from left to right.
-// Nodes with the same horizontal distance belong to the same vertical column.
+// I'll use BFS traversal to traverse the tree level by level, and I'll use horizontal distance, which represents a column
+// index or vertical line for each node of the tree. 
+// Horizontal distance helps to group nodes that belong to the same column index or vertical line.
+// To store those groups of nodes with the same horizontal distance, I'll use a HashMap.
 
 // What is Horizontal Distance?
-// Horizontal Distance means assigning a position to each node.
-// It looks like below:
-// - Horizontal Distance of root node is always 0.
-// - Horizontal Distance of left child = Horizontal Distance of root - 1 = -1.
-// - Horizontal Distance of right child = Horizontal Distance of root + 1 = 1.
-
-// Why Horizontal Distance is useful for Vertical View?
-// I use horizontal distance because it helps represent each vertical line of the tree uniquely.
-
-// By assigning:
-// - Root = 0
-// - Left child = HD - 1
-// - Right child = HD + 1
-
-// I can easily group nodes that lie on the same vertical line and collect all nodes in each vertical column.
+// Horizontal distance means assigning a position to each node.
+// The root node always has a horizontal distance of 0. 
+// The left child gets the horizontal distance of its parent node minus 1, and
+// the right child gets the horizontal distance of its parent node plus 1.
+// We follow the same rule for all other nodes in the tree.
 
 // Vertical View means:
 // “What nodes do we see when we look at the tree column by column from left to right?”
@@ -41,8 +26,6 @@
 // So horizontal distance helps us group nodes like this:
 // HD:   -2   -1    0    1    2
 //       [ ]  [ ]  [ ]  [ ]  [ ]
-
-
 // Each column corresponds to one vertical line in the tree.
 
 
@@ -60,7 +43,7 @@
 //   - For each node, extract the node and its horizontal distance.
 //   - If the horizontal distance is not present in the map, create a new list.
 //   - Otherwise, push the node value into the existing list (preserving level order).
-//   - Add left and right children to the queue with updated horizontal distances.
+//   - Add left and right children of the current visited node to the queue with updated horizontal distances.
 
 // - After traversal:
 //   - Sort the map entries based on horizontal distance.
@@ -73,6 +56,12 @@
 // In the worst case, if the tree is unbalanced (left-skewed or right-skewed),
 // where each node has a unique horizontal distance then K = N.
 // So, in the worst case, the time complexity becomes O(N log N).
+
+// Note:-
+// In a balanced tree, the Map groups multiple nodes that have the same horizontal distance, so the number of Map
+// entries is smaller than N(number of nodes in the tree) that is k.
+// In an unbalanced or skewed tree, each node can have a unique horizontal distance, so the Map can have N
+// entries.
 
 // Space Complexity:- O(N), Explanation:-
 // O(N) is used by the queue to store nodes, and in the worst case, when the tree is balanced,
@@ -89,11 +78,12 @@
 // So, overall SC:- O(N) + O(N) + O(N) = O(3N) = O(N).
 
 // Why we sort in vertical View?
-// Because BFS traversal processes nodes like:- level 0 → level 1 → level 2.
-// But the final output of the vertical view should be: HD -2 → -1 → 0 → 1 → 2, that is, nodes from smallest HD to
-// largest HD.
-// That's why we sort the map entries to arrange nodes from smallest Horizontal Distance to largest Horizontal
-// Distance.
+// Currently, the Map stores the horizontal distance along with the grouped nodes, level by level.
+// But the problem requires the vertical order from the leftmost column to the rightmost column.
+// So I'll sort the horizontal distances in ascending order. 
+// Since I cannot directly perform sorting in a hash Map, I'll first add its entries into a new array, and then
+// i will perform sorting based on horizontal distance. 
+// This way, the columns will be arranged from the leftmost column to the rightmost column.
 
 // Let's see an example for vertical traversal of the tree:
 //         1
@@ -121,14 +111,15 @@
 // }
 
 // Step 3: map.entries() (Iterator form)
-// It is an iterator that provides [key, value] pairs one by one. It is neither an array nor an object.
+// map.entries() returns an iterator that gives you [key, value] pairs, allowing you to traverse the Map.
 // [-2, [4]]
 // [-1, [2]]
 // [0, [1, 5]]
 // [1, [3]]
 // [2, [6]]
 
-// If you do: [...map.entries()]
+// If you do: [...map.entries()] :- spread operator unpack/extract all entries containing "key,vlaue" pair of map into
+// individual entries and then add them into a new array.
 // Then it becomes:
 // [
 //   [-2, [4]],
@@ -155,9 +146,10 @@ class Solution {
 
         let queue = [[root, 0]];
         let map = new Map();
+        let front = 0;
 
-        while(queue.length > 0){
-            let [node, hd] = queue.shift();
+        while(front < queue.length){
+            let [node, hd] = queue[front];
 
             if(!map.has(hd)){
                 map.set(hd, [node.data]);
@@ -172,6 +164,8 @@ class Solution {
             if(node.right !== null){
                 queue.push([node.right, hd + 1]);
             }
+
+            front++;
         }
 
         let sortedArray = [...map.entries()].sort((a, b) => a[0] - b[0]);

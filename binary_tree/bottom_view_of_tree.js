@@ -3,13 +3,10 @@
 // The bottom view of a binary tree is the set of nodes visible when the tree is viewed from the bottom.
 
 // Approach:
-// I will use BFS traversal to traverse the tree level by level along with each node’s horizontal distance by 
-// imagining vertical lines across the tree.
+// I'll use BFS traversal to traverse the tree level by level, and I'll use horizontal distance, which represents
+// a column index or vertical line for each node of the tree. 
 // The last node encountered in every vertical line of the tree will be the bottom view node of that tree.
-// I will store the last node encountered at each vertical line in a hash map to get the bottom view of the tree.
-
-// That means I will not only perform level-by-level traversal, but I will also store the horizontal distance of 
-// each node to compute the bottom view of the tree.
+// And to store the bottom view of the tree, I'll use a HashMap.
 
 // What is Horizontal Distance?
 // Horizontal Distance means assigning a position to each node.
@@ -67,6 +64,12 @@
 // In the worst case, K = N if the tree is unbalanced (left-skewed or right-skewed),
 // where each node has a unique horizontal distance.
 // So, in the worst case, the time complexity becomes O(N log N).
+
+// Note:-
+// In a balanced tree, the Map groups multiple nodes that have the same horizontal distance, so the number of Map
+// entries is smaller than N(number of nodes in the tree) that is k.
+// In an unbalanced or skewed tree, each node can have a unique horizontal distance, so the Map can have N
+// entries.
 
 // Space Complexity:- O(N), Explanation:-
 // O(N) is used by the queue to store nodes, and in the worst case, when the tree is balanced,
@@ -143,37 +146,31 @@
 
 class Solution {
     bottomView(root) {
-        return levelOrderTraversal(root);
-        function levelOrderTraversal(root){
-            let result = [];
-            if(root === null){
-                return result;
-            }
-
-            let queue = [[root, 0]];
-            let map = new Map();
-
-            while(queue.length > 0){
-                let [node, hd] = queue.shift();
-
-                map.set(hd, node.data);
-
-                if(node.left !== null){
-                    queue.push([node.left, hd - 1]);
-                }
-
-                if(node.right !== null){
-                    queue.push([node.right, hd + 1]);
-                }
-            }
-
-            let sortedMap = [...map.entries()].sort((a,b) => a[0] - b[0]);
-
-            for(let val of sortedMap){
-                result.push(val[1]);
-            }
-
-            return result;
-        }
+       let map = new Map(), result = [];
+       
+       let queue = [[root, 0]];
+       let front = 0;
+       while(front < queue.length){
+           let [node, hd] = queue[front];
+           
+           map.set(hd, node.data);
+           
+           if(node.left){
+               queue.push([node.left, hd-1]);
+           }
+           
+           if(node.right){
+               queue.push([node.right, hd+1]);
+           }
+           
+           front++;
+       }
+       
+       let sortedArray = [...map.entries()].sort((a,b) => a[0] - b[0]);
+       for(let val of sortedArray){
+           result.push(val[1]);
+       }
+       
+       return result;
     }
 }

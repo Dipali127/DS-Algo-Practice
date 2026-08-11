@@ -24,8 +24,8 @@
 // - Repeat this process for all levels.
 
 // Time Complexity (TC): O(N), where N is the number of nodes in the tree, as each node is visited exactly once.
-// Space Complexity (SC): O(N), because in the worst case, the queue can store up to O(N) nodes (for a very wide 
-// tree).
+// Space Complexity (SC): O(N), because in the worst case, the queue can store up to O(N) nodes (for a very
+//  wide level of tree).
 
 // Note:
 // - Even though we only pick the first node at each level, we still process all nodes at that level
@@ -74,8 +74,8 @@ class Solution {
 
 // Second Approach: Using DFS (Depth-First Search).
 // Approach:
-// I will use DFS traversal. I will recursively traverse the tree, and for each node, I will first explore the left
-// subtree and then the right subtree.
+// I will use DFS traversal. I will recursively traverse the tree, and for each node, I will first explore the 
+// left subtree and then the right subtree.
 
 // Inside leftView function:
 // - Take a result array to store the left side view of the tree.

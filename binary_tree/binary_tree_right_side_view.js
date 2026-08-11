@@ -6,7 +6,8 @@
 
 // Optimal Approach: Using BFS (Breadth-First Search)
 // Approach:
-// I will use BFS traversal using a queue to print all the nodes that the person can see from the right side of the tree.
+// I will use BFS traversal using a queue to print all the nodes that the person can see from the right side of the 
+// tree.
 // - First, I will push the root node into the queue.
 // - Then, I will run a while loop to traverse through all the levels of the tree.
 // - For each level, I will get the size of the queue (let n = queue.length), which represents the number of 
@@ -26,8 +27,6 @@
 // Space Complexity (SC): O(N), because in the worst case, the queue can store up to O(N) nodes (for a very wide tree).
 
 // Note:
-// - Even though we only pick the first node at each level, we still process all nodes at that level
-//   to ensure the next level is traversed correctly.
 // - Since the result array stores one node per level, in the worst case (skewed tree), it may store O(N) nodes.
 // - In a balanced tree, the number of levels is O(log N), so the result array size is O(log N).
 

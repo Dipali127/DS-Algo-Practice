@@ -4,24 +4,13 @@
 // Group nodes column-wise (vertical) from left to right.
 // Inside each column:
 // Traverse top → bottom (based on row)
-// If multiple nodes have the same row AND same column, then sort them by value
+// If multiple nodes have the same row AND same column, then sort them by value otherwise sort by row.
 
 // Approach:
-// I will use BFS traversal to traverse the tree level by level along with each node’s horizontal distance by 
-// imagining vertical lines across the tree.
-// I will use hash map to group all the nodes corresponding to each vertical line(horizontal distance) to get the 
-// vertical view of the tree.
-
-// That means I will not only perform level-by-level traversal, but I will also store the horizontal distance of 
-// each node to compute the vertical view of the tree.
-
-// In the case of vertical traversal, Horizontal distance assigns a column index to each node in a tree, which
-// helps to group the nodes vertically from left to right.
-// Nodes with the same horizontal distance belong to the same vertical column.
-
-// Horizontal distance assigns a column index to each node in a tree, which helps group nodes vertically from left 
-// to right.
-// Nodes with the same horizontal distance belong to the same vertical column.
+// I'll use BFS traversal to traverse the tree level by level, and I'll use horizontal distance, which represents 
+// a column index or vertical line for each node of the tree. 
+// Horizontal distance helps to group nodes that belong to the same column index or vertical line.
+// To store those groups of nodes with the same horizontal distance, I'll use a HashMap.
 
 // Solution:
 // Call the verticalTraversal function and return its result to get the vertical view of the tree.
@@ -50,6 +39,12 @@
 // where each node has a unique horizontal distance then K = N.
 // So, in the worst case, the time complexity becomes O(N log N).
 
+// Note:-
+// In a balanced tree, the Map groups multiple nodes that have the same horizontal distance, so the number of Map
+// entries is smaller than N(number of nodes in the tree) that is k.
+// In an unbalanced or skewed tree, each node can have a unique horizontal distance, so the Map can have N
+// entries.
+
 // Space Complexity:- O(N), Explanation:-
 // O(N) is used by the queue to store nodes, and in the worst case, when the tree is balanced,
 // the queue stores the maximum number of nodes at the last level.
@@ -65,11 +60,12 @@
 // So, overall SC:- O(N) + O(N) + O(N) = O(3N) = O(N).
 
 // Why we sort in vertical View?
-// Because BFS traversal processes nodes like:- level 0 → level 1 → level 2.
-// But the final output of the vertical view should be: HD -2 → -1 → 0 → 1 → 2, that is, nodes from smallest HD to
-// largest HD.
-// That's why we sort the map entries to arrange nodes from smallest Horizontal Distance to largest Horizontal
-// Distance.
+// Currently, the Map stores the horizontal distance along with the grouped nodes, level by level.
+// But the problem requires the vertical order from the leftmost column to the rightmost column.
+// So I'll sort the horizontal distances in ascending order. 
+// Since I cannot directly perform sorting in a hash Map, I'll first add its entries into a new array, and then
+// i will perform sorting based on horizontal distance. 
+// This way, the columns will be arranged from the leftmost column to the rightmost column.
 
 
 // For nodes in the same column (same HD): first sort by row (top to bottom of the tree).
@@ -105,19 +101,27 @@
 // At [0,3] and [2,5], rows are different, so sort by row → no change.
 // At [2,5] and [2,2], rows are same, so sort by value → becomes [[0,3], [2,2], [2,5]].
 
+// for (let [hd, values] of sortedMap):-
+// Here I'm using a for...of loop to traverse through the sorted array.
+// Each element of the sorted array is an array containing two things: the horizontal distance and the values
+// array for that horizontal distance. So I'm using array destructuring to extract the current horizontal 
+//distance into hd and the corresponding values array into values.
+
 
 var verticalTraversal = function (root) {
     if (root === null) return [];
 
     let result = [], queue = [[root, 0, 0]], map = new Map();
-
-    while (queue.length > 0) {
-        let [node, hd, row] = queue.shift();
+    
+    let front = 0;
+    while (front < queue.length) {
+        let [node, hd, row] = queue[front];
 
         if (!map.has(hd)) {
             map.set(hd, [[row, node.val]]);
         } else {
-            map.get(hd).push([row, node.val]);
+            map.get(hd).push([row, node.v
+                al]);
         }
 
         if (node.left !== null) {
@@ -127,6 +131,8 @@ var verticalTraversal = function (root) {
         if (node.right !== null) {
             queue.push([node.right, hd + 1, row + 1]);
         }
+
+        front++;
     }
 
     // sorting based on same horizontal distance

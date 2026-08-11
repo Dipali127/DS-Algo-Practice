@@ -3,13 +3,10 @@
 // The top view of a binary tree is the set of nodes visible when the tree is viewed from the top.
 
 // Approach:
-// I will use BFS traversal to traverse the tree level by level along with each node’s horizontal distance by 
-// imagining vertical lines across the tree.
+// I'll use BFS traversal to traverse the tree level by level, and I'll use horizontal distance, which represents a column
+// index or vertical line for each node of the tree. 
 // The first node encountered in every vertical line of the tree will be the top view node of that tree.
-// I will store the first node encountered at each vertical line in a hash map to get the top view of the tree.
-
-// That means I will not only perform level-by-level traversal, but I will also store the horizontal distance of 
-// each node to compute the top view of the tree.
+// And to store the top view of the tree, I'll use a HashMap.
 
 // What is Horizontal Distance?
 // Horizontal Distance means assigning a position to each node.
@@ -25,11 +22,6 @@
 // - Root = 0
 // - Left child = HD - 1
 // - Right child = HD + 1
-
-// I can easily group nodes that lie on the same vertical line and identify the first node in each vertical
-// line for the top view.
-// Top View means:
-// “What do we see if we look at the tree from above?”
 
 // Now imagine:
 // Nodes are stacked vertically (different levels),
@@ -67,6 +59,12 @@
 // where each node has a unique horizontal distance.
 // So, in the worst case, the time complexity becomes O(N log N).
 
+// Note:-
+// In a balanced tree, the Map groups multiple nodes that have the same horizontal distance, so the number of Map
+// entries is smaller than N(number of nodes in the tree) that is k.
+// In an unbalanced or skewed tree, each node can have a unique horizontal distance, so the Map can have N
+// entries.
+
 // Space Complexity:- O(N), Explanation:-
 // O(N) is used by the queue to store nodes, and in the worst case, when the tree is balanced,
 // the queue stores the maximum number of nodes at the last level.
@@ -94,9 +92,9 @@ class Solution {
         function levelOrderTraversal(root){
             let result = []
             if (!root) return [];
-            let queue = [[root, 0]], map = new Map();
-            while(queue.length > 0){
-                let [node, hd] = queue.shift();
+            let queue = [[root, 0]], map = new Map(), front = 0;
+            while(front < queue.length){
+                let [node, hd] = queue[front];
                 
                 if(!map.has(hd)){
                     map.set(hd, node.data);
@@ -109,6 +107,8 @@ class Solution {
                 if(node.right !== null){
                     queue.push([node.right, hd + 1]);
                 }
+                
+                front++;
             }
             
             let sortedMap = [...map.entries()].sort((a,b) => a[0] - b[0]);
