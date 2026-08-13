@@ -56,8 +56,9 @@
 
 // Time Complexity (TC): O(N) as each node of the tree is visited exactly once.
 
-// Space Complexity (SC): O(H) Where H is the height of the tree due to recursion stack.
-// Since the tree is perfect(i.e; Balanced Tree). So, Space Complexity for balanced tree: O(LOGN)[That means, H = LOGN].
+// Space Complexity (SC): O(logN) as the depth of recursion stack is proportional to the height of the tree.
+// And the given tree is perfect(i.e; Balanced Tree). So, Space Complexity for balanced tree: O(LOGN)[That means, 
+// H = LOGN].
 
 // Note:
 // Recursive stack space is allowed as per the problem statement,

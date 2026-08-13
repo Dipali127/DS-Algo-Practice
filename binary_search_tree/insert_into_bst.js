@@ -28,6 +28,7 @@
 // Because without assignment (such as root.left = insertIntoBST(root.left, val) or
 // root.right = insertIntoBST(root.right, val)), subtree changes are lost and the updated subtree or new node
 // is not attached back to the parent node.
+// So, we have to return the updated subtree to its previous recursive call.
 
 // So, in short:-
 // In recursive BST insertion, we must return and reassign the updated subtree; otherwise, changes are not attached

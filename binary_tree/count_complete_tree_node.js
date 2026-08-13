@@ -81,16 +81,54 @@ var countNodes = function(root) {
 // - Return:
 //   1 + countNodes(root.left) + countNodes(root.right)
 
-// Time Complexity (TC):
-// - In each recursive call, computing leftHeight and rightHeight takes O(log N)
-//   because height of a complete binary tree is log N.
-// - Recursive calls continue for O(log N) levels in the worst case.
-// - Overall TC:- O((log N)²)
+// Time Complexity (TC) in worst case: O((log N)²)
+//
+// Explanation:
+// Since the tree is complete, its height is O(log N).
+// And there are O(log N) recursive levels in countNodes().
+// At each recursive level, we compute the leftmost and rightmost heights.
+// Each height takes O(log N) time complexity, so computing both heights takes:
+//
+// O(log N) + O(log N) = O(2 log N) = O(log N)
+//
+// Therefore:
+//
+// Time Complexity = O(log N recursive levels × O(log N) work per level)
+//                  = O((log N)²).
 
 // Why O((log N)²)?
 // - O(log N) work at each recursive level for height calculation
 // - O(log N) recursive levels
 // - Total = O(log N × log N)
+//         = O((log N)²)
+
+// Left height:
+// n → n/2 → n/4 → n/8 → ... → 1
+//              = O(log n)
+
+// Right height:
+// n → n/2 → n/4 → n/8 → ... → 1
+//              = O(log n)
+
+// At start:
+// Entire tree = n nodes
+
+// After moving to one subtree:
+// Remaining subtree ≈ n/2 nodes
+
+// After moving to one subtree again:
+// Remaining subtree ≈ n/4 nodes
+
+// After moving again:
+// Remaining subtree ≈ n/8 nodes
+
+// ...
+
+// Eventually:
+// Remaining subtree = 1 node
+
+// Best Case, Time Complexity will be O(logN) if at first recursive call it found that given tree is 
+// perfectly binary tree.
 
 // Space Complexity (SC):
 // - Recursive stack depth is equal to tree height.

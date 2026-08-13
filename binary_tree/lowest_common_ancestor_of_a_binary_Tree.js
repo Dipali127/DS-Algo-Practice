@@ -1,7 +1,8 @@
 // Leetcode Problem:- 236
 // Important problem, asked by many companies.
 // Definition of 'Ancestor':-
-// an ancestor is a node that is either a parent, grandparent, or a higher node in the hierarchy, or even the current node itself.
+// An ancestor is a node that is either a parent, grandparent, or a higher node in the hierarchy, or even the 
+// current node itself.
 // Let's first understand what Ancestor and Descendant mean:
 
 //         15
@@ -46,22 +47,23 @@
 
 // Optimal Approach:
 // Approach:
-// I will use DFS traversal. I will recursively explore both the left and right subtrees until I find the Lowest Common
-// Ancestor (LCA) of nodes p and q.
+// I will use DFS traversal. I will recursively explore both the left and right subtrees until I find the Lowest
+// Common Ancestor (LCA) of nodes p and q.
 
 // Solution:
 // Check if the root is null. If root is null, return null as there is no tree to traverse.
-// Check if the root is equal to either 'p' or 'q'. If it is, return root because this means one of the nodes (either 'p'
-// or 'q') has been found, and the another node may exist in its subtree(left or right).
+// Check if the root is equal to either 'p' or 'q'. If it is, return root because this means one of the nodes 
+// (either 'p' or 'q') has been found, and the another node may exist in its subtree(left or right).
 
 // If not, recursively search for 'p' and 'q' in the left and right subtrees.
 
 // -> After the recursive calls:
-//    - If both the left and right subtrees return non-null values, it means 'p' and 'q' exist in different subtrees,
-//      so the current node (root) is their LCA, so return root.
-//    - If only one subtree returns a non-null value and another one return null, return that value because both 'p' and 
-//     'q' are located in that same subtree (or one node itself was found there).
-//    - If both the left and right subtrees return null, return null because neither 'p' nor 'q' exists in that path.
+//    - If both the left and right subtrees return non-null values, it means 'p' and 'q' exist in different
+//      subtrees, so the current node (root) is their LCA, so return root.
+//    - If only one subtree returns a non-null value and another one return null, return that value because both
+//      'p' and 'q' are located in that same subtree (or one node itself was found there).
+//    - If both the left and right subtrees return null, return null because neither 'p' nor 'q' exists in that
+//      path.
 
 // Time Complexity (TC):- O(N), where 'N' is the number of nodes in the tree, as each node of the tree is visited once.
 // Space Complexity (SC):- O(H), where 'H' is the height of the tree and is used by the recursive call stack.

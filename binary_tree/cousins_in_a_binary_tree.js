@@ -47,8 +47,8 @@ var isCousins = function (root, x, y) {
     return false;
 
     function findDepth(root, parent, depth, value) {
-        if (root === null) return null;
-        
+        if(root === null) return null;
+
         if(root.val === value){
             return {parent, depth};
         }
@@ -122,10 +122,10 @@ var isCousins = function (root, x, y) {
     function findDepth(root, value) {
         if (root === null) return null;
 
-        let queue = [{ node: root, depth: 0, parent: null }];
+        let queue = [{ node: root, depth: 0, parent: null }], front = 0;
 
-        while (queue.length > 0) {
-            let { node, depth, parent } = queue.shift();
+        while (front < queue.length) {
+            let { node, depth, parent } = queue[front];
 
             if (node.val === value) {
                 return { depth, parent };
@@ -138,6 +138,8 @@ var isCousins = function (root, x, y) {
             if (node.right !== null) {
                 queue.push({node: node.right, depth: depth + 1, parent: node })
             }
+
+            front++;
         }
 
         return null;

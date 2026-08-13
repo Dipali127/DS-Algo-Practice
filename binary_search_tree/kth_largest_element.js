@@ -69,7 +69,7 @@ class Solution {
 // Note:
 // What if we only use return and not a boolean return value?
 // A simple return exits only the current recursive call, whereas a boolean return value enables early termination by
-// signaling previous recursive calls to stop further traversal.
+// signaling previous recursive calls to stop further traversal (either left or right subtree).
 
 class Solution {
     kthLargest(root, k) {

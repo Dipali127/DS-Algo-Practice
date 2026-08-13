@@ -36,16 +36,16 @@
 // Finally, return `maxLevel`.
 
 // Time Complexity:- O(N), where 'N' is the number of nodes in the tree, as we visit each node exactly once.
-// Space Complexity:- O(N), used by the queue to store nodes, and in the worst case when the tree is balanced,
-// the queue stores the maximum number of nodes at the last level.
+// Space Complexity:- O(N), used by the queue to store nodes, and in the worst case when the tree is
+// balanced, the queue stores the maximum number of nodes at the last level.
 
   var maxLevelSum = function(root) {
     let queue = [root];
-    let maximumSum = -Infinity, maxLevel = 0, level = 1;
-    while(queue.length > 0){
+    let maximumSum = -Infinity, maxLevel = 0, level = 1, front = 0;
+    while(front < queue.length){
         let n = queue.length, sum = 0;
-        while(n--){
-            let currentNode = queue.shift();
+        while(front < n){
+            let currentNode = queue[front];
             sum+= currentNode.val;
 
             if(currentNode.left !== null){
@@ -55,6 +55,8 @@
             if(currentNode.right !== null){
                 queue.push(currentNode.right);
             }
+
+            front++;
         }
 
         if(maximumSum < sum){

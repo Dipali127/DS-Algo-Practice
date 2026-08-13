@@ -23,7 +23,7 @@
 // Additionally, O(N) space is used to store leaf node values in the arrays.
 // → Overall space complexity is O(N).
 
-// We use join(' ') to convert arrays like [1, 2, 3] into the string "1 2 3" for easy comparison without iteration.
+// We use join(' ') to convert arrays like [1, 2, 3] into the string "1 2 3" for easy comparison.
 // How string comparison works:
 // - First, JavaScript compares the length of both strings.
 // - If lengths are equal, it compares each character one by one from left to right.
@@ -34,7 +34,8 @@
 // First call → result points to leaf1 array.
 // Second call → result points to leaf2 array.
 // So each DFS call gets a separate array reference.
-// Arrays are passed by reference in JavaScript, so all recursive calls within a single DFS share the same array instance.
+// Arrays are passed by reference in JavaScript, so all recursive calls within a single DFS share the same
+// array instance.
 
 
 var leafSimilar = function(root1, root2) {

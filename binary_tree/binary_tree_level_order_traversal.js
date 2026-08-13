@@ -11,11 +11,11 @@
 // After processing all nodes of the current level, add `currentLevel` array into the `result` array,
 // which stores values from all levels of the tree.
 
-// Time Complexity (TC): O(N) - where 'N' is the number of nodes in the binary tree, since each node is visited exactly
-// once.
+// Time Complexity (TC): O(N) - where 'N' is the number of nodes in the binary tree, since each node is 
+// visited exactly once.
 // Space Complexity (SC): O(N), Explanation:
-// O(N) is used by the queue to store nodes, and in the worst case when the tree is balanced, the queue stores the
-// maximum number of nodes at the last level.
+// O(N) is used by the queue to store nodes, and in the worst case when the tree is balanced, the queue
+// stores the maximum number of nodes at the last level.
 // O(N) used by result array to store all nodes of the tree in level order traversal.
 // O(N) used by currentLevel to store nodes, and in the worst case when the tree is balanced, the currentLevel stores the
 // maximum number of nodes at the last level.
@@ -38,13 +38,12 @@
 // The queue does not store a copy of the tree, it only stores node references during traversal.
 
 var levelOrder = function (root) {
-    let result = [], queue = [root];
+    let result = [], queue = [root], front = 0;
     if(root === null) return result;
-    while(queue.length > 0) {
-        let n = queue.length;
-        let temp = []
-        while (n > 0) {
-            let currentNode = queue.shift();
+    while(front < queue.length) {
+        let temp = [], currentLevelLength = queue.length;
+        while (front < currentLevelLength) {
+            let currentNode = queue[front];
             temp.push(currentNode.val);
 
             if (currentNode.left !== null) {
@@ -55,7 +54,7 @@ var levelOrder = function (root) {
                 queue.push(currentNode.right);
             }
 
-            n--;
+            front++;
         }
 
         result.push(temp);

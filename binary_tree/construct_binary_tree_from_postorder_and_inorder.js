@@ -3,7 +3,6 @@
 // Approach:
 // I will use DFS traversal to construct the tree recursively.
 // I will recursively build the left and right subtrees based on the current root node taken from the postorder array.
-// To get the root node, I will use the postorder array.
 // To divide the tree into left and right subtrees based on the current root node, I will use the inorder array.
 
 // Solution:
@@ -38,20 +37,18 @@
 
 // In this way, the full binary tree is constructed recursively.
 
-// Time Complexity in Worst Case (when the constructed tree is skewed left or right): O(N²)
+// Time Complexity in Worst Case (when the given arrays represent a skewed tree): O(N²)
 // Explanation:
-// For each node from the postorder array, we may linearly scan the inorder array
-// (or current inorder segment) to find the root position for subtree construction.
-
-// If the tree is highly skewed (like a linked list), the root may always be at one end
-// of the inorder segment, so the search length decreases by only one at each step.
+// If the given inorder and postorder arrays represent a highly skewed tree (like a linked list),
+// the root may always be at one end of the current inorder segment, so the search length decreases by only one at each 
+// recursive call.
 
 // Example:
-// First root   → scan N elements
-// Second root  → scan N-1 elements
-// Third root   → scan N-2 elements
+// First root  → scan N elements of the inorder segment
+// Second root → scan N-1 elements
+// Third root  → scan N-2 elements
 // ...
-// Last root    → scan 1 element
+// Last root   → scan 1 element
 
 // Total work:
 // N + (N-1) + (N-2) + ... + 1
@@ -59,25 +56,25 @@
 // = O(N²)
 
 // Best / Average Case: O(N log N)
-// This happens when the constructed tree is perfectly balanced and the root is
-// always near the middle of the inorder sequence.
-// This reduces the search length by half at each recursive step, leading to O(N log N).
+// This happens when the given postorder and inorder arrays represent a balanced tree,
+// and the root is always near the middle of the current inorder segment.
+// This reduces the search length by half at each recursive level, leading to an overall complexity of O(N log N).
 
 // At each level of recursion:
 // Level 1: scan total N elements
 // Level 2: scan N/2 + N/2 = N
 // Level 3: scan N/4 + N/4 + N/4 + N/4 = N
-// So, for each level, total scanning work is O(N).
+// So, for each level, the total scanning work is O(N).
 
 // Since a balanced tree has O(log N) levels:
 // O(N) work per level × O(log N) levels
 // = O(N log N)
 
 // Space Complexity (SC): O(H), where 'H' is the height of the constructed tree due to the recursion stack.
-// If the constructed tree is balanced, then H = O(log N), as the recursion stack depth is proportional to the height of
-// the tree.
-// If the constructed tree is unbalanced (either left-skewed or right-skewed), then H = O(N), as the recursion stack
-// depth is proportional to the number of nodes in the tree.
+// If the constructed tree is balanced, then H = O(log N), as the depth of recursion stack is proportional to the height
+// of the tree.
+// If the constructed tree is unbalanced (either left-skewed or right-skewed), then H = O(N), as the depth of recursion
+// stack is proportional to the number of nodes in the tree.
 
 // Extra Space:
 // O(N) for the constructed tree nodes themselves (output tree).
@@ -144,7 +141,6 @@ var buildTree = function (inorder, postorder) {
 // I will use DFS traversal to recursively construct the tree and a HashMap to store elements of the inorder array
 // along with their indices.
 // I will recursively build the left and right subtrees based on the current root node taken from the postorder array.
-// To get the root node, I will use the postorder array.
 // To divide the tree into left and right subtrees based on the current root node, I will use the HashMap.
 
 // Why HashMap?

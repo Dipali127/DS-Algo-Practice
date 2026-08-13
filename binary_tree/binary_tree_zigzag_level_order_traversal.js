@@ -32,15 +32,18 @@
 // the queue stores the maximum number of nodes at the last level.
 // So, overall SC:- O(N).
 
+// Here, The front pointer traverses each node of the tree exactly once, and it keeps track of which node
+// should be processed next.
+
 var zigzagLevelOrder = function (root) {
     let result = [], queue = [root];
     if (root === null) return result;
 
-    let level = 0;
-    while (queue.length > 0) {
+    let level = 0, front = 0;
+    while (front < queue.length) {
         let n = queue.length, currentArray = [];
-        while (n > 0) {
-            let currentNode = queue.shift();
+        while (front < n) {
+            let currentNode = queue[front];
             currentArray.push(currentNode.val);
 
             if (currentNode.left !== null) {
@@ -51,7 +54,7 @@ var zigzagLevelOrder = function (root) {
                 queue.push(currentNode.right);
             }
 
-            n--;
+            front++;
         }
 
         if (level % 2 !== 0) {

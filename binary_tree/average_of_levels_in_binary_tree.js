@@ -19,8 +19,12 @@
 
 // For each level:
 // - Initialize a variable 'sum' to store the sum of node values at the current level.
-// - Store the current queue size in 'n' (this represents number of nodes in that level).
-// - Store it again in 'size' to later compute the average.
+// - Calculate 'currentLevelLength = queue.length - front' to get the number of
+//   unprocessed nodes belonging to the current level.
+// - Use 'currentLevelLength' later to calculate the average of the current level.
+// - Calculate 'end = front + currentLevelLength' to determine the ending index
+//   of the current level.
+// - Use 'front' and 'end' to process exactly all the nodes of the current level.
 
 // Now process all nodes of the current level using a while loop (n times):
 // - Remove the front node from the queue using shift().
@@ -50,17 +54,14 @@
 
 var averageOfLevels = function (root) {
     let result = [];
-    if (root === null) return result;
 
-    let queue = [root];
+    let queue = [root], front = 0;
 
-    while (queue.length > 0) {
-        let sum = 0;
-        let n = queue.length;
-        let size = n;
-
-        while (n--) {
-            let currentNode = queue.shift();
+    while (front < queue.length) {
+        let sum = 0, currentLevelLength = queue.length - front;
+        let end = currentLevelLength + front;
+        while (front < end) {
+            let currentNode = queue[front];
             sum += currentNode.val;
 
             if (currentNode.left !== null) {
@@ -70,9 +71,11 @@ var averageOfLevels = function (root) {
             if (currentNode.right !== null) {
                 queue.push(currentNode.right);
             }
+
+            front++;
         }
 
-        let avg = sum / size;
+        let avg = sum / currentLevelLength;
         result.push(avg);
     }
 
