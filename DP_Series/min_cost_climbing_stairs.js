@@ -5,13 +5,18 @@
 // You can either start from the step with index '0' or index '1'.
 // Brute Force Approach:
 // Approach:-
+// Since, the given problem define that we can either start from current step or next step along with that we can either
+// climb one stair or two stair.
+/// I will define function minCost which return the minimum cost to reach the top of stair.
+
 // call the function 'minCost' twice: 
 //   - first, start climbing the stairs from index '0'.
 //   - second, start climbing the stairs from index '1'.
 // the 'minCost' function calculates and returns the minimum cost to reach the top, starting from the given index (either '0' or '1').
 // Inside the 'minCost' function:
 //  - calculate the minimum cost by either climbing one step or two steps from the current index.
-//  - once the minimum cost for both options (climb one and climb two) is calculated, return the smaller value between the two.
+//  - once the minimum cost for both options (climb one and climb two) is calculated, return the smaller value between
+//    the two.
 // finally, the main function 'minCostClimbingStairs' returns the minimum of these two starting points.
 // TC:- O(2^N), because at each index we have two options: climb one step or climb two steps, leading to an exponential number of recursive calls.
 // SC:- O(N), due to the maximum depth of the recursion stack being 'N' in the worst case (when we climb one step at a time).
@@ -52,7 +57,7 @@ function minCost(cost, i, n) {
 
 var minCostClimbingStairs = function (cost) {
     let n = cost.length;
-    let dp = new Array(n + 1).fill(-1);
+    let dp = new Array(n).fill(-1);
     return Math.min(minCost(cost, 0, dp, n), minCost(cost, 1, dp, n));
 };
 
@@ -72,19 +77,21 @@ function minCost(cost, i, dp, n) {
 // Optimal Approach2: [Bottom-Up Approach] (In-Place Modification)
 // Approach:-
 // Base Case:- 
-// - if the length of the given array 'cost' is 2, return the minimum between cost[0] and cost[1] since we can start from either of the first two steps.
+// - if the length of the given array 'cost' is 2, return the minimum between cost[0] and cost[1] since we can start from
+//   either of the first two steps.
 // - otherwise, traverse the given array 'cost' from index '2' to the length of the 'cost' array.
 // - at each step 'i', update cost[i] by adding the minimum of the previous two steps (cost[i-1] and cost[i-2]) to it.
 //   this ensures that cost[i] stores the minimum cost required to reach step 'i'.
-// - finally, return the minimum cost to reach the top, which would be either from the last step (cost[n-1]) or the second last step (cost[n-2]).
+// - finally, return the minimum cost to reach the top, which would be either from the last step (cost[n-1]) or the 
+//   second last step (cost[n-2]).
 // TC:- O(N), since we are traversing the 'cost' array once in a loop from index 2 to n-1.
 // SC:- O(1), since we are modifying the input 'cost' array in place, and no extra space is used apart from a few variables.
 // Note:-
 // For each stair starting from index 2, the cost of reaching that stair is updated to include the minimum of the 
 // previous two stairs' costs.
 // specifically, cost[i] = cost[i] + Math.min(cost[i - 1], cost[i - 2]):-
-//  - cost[i - 1] represents the cost of taking one step to the current stair i.
-//  - cost[i - 2] represents the cost of taking two steps to the current stair i.
+//  - cost[i - 1] represents the minimum cost required to reach stair i - 1.
+//  - cost[i - 2] represents the minimum cost required to reach stair i - 2.
 // After looping through all stairs, the last two elements of the array hold the total cost to reach the top:
 //  - cost[n - 1] holds the cost if the person takes one step to reach the top.
 //  - cost[n - 2] holds the cost if the person takes two steps to reach the top.

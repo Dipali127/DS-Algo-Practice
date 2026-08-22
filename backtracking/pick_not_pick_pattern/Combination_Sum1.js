@@ -96,18 +96,23 @@
 // After exploring all values of the nums array, return result which contains all possible combinations where sum 
 // equals target.
 
-// Time Complexity: O(N^(T / M)), where
+// Time Complexity: O(N^(T/M))
+// Where:
 // N = number of candidates
 // T = target
-// M = minimum candidate value
-
+// M = smallest candidate value
+//
 // Explanation:
-// Since, at each recursive call, we can choose any element starting from the current index.
-// In the worst case, we keep picking the smallest element multiple times until the target becomes zero or negative.
-// So, the recursion depth depends on how many times we can subtract the minimum value from the target.
+// The maximum recursion depth is T/M, where M is the smallest candidate, because in the worst case we repeatedly
+// pick the smallest number until the target becomes 0 or negative. 
+// Since there are N candidate values that can participate in combinations, the algorithm explores an exponential 
+// search space, giving a worst-case time complexity of O(N^(T/M)).
 
-// Space Complexity: O(T / M), Since at any time, the recursion stack stores T/M recursive calls, because
-// we keep subtracting the smallest element from the target until it becomes 0 or negative.
+// Space Complexity: O(T/M)
+// Explanation:
+// The maximum recursion depth is T/M because in the worst case we repeatedly subtract the smallest candidate value
+// M from the target until it becomes 0 or negative.
+// Therefore the recursion stack and path array can grow up to T/M levels.
 
 // Key Point:-
 // we only add value in path array or remove from target when we are deciding to pick it.

@@ -19,22 +19,26 @@
 // if amount === 0, it means we have found a valid way to make the exact amount, so we return 0 because 
 // no more coins are needed.
 // if amount < 0, return Infinity (indicating it's not possible to make the amount with this coin). 
-// Explanation: A negative amount indicates that we have taken more coins than required, leading to an invalid solution, 
-// so we return Infinity to avoid this path.
+// Explanation: A negative amount indicates that we have taken more coins than required, leading to an invalid
+// solution, so we return Infinity to avoid this path.
 // if i >= n, where 'n' is the length of the coins array, return Infinity because we’ve explore all available coins, 
 // and no valid combination is possible. 
 // Explanation: Returning 0 here would be incorrect, as it would suggest we have successfully formed the amount even 
 // when no more coins are left.
-// if the value of the current coin at coins[i] is greater than the remaining amount, we skip this coin and move to the 
-// next one by recursively calling the solve function with i + 1.
+// if the value of the current coin at coins[i] is greater than the remaining amount, we skip this coin and move to 
+// the next one by recursively calling the solve function with i + 1.
 // Otherwise, if the current coin is less than or equal to the remaining amount, there are two possible choices:
 //  - Take the current coin: Reduce the amount by the value of coins[i] and keep the index i the same
 //  (as we can use the same coin multiple times).
 //  - Skip the current coin: Move to the next coin by incrementing the index i, leaving the amount unchanged.
 // the result is the minimum of both choices (i.e., taking the current coin and skipping the current coin), 
 // which ensures that we find the minimum number of coins required.
-// TC:- O(2^N), where 'N' is the number of coins as for each coin, we have two choices (take or skip).
-// SC:- O(N), where, 'N' is the maximum depth of the recursion stack.
+// TC:- O(2^M), where 'M' is the given amount, because at each step we have two choices:
+// take the coin or skip the coin. If we keep taking the same coin, the recursive call goes deeper
+// until the amount becomes 0 or negative.
+//
+// SC:- O(M), where 'M' is the given amount, because the depth of the recursion stack is proportional
+// to the deepest recursive call when we keep taking the same coin until the amount becomes 0 or negative.
 
 var coinChange = function(coins, amount) {
     let n = coins.length;
@@ -59,28 +63,38 @@ function solve(coins, i, amount, n) {
 // Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization) 
 // Approach:-
 // use a 'dp' array to store the results of already solved subproblems to avoid redundant calculations.
-// use a recursive function 'solve' to explore all possible combinations of coins to make up the given 'amount'.
+// use a recursive function 'solve' to explore all possible combinations of coins to make up the given
+// 'amount'.
 // Inside the 'solve' function:
-// if amount === 0, it means we have found a valid way to make the exact amount, so we return 0 because no more coins are needed.
+// if amount === 0, it means we have found a valid way to make the exact amount, so we return 0 because no 
+// more coins are needed.
 // if amount < 0, return Infinity (indicating it's not possible to make the amount with this coin). 
-// Explanation: A negative amount indicates that we have taken more coins than required, leading to an invalid solution, 
-// so we return Infinity to avoid this path.
-// if i >= n, where 'n' is the length of the coins array, return Infinity because we’ve explore all available coins, 
-// and no valid combination is possible. 
-// Explanation: Returning 0 here would be incorrect, as it would suggest we have successfully formed the amount even 
-// when no more coins are left.
+// Explanation: A negative amount indicates that we have taken more coins than required, leading to an 
+// invalid solution, so we return Infinity to avoid this path.
+// if i >= n, where 'n' is the length of the coins array, return Infinity because we’ve explore all 
+// available coins, and no valid combination is possible. 
+// Explanation: Returning 0 here would be incorrect, as it would suggest we have successfully formed the 
+// amount even when no more coins are left.
 // before solving a subproblem, check if it is already solved by looking into 'dp[i][amount]', 
 // if 'dp[i][amount] !== -1', return the precomputed result of subproblem to avoid recalculating.
-// if the value of the current coin at coins[i] is greater than the remaining amount, we skip this coin and move to the next
-// one by recursively calling the solve function with i + 1.
-// Otherwise, if the current coin is less than or equal to the remaining amount, there are two possible choices:
-//  - Take the current coin: Reduce the amount by the value of coins[i] and keep the index i the same (as we can use the same coin multiple times).
+// if the value of the current coin at coins[i] is greater than the remaining amount, we skip this coin and
+// move to the next one by recursively calling the solve function with i + 1.
+// Otherwise, if the current coin is less than or equal to the remaining amount, there are two possible 
+// choices:
+//  - Take the current coin: Reduce the amount by the value of coins[i] and keep the index i the same
+//  (as we can use the same coin multiple times).
 //  - Skip the current coin: Move to the next coin by incrementing the index i, leaving the amount unchanged.
 // the result is the minimum of both choices (i.e., taking the current coin and skipping the current coin), 
 // which ensures that we find the minimum number of coins required.
-// - Store the result of these choices in 'dp[i][amount]' to avoid recomputation for the same subproblem later.
-// TC:- O(N * M), where 'N' is the number of coins and 'M' is the total amount as we fill an N+1 x M+1 'dp' array.
-// SC:- O(N * M), due to the 2D 'dp' array and the recursion stack space is O(N), so overall SC is O(N * M).
+// - Store the result of these choices in 'dp[i][amount]' to avoid recomputation for the same subproblem
+//  later.
+// TC:- O(N * M), where 'N' is the number of coins and 'M' is the total amount. 
+// There are N × M unique (i, amount) states, and memoization ensures each state is calculated only once,
+// so the time complexity is O(N × M).
+// SC:- O(N * M), where N is the number of coins and M is the amount. 
+// The recursion stack takes O(M) space because in the take branch, the coin index i can remain the same
+// while the amount keeps decreasing. Therefore, the recursion can go as deep as the amount, until it 
+// reaches 0 or becomes negative.
 
 var coinChange = function(coins, amount) {
     let n = coins.length;
@@ -116,18 +130,20 @@ function solve(coins, i, amount, n, dp) {
 // If the current coin is less than or equal to the amount,
 // update dp[i] using: dp[i] = Math.min(dp[i], dp[i - coin] + 1).
 // Here, dp[i] represents the minimum number of coins needed to make up the current amount.
-// dp[i - coin] is the minimum number of coins required to make up the remaining amount before the current amount.
+// dp[i - coin] is the minimum number of coins required to make up the remaining amount after taking the current coin.
 // Adding 1 to dp[i - coin] accounts for including the current coin in the total number of coins required.
-// After processing all amounts, dp[amount] will contain the minimum number of coins required to form the target amount.
+// After processing all amounts, dp[amount] will contain the minimum number of coins required to form the target 
+// amount.
 // If dp[amount] is still Infinity, it means it's not possible to form that amount with the given coins, so return -1.
-// Time Complexity: O(N * M), where 'N' is the number of coins and 'M' is the target amount, since we use a nested loop.
+// Time Complexity: O(N * M), where 'N' is the number of coins and 'M' is the target amount, since we use a nested 
+// loop.
 // Space Complexity: O(M), where 'M' is the target amount, since we have created a dp array of size M.
 
 // In recursion, we start with the big problem and break it down into smaller subproblems (top-down approach).
 // In iterative DP, we solve smaller subproblems first and build up to the big one (bottom-up approach).
 // In the coin change problem, the iterative approach processes each amount from 1 to the target amount.
-// For each amount, we iterate through all coins and explore the smaller remaining amount (amount - coin) to find the 
-// minimum number of coins needed for the current amount.
+// For each amount, we iterate through all coins and explore the smaller remaining amount (amount - coin) to find 
+// the minimum number of coins needed for the current amount.
 
 var coinChange = function(coins, amount) {
     let dp = new Array(amount + 1).fill(Infinity);

@@ -13,7 +13,7 @@
 // zero.
 // similarly, i will iterate through `arrCol` to check which columns contain a zero.
 // once i found a index in arrCol which contain zero, i will set all the elements in the matrix column to
-//  zero.
+// zero.
 
 // Time Complexity: O(N^2)
 // - O(N^2) due to the first nested loop that traverses the given matrix to mark the rows and columns 

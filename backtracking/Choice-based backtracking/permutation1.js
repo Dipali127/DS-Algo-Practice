@@ -65,13 +65,13 @@
 // This process continues until all paths from the root are explored, generating all permutations.
 
 // Why For-loop always starts from 0 in each recursive call?
-// Because in permutations, order matters, so at each level of recursion, we need to try every element that hasn’t been
-// used yet as the next candidate in the current path.
+// Because in permutations, order matters, so at each level of recursion, we need to try every element that hasn’t 
+// been used yet as the next candidate in the current path.
 
 // Solution:
 // Approach:
-// Since we have to generate all possible permutations, we will call a function dfs with an empty path array 
-// where we will build all permutations.
+// Since we have to generate all possible permutations, i will traverse through the given array and for each
+// element, i will explore all the possible combinations.
 
 // Inside dfs function:
 // Base Case:
@@ -85,8 +85,8 @@
 //  element; otherwise, add current element to the path array as well as in hash set which will helps for further
 //  recursive calls.
 // (ii) Call dfs recursively with the current path to explore other permutations.
-// (iii) After exploring all elements at the current recursive call, backtrack by removing the last added element from the
-//  path array as well as from hash set since we are reusing same hash set and path array for all recursive calls.
+// (iii) After exploring all elements at the current recursive call, backtrack by removing the last added element 
+// from the path array as well as from hash set since we are reusing same hash set and path array for all recursive calls.
 // (iv) Continue backtracking until reaching the root recursive call, ensuring all permutations are explored.
 
 // Time Complexity: O(N · N!).

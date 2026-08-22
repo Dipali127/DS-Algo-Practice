@@ -2,8 +2,8 @@
 // approach:- 
 // first i will take transpose of a matrix by swapping the elements at (i,j) with the elements at (j,i) 
 // which convert rows into columns and columns into rows and this help to rotate matrix 
-// after transpose, i will iterate through the half of the elements in each row and swap their values to 
-// reverse the row. 
+// After transposing, I reverse each row by swapping the first element with the last element, the second
+// element with the second-last element, and so on
 // this will effectively rotate the given matrix by 90 degree clockwise.
 // Time Complexity (TC): O(N²)
 // Explanation:

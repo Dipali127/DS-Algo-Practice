@@ -15,8 +15,8 @@
 // Option 1: Rob the current house 'i' and move to the house 'i + 2' (since adjacent houses can't be robbed).
 // Option 2: Skip the current house and move to the next house 'i + 1'.
 // And return the maximum of take and skip.
-// TC:- O(2^N), as for each house, we are making two recursive calls (either rob or skip), and this leads to an 
-// exponential number of recursive calls.
+// TC:- O(2^N), as for each house, we are making two recursive calls (either rob or skip), and this leads to
+// an exponential number of recursive calls.
 // SC:- O(N), because the maximum depth of the recursion stack is proportional to n.
 
  var rob = function (nums) {
@@ -110,10 +110,14 @@ var rob = function (nums) {
 
 // Optimal Approach (Best Approach): [Constant Space Complexity]
 // Approach:
-// According to the problem, only two variables are required for each house.
-// So, use two variables: 'moneyBeforeCurrentHouse' and 'moneyBeforeAdjacentHouse', where:
-// - 'moneyBeforeCurrentHouse' stores the maximum money robbed before the current house.
-// - 'moneyBeforeAdjacentHouse' stores the maximum money robbed before the adjacent house.
+// According to the problem, if i assume robber is at second house and he is stealing money from current
+// house then he cannot stole money from the adjacent house and if he is not stealing money from current
+// house then he can stole the money from adjacent house and this process continues for all the
+// remaining houses.
+// Therefore from this conclusion i found that i will take two variables that is
+//   'moneyBeforeCurrentHouse' and 'moneyBeforeAdjacentHouse', where:
+// - 'moneyBeforeCurrentHouse' stores the maximum money robbed/stoled by robber before the current house.
+// - 'moneyBeforeAdjacentHouse' stores the maximum money robbed/stoled by robber before the adjacent house.
 // As we iterate through the houses, for each house, we calculate the maximum of two choices:
 // 1. Skip the current house (thus, keep the max value in 'moneyBeforeCurrentHouse').
 // 2. Steal from the current house (add its value to 'moneyBeforeAdjacentHouse').

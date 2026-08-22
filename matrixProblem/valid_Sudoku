@@ -1,21 +1,35 @@
 // Leetcode Problem:
-// appraoch:- first, iterate through each row of given grid(matrix).
-// while iterating each row of given matrix, use of set to encounter value in each row meanwhile check
-// if current iterated value of a row is a number which is already present in the set then 
-// return false from there only as the row contain duplicate. likewise, iterate through each column
-// of given grid(matrix) and while iterating column again use of set to encounter value in each column
-//  meanwhile check if current iterated value of a column is a number which is already present in the
-//  set then return false from there only as the column contain duplicate.
-// There are nine 3x3 sub-matrix in a 9x9 Sudoku board.
-// Iterate over each sub-matrix by moving in steps of 3 (i.e., i += 3 and j += 3).
+// Approach:-
+// First, iterate through each row of the given grid (matrix).
+// While iterating through each row of the given matrix, use a Set to keep track of
+// the values encountered in the current row. Meanwhile, check if the current
+// iterated value is already present in the Set. If it is already present,
+// return false immediately because the row contains a duplicate.
+// Otherwise, add the value to the Set.
+//
+// Likewise, iterate through each column of the given grid (matrix).
+// While iterating through each column, again use a Set to keep track of the
+// values encountered in the current column. If the current iterated value is
+// already present in the Set, return false immediately because the column
+// contains a duplicate. Otherwise, add the value to the Set.
+//
+// There are nine 3x3 sub-matrices in a 9x9 Sudoku board.
+// Iterate over each 3x3 sub-matrix by moving in steps of 3
+// (i.e., i += 3 and j += 3).
 // Use a Set to track the numbers encountered in the current sub-matrix.
-// For each cell(single box) in the 3x3 sub-matrix,  check if the number is already in the Set.
-// If the number is in the Set, the sub-matrix contains duplicates, so return false.
+//
+// For each cell in the current 3x3 sub-matrix, check if the number is already
+// present in the Set. If the number is already in the Set, the sub-matrix
+// contains a duplicate, so return false.
 // If the number is not in the Set, add it to the Set.
-// The time complexity remains O(1), because we are iterating over a fixed number of cells (81) which
-// we have 9 rows and 9 columns.
-// The space complexity is also O(1), as we are using a fixed amount of additional space (has set)
-// (3 arrays of 9 blocks).
+//
+// Time Complexity:
+// The time complexity is O(1) because we are iterating over a fixed number
+// of cells (81), as the Sudoku board always contains 9 rows and 9 columns.
+//
+// Space Complexity:
+// The space complexity is O(1) because we are using a fixed amount of
+// additional space. The Set can contain at most 9 values at a time.
 
 var isValidSudoku = function (board) {
     let row = board.length;

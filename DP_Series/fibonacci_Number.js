@@ -4,10 +4,25 @@
 // The nth Fibonacci number is found by adding the two numbers before it.
 // Brute force approach:- [Top - Down Approach](Recursive Solution)
 // Approach:-
-// Base case: If 'n' is 0 or 1, the function just returns n because those are the first two numbers in the Fibonacci sequence.
+// Since a Fibonacci number is the sum of its two preceding Fibonacci numbers, and I don't know the value of
+// the nth Fibonacci number directly, I break the problem into smaller subproblems. I recursively compute
+// the Fibonacci of n-1 and the Fibonacci of n-2, and then add their results.
+// I continue recursively calling Fibonacci(n-1) and Fibonacci(n-2) until the recursion reaches the base 
+// cases, where n = 0 or n = 1.
+// I already know the answers for these base cases:
+// Fibonacci(0) = 0 And Fibonacci(1) = 1
+// Once the recursion reaches these base cases, it starts returning the known values, and the recursive 
+// calls combine those results to compute the answer for larger values of n.
+
+// Base case: If 'n' is 0 or 1, the function just returns n because those are the first two numbers in the
+// Fibonacci sequence.
 // Otherwise, it adds the results of fib(n-1) and fib(n-2) to get the nth fibonacci number.
-// TC:- O(2^n), as the function calls itself twice for every number, so the number of calls grows very quickly.
+
+// TC:- O(2^n), because for each non-base-case call/each fibonacci call, we make two recursive calls: 
+// fib(n-1) and fib(n-2). This causes the number of function calls to grow exponentially.
 // SC:- O(N), because the maximum depth of the recursion stack is proportional to n.
+// At the deepest point, the recursive calls can go from fib(n) → fib(n-1) → fib(n-2) → ... until the base 
+// case, so there can be at most n calls on the stack.
 
 var fib = function(n) {
     if(n==0 || n==1){
@@ -19,37 +34,40 @@ var fib = function(n) {
 
 // Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization) 
 // Approach:-
+// In the recursive solution, multiple recursive calls solve the same overlapping subproblems.
+// Instead of computing the same subproblem again, I will use a DP array 'dp' to store
+// already computed results and reuse them whenever the same subproblem occurs.
 // Base Case:- if 'n' is 0 or 1, return n directly because these are the first two Fibonacci numbers.
-// initialize an array 'dp' of size n+1 filled with -1. This array will store previously computed Fibonacci numbers to avoid redundant calculations.
+// initialize an array 'dp' of size n+1 filled with -1. This array will store previously computed Fibonacci
+// numbers to avoid redundant calculations.
 // call the helper function 'solve' with the input 'n' and the 'dp' array.
 // In the 'solve' function:
 //    - If 'n' is 0 or 1, return n (base case).
-//    - check if the Fibonacci number for 'n' is already computed (if dp[n] is not -1). If it is, return that value to avoid recalculation.
-//    - If not computed, recursively calculate the Fibonacci number for 'n' by calling 'solve(n-1, dp)' and 'solve(n-2, dp)', and store the result in dp[n].
+//    - check if the Fibonacci number for 'n' is already computed (if dp[n] is not -1). If it is, return 
+//     that value to avoid recalculation.
+//    - If not computed, recursively calculate the Fibonacci number for 'n' by calling 'solve(n-1, dp)' and 
+//      'solve(n-2, dp)', and store the result in dp[n].
 // finally, return the computed Fibonacci number for 'n' from the 'dp' array.
-// TC:- O(N), since each Fibonacci number is computed only once because we store the previously computed values in the 'dp' array.
-// SC:- O(N), since we are using the dp array used to store computed Fibonacci values and recursion depth in the worst case can go up to n.
+// TC:- O(N), since each Fibonacci number is computed only once because we store the previously computed
+//  values in the 'dp' array.
+// SC:- O(N), since we are using the dp array used to store computed Fibonacci values and recursion depth
+// in the worst case can go up to n.
 
-var fib = function(n) {
-    if(n <= 1){
-        return n;
-    }
+var fib = function (n) {
+    if (n <= 1) return n;
+    let dp = new Array(n + 1).fill(-1);
 
-     let dp = new Array(n+1).fill(-1);
-    
-    return solve(n, dp);
+    return findFib(n, dp)
+
 };
 
-function solve(n,dp){
-    if(n<=1){
-        return n;
-    }
-
-    if(dp[n] !== -1){
+var findFib = function (n, dp) {
+    if (n <= 1) return n;
+    if (dp[n] !== -1) {
         return dp[n];
     }
 
-    return dp[n] = solve(n-1, dp) + solve(n-2, dp);
+    return dp[n] = findFib(n - 1, dp) + findFib(n - 2, dp);
 }
 
 // Optimal Approach2:- [Using Bottom Up DP] (Iterative Solution)
@@ -81,8 +99,12 @@ var fib = function(n) {
 
 // Optimal Approach3 (Best Approach):- [Constant Space Complexity]
 // approach:- 
+// Instead of finding nth fibonacci using recursive approach or by taking an array, i will solve it
+// iteratively by using the value of two preceeding fibonacci, Since nth fibonacci is the sum of its two
+// preceeding fibonacci.
 // if 'n' is 0 or 1, return n directly because these are the first two Fibonacci numbers.
-// initialize 'prev1' to 0 and 'prev2' to 1. These variables represent the two most recent Fibonacci numbers in the sequence.
+// initialize 'prev1' to 0 and 'prev2' to 1. These variables represent the two most recent Fibonacci 
+// numbers in the sequence.
 // use a loop that runs from 2 to n, updating the current Fibonacci number as the sum of prev1 and prev2.
 // after each iteration, update prev1 and prev2 to the last two Fibonacci numbers.
 // once the loop is done, return the current Fibonacci number, which is stored in 'fib'.

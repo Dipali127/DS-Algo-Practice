@@ -3,13 +3,15 @@
 // You are given an array 'prices' where 'prices[i]' represents the price of a given stock on the ith day.
 // Your task is to find the maximum profit you can achieve by buying and selling stocks.
 // Conditions:
-//  - You can complete as many transactions as you like (i.e., you can buy and sell the stock as many times as you want).
-//  - However, you can't buy a stock again before selling previous buying stock (you need to sell before buying again).
+//  - You can buy and sell the stock as many times as you want on same day.
+//  - However, you can't buy a stock until you sell the previous buying stock (you need to sell before 
+//   buying again).
 // Brute force approach:- [Top - Down Approach](Using Recursion)
 // Approach:-
 // call a function 'maxProfits' which return the maximum profit.
 // Inside 'maxProfits' function:
-//  - Base Case: if 'day' is greater than or equal to 'n' (length of the prices array), return 0 as there are no more days left.
+//  - Base Case: if 'day' is greater than or equal to 'n' (length of the prices array), return 0 as there are
+//    no more days left.
 //  otherwise, at each day, you have two choices:
 //           - if it's a "buy" day, you can choose to either buy the stock or skip it (buy or not_buy).
 //           - if it's a "sell" day, you can choose to either sell the stock or skip it (sell or not_sell).

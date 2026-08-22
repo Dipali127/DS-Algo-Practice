@@ -1,11 +1,18 @@
 // GFG PROBLEM:
-// approach:- first take transpose of a matrix by swapping the the elements at positions (i, j) with (j, i).
-// this will change the rows into colums and colums into rows.
-// after transpose, iterate over half of the row and swap each values of the row . 
-// swap elements from the start of each row with elements from the end of the row.
-// this will effectively rotate the given matrix by 90 degree anticlockwise.
-// TC:O(N^2), explanation:- O(N^2) for traspose of matrix and O(N^2) for reversing the rows.
-// So, overall TC:- O(N^2)+O(N^2) => O(2N^2) => O(N^2) AND SC:O(1)
+// Approach:
+// 1. First transpose the matrix by swapping elements at positions (i, j)
+//    with (j, i). This converts rows into columns and columns into rows.
+// 2. After transposing, reverse the order of rows by swapping the first
+//    row with the last row, the second row with the second last row, and so on.
+// 3. This rotates the matrix by 90 degrees anticlockwise.
+//
+// Time Complexity:
+// - Transpose takes O(N²).
+// - Reversing the rows takes O(N²).
+// Therefore, overall TC = O(N²) + O(N²) = O(2N²) = O(N²).
+//
+// Space Complexity:
+// O(1), since the rotation is performed in-place.
 
 class Solution 
 {

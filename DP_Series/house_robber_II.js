@@ -1,8 +1,9 @@
 // Leetcode Problem:- 213
 // Problem says:-
-// You are a professional robber planning to rob houses along a street, but all houses are arranged in a circle,
-// meaning the first house is a neighbor of the last one. Also, adjacent houses have a security system connected, 
-// and you cannot rob two adjacent houses on the same night.
+// You are a professional robber planning to rob houses along a street, but all houses are arranged in a 
+// circle, meaning the first house is a neighbor of the last one. 
+// Also, adjacent houses have a security system connected, and you cannot rob two adjacent houses on the 
+// same night.
 // The goal is to determine the maximum amount of money you can rob without alerting the police.
 
 // Brute force approach:- [Top - Down Approach](Using Recursion)
@@ -88,42 +89,31 @@ function solve(nums, i, n) {
 // TC: O(N), since each house is processed only once due to memoization, making the time complexity linear.
 // SC: O(N), due to the 'dp' array storing computed results and recursion depth in the worst case can go up to n.
 
-var rob = function(nums) {
-    let n = nums.length;
-    // if there is only one house then stole money from there.
-    if(n === 1){
-        return nums[0];
+// Why two dp arrays?
+// Since the two recursive functions have different ranges, I'll use two separate DP arrays so that the 
+// values computed for one range don't interfere with the values of the other range. 
+// If I reuse the same DP array, the recursive calls of the second function may reuse precomputed values
+// from the first function, even though those values were computed for a different range, which can lead to 
+// an incorrect result.
+
+var rob = function (nums) {
+    if (nums.length === 1) return nums[0];
+    return Math.max(solve(0, nums.length - 1, nums, dp1), solve(1, nums.length, nums, dp2))
+    function solve(i, n, nums, dp) {
+        if (i >= n) {
+            return 0;
+        }
+
+        if (dp[i] !== -1) {
+            return dp[i];
+        }
+
+        let take = nums[i] + solve(i + 2, n, nums, dp);
+        let skip = solve(i + 1, n, nums, dp);
+
+        return dp[i] = Math.max(take, skip);
     }
-     if(n === 2){
-        return Math.max(nums[0], nums[1]);
-     }
-
-     let dp1 = new Array(n+1).fill(-1);
-     // case 1:- if we will take 0rth house then we can't take the last house ATQ.
-     let take_0rth_index_house = solve(nums, 0, dp1, n-2);
-
-     let dp2 = new Array(n+1).fill(-1);
-    // case 2:- if we will not take 0rth house then we can take the last house ATQ.
-    let take_1st_index_house = solve(nums, 1, dp2, n-1); 
-
-    return Math.max(take_0rth_index_house, take_1st_index_house); 
 };
-
-function solve(nums, i, dp, n) {
-    if (i > n) {
-        return 0;
-    }
-    
-    if (dp[i] !== -1) {
-        return dp[i];
-    }
-    
-    let steal = nums[i] + solve(nums, i + 2, dp, n);
-    let skip = solve(nums, i + 1, dp, n);
-
-    return dp[i] = Math.max(steal, skip);
-}
-
 
 // Optimal Approach 2: [Using Bottom-Up DP] (Iterative Solution)
 // Approach:
@@ -197,20 +187,22 @@ var rob = function(nums) {
 var rob = function(nums) {
     let n = nums.length;
     if (n === 1) return nums[0];
-    if (n === 2) return Math.max(nums[0], nums[1]);
 
-    return Math.max(maxMoney(nums, 0, n - 2), maxMoney(nums, 1, n - 1));
+    return Math.max(maxMoney(nums, 0, n - 1), maxMoney(nums, 1, n));
 
     function maxMoney(nums, start, end) {
-        let moneyBeforeCurrent = 0, moneyBeforeAdjacent = 0;
-        for (let i = start; i <= end; i++) {
+        let moneyBeforeCurrent = nums[start];
+        let moneyBeforeAdjacent = 0;
+
+        for (let i = start + 1; i < end; i++) {
             let take = nums[i] + moneyBeforeAdjacent;
             let notTake = moneyBeforeCurrent;
-            let maxMoney = Math.max(take, notTake);
 
-            moneyBeforeAdjacent = moneyBeforeCurrent;
-            moneyBeforeCurrent = maxMoney;
+            moneyBeforeCurrent = Math.max(take, notTake);
+
+            moneyBeforeAdjacent = moneyBeforeCurrent; 
         }
+
         return moneyBeforeCurrent;
     }
 };

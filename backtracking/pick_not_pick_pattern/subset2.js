@@ -70,7 +70,7 @@
 
 // Space Complexity: O(n), since at any time the recursion stack stores at most n recursive calls.
 // The number of recursive calls in the stack depends on the depth of recursion,
-// and the depth of recursion is equal to n because there are n levels in this problem.
+// and the depth of recursion is equal to n(number of elements in array) because there are n levels in this problem.
 // But if we include result storage of all generated subsets, then it becomes O(2ⁿ × n), because for each subset, we
 // copy all the elements of the path array into new array before storing it into result array . 
 // Since, there are 2ⁿ subsets and each subset can take up to n space, the total space complexity becomes O(2ⁿ × n).

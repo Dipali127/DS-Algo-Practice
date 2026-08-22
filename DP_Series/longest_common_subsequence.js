@@ -23,13 +23,12 @@
 //       (2) Skip the current character in string1 (move i forward, j remains the same).
 //     We skip characters to try different combinations and find common characters between both strings.
 //   - Return the maximum of the two results, which represents the longest common subsequence found so far.
-// Time Complexity: O(2^M * 2^N) = O(2^(M+N)), where 'M' is the length of string1 and 'N' is the length of string2.
-// Explanation: For each index in string1 and string2, we have two choices — 
-// skip a character from string1 and take a character from string1 or skip character from string2 and take character from
-// string2. This leads to an exponential number of combinations, hence the exponential time complexity.
-// Space Complexity: O(M + N), due to the recursion stack.
-// In the worst case, the recursion can go as deep as M + N levels,
-// where M and N are the lengths of the two strings.
+// Time Complexity: O(2^n × 2^m), which is equal to O(2^(n+m)). 
+// For each character in both strings, we have two possibilities: we can either take it or skip it.
+// Therefore, the number of possibilities grows exponentially, resulting in exponential time complexity.
+// Space Complexity: O(N + M) because of the recursion stack. 
+// In the worst case, the recursion can go as deep as N + M calls, where N and M are the lengths of the two
+// strings.
 
 
 var longestCommonSubsequence = function(text1, text2) {
@@ -54,7 +53,7 @@ function common(string1, string2, i, j, length1, length2){
 // Optimal Approach1:- [Top - Down Approach](Using Recursion + Memoization) 
 // Approach:-
 // use a 2D DP array 'dp' where dp[i][j] stores the length of the longest common subsequence for the 
-// substrings starting at indices 'i' of string1 and 'j' of string2. 
+// substrings starting from indices 'i' of string1 and 'j' of string2. 
 // call the function 'solve' with arguments string1, string2, index 'i', index 'j', and 
 // lengths:- s1 (length of string1), s2 (length of string2), and 'dp' array to store intermediate results.
 
@@ -71,15 +70,16 @@ function common(string1, string2, i, j, length1, length2){
 //       (2) Skip the current character in string1 (move i forward, j remains the same).
 //     We skip characters to try different combinations and find common characters between both strings.
 //   - Store the maximum of the two results in dp[i][j] and return it to avoid recalculating for the same subproblems.
-// TC: O(M * N) due to memoization (since there are M * N unique subproblems,
+// TC: O(M * N) Since each recursive function are computed once,
 // where M is the length of text1 and N is the length of text2).
 // SC: O(M * N) for the 2D dp array, and O(M + N) for the recursion stack in the worst case,
-// since each recursive call can go up to M + N levels deep in the call stack.
+// as the depth of recursive stack is proportional to M + N levels.
 // So, the overall space complexity is O(M * N), as it dominates the recursion stack space.
 
 
-// Note:- "Array.from() is used to create a new array. The first argument { length: n1 } defines how many elements (rows)
-// the outer array should have. It's an array-like object that tells Array.from to create an array with n1 slots.
+// Note:- "Array.from() is used to create a new array. The first argument { length: n1 } defines how many
+// elements (rows) the outer array should have. It's an array-like object that tells Array.from to create an
+// array with n1 slots.
 // The second argument is a mapping function: () => Array(n2).fill(-1).
 // This function is called for each index of the array and returns a new inner array of length n2, filled with -1. 
 // These inner arrays act as columns, so overall this gives us a n1 x n2 2D array where each cell is initialized to -1,
@@ -87,68 +87,81 @@ function common(string1, string2, i, j, length1, length2){
 
 var longestCommonSubsequence = function(text1, text2) {
     let length1 = text1.length, length2 = text2.length;
-    let dp = Array.from({ length: length1 }, () => Array(length2).fill(-1));
+    let dp = Array.from({ length: length1 }, () => new Array(length2).fill(-1));
     return common(text1, text2, 0, 0, length1, length2, dp);
 
 };
-
 function common(string1, string2, i, j, length1, length2, dp){
     if(i >= length1 || j >= length2){
         return 0;
-    } 
+    }
+
     if(dp[i][j] !== -1){
         return dp[i][j];
     }
+
     if(string1[i] === string2[j]){
-        return 1 + common(string1, string2, i+1, j+1, length1, length2, dp);
+        return dp[i][j] = 1 + common(
+            string1, string2, i+1, j+1, length1, length2, dp
+        );
     }else{
-        return dp[i][j] = Math.max(common(string1, string2, i, j+1, length1, length2, dp), 
-        common(string1, string2, i+1, j, length1, length2, dp));
+        return dp[i][j] = Math.max(
+            common(string1, string2, i, j+1, length1, length2, dp),
+            common(string1, string2, i+1, j, length1, length2, dp)
+        );
     }
 }
 
-// Optimal Approach [Using Bottom Up DP] (Iterative Solution)
-// Approach:-
-// We use a 2D DP array 'dp' where dp[i][j] stores the length of the longest common subsequence (LCS) 
-// for the substrings of length i and j that is text1[0..i-1] and text2[0..j-1].
-// In dp[i][j], 'i' and 'j' are lengths of the substrings text1 and text2 not the actual indices of the characters.
 
-// Steps:-
-// 1. Initialize a 2D DP array 'dp' of size (length1+1) x (length2+1), where 'length1' and 'length2' are the lengths of 
-// text1 and text2, respectively and each element of 'dp' is initially set to -1, except for the first row and column.
-// 2. The extra row and column in the DP array (i.e., dp[0][*] and dp[*][0]) are used to handle the base case 
-//    where one of the substrings is of length 0 as the LCS of any string with an empty string is 0. 
-//    Therefore, the first row and first column are initialized to 0.
-// 3. Iterate over both strings starting from index 1. For each pair of characters (text1[i-1], text2[j-1]):
-//    - If the characters are equal, set dp[i][j] = 1 + dp[i-1][j-1], which is the LCS between text1 and text2.
-//    - If the characters are not equal, set dp[i][j] = max(dp[i-1][j], dp[i][j-1]), as we either skip a character from 
-//     text1 or text2.
-// 4. After the loops, dp[length1][length2] will hold the length of the longest common subsequence between text1 and text2.
-// TC:- O(N^2) where 'N' is the length of the strings (since we need to fill the entire DP array).
-// SC:- O(N^2) for the 2D DP array (of size (length1+1) x (length2+1)).
+// Optimal Approach: [Bottom-Up DP] (Iterative Solution)
+// Approach:
+// We use a 2D DP array 'dp' where dp[i][j] stores the length of the longest common subsequence between the 
+// text1 and text2 of length 'i' and 'j'.
+//
+// Here,'i' and 'j' represent the lengths of the substring/prefixes we are considering,not the actual character indices.
+// Steps:
+// 1. Create a 2D DP array of size (length1 + 1) x (length2 + 1).
+//    We use one extra row and one extra column to handle the case where one of the substring/prefixes has
+//    length 0.
+//    The LCS with an empty string is 0, so dp[0][j] and dp[i][0] are 0.
+//
+// 2. Start filling the DP table from i = 1 and j = 1, Since i and j represent lengths, we use i - 1 and j - 1
+//  to access the actual characters because strings use 0-based indexing.
+//
+// 3. If text1[i - 1] and text2[j - 1] are equal: dp[i][j] = 1 + dp[i - 1][j - 1]
+//    We found one common character, so we add 1 to the LCS of the previous substring/prefixes because we 
+//    haven't found future substring/prefixes LCS that is dp[i+1][j+1].
+//
+// 4. If the characters are not equal: dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
+//    We try both choices:
+//    - Skip the current character of text1.
+//    - Skip the current character of text2.
+//    Then we take the maximum result.
+//
+// 5. After filling the table, dp[length1][length2] contains the length of the longest common subsequence of 
+// the two complete strings.
+//
+// Time Complexity: O(M * N), Since we fill each cell of the DP table once.
+// Space Complexity: O(M * N), Since we use a 2D DP array of size (M + 1) x (N + 1).
 
-var longestCommonSubsequence = function(text1, text2) {
-    let length1 = text1.length, length2 = text2.length;
-      let dp = Array.from({ length: length1 + 1 }, () => Array(length2 + 1).fill(-1));
-    // first row and first column will be 0 
-    for(let row = 0; row <= length1; row++){
-        dp[row][0] = 0;
-    }
+var longestCommonSubsequence = function (text1, text2) {
+    let dp = Array.from(
+        { length: text1.length + 1 },
+        () => new Array(text2.length + 1).fill(0)
+    );
 
-    for(let col = 0; col <= length2; col++){
-        dp[0][col] = 0;
-    }
-
-    for(let i = 1; i <= length1; i++){
-        for(let j = 1; j <= length2; j++){
-            if(text1[i-1] === text2[j-1]){
-                dp[i][j] = 1 + dp[i-1][j-1];
-            }else{
-                dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+    for (let i = 1; i <= text1.length; i++) {
+        for (let j = 1; j <= text2.length; j++) {
+            if (text1[i - 1] === text2[j - 1]) {
+                dp[i][j] = 1 + dp[i - 1][j - 1];
+            } else {
+                dp[i][j] = Math.max(
+                    dp[i - 1][j],
+                    dp[i][j - 1]
+                );
             }
         }
     }
 
-    return dp[length1][length2];
-
-}; 
+    return dp[text1.length][text2.length];
+};

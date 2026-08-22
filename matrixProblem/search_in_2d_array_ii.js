@@ -34,6 +34,11 @@ function searchMatrix(matrix, target) {
 // If the target element is not found in any row, return false.
 
 // Time Complexity:- O(N * log M), where 'N' is the number of rows and 'M' is the number of columns.
+// Explanation:- For each row, I apply binary search.
+// At every step of binary search, I compare the middle element with the target and eliminate half of the
+// remaining search space. 
+// Therefore, searching one row takes O(log M) time. 
+// Since there are N rows and we perform binary search on each row, the overall time complexity is O(N log M).
 // Space Complexity:- O(1), since no additional space is used apart from a few variables.
 
 function searchMatrix(matrix, target) {
