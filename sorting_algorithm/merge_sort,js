@@ -1,6 +1,7 @@
-// merge sort is based on divide and conquer algorithm which recursively divide the array into subarray until the 
-// size of the array becomes one.
-// once the size of the array becomes one, merge function merge the array until the array will be completely merge.
+// merge sort is based on divide and conquer algorithm which recursively divide the array into subarray until
+// the size of the array becomes one.
+// once the size of the array becomes one, merge function merge the array until the array will be completely
+// merge.
 //
 // Time Complexity: O(NlogN)
 // Explanation:

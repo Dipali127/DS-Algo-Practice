@@ -1,5 +1,5 @@
-// In every pass, Bubble Sort compares the adjacent elements and swaps their positions if they are not in 
-// the intended order (either increasing or decreasing), and moves the sorted values to the right of the 
+// In every pass of Bubble Sort, it compares the adjacent elements and swaps their positions if they are not 
+// in the intended order (either increasing or decreasing), and moves the sorted values to the right of the 
 // array.
 // if (!swapFlag means value of swapFlag is false), that means no swapping happened inside the inner loop,
 // so it breaks the outer loop early if no swaps occur in one complete pass, confirming the array is 
@@ -11,8 +11,7 @@
 // SC:- O(1), since no additional space is used.
 // Bubble Sort is a stable sort as it maintains the relative order of array elements after sorting.
 // Note: Why does the outer loop run only up to arr.length - 1 (i.e., n - 1)?
-// Because after each pass, the sorted value is placed at its correct position,
-// so after the first pass, the last position of the array contains the sorted value.
+// Because after the first pass, the last position of the array contains the sorted value.
 // And why does j run only up to arr.length - i - 1 (i.e., n - i - 1)?
 // Because the inner loop only needs to check the unsorted part of the array.
 // In every pass, the rightmost part of the array gets sorted in the intended order
@@ -20,6 +19,8 @@
 // the largest value among all elements. In the second pass, the last two positions contain 
 // the first and second largest values, and so on.
 
+// Keep Point:- swapFlag is used to return early in the case of the given array is already sorted in the
+// intended order(either increasing or decreasing).
 let arr = [1,2,3,4,5];
 console.log(bubblesort(arr))
 function bubblesort(arr){

@@ -85,21 +85,37 @@ var productExceptSelf = function(nums) {
 }
 
 // Optimal Approach:-
+// Idea:
+// Compute left product for all the numbers and Compute right product for all number.
+// Multiple right product with left product which give product of all the numbers except current number.
+// left product store product of all the numbers before current number and right product store product of all
+// the numbers after current number and multiplying left and right product for current number give product of
+// all the numbers except current number.
+
 // Approach:
-// Take a result array of the same size as the given array 'nums'.
-// Store 1 at the 0th index of the result array, since the left product for the 0th index value is 0,
-// but to correctly compute the left product for all other numbers (except the 0th index), we store 1 at 
-// the 0th index of the result array.
-// Calculate the left products for each element and store them in the result array.
-// Calculate the right products for each element and multiply them with the left products already stored
+// Take a result array of the same size as the given array `nums`.
+// First, calculate the left products.
+// For index 0, there are no elements to its left, so we consider its left product
+// as 1 and store 1 at result[0].
+// Then, for every remaining index, store the product of all elements to its left
 // in the result array.
-// After processing all elements and calculating the product, return the result array.
+// Next, calculate the right products while traversing the array from right to left.
+// Maintain a variable `right` to store the product of all elements to the right
+// of the current index.
+// For each index:
+//     1. Multiply result[i] (left product) with `right` (right product).
+//     2. Store the result back in result[i].
+//     3. Update `right` by multiplying it with nums[i].
+// After processing all indices, the result array contains the product of all
+// elements except the current element.
 // Time Complexity (TC):- O(N)
 // Explanation:-
 // O(N): to calculate the left products for each element.
 // O(N): to calculate the right products for each element.
 // Overall, TC = O(N) + O(N) = O(2N) = O(N).
 // Space Complexity (SC):- O(N), to store the products in the result array.
+
+
 
 var productExceptSelf = function (nums) {
     let n = nums.length;

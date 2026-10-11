@@ -1,6 +1,5 @@
 // Leetcode Problem: 215
-// we have given an array and k which contain the index and we have to return the kth largest value from
-// array.
+// we are given an array and k, and we have to return the kth largest value from the array.
 // Brute force approach:-
 // use the built-in `sort` method to sort the array in descending order.
 // return the value at the `nums[k-1]` index to get the kth largest element, since arrays are 0-based 
@@ -12,30 +11,28 @@
 };
 
 // Optimal Appraoch:-
-// use the Quickselect algorithm, which is similar to Quicksort, but it only partition the array until 
-// the kth element reach at its correct position.
-// That means, quickSelect doesn't sort the array completely like quicksort do.
-// Quick select is not recursive solution, instead it is iterative approach.
-// And this iterative approach, after each partition, update low or high to reduce the search space, 
-// and in the next iteration, we call the partition function again on the new subarray.
+// I will use the Quickselect algorithm, which is similar to Quicksort, but it doesn't sort the array 
+// completely like QuickSort; instead, it only partitions the array until the kth largest element reaches 
+// its correct position.
+// In this implementation, QuickSelect is iterative rather than recursive, where we are reusing the same
+// array by updating the low or high pointers, which reduces search space.
+// In this way, the partition function traverses at most 'n' elements.
+// Just to be clear, the partition function is called multiple times, but each time it operates on the
+// same updated subarray.
 
 // Time Complexity (TC):
-// Worst Case:- O(N^2), occurs when the array is already sorted (either in ascending or descending order).
-// In this scenario, partition algorithm will do unnecessary traversal of almost all elements at every 
-// recursive call.
-// Random pivot reduces the chances of worst case, but it can still occur.
-// Best/Average Case: O(N)
+// Best/Average Case: O(N), because after each partition, QuickSelect reduces the search space by 
+// continuing only one side of the array.
 // Explanation:
-// - Initially, the partition operation takes O(N) time.
-// - After partitioning, QuickSelect only recurses into one side of the array.
+// - Initially, the partition function traverses through all the elements of the array which take O(N) time.
+// - After first partitioning, QuickSelect only recurses into one side of the array.
 // - The size of the subarray reduces at each step.
 // - So total work becomes: N + N/2 + N/4 + ... = O(N)
-// Space Complexity (SC): O(1), because the algorithm is implemented iteratively using a while loop, so 
-// there is no recursion stack, and all operations are performed in-place without using extra memory.
-// Keep Note:-
-// In QuickSelect, we are not recursively calling the array; instead, we are reusing the same array by updating the low
-// or high pointers, which reduces the search space. In this way, the partition function traverses at most n elements.
-// Just to be clear, the partition function is called multiple times, but each time it operates on the updated subarray.
+
+// Worst Case:- O(N^2), occurs when the array is already sorted (either in ascending or descending order).
+// In this scenario, partition algorithm will do unnecessary traversal of almost all elements at every 
+// iteration.
+// Random pivot reduces the chances of worst case, but it can still occur.
 
 // "Highly Unbalanced Partition" means one side has n-1 elements and the other side has 0 elements.
 // Let's take an example:-
@@ -52,13 +49,18 @@
 // Left side → [] → 0 elements
 // Right side → [6,5,4,3,2,7] → n-1 elements
 
-// So, avoid to take pivot as last index element. instead, take randomIndex as pivot index then to resuse
+// So, avoid to take pivot as last index element. instead, take randomIndex as pivot index then to reuse
 // last index pivot in partition function, swap it with randomIndex.
 
-// Note:- We use arr.length - k because QuickSelect place the pivot element at the correct position where it would be if
-// the array were sorted. The k-th largest element is at index n - k in a zero-indexed array, even though
-// the whole array is not fully sorted.
+// Space Complexity (SC): O(1), because the algorithm is implemented iteratively using a while loop, so 
+// there is no recursion stack, and all operations are performed in-place without using extra memory.
 
+// Why arr.length - k?
+// Because arrays are zero-indexed. If we consider the array sorted in ascending order, the largest element
+// is at index n-1, the second largest is at n-2, and so on.
+// Therefore, the kth largest element is at index n-k, where n is the array length.
+
+// Note:- In the below implementation, pointer 'low' and 'high' stops at same index.
 
 let arr =[4,5,10,11,1,3,19,8,7];
 let low = 0, high = arr.length - 1, k = 5;

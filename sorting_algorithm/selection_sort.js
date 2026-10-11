@@ -1,5 +1,6 @@
-// In every pass, Selection Sort selects the smallest or largest element from the unsorted array and 
-// places that element at the beginning of the array to achieve the intended order (either increasing or decreasing).
+// In every pass of Selection Sort, it selects the smallest or largest element from the unsorted array and 
+// places that element at the beginning of the array to achieve the intended order (either increasing or 
+// decreasing).
 
 // TC: O(N^2) in the average, best, and worst cases, regardless of the array's initial order.
 // Why is the time complexity O(N^2) even in the best case and not O(N)?
@@ -22,7 +23,7 @@
 // - The first 2 is at index 0 (2(1st))
 // - The second 2 is at index 2 (2(2nd))
 
-// After a stable sort (like Insertion Sort), the array becomes:
+// After a stable sort (like Insertion Sort) and Bubble Sort, the array becomes:
 // [1, 2(1st), 2(2nd), 3]
 // The relative order of the two 2s is maintained (2(1st) stays before 2(2nd))
 

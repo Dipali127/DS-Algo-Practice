@@ -3,8 +3,8 @@
 // Approach:
 // Consider each possible substring and check if it is a palindrome by calling the isPalindrome() function.
 // If the current substring is a palindrome, increment the count.
-// After iterating through all possible substrings, return the count variable, which holds the number of palindromic
-// substrings.
+// After iterating through all possible substrings, return the count variable, which holds the number of
+// palindromic substrings.
 //
 // Time Complexity: O(N^3).
 // - There are O(N^2) possible substrings in a string of length N.
@@ -49,8 +49,8 @@ var isPalindrome = function(string, start, end) {
 // I will call the `expandAround` function twice for each character:
 //   - Once for odd-length palindromes (where the palindrome has a single center character).
 //   - Once for even-length palindromes (where the palindrome has two center characters).
-// The `expandAround` function will return the number of palindromes found for the current center, which will be 
-// addedto the `count` variable in the main function (countSubstrings).
+// The `expandAround` function will return the number of palindromes found for the current center, which
+// will be added to the `count` variable in the main function (countSubstrings).
 // Finally, the function will return the total count of palindromic substrings.
 //
 // Time Complexity: O(N^2), because for each character, the expandAround function is called twice: 
@@ -60,6 +60,23 @@ var isPalindrome = function(string, start, end) {
 // Since there are N possible centers (one for each character), the total time complexity is O(N^2).
 // Space Complexity: O(1), since no additional space is used apart from a few variables to store the current 
 // center and count, making the space complexity constant.
+
+// Difference between the `count` variables in brute force and optimal approaches:
+// Brute Force Approach:** The main function has a `count` variable because the `isPalindrome()` function
+// only checks whether the current substring is a palindrome and returns `true` or `false`.
+// If it returns `true`, the main function increments `count` by 1.
+
+// Optimal Approach: Both the main function and the `expandAround()` function have their own `count` 
+// variables. The main function passes the center indices to `expandAround()`, which expands outward to
+// find palindromic substrings. Whenever it finds a palindrome, it increments its local `count` by 1. 
+// Since multiple palindromic substrings can be found around a single center, `expandAround()` returns 
+// the total number found around that center. The main function adds this returned value to its own
+// `count`.
+// Finally, the main function returns the total number of palindromic substrings.
+
+// Remember this key point: One center can produce multiple palindromes.
+// For example, in "aba", the center character "b" gives us two palindromic substrings: "b" and "aba".
+// Therefore, expandAround() returns 2 for that center.
 
 var countSubstrings = function(s){
     let count = 0;

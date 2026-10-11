@@ -1,10 +1,10 @@
 // In Insertion Sort, It start by assuming that the first element of the array is already sorted.
-// We start iterating from the second element in the array, and while iterating, take the current iterated element
-// as the "key" and compare it with all the elements that are to the left of the key.
-// If an element to the left of the key is greater than the key, we shift that element one position to the
+// We start iterating from the second element in the array, and while iterating, take the current iterated
+// element as the "key" and compare it with all the elements that are to the left of the key.
+// If an element to the left of the key is greater than the key, we shift that left element one position to the
 // right.
 // Repeat this process until we find a position for the key element.
-// Once we find that position, we place the key in that element's position.
+// Once we find the position for the key, we place the key in that position.
 //
 // TC: O(N^2), in the worst case when the given array is in descending order. In such case,
 // each key element might need to be compared with every other element in the sorted portion.
