@@ -41,9 +41,10 @@ var maxArea = function (height) {
 // i will use the two-pointer approach where left points to the 0th index of the height array and right
 // points to the last index of the height array.
 // the idea behind using the two-pointer approach is to avoid unnecessary comparisons of smaller heights
-// because they give a smaller area and are not helpful for future area computation.
-// So, instead of taking that minimum height of the container with all the other containers like we did in
-// the brute force approach, it's better to skip it after using it to find the area.
+// container between the pair of containers because they give a smaller area and are not helpful for 
+// future area computation because it will not produce larger area with all the remaining containers.
+// So, instead of taking that minimum height of the container with all the other containers like we did
+// in the brute force approach, it's better to skip it after using it once to find the area.
 // i will run a while loop until left is less than right, and in each iteration, i will find the area
 // between the pair of container walls and update maxArea if the new area is greater than maxArea.
 // check if the height of the wall pointed by the left pointer is less than the height of the wall pointed
@@ -56,8 +57,8 @@ var maxArea = function (height) {
 // SC: O(1), as no additional space is used apart from maxArea.
 
 // Why not sort the height array?
-// Since finding the width depends on the original indices of the container bars, we cannot sort the height
-// array because sorting would change the original positions of the height bars and produce incorrect widths.
+// because sorting would change the original positions/indices of the height of container walls
+// and produce incorrect widths.
 
 var maxArea = function(height) {
     let maxArea = 0; 

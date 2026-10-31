@@ -1,15 +1,16 @@
 // What is Linked List?
 // A Linked List is a linear data structure where elements are stored in nodes and each node is connected 
-// using pointers/references/address. That means each node stores the address/reference of the next node.
+// using pointers/references/address. That means each node stores the data along with reference/address of the next 
+// node.
 
-// Unlike Arrays where elements  are stored in continuous memory locations, Linked lists store elements/nodes 
-// anywhere in memory and Nodes are later connected using links.
+// Unlike Arrays where elements are stored in continuous memory locations, Linked lists store elements/nodes 
+// anywhere in memory and Nodes are later connected using links/pointers.
 
 // Structure of a Node:
 
 // A node usually contains:-
 // data/value.
-// pointer/reference to another node.
+// next pointer hold the references/address to another node.
 
 // Example:
 // [10 | next] -> [20 | next] -> [30 | null]
@@ -91,7 +92,7 @@ printList(head);
 // (2) Delete a node from end(tail) of linked list:-
 // appraoch:- 
 // if head is null or head.next is null then return null as there is only one node in the list which is the last node of the list.
-//traverse the list using 'temp' pointer and take one more pointer 'prev' to keep track of the node before current
+// traverse the list using 'temp' pointer and take one more pointer 'prev' to keep track of the node before current
 // iterated node.
 // traverse the list until the temp.next is not null to get the last node of the list to be deleted.
 // disconnect the last node once temp.next is null using "prev.next = null".

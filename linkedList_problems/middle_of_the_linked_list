@@ -17,11 +17,13 @@
  }
  
 // optimal approach:- 
-// optimal appraoch:- use floyd's cylce finding algortihm also known as (also known as the Tortoise and Hare algorithm)
+// use floyd's cylce finding algortihm also known as (also known as the Tortoise and Hare algorithm)
 // which uses two pointers slow and fast. The fast pointer moves twice as fast as the slow pointer.
 // There are two different case for getting middle node of the linked list:-
-// For an even-length linked list, when fast reaches null (end of the linked list), slow will be at the middle node of the linked list.
-// For an odd-length linked list, when fast reaches the last node of the linked list, slow will be at the middle node of linked list.
+// For an even-length linked list, when fast reaches null (end of the linked list), slow will be at the 
+// middle node of the linked list.
+// For an odd-length linked list, when fast reaches the last node of the linked list, slow will be at the
+// middle node of linked list.
 // TC: O(N), both pointers (slow and fast) traverse the list in a single pass.
 // Even though the loop runs about N/2 times, constant factors are ignored, so the time complexity is O(N).
 // SC: O(1) as we uses a constant amount of extra space for the two pointers (fast and slow).

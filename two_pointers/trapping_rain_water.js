@@ -2,16 +2,17 @@
 // Understanding the Problem:
 // The goal of the Trapping Rain Water problem is to calculate the total amount of water trapped after 
 // raining.
-// For each index (bar), we compute how much water can be stored above the current bar.
+// For each index (bar), we compute how much water a current bar can be store.
 
 // Brute Force Approach:
 // Approach:
 // To solve the Trapping Rain Water problem, I observe that the water trapped at each bar depends on the 
-// tallest bar on its left and the tallest bar on its right. 
-// The water level at each bar (index) is determined by the minimum of the left maximum height bar and the 
-// right maximum height bar because water can only be stored up to the shorter height of the surrounding bars.
-// We then subtract the current height bar from the minimum height bar value because water will start fill 
-// from above the current height of the bar upto shorter height of the surrounding bar.
+// minimum height between the tallest bar on the left of current bar and the tallest bar on the right of the current
+// bar because water can only be stored up to the shorter height of the surrounding bars.
+// After then we need to subtract the current height bar from the minimum height bar value because water can be 
+// trapped above the current bar only up to the shorter of the two surrounding maximum height's bar.
+// The current bar itself occupies some height, so we subtract its height to calculate the amount of water trapped 
+// above it.
 
 // To compute the amount of water that can be trapped at each bar:
 // 1. First, find the tallest bar on the left of the current bar and store it in `leftMax`.
@@ -19,8 +20,8 @@
 // 3. The water level at each bar (index) is determined by the minimum of the left maximum height bar and 
 // the right maximum height bar because water can only be stored up to the shorter height of the surrounding
 // bars.
-// We then subtract the current height bar from the minimum height bar value because water will start fill 
-// from above the current height of the bar and it only fill upto shorter height of the surrounding bar.
+// We then subtract the current height bar from the minimum height bar value be because water can be 
+// trapped above the current bar only up to the shorter of the two surrounding maximum height's bar.
 // 5. Add the result to `totalWaterTrapped`.
 // Finally, return `totalWaterTrapped`, which represents the total amount of water that can be trapped across all bars.
 
@@ -105,12 +106,12 @@ var trap = function(height){
 // leftMax = tallest bar seen so far from the left side up to the current left pointer.
 // rightMax = tallest bar seen so far from the right side up to the current right pointer.
 
-// If the height of the bar at the left pointer is smaller than or equal to the height of the bar at the
+// If the height of the bar at the left pointer is less than or equal to the height of the bar at the
 // right pointer, it means that the left side determines how much water can be trapped for the current bar.
-// We update `leftMax` to be the maximum of the current `leftMax` and `height[left]`.
+// We update `leftMax` to be the maximum between the current `leftMax` and `height[left]`.
 // Then, we compute the trapped water at the `left` pointer as `leftMax - height[left]`
-// (subtracting the current height because water starts filling from above the current bar up to the
-//  shorter height of the surrounding bar).
+// (subtracting the current height because water can be 
+// trapped above the current bar only up to the shorter of the two surrounding maximum height's bar.).
 // Then, we compute the exact amount of water the current bar can store.
 // We add this amount to the total water trapped.
 // Finally, we move the left pointer to the right (`left++`).
@@ -132,10 +133,10 @@ var trap = function(height){
 // Because sorting the array would change the original positions of the bars.
 
 // Why do you process the left side when height[left] <= height[right]?
-// We always process the side with the smaller current height because the opposite side already provides a
+// We always process the side with the smaller current height bar because the opposite side already provides a
 // boundary that is at least as tall as the current bar. Therefore, for the current left bar, the amount of
 // trapped water can be determined using leftMax. So we compute leftMax - height[left] and move the left 
-// pointer. Similarly, when height[right] < height[left], we process the right side using rightMax.
+// pointer. Similarly, when height[right] <= height[left], we process the right side using rightMax.
 
   var trap = function (height) {
     let totalWater = 0;

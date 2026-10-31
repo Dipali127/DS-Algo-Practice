@@ -2,36 +2,38 @@
 
 // Brute-force approach:
 // Approach:
-// I will use a result array to store unique triplets and a hash set to quickly check
-// whether a triplet already exists in it, so that I can avoid adding duplicate triplets to the result
-// array.
+// I will use a result array to store unique triplets and a hash set to quickly check whether a triplet already exists, so that I can avoid adding duplicate triplets to the result array.
 // I will consider every possible triplet using three nested loops.
-// For each triplet,
-// I will compute the sum of its elements and check whether the computed sum equals zero.
-// If it does, I will ensure that the triplet is unique by verifying that it doesn’t already exist in the hash set.
-// If the triplet string does not already exist in the hash set, I will add it to the result array.
+// For each triplet, I will compute the sum of its elements and check whether the sum equals zero.
+// If it does, I will ensure that the triplet is unique by checking whether it already exists in the hash set.
+// If the triplet's string representation does not already exist in the hash set, I will add the string to the hash set and the triplet to the result array.
 // If it does exist in the hash set, it means the current triplet is a duplicate and should be skipped.
 
 // Time Complexity: O(N^3), due to the triple nested loops.
-// Space Complexity: O(N), to store the unique triplets in the hash set.
+// Space Complexity: O(N^2), because the Set and result array can store O(N^2) unique triplets and their
+// string keys.
+// Why space complexity is O(N^2)?
+// Because once we choose two elements, the third element's value is determined by the values of the 
+// chosen two elements, such that their sum equals zero. For example, if a = -2 and b = 1, then c = 1 and
+// their sum :- -2 + 1 + 1 = 0.
 
 // Why are we converting the sorted array into a string instead of directly storing it as an array in a hash set?
-// Because when we store an array in a hash set, JavaScript stores the reference of the array, not the array itself.
-// When we compare a new triplet array with an existing triplet array in the hash set,
-// JavaScript compares them by reference, not by value.
-// That’s why we convert the triplet into a string.
-// On the other hand, strings like '1,2,3' and another '1,2,3' are considered equal which allows the hash set to properly 
-// detect duplicates.
-
-// NOTE: When creating triplets like [nums[i], nums[j], nums[k]], a new array reference (memory address)
-// is created in memory.
+// Because when we store an array in a hash set, JavaScript stores the array's reference, not a 
+// value-based representation of its elements.
+// When we compare a new duplicate triplet array with an existing triplet array in the hash set, 
+// JavaScript compares their references, not their contents/values.
+// That's why we convert the triplet into a string.
+// On the other hand, strings such as '1,2,3' and another '1,2,3' are considered equal because their 
+// character sequences are identical. This allows the hash set to detect duplicates.
+// Note: When creating a triplet such as [nums[i], nums[j], nums[k]], a new array object with its own 
+// reference is created in memory.
 
 // Why do we sort the triplet before converting it into a string and then storing the string in the hash set?
-// Because the strict equality operator compares both strings character by character from left to right.
-// If two triplets are not in the same order, the strict equality operator returns false,
-// even if both triplets contain the same numbers in a different order.
+// Because the hash set compares strings in the same way the strict equality operator compares them.
+// The strict equality operator compares strings by value, and the hash set does the same.
+// During comparison, if the triplets have different element orders, their string representations will 
+// also be different, so the hash set will store the duplicate triplet as a separate entry.
 // That's why we sort the triplet before converting it into a string and then storing the string in the hash set.
-
 
 var threeSum = function(nums) {
   let set = new Set();
@@ -80,15 +82,21 @@ var threeSum = function(nums) {
 // where the outer loop iterates through each element and the two pointers together traverse the remaining
 // elements at most once for each iteration of the outer loop.
 
-// Space Complexity: O(1), since we haven't used any extra space apart from a few pointers.
+// Space Complexity:- O(N^2), used by result array to store at most n^2 triplets.
+// Why space complexity is O(N^2)?
+// Because once we choose two elements, the third element's value is determined by the values of the 
+// chosen two elements, such that their sum equals zero. For example, if a = -2 and b = 1, then c = 1 and
+// their sum :- -2 + 1 + 1 = 0.
 
 // KEY POINT:
-// After sorting, duplicate values become adjacent to each other, which helps us skip duplicate triplets easily.
+// After sorting the array, duplicate values become adjacent to each other, which helps us skip duplicate
+// triplets easily.
 // Sorting also enables the two-pointer technique because the array is in sorted order.
 // Based on whether the current sum is too small or too large, I can move the left or right pointer accordingly.
 
 var threeSum = function (nums) {
-    nums.sort((a,b) => a-b), result = [];
+    nums.sort((a,b) => a-b);
+    let result = [];
     for (let i = 0; i < nums.length; i++) {
         if (i > 0 && nums[i] === nums[i - 1]) {
             continue;

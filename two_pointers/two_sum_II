@@ -10,9 +10,9 @@
 // SC: O(1), since, there is no additional space used apart from the variables.
 
  var twoSum = function(arr,target){
-     for(let i = 0;i<arr.length-1;i++){
-         for(let j = i+1;j<arr.length;j++){
-             if(arr[i]+arr[j]==target){
+     for(let i = 0; i<arr.length-1; i++){
+         for(let j = i+1; j<arr.length; j++){
+             if(arr[i]+arr[j] === target){
                  return [i+1,j+1];
              }
          }
@@ -22,8 +22,8 @@
 
 // optimal approach: using two pointers
 // approach:
-// take two pointers, `i` and `j`. where `i` points to the start of the array and `j` points to the end of
-// the array.
+// take two pointers, `i` and `j`. where `i` points to the start of the array and `j` points to the end 
+// of the array.
 // use a while loop to traverse the array while `i` is less than `j`.
 // inside the loop, check if the sum of the elements at the `i` and `j` pointers equals the target.
 // if the sum equals the target, return the 1-based indices of these two elements.
@@ -34,9 +34,10 @@
 // SC: o(1), as there is no additional space used apart from the pointers.
 
 // Note:-
-// The problem asks us to return the indices using 1-based indexing, whereas arrays are indexed using 0-based indexing in
-// JavaScript. Therefore, when I find the valid pair at indices left and right, I simply add 1 to both indices before 
-// returning them to convert the 0-based indices into the required 1-based indices.
+// The problem asks us to return the indices using 1-based indexing, whereas arrays are indexed using 
+// 0-based indexing in JavaScript. Therefore, when I find the valid pair at indices left and right, I
+// simply add 1 to both indices before returning them to convert the 0-based indices into the required 
+// 1-based indices.
 
 var twoSum = function(arr, target) {
     let i = 0;

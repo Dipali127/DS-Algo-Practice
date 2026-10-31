@@ -33,8 +33,8 @@ var sortList = function(head) {
 
 // Optimal Approach:-
 // approach:-
-// i will use merge sort which will divide the list into two halves and two halves are furthere divided into sub sub halves
-// until size of node in each half becomes 1.
+// i will use merge sort which will divide the list into two halves and two halves are furthere divided
+// into sub sub halves until size of node in each half becomes 1.
 // once, size of node becomes 1, merge function start merging.
 
 // Soluton:-
@@ -43,18 +43,22 @@ var sortList = function(head) {
 // recursively call for the left and right half of the list until you get the single node in the list.
 // once, you will get single node in the list call the mergeSortedlist function to sort both the list.
 
-// TC: O(NLOGN), Explanation:-
-// O(N), for finding middle of the list.
-// O(NLOGN),  for recursively dividing the n size list into two halves.
-// O(N), for merge the two sorted list.
-// overall, TC: O(N) + O(NLOGN) + O(N) = O(NLOGN).
-// SC: O(LOGN), due to the depth of recursion stack.
+// TC: O(NLOGN)
+// O(log N) recursion levels, and at each level, the total work
+// of finding the middle and merging the sublists is O(N).
+// Therefore, overall TC = O(N log N).
+
+// SC: O(LOGN), due to the depth of recursion stack. At each recursive call, the list is divided into
+// half, and the function recursively processes the left half first, then the right half.
+// Since the list is reduced by half at each recursive call, the maximum depth of the recursion stack is
+// log n. Therefore, the auxiliary space complexity is O(log n).
+
 // here, slow points to the last node of the first list.
 // So, slow.next (i.e., mid.next) is the first node of the right half.
 
-// Note:- We reuse the same variable names left and right inside each recursive function call — but they point to
-// different sublists at each level and left and right are reference that means they point to address of new left
-// sublist and new right sublist.
+// Note:- We reuse the same variable names left and right inside at each recursive function call — but 
+// they point to different sublists at each level and left and right are reference that means they point
+// to address of new left sublist and new right sublist.
 // Once the merge is done, the sorted sublist is returned to the previous level's left or right.
 
 // NOTE:-
@@ -63,8 +67,18 @@ var sortList = function(head) {
 // Level 1: N/2 + N/2
 // Level 2: N/4 + N/4 + N/4 + N/4 … until each sublist has 1 node
 // That mean's when size of node is 1, it is equal to n/2^k = 1 which is general formula
-// So when we solve n/2^k = 1 , we cannot solve exponiationn/power, so i will use log on both sides.
-// n = 2^k => logn = log2^k => k = logn.
+// So when we solve n/2^k = 1 , we cannot solve exponentiation/power, so i will use log on both sides.
+// n = 2^k => logn = log2^k => k = logn. 
+
+// Why fast = head.next?
+// Because, For an "even-sized list", starting the fast pointer at head.next makes the slow pointer stop
+// at the first middle node, which is the last node of the left half. This allows us to split the list 
+// into two equal halves.
+
+// For an odd-sized list, both approaches, where the fast pointer starts at head or head.next, make the 
+// slow pointer stop at the actual middle node.
+// Therefore, we initialize fast = head.next to ensure that, for an even-sized list, the slow pointer 
+// stops at the last node of the left half, allowing us to divide the list correctly.
 
 var sortList = function (head) {
 

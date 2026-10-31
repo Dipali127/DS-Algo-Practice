@@ -54,7 +54,7 @@ var sortColors = function(nums) {
 };
 
 
-// Optimal Approach:
+// Optimal Approach: Using Dutch National Flag Algorithm
 // Approach:-
 
 // Since, according to the problem, we have to solve the given sort colors problem in one pass
@@ -73,8 +73,9 @@ var sortColors = function(nums) {
 // - If the value at mid is 2, swap it with right and decrement right.
 // - If the value at mid is 1, just increment mid (no swap needed since 1 is already in correct region).
 
-// TC:- O(N)
-// Since only a single while loop is used to traverse the array.
+// Time Complexity: O(N), Explanation:-
+// Since we use a single while loop to traverse the array, the mid, left, and right pointers move across
+// the array in a single pass.
 
 // SC:- O(1)
 // Since no additional space is used apart from a few pointers.
@@ -86,10 +87,10 @@ var sortColors = function(nums) {
 
 // KEY POINT:
 // During the execution of the algorithm, the array is conceptually divided into four regions:
-// [0 ... left-1] → all 0s (already sorted)
-// [left ... mid-1] → all 1s (already sorted)
-// [mid ... right] → unknown elements that are yet to be processed
-// [right+1 ... end] → all 2s (already sorted)
+// [0 ... left-1] → All elements in this region are 0 (already sorted)
+// [left ... mid-1] → All elements in this region are 1 (already sorted)
+// [mid ... right] → These elements are still unknown and need to be processed.
+// [right+1 ... end] → All elements in this region are 2. (already sorted)
 
 // As the pointers move and swapping takes place, these four regions are formed and continuously updated.
 
